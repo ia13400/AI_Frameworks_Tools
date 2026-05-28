@@ -1,0 +1,44 @@
+[project]
+name = "team4"
+version = "0.1.0"
+description = "team 4: Semester project"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "torch>=2.0",
+    "torchaudio",
+    "mlflow>=2.0",
+    "jupyter",
+    "ipykernel",
+    "seaborn>=0.13.2",
+    "openai>=2.38.0",
+    "transformers>=5.9.0",
+]
+[tool.uv.sources]
+torch = { index = "pytorch-cu124" }
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+#[tool.uv]
+#dev-dependencies = []
+
+# === SETUP-ANLEITUNG ===
+#
+# 1. Ordner lokal kopieren (nicht auf Netzlaufwerk!):
+#    cp -r "Block 3" ~/Desktop/Block3
+#    cd ~/Desktop/Block3
+#
+# 2. Environment erstellen und Pakete installieren:
+#    uv sync
+#
+# 3. Jupyter starten:
+#    uv run jupyter notebook
+#
+# ODER in Cursor/VS Code:
+#    uv run python -m ipykernel install --user --name block3 --display-name "Block 3"
+#    → Dann in Cursor: Kernel "Block 3" auswählen
