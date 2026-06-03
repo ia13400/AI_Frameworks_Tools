@@ -1,26 +1,22 @@
-\section{Introduction}
+\section{Einleitung}
 
-**** Example Text Start ******
-\gls{ai} has become an important field in computer science and software engineering. 
-Recent progress in \gls{nlp} has been strongly influenced by the development of the 
-\gls{transformer} architecture and the emergence of \gls{llm} systems.
+\gls{ai} hat sich zu einem wichtigen Forschungs- und Anwendungsgebiet der Informatik und Softwaretechnik entwickelt. 
+Insbesondere aktuelle Fortschritte im Bereich der \gls{nlp} wurden stark durch die Entwicklung der 
+\gls{transformer}-Architektur und das Aufkommen von \gls{llm}-Systemen geprägt.
 
-Although \gls{llm} systems can achieve impressive performance in many language-related tasks, 
-their internal behavior is often difficult to understand. This lack of transparency motivates 
-the field of \gls{mechanisticinterpretability}, which aims to analyze the internal mechanisms 
-of neural networks instead of treating them only as black-box models.
+Obwohl \gls{llm}-Systeme bei vielen sprachbezogenen Aufgaben beeindruckende Ergebnisse erzielen, 
+ist ihr internes Verhalten häufig schwer nachvollziehbar. Diese mangelnde Transparenz motiviert 
+das Forschungsgebiet der \gls{mechanisticinterpretability}. Ziel dieses Forschungsgebiets ist es, 
+die inneren Mechanismen neuronaler Netze zu analysieren, anstatt sie ausschließlich als Black-Box-Modelle zu betrachten.
 
-In this paper, \gls{sentimentanalysis} is used as a case study to investigate how a language 
-model processes emotional information in text. For example, the model may classify a sentence 
-such as ``The movie was surprisingly good'' as positive, while assigning a negative sentiment 
-to a sentence such as ``The service was disappointing.''
+In dieser Arbeit wird die \gls{sentimentanalysis} als Fallstudie verwendet, um zu untersuchen, 
+wie ein Sprachmodell emotionale Informationen in Texten verarbeitet. Beispielsweise kann ein Modell 
+einen Satz wie ``Der Film war überraschend gut'' als positiv klassifizieren, während ein Satz wie 
+``Der Service war enttäuschend'' als negativ bewertet werden kann.
 
-The Transformer architecture introduced the self-attention mechanism, which became a foundation 
-for many modern language models \cite{vaswani2017attention}. Later models such as GPT further 
-demonstrated the effectiveness of large-scale pretraining for language understanding and generation 
-\cite{radford2018improving}.
+Die Transformer-Architektur führte den Self-Attention-Mechanismus ein, der zur Grundlage vieler moderner 
+Sprachmodelle wurde \cite{vaswani2017attention}. Spätere Modelle wie GPT zeigten zusätzlich die Wirksamkeit 
+großskaligen Vortrainings für Sprachverständnis und Sprachgenerierung \cite{radford2018improving}.
 
-The aim of this work is to explore how internal elements such as \glspl{attentionhead}, 
-\glspl{token}, and \glspl{activation} may contribute to sentiment-related behavior in a 
-large language model.
-**** Example Text END ******
+Das Ziel dieser Arbeit besteht darin zu untersuchen, wie interne Bestandteile wie \glspl{attentionhead}, 
+\glspl{token} und \glspl{activation} zum sentimentbezogenen Verhalten eines großen Sprachmodells beitragen können.
