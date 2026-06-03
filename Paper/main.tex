@@ -1,0 +1,61 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{booktabs} 
+\usepackage[
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+]{hyperref}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\geometry{margin=2.5cm}
+\onehalfspacing
+
+\addbibresource{references.bib}
+
+\usepackage[automake,acronym]{glossaries}
+
+\makeglossaries
+
+\input{glossary}
+
+\begin{document}
+
+\input{cover}
+
+\tableofcontents
+\newpage
+
+\input{chapters/01_introduction}
+\newpage
+
+\input{chapters/02_methods}
+\newpage
+
+\input{chapters/03_results}
+\newpage
+
+\input{chapters/04_discussion}
+\newpage
+
+\input{chapters/05_conclusion}
+\newpage
+
+\printglossary[
+    title=Glossary,
+    toctitle=Glossary,
+    style=long
+]
+\newpage
+
+\printbibliography
+
+\end{document}
