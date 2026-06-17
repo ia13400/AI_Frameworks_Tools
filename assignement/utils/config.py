@@ -20,6 +20,12 @@ FLAT_PAIRS_PATH = INPUT_DIR / "hu_liu_sentiment_word_pairs_flat.json"
 SENTIMENT_PROMPTS_PATH = INPUT_DIR / "sentiment_prompts.json"
 PROMPTS_PATH = INPUT_DIR / "prompts.json"
 PROBE_SPLIT_PATH = OUTPUT_JSON_DIR / "hu_liu_logistic_regression_split.json"
+SENTIMENT_CHALLENGE_DIR = INPUT_DIR / "assessing_and_probing_sentiment"
+SENTIMENT_CHALLENGE_ANNOTATED_PATH = SENTIMENT_CHALLENGE_DIR / "annotated.txt"
+SENTIMENT_CHALLENGE_HEATMAP_PATH = OUTPUT_PNG_DIR / "sentiment_challenge_category_heatmap.png"
+FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH = (
+    OUTPUT_PNG_DIR / "sentiment_challenge_filtered_category_heatmap.png"
+)
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",

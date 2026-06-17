@@ -4,13 +4,94 @@ matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import torch
 from sklearn.decomposition import PCA
 
-from config import OUTPUT_PNG_DIR
+from config import (
+    FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+    OUTPUT_PNG_DIR,
+    SENTIMENT_CHALLENGE_HEATMAP_PATH,
+)
 
 
 matplotlib.rcParams["figure.dpi"] = 100
+
+
+def plot_sentiment_challenge_category_heatmap(
+    category_to_records,
+    sentiment_labels,
+    filename_or_path=SENTIMENT_CHALLENGE_HEATMAP_PATH,
+    sentiment_key="gold_label",
+    title="Sentiment Challenge Dataset: Categories by Sentiment Level",
+):
+    """Save a heatmap of challenge annotation categories by gold sentiment label."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    categories = sorted(
+        category_to_records,
+        key=lambda key: (-len(category_to_records[key]), key),
+    )
+    sentiment_ids = list(sentiment_labels)
+    heatmap_counts = [
+        [
+            sum(
+                record[sentiment_key] == sentiment_id
+                for record in category_to_records[category]
+            )
+            for sentiment_id in sentiment_ids
+        ]
+        for category in categories
+    ]
+    sentiment_names = [
+        (
+            sentiment_labels[sentiment_id]
+            if str(sentiment_id) == str(sentiment_labels[sentiment_id])
+            else f"{sentiment_id}: {sentiment_labels[sentiment_id]}"
+        )
+        for sentiment_id in sentiment_ids
+    ]
+
+    height = max(9, len(categories) * 0.58)
+    fig, ax = plt.subplots(figsize=(12.5, height))
+    sns.heatmap(
+        heatmap_counts,
+        annot=True,
+        fmt="d",
+        cmap="YlGnBu",
+        cbar_kws={"label": "Number of sentences"},
+        xticklabels=sentiment_names,
+        yticklabels=categories,
+        linewidths=0.5,
+        linecolor="white",
+        ax=ax,
+    )
+    ax.set_title(title)
+    ax.set_xlabel("Sentiment")
+    ax.set_ylabel("Annotation category")
+    x_rotation = 0 if len(sentiment_names) <= 2 else 30
+    ax.tick_params(axis="x", rotation=x_rotation)
+    ax.tick_params(axis="y", labelsize=10)
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Saved plot: {output_path.name}")
+    return heatmap_counts
+
+
+def plot_filtered_sentiment_challenge_category_heatmap(category_to_records):
+    """Save the binary positive/negative heatmap for the filtered challenge data."""
+    return plot_sentiment_challenge_category_heatmap(
+        category_to_records,
+        {"negative": "negative", "positive": "positive"},
+        filename_or_path=FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+        sentiment_key="sentiment",
+        title="Filtered Sentiment Challenge Dataset: Categories by Binary Sentiment",
+    )
 
 
 def representative_labels(group, n=8):
