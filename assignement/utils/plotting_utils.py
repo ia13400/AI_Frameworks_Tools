@@ -11,6 +11,8 @@ from sklearn.decomposition import PCA
 from config import (
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
     OUTPUT_PNG_DIR,
+    SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH,
+    SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
     SENTIMENT_CHALLENGE_HEATMAP_PATH,
 )
 
@@ -92,6 +94,111 @@ def plot_filtered_sentiment_challenge_category_heatmap(category_to_records):
         sentiment_key="sentiment",
         title="Filtered Sentiment Challenge Dataset: Categories by Binary Sentiment",
     )
+
+
+def plot_sentiment_challenge_category_confusion_matrices(
+    category_confusion_counts,
+    filename_or_path=SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
+):
+    """Save one confusion matrix per challenge annotation category."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    categories = list(category_confusion_counts)
+    true_labels = ["negative", "positive"]
+    predicted_labels = ["negative", "positive", "no sentiment"]
+
+    n_cols = 3
+    n_rows = int(np.ceil(len(categories) / n_cols))
+    fig, axes = plt.subplots(
+        n_rows,
+        n_cols,
+        figsize=(17, max(5, n_rows * 3.25)),
+    )
+    axes = np.asarray(axes).reshape(-1)
+
+    max_count = max(
+        max(max(row) for row in matrix)
+        for matrix in category_confusion_counts.values()
+    )
+
+    for ax, category in zip(axes, categories):
+        matrix = category_confusion_counts[category]
+        sns.heatmap(
+            matrix,
+            annot=True,
+            fmt="d",
+            cmap="YlGnBu",
+            cbar=False,
+            vmin=0,
+            vmax=max_count,
+            xticklabels=predicted_labels,
+            yticklabels=true_labels,
+            linewidths=0.5,
+            linecolor="white",
+            ax=ax,
+        )
+        ax.set_title(category, fontsize=10.5)
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("True")
+        ax.tick_params(axis="x", rotation=25, labelsize=8.5)
+        ax.tick_params(axis="y", rotation=0, labelsize=8.5)
+
+    for ax in axes[len(categories):]:
+        ax.axis("off")
+
+    fig.suptitle(
+        "Sentiment Challenge: Hu & Liu Top-10 Token Sentiment by Category",
+        fontsize=16,
+        y=0.996,
+    )
+    plt.tight_layout(rect=(0, 0, 1, 0.985))
+    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Saved plot: {output_path.name}")
+
+
+def plot_sentiment_challenge_category_accuracy(
+    category_accuracy_rows,
+    filename_or_path=SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH,
+):
+    """Save a bar chart with top-token sentiment accuracy per challenge category."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    rows = sorted(category_accuracy_rows, key=lambda row: (row["accuracy"], row["category"]))
+    categories = [row["category"] for row in rows]
+    accuracies = [row["accuracy"] * 100 for row in rows]
+
+    fig, ax = plt.subplots(figsize=(12.5, max(8, len(rows) * 0.46)))
+    colors = ["#2E8B57" if value >= 50 else "#B22222" for value in accuracies]
+    bars = ax.barh(categories, accuracies, color=colors, alpha=0.82)
+
+    for bar, row, value in zip(bars, rows, accuracies):
+        ax.text(
+            min(value + 1.2, 98),
+            bar.get_y() + bar.get_height() / 2,
+            f"{value:.1f}% (n={row['total']})",
+            va="center",
+            ha="left" if value < 90 else "right",
+            fontsize=9,
+        )
+
+    ax.axvline(50, color="#404040", linewidth=1, linestyle="--")
+    ax.set_xlim(0, 100)
+    ax.set_xlabel("Accuracy (%)")
+    ax.set_ylabel("Annotation category")
+    ax.set_title("Sentiment Challenge: Top-10 Hu & Liu Sentiment Accuracy by Category")
+    ax.grid(axis="x", alpha=0.22)
+
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Saved plot: {output_path.name}")
 
 
 def representative_labels(group, n=8):

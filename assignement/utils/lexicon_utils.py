@@ -11,9 +11,13 @@ from config import (
     NEGATIVE_WORDS_PATH,
     POSITIVE_WORDS_PATH,
     SENTIMENT_CHALLENGE_ANNOTATED_PATH,
+    SENTIMENT_CHALLENGE_TOP_TOKENS_PATH,
+    SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH,
 )
 from plotting_utils import (
     plot_filtered_sentiment_challenge_category_heatmap,
+    plot_sentiment_challenge_category_accuracy,
+    plot_sentiment_challenge_category_confusion_matrices,
     plot_sentiment_challenge_category_heatmap,
 )
 
@@ -191,6 +195,281 @@ def import_data_set(dataset_path: str | Path | None = None):
 def filter_data_set(dataset_path: str | Path | None = None):
     """Import, filter to binary sentiment labels, and save the filtered heatmap PNG."""
     return filter_sentiment_challenge_dataset(dataset_path)
+
+
+def form_sentiment_challenge_prompts(filtered_records, sentiment_suffix: str):
+    """Create model prompts from filtered challenge sentences."""
+    return [
+        {
+            "sentence_index": record["sentence_index"],
+            "true_sentiment": record["sentiment"],
+            "annotations": record["annotations"],
+            "prompt": record["text"] + sentiment_suffix,
+        }
+        for record in filtered_records
+    ]
+
+
+def classify_top_tokens_by_hu_liu(top_tokens, hu_liu_lookup):
+    """Classify top-k next tokens by summed Hu & Liu sentiment probability."""
+    sentiment_scores = {"positive": 0.0, "negative": 0.0}
+    matched_tokens = []
+
+    for token in top_tokens:
+        key = normalized_word_key(token["token"])
+        if key not in hu_liu_lookup:
+            continue
+
+        sentiment = hu_liu_lookup[key]["sentiment"]
+        sentiment_scores[sentiment] += token["probability"]
+        matched_tokens.append(
+            {
+                "token": token["token"],
+                "probability": token["probability"],
+                "hu_liu_word": hu_liu_lookup[key]["word"],
+                "sentiment": sentiment,
+            }
+        )
+
+    if not matched_tokens:
+        predicted_sentiment = "no sentiment"
+    elif sentiment_scores["positive"] > sentiment_scores["negative"]:
+        predicted_sentiment = "positive"
+    elif sentiment_scores["negative"] > sentiment_scores["positive"]:
+        predicted_sentiment = "negative"
+    else:
+        predicted_sentiment = matched_tokens[0]["sentiment"]
+
+    return predicted_sentiment, sentiment_scores, matched_tokens
+
+
+def write_top_token_report(results):
+    """Write a readable prompt/token/Hu-Liu-hit report for inspection."""
+    lines = [
+        "Sentiment Challenge top-10 next-token report",
+        "=" * 52,
+        (
+            "Prediction rule: sum the probability mass of top-10 tokens that "
+            "match the Hu & Liu positive or negative lexicon. If neither side "
+            "has more mass, label the result as no sentiment."
+        ),
+        "",
+    ]
+
+    for index, result in enumerate(results, start=1):
+        lines.extend(
+            [
+                f"Example {index}",
+                "-" * 52,
+                f"sentence_index: {result['sentence_index']}",
+                f"true_sentiment: {result['true_sentiment']}",
+                f"predicted_sentiment: {result['predicted_sentiment']}",
+                f"annotations: {', '.join(result['annotations'])}",
+                f"prompt: {result['prompt']}",
+                "",
+                "top_10_next_tokens:",
+            ]
+        )
+
+        for token in result["top_tokens"]:
+            lines.append(
+                f"  {token['rank']:>2}. {token['token']!r:<18} "
+                f"token_id={token['token_id']:<6} "
+                f"probability={token['probability']:.6f}"
+            )
+
+        lines.append("")
+        lines.append("hu_liu_hits:")
+        if result["matched_hu_liu_tokens"]:
+            for match in result["matched_hu_liu_tokens"]:
+                lines.append(
+                    f"  {match['token']!r:<18} "
+                    f"word={match['hu_liu_word']:<18} "
+                    f"sentiment={match['sentiment']:<8} "
+                    f"probability={match['probability']:.6f}"
+                )
+        else:
+            lines.append("  none")
+
+        scores = result["hu_liu_probability_mass"]
+        lines.extend(
+            [
+                "",
+                "hu_liu_probability_mass:",
+                f"  negative={scores['negative']:.6f}",
+                f"  positive={scores['positive']:.6f}",
+                "",
+            ]
+        )
+
+    SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH.write_text(
+        "\n".join(lines) + "\n",
+        encoding="utf-8",
+    )
+
+
+def top_k_next_tokens_for_prompts(
+    model,
+    tokenizer,
+    device,
+    prompt_records,
+    positive_words,
+    negative_words,
+    top_k: int = 10,
+    batch_size: int = 8,
+):
+    """Run next-token inference and classify top-k tokens through Hu & Liu."""
+    hu_liu_lookup = build_hu_liu_lookup(positive_words, negative_words)
+    results = []
+
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    model.eval()
+    for start in range(0, len(prompt_records), batch_size):
+        batch_records = prompt_records[start : start + batch_size]
+        prompts = [record["prompt"] for record in batch_records]
+        inputs = tokenizer(
+            prompts,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+        ).to(device)
+
+        with torch.no_grad():
+            outputs = model(**inputs)
+
+        attention_lengths = inputs["attention_mask"].sum(dim=1) - 1
+        for batch_index, record in enumerate(batch_records):
+            final_token_index = int(attention_lengths[batch_index].item())
+            logits = outputs.logits[batch_index, final_token_index, :]
+            probabilities = torch.softmax(logits, dim=-1)
+            top_probabilities, top_indices = torch.topk(probabilities, top_k)
+            top_tokens = []
+
+            for rank, (token_id, probability) in enumerate(
+                zip(top_indices, top_probabilities),
+                start=1,
+            ):
+                token_text = tokenizer.decode([int(token_id)])
+                top_tokens.append(
+                    {
+                        "rank": rank,
+                        "token": token_text,
+                        "token_id": int(token_id),
+                        "probability": float(probability),
+                    }
+                )
+
+            predicted, scores, matches = classify_top_tokens_by_hu_liu(
+                top_tokens,
+                hu_liu_lookup,
+            )
+            results.append(
+                {
+                    **record,
+                    "predicted_sentiment": predicted,
+                    "hu_liu_probability_mass": scores,
+                    "matched_hu_liu_tokens": matches,
+                    "top_tokens": top_tokens,
+                }
+            )
+
+    SENTIMENT_CHALLENGE_TOP_TOKENS_PATH.write_text(
+        json.dumps(results, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    write_top_token_report(results)
+    print(
+        "Top-token prompt details were saved to:\n"
+        f"- {SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH}\n"
+        f"- {SENTIMENT_CHALLENGE_TOP_TOKENS_PATH}"
+    )
+    return results
+
+
+def build_category_confusion_counts(prediction_results):
+    """Count true-vs-predicted sentiment for every annotation category."""
+    categories = sorted(
+        {category for result in prediction_results for category in result["annotations"]}
+    )
+    true_labels = ["negative", "positive"]
+    predicted_labels = ["negative", "positive", "no sentiment"]
+    counts = {
+        category: [
+            [0 for _ in predicted_labels]
+            for _ in true_labels
+        ]
+        for category in categories
+    }
+    true_index = {label: index for index, label in enumerate(true_labels)}
+    predicted_index = {label: index for index, label in enumerate(predicted_labels)}
+
+    for result in prediction_results:
+        for category in result["annotations"]:
+            counts[category][true_index[result["true_sentiment"]]][
+                predicted_index[result["predicted_sentiment"]]
+            ] += 1
+
+    return counts
+
+
+def build_category_accuracy_rows(prediction_results):
+    """Compute binary sentiment accuracy for each annotation category."""
+    categories = sorted(
+        {category for result in prediction_results for category in result["annotations"]}
+    )
+    rows = []
+
+    for category in categories:
+        category_results = [
+            result
+            for result in prediction_results
+            if category in result["annotations"]
+        ]
+        correct = sum(
+            result["true_sentiment"] == result["predicted_sentiment"]
+            for result in category_results
+        )
+        total = len(category_results)
+        rows.append(
+            {
+                "category": category,
+                "correct": correct,
+                "total": total,
+                "accuracy": correct / total if total else 0.0,
+            }
+        )
+
+    return rows
+
+
+def run_sentiment_challenge_top_token_analysis(
+    model,
+    tokenizer,
+    device,
+    prompt_records,
+    positive_words,
+    negative_words,
+    top_k: int = 10,
+    batch_size: int = 8,
+):
+    """Save top-k token predictions and plot category confusion matrices."""
+    prediction_results = top_k_next_tokens_for_prompts(
+        model,
+        tokenizer,
+        device,
+        prompt_records,
+        positive_words,
+        negative_words,
+        top_k=top_k,
+        batch_size=batch_size,
+    )
+    category_confusion_counts = build_category_confusion_counts(prediction_results)
+    category_accuracy_rows = build_category_accuracy_rows(prediction_results)
+    plot_sentiment_challenge_category_confusion_matrices(category_confusion_counts)
+    plot_sentiment_challenge_category_accuracy(category_accuracy_rows)
+    return prediction_results, category_confusion_counts, category_accuracy_rows
 
 
 def format_challenge_sentence(record, missing_text: str, text_width: int = 140):

@@ -26,6 +26,18 @@ SENTIMENT_CHALLENGE_HEATMAP_PATH = OUTPUT_PNG_DIR / "sentiment_challenge_categor
 FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH = (
     OUTPUT_PNG_DIR / "sentiment_challenge_filtered_category_heatmap.png"
 )
+SENTIMENT_CHALLENGE_TOP_TOKENS_PATH = (
+    OUTPUT_JSON_DIR / "sentiment_challenge_prompt_top10_tokens.json"
+)
+SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH = (
+    OUTPUT_DIR / "sentiment_challenge_prompt_top10_tokens_report.txt"
+)
+SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH = (
+    OUTPUT_PNG_DIR / "sentiment_challenge_category_confusion_matrices.png"
+)
+SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH = (
+    OUTPUT_PNG_DIR / "sentiment_challenge_category_accuracy.png"
+)
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",
