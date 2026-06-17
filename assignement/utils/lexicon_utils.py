@@ -9,6 +9,8 @@ from config import (
     INPUT_DIR,
     MODEL_NAME,
     NEGATIVE_WORDS_PATH,
+    OUTPUT_DIR,
+    OUTPUT_JSON_DIR,
     POSITIVE_WORDS_PATH,
     SENTIMENT_CHALLENGE_ANNOTATED_PATH,
     SENTIMENT_CHALLENGE_TOP_TOKENS_PATH,
@@ -210,6 +212,34 @@ def form_sentiment_challenge_prompts(filtered_records, sentiment_suffix: str):
     ]
 
 
+def safe_trial_name(trial_name):
+    """Create a filesystem-safe suffix for per-trial output files."""
+    if not trial_name:
+        return None
+
+    safe_name = re.sub(r"[^A-Za-z0-9]+", "_", trial_name).strip("_")
+    return safe_name or None
+
+
+def trial_output_paths(trial_name=None):
+    """Return JSON, report, confusion PNG, and accuracy PNG paths for one trial."""
+    safe_name = safe_trial_name(trial_name)
+    if safe_name is None:
+        return {
+            "json": SENTIMENT_CHALLENGE_TOP_TOKENS_PATH,
+            "report": SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH,
+            "confusion_png": "sentiment_challenge_category_confusion_matrices.png",
+            "accuracy_png": "sentiment_challenge_category_accuracy.png",
+        }
+
+    return {
+        "json": OUTPUT_JSON_DIR / f"sentiment_challenge_prompt_top10_tokens_{safe_name}.json",
+        "report": OUTPUT_DIR / f"sentiment_challenge_prompt_top10_tokens_report_{safe_name}.txt",
+        "confusion_png": f"sentiment_challenge_category_confusion_matrices_{safe_name}.png",
+        "accuracy_png": f"sentiment_challenge_category_accuracy_{safe_name}.png",
+    }
+
+
 def classify_top_tokens_by_hu_liu(top_tokens, hu_liu_lookup):
     """Classify top-k next tokens by summed Hu & Liu sentiment probability."""
     sentiment_scores = {"positive": 0.0, "negative": 0.0}
@@ -243,18 +273,102 @@ def classify_top_tokens_by_hu_liu(top_tokens, hu_liu_lookup):
     return predicted_sentiment, sentiment_scores, matched_tokens
 
 
-def write_top_token_report(results):
+def category_match_examples(prediction_results):
+    """Pick one correct and one incorrect prediction example per category."""
+    categories = sorted(
+        {category for result in prediction_results for category in result["annotations"]}
+    )
+    examples = {}
+
+    for category in categories:
+        category_results = [
+            result
+            for result in prediction_results
+            if category in result["annotations"]
+        ]
+        matching = next(
+            (
+                result
+                for result in category_results
+                if result["true_sentiment"] == result["predicted_sentiment"]
+            ),
+            None,
+        )
+        not_matching = next(
+            (
+                result
+                for result in category_results
+                if result["true_sentiment"] != result["predicted_sentiment"]
+            ),
+            None,
+        )
+        examples[category] = {
+            "matching": matching,
+            "not_matching": not_matching,
+        }
+
+    return examples
+
+
+def format_prediction_example(result):
+    """Format one prediction result for the text report."""
+    if result is None:
+        return "none"
+
+    hits = result["matched_hu_liu_tokens"]
+    hit_text = ", ".join(
+        f"{hit['hu_liu_word']}={hit['sentiment']}:{hit['probability']:.4f}"
+        for hit in hits[:3]
+    )
+    if not hit_text:
+        hit_text = "no Hu & Liu hit"
+
+    return (
+        f"sentence_index={result['sentence_index']} | "
+        f"true={result['true_sentiment']} | "
+        f"predicted={result['predicted_sentiment']} | "
+        f"hits={hit_text} | "
+        f"prompt={result['prompt']}"
+    )
+
+
+def write_top_token_report(results, prompt_suffix=None, report_path=None):
     """Write a readable prompt/token/Hu-Liu-hit report for inspection."""
+    if report_path is None:
+        report_path = SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH
+
     lines = [
         "Sentiment Challenge top-10 next-token report",
         "=" * 52,
         (
             "Prediction rule: sum the probability mass of top-10 tokens that "
-            "match the Hu & Liu positive or negative lexicon. If neither side "
-            "has more mass, label the result as no sentiment."
+            "match the Hu & Liu positive or negative lexicon. Use no sentiment "
+            "only when no top-10 token matches Hu & Liu. If positive and "
+            "negative probability mass tie after at least one match, use the "
+            "sentiment of the highest-ranked Hu & Liu match."
         ),
         "",
     ]
+    if prompt_suffix is not None:
+        lines.extend([f"prompt_suffix: {prompt_suffix!r}", ""])
+
+    lines.extend(
+        [
+            "One matching and one non-matching prediction example per category",
+            "=" * 68,
+        ]
+    )
+    for category, examples in category_match_examples(results).items():
+        lines.extend(
+            [
+                "",
+                category,
+                "-" * len(category),
+                f"matching: {format_prediction_example(examples['matching'])}",
+                f"not_matching: {format_prediction_example(examples['not_matching'])}",
+            ]
+        )
+    lines.extend(["", "Full prompt-level top-10 details", "=" * 52, ""])
 
     for index, result in enumerate(results, start=1):
         lines.extend(
@@ -302,7 +416,7 @@ def write_top_token_report(results):
             ]
         )
 
-    SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH.write_text(
+    report_path.write_text(
         "\n".join(lines) + "\n",
         encoding="utf-8",
     )
@@ -317,10 +431,13 @@ def top_k_next_tokens_for_prompts(
     negative_words,
     top_k: int = 10,
     batch_size: int = 8,
+    prompt_suffix=None,
+    trial_name=None,
 ):
     """Run next-token inference and classify top-k tokens through Hu & Liu."""
     hu_liu_lookup = build_hu_liu_lookup(positive_words, negative_words)
     results = []
+    paths = trial_output_paths(trial_name)
 
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -375,15 +492,20 @@ def top_k_next_tokens_for_prompts(
                 }
             )
 
-    SENTIMENT_CHALLENGE_TOP_TOKENS_PATH.write_text(
+    paths["json"].write_text(
         json.dumps(results, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
-    write_top_token_report(results)
+    write_top_token_report(
+        results,
+        prompt_suffix=prompt_suffix,
+        report_path=paths["report"],
+    )
     print(
-        "Top-token prompt details were saved to:\n"
-        f"- {SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH}\n"
-        f"- {SENTIMENT_CHALLENGE_TOP_TOKENS_PATH}"
+        "Top-token prompt details and per-category match/non-match examples "
+        "were saved to:\n"
+        f"- {paths['report']}\n"
+        f"- {paths['json']}"
     )
     return results
 
@@ -431,13 +553,26 @@ def build_category_accuracy_rows(prediction_results):
             result["true_sentiment"] == result["predicted_sentiment"]
             for result in category_results
         )
+        no_sentiment = sum(
+            result["predicted_sentiment"] == "no sentiment"
+            for result in category_results
+        )
+        wrong_sentiment = sum(
+            result["true_sentiment"] != result["predicted_sentiment"]
+            and result["predicted_sentiment"] != "no sentiment"
+            for result in category_results
+        )
         total = len(category_results)
         rows.append(
             {
                 "category": category,
                 "correct": correct,
+                "wrong_sentiment": wrong_sentiment,
+                "no_sentiment": no_sentiment,
                 "total": total,
                 "accuracy": correct / total if total else 0.0,
+                "wrong_sentiment_rate": wrong_sentiment / total if total else 0.0,
+                "no_sentiment_rate": no_sentiment / total if total else 0.0,
             }
         )
 
@@ -453,8 +588,11 @@ def run_sentiment_challenge_top_token_analysis(
     negative_words,
     top_k: int = 10,
     batch_size: int = 8,
+    prompt_suffix=None,
+    trial_name=None,
 ):
     """Save top-k token predictions and plot category confusion matrices."""
+    paths = trial_output_paths(trial_name)
     prediction_results = top_k_next_tokens_for_prompts(
         model,
         tokenizer,
@@ -464,12 +602,73 @@ def run_sentiment_challenge_top_token_analysis(
         negative_words,
         top_k=top_k,
         batch_size=batch_size,
+        prompt_suffix=prompt_suffix,
+        trial_name=trial_name,
     )
     category_confusion_counts = build_category_confusion_counts(prediction_results)
     category_accuracy_rows = build_category_accuracy_rows(prediction_results)
-    plot_sentiment_challenge_category_confusion_matrices(category_confusion_counts)
-    plot_sentiment_challenge_category_accuracy(category_accuracy_rows)
+    plot_sentiment_challenge_category_confusion_matrices(
+        category_confusion_counts,
+        filename_or_path=paths["confusion_png"],
+        prompt_suffix=prompt_suffix,
+    )
+    plot_sentiment_challenge_category_accuracy(
+        category_accuracy_rows,
+        filename_or_path=paths["accuracy_png"],
+        prompt_suffix=prompt_suffix,
+    )
     return prediction_results, category_confusion_counts, category_accuracy_rows
+
+
+def run_sentiment_challenge_suffix_trials(
+    model,
+    tokenizer,
+    device,
+    filtered_challenge_records,
+    positive_words,
+    negative_words,
+    prompt_suffix,
+    top_k: int = 10,
+    batch_size: int = 8,
+):
+    """Run the top-token analysis once for each suffix in prompt_suffix."""
+    suffix_trial_results = {}
+
+    for trial_index, suffix in enumerate(prompt_suffix, start=1):
+        trial_name = f"Trial{trial_index}"
+        print(f"Running {trial_name} with suffix: {suffix!r}")
+
+        prompt_records = form_sentiment_challenge_prompts(
+            filtered_challenge_records,
+            suffix,
+        )
+        (
+            prediction_results,
+            category_confusion_counts,
+            category_accuracy_rows,
+        ) = run_sentiment_challenge_top_token_analysis(
+            model,
+            tokenizer,
+            device,
+            prompt_records,
+            positive_words,
+            negative_words,
+            top_k=top_k,
+            batch_size=batch_size,
+            prompt_suffix=suffix,
+            trial_name=trial_name,
+        )
+
+        suffix_trial_results[trial_name] = {
+            "suffix": suffix,
+            "prediction_results": prediction_results,
+            "category_confusion_counts": category_confusion_counts,
+            "category_accuracy_rows": category_accuracy_rows,
+            "confusion_png": f"sentiment_challenge_category_confusion_matrices_{trial_name}.png",
+            "accuracy_png": f"sentiment_challenge_category_accuracy_{trial_name}.png",
+        }
+
+    return suffix_trial_results
 
 
 def format_challenge_sentence(record, missing_text: str, text_width: int = 140):

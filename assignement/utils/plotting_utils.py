@@ -99,6 +99,7 @@ def plot_filtered_sentiment_challenge_category_heatmap(category_to_records):
 def plot_sentiment_challenge_category_confusion_matrices(
     category_confusion_counts,
     filename_or_path=SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
+    prompt_suffix=None,
 ):
     """Save one confusion matrix per challenge annotation category."""
     output_path = (
@@ -149,11 +150,10 @@ def plot_sentiment_challenge_category_confusion_matrices(
     for ax in axes[len(categories):]:
         ax.axis("off")
 
-    fig.suptitle(
-        "Sentiment Challenge: Hu & Liu Top-10 Token Sentiment by Category",
-        fontsize=16,
-        y=0.996,
-    )
+    title = "Sentiment Challenge: Hu & Liu Top-10 Token Sentiment by Category"
+    if prompt_suffix is not None:
+        title += f"\nPrompt suffix: {prompt_suffix!r}"
+    fig.suptitle(title, fontsize=16, y=0.996)
     plt.tight_layout(rect=(0, 0, 1, 0.985))
     plt.savefig(output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
@@ -163,8 +163,9 @@ def plot_sentiment_challenge_category_confusion_matrices(
 def plot_sentiment_challenge_category_accuracy(
     category_accuracy_rows,
     filename_or_path=SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH,
+    prompt_suffix=None,
 ):
-    """Save a bar chart with top-token sentiment accuracy per challenge category."""
+    """Save a stacked bar chart with correct, wrong, and no-sentiment rates."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
@@ -172,28 +173,70 @@ def plot_sentiment_challenge_category_accuracy(
     )
     rows = sorted(category_accuracy_rows, key=lambda row: (row["accuracy"], row["category"]))
     categories = [row["category"] for row in rows]
-    accuracies = [row["accuracy"] * 100 for row in rows]
+    y_positions = np.arange(len(rows))
+    correct_rates = np.array([row["accuracy"] * 100 for row in rows])
+    wrong_rates = np.array([row["wrong_sentiment_rate"] * 100 for row in rows])
+    no_sentiment_rates = np.array([row["no_sentiment_rate"] * 100 for row in rows])
 
-    fig, ax = plt.subplots(figsize=(12.5, max(8, len(rows) * 0.46)))
-    colors = ["#2E8B57" if value >= 50 else "#B22222" for value in accuracies]
-    bars = ax.barh(categories, accuracies, color=colors, alpha=0.82)
+    fig, ax = plt.subplots(figsize=(15.5, max(8, len(rows) * 0.5)))
+    ax.barh(
+        y_positions,
+        correct_rates,
+        color="#2E8B57",
+        alpha=0.86,
+        label="correct sentiment",
+    )
+    ax.barh(
+        y_positions,
+        wrong_rates,
+        left=correct_rates,
+        color="#B22222",
+        alpha=0.82,
+        label="wrong sentiment",
+    )
+    ax.barh(
+        y_positions,
+        no_sentiment_rates,
+        left=correct_rates + wrong_rates,
+        color="#8C8C8C",
+        alpha=0.8,
+        label="no sentiment",
+    )
 
-    for bar, row, value in zip(bars, rows, accuracies):
+    for y_pos, row, correct_value in zip(y_positions, rows, correct_rates):
         ax.text(
-            min(value + 1.2, 98),
-            bar.get_y() + bar.get_height() / 2,
-            f"{value:.1f}% (n={row['total']})",
+            min(correct_value + 1.2, 98),
+            y_pos,
+            f"{correct_value:.1f}% (n={row['total']})",
             va="center",
-            ha="left" if value < 90 else "right",
+            ha="left" if correct_value < 90 else "right",
             fontsize=9,
         )
 
     ax.axvline(50, color="#404040", linewidth=1, linestyle="--")
     ax.set_xlim(0, 100)
-    ax.set_xlabel("Accuracy (%)")
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels(categories)
+    ax.set_xlabel("Share of examples (%)")
     ax.set_ylabel("Annotation category")
-    ax.set_title("Sentiment Challenge: Top-10 Hu & Liu Sentiment Accuracy by Category")
+    title = "Sentiment Challenge: Correct vs Error Type by Category"
+    if prompt_suffix is not None:
+        title += f"\nPrompt suffix: {prompt_suffix!r}"
+    ax.set_title(title)
     ax.grid(axis="x", alpha=0.22)
+    ax.legend(loc="lower right", frameon=True)
+
+    ax_right = ax.twinx()
+    ax_right.set_ylim(ax.get_ylim())
+    ax_right.set_yticks(y_positions)
+    ax_right.set_yticklabels(
+        [
+            f"wrong {wrong:.1f}% | no {no_sentiment:.1f}%"
+            for wrong, no_sentiment in zip(wrong_rates, no_sentiment_rates)
+        ],
+        fontsize=8.5,
+    )
+    ax_right.set_ylabel("Remaining percentage to 100%")
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=140, bbox_inches="tight")

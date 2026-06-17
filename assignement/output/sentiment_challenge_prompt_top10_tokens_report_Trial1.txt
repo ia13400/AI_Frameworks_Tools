@@ -1,6 +1,109 @@
 Sentiment Challenge top-10 next-token report
 ====================================================
-Prediction rule: sum the probability mass of top-10 tokens that match the Hu & Liu positive or negative lexicon. If neither side has more mass, label the result as no sentiment.
+Prediction rule: sum the probability mass of top-10 tokens that match the Hu & Liu positive or negative lexicon. Use no sentiment only when no top-10 token matches Hu & Liu. If positive and negative probability mass tie after at least one match, use the sentiment of the highest-ranked Hu & Liu match.
+
+prompt_suffix: ' I feel very'
+
+One matching and one non-matching prediction example per category
+====================================================================
+
+amplified
+---------
+matching: sentence_index=2 | true=positive | predicted=positive | hits=confident=positive:0.1077, optimistic=positive:0.0679, good=positive:0.0545 | prompt=The Kyoto Protocol is a first major step . I feel very
+not_matching: sentence_index=1 | true=negative | predicted=positive | hits=bad=negative:0.0871, lucky=positive:0.0717, sorry=negative:0.0630 | prompt=Business groups and labor unions joined in a giant protest , perhaps knowing that portions of the military were on their side . I feel very
+
+comparative
+-----------
+matching: sentence_index=75 | true=positive | predicted=positive | hits=confident=positive:0.2772, comfortable=positive:0.0842, good=positive:0.0602 | prompt=Attention Romo haters. Guess who is the 4th highest career qb rating all time? That's right..higher than Manning, Brees, Warner, Montana etc I feel very
+not_matching: sentence_index=202 | true=negative | predicted=positive | hits=confident=positive:0.1815, optimistic=positive:0.0544, sorry=negative:0.0536 | prompt=Japanese customers paying more for LNG according to report: "Prior to the Great East Japan Earthquake of March 1... http://bit.ly/RHqdPR I feel very
+
+desirable-element
+-----------------
+matching: sentence_index=2 | true=positive | predicted=positive | hits=confident=positive:0.1077, optimistic=positive:0.0679, good=positive:0.0545 | prompt=The Kyoto Protocol is a first major step . I feel very
+not_matching: sentence_index=1 | true=negative | predicted=positive | hits=bad=negative:0.0871, lucky=positive:0.0717, sorry=negative:0.0630 | prompt=Business groups and labor unions joined in a giant protest , perhaps knowing that portions of the military were on their side . I feel very
+
+difficult-vocab
+---------------
+matching: sentence_index=8 | true=negative | predicted=negative | hits=sorry=negative:0.0736, uncomfortable=negative:0.0324, badly=negative:0.0322 | prompt=Bill Nash , a retired Army major general and senior fellow at the Council on Foreign Relations , said this amounted to " imposing on them a psychological sense of isolation , domination and futility , and trying to establish the conditions by which you can then reward them for information , as oppose to punish them . " I feel very
+not_matching: sentence_index=59 | true=negative | predicted=positive | hits=lucky=positive:0.1388, fortunate=positive:0.0817, sorry=negative:0.0572 | prompt=Renewed fighting rocks Syria: An early morning explosion rocked the flashpoint city of Deir Ezzor on Saturday in...http://bit.ly/SNIg5O I feel very
+
+emoji
+-----
+matching: sentence_index=666 | true=negative | predicted=negative | hits=sorry=negative:0.0974, bad=negative:0.0884, sad=negative:0.0593 | prompt=@DC_Zol Pricess Leia is going to be gutted! :-) I feel very
+not_matching: sentence_index=71 | true=negative | predicted=positive | hits=confident=positive:0.0699, lucky=positive:0.0636, bad=negative:0.0526 | prompt=USSDGate :) "@verge: Galaxy S II can be wiped by just clicking a link, other TouchWiz devices may also be vulnerable http://vrge.co/ORLI24 " I feel very
+
+idioms
+------
+matching: sentence_index=17 | true=negative | predicted=negative | hits=sorry=negative:0.1314, sad=negative:0.1276, proud=positive:0.0410 | prompt=No one will allow this human achievement , which is the discovery of God - given human rights , which is achieved after thousands of years of research , to be wasted away . I feel very
+not_matching: sentence_index=18 | true=positive | predicted=negative | hits=sorry=negative:0.1204, bad=negative:0.0489, confident=positive:0.0414 | prompt=Russian Yuri Onufrienko could n't wait to take over as space station commander from American Frank Culbertson . I feel very
+
+mixed
+-----
+matching: sentence_index=11 | true=positive | predicted=positive | hits=proud=positive:0.0978, honored=positive:0.0935, sad=negative:0.0640 | prompt=The IHRC said in a statement to mark December 10 , " international day for human rights " that the international community has formulated numerous documents to honor human rights after 50 years of bitter experience and the heavy losses that the humanity has suffered . I feel very
+not_matching: sentence_index=3 | true=negative | predicted=positive | hits=proud=positive:0.0752, sorry=negative:0.0724, confident=positive:0.0459 | prompt=But after declaring a war against terrorism the United States not only drew Pakistan to its side but also provided aid to it . I feel very
+
+modality
+--------
+matching: sentence_index=33 | true=positive | predicted=positive | hits=comfortable=positive:0.0430, good=positive:0.0330, confident=positive:0.0318 | prompt=I would like to go byack write now I feel very
+not_matching: sentence_index=182 | true=negative | predicted=positive | hits=sorry=negative:0.1175, confident=positive:0.1014, lucky=positive:0.0784 | prompt=Dammn yung Tracy McGrady goin to play in China really wish injuries didnt slow him down was one the best in the @NBA my 2nd favorite player I feel very
+
+morphology
+----------
+matching: sentence_index=320 | true=negative | predicted=negative | hits=sorry=negative:0.1449, bad=negative:0.0671, lucky=positive:0.0622 | prompt=Just another fish-out-of-water story that barely stays afloat . I feel very
+not_matching: sentence_index=334 | true=positive | predicted=negative | hits=lucky=positive:0.0342, sorry=negative:0.0294, comfortable=positive:0.0276 | prompt=The D images only enhance the film 's otherworldly quality , giving it a strange combo of you-are-there closeness with the disorienting unreality of the seemingly broken-down fourth wall of the movie screen . I feel very
+
+negated
+-------
+matching: sentence_index=0 | true=negative | predicted=negative | hits=badly=negative:0.1366, sorry=negative:0.1031, bad=negative:0.0903 | prompt=And what they have said about him has not been pretty . I feel very
+not_matching: sentence_index=37 | true=negative | predicted=positive | hits=lucky=positive:0.0758, sorry=negative:0.0686, bad=negative:0.0501 | prompt=Never worth the money we had to pay for the room and the stay !!! I feel very
+
+negative
+--------
+matching: sentence_index=8 | true=negative | predicted=negative | hits=sorry=negative:0.0736, uncomfortable=negative:0.0324, badly=negative:0.0322 | prompt=Bill Nash , a retired Army major general and senior fellow at the Council on Foreign Relations , said this amounted to " imposing on them a psychological sense of isolation , domination and futility , and trying to establish the conditions by which you can then reward them for information , as oppose to punish them . " I feel very
+not_matching: sentence_index=1 | true=negative | predicted=positive | hits=bad=negative:0.0871, lucky=positive:0.0717, sorry=negative:0.0630 | prompt=Business groups and labor unions joined in a giant protest , perhaps knowing that portions of the military were on their side . I feel very
+
+no-sentiment
+------------
+matching: sentence_index=173 | true=negative | predicted=negative | hits=sorry=negative:0.1121, bad=negative:0.0767, sad=negative:0.0327 | prompt=According the BNP's website they are bussing people down from Sheffield for the "BBC Paedo" protest at Broadcast House tomorrow. I feel very
+not_matching: none
+
+non-standard spelling
+---------------------
+matching: sentence_index=33 | true=positive | predicted=positive | hits=comfortable=positive:0.0430, good=positive:0.0330, confident=positive:0.0318 | prompt=I would like to go byack write now I feel very
+not_matching: sentence_index=78 | true=positive | predicted=negative | hits=guilty=negative:0.1041, lucky=positive:0.0514, good=positive:0.0407 | prompt=Actually, I'm just ready for Taco Bell tomorrow for lunch. #fattweet I feel very
+
+positive
+--------
+matching: sentence_index=0 | true=negative | predicted=negative | hits=badly=negative:0.1366, sorry=negative:0.1031, bad=negative:0.0903 | prompt=And what they have said about him has not been pretty . I feel very
+not_matching: sentence_index=18 | true=positive | predicted=negative | hits=sorry=negative:0.1204, bad=negative:0.0489, confident=positive:0.0414 | prompt=Russian Yuri Onufrienko could n't wait to take over as space station commander from American Frank Culbertson . I feel very
+
+reducer
+-------
+matching: sentence_index=21 | true=positive | predicted=positive | hits=sorry=negative:0.0567, comfortable=positive:0.0519, confident=positive:0.0404 | prompt=" It somewhat softens its tone in the China human rights report . I feel very
+not_matching: sentence_index=221 | true=negative | predicted=positive | hits=comfortable=positive:0.0384, confident=positive:0.0329, sorry=negative:0.0326 | prompt=Absorbing and disturbing -- perhaps more disturbing than originally intended -- but a little clarity would have gone a long way . I feel very
+
+sarcasm/irony
+-------------
+matching: sentence_index=56 | true=positive | predicted=positive | hits=confident=positive:0.1232, bad=negative:0.0947, sorry=negative:0.0604 | prompt=Dad just said if Obama wins on Tuesday he is moving to Cuba #dontknowwhatyourtalkingbout #butok I feel very
+not_matching: sentence_index=78 | true=positive | predicted=negative | hits=guilty=negative:0.1041, lucky=positive:0.0514, good=positive:0.0407 | prompt=Actually, I'm just ready for Taco Bell tomorrow for lunch. #fattweet I feel very
+
+shifter
+-------
+matching: sentence_index=15 | true=negative | predicted=negative | hits=comfortable=positive:0.0546, confident=positive:0.0529, uncomfortable=negative:0.0412 | prompt=For South Africa , the main concern is regional stability , not the niceties of participatory democracy . I feel very
+not_matching: sentence_index=23 | true=negative | predicted=positive | hits=bad=negative:0.0841, confident=positive:0.0650, sorry=negative:0.0622 | prompt=Bush repeated his rejection of the 1997 Kyoto Protocol aimed atcurbing global warming , and pushed for the alternative he announced last week . I feel very
+
+strong
+------
+matching: sentence_index=6 | true=positive | predicted=positive | hits=confident=positive:0.2622, proud=positive:0.0975, good=positive:0.0850 | prompt=The campaign so far showed Alliance military success was the best way of getting food in , he said . I feel very
+not_matching: sentence_index=25 | true=negative | predicted=positive | hits=confident=positive:0.0923, lucky=positive:0.0297, optimistic=positive:0.0281 | prompt=Researchers have shown that without a determined policy on climate coordinated at international level the consequences of climate change will be dramatic . I feel very
+
+world-knowledge
+---------------
+matching: sentence_index=13 | true=negative | predicted=negative | hits=sorry=negative:0.1602, sad=negative:0.1087, proud=positive:0.0552 | prompt=" The situation we see now is what I call the Last Supper -- it is ZANU - PF 's final feast , " Mr. Tsvangirai said . I feel very
+not_matching: sentence_index=27 | true=negative | predicted=positive | hits=confident=positive:0.1330, good=positive:0.0751, optimistic=positive:0.0623 | prompt=With an annual economic growth objective of 3 percent , absolute US emissions in 2012 will be 24.5 percent more than 1990 levels , despite the improvement in energy efficiency . I feel very
+
+Full prompt-level top-10 details
+====================================================
 
 Example 1
 ----------------------------------------------------
