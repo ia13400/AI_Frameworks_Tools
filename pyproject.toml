@@ -2,20 +2,24 @@
 name = "team4"
 version = "0.1.0"
 description = "team 4: Semester project"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "numpy",
     "pandas",
     "matplotlib",
     "scikit-learn",
-    "torch>=2.0",
-    "torchaudio",
+    "torch==2.6.0",
+    "torchaudio==2.6.0",
     "mlflow>=2.0",
     "jupyter",
     "ipykernel",
     "seaborn>=0.13.2",
     "openai>=2.38.0",
     "transformers>=5.9.0",
+    "datasets",
+    "nltk",
+    "accelerate",
+    "polars",
 ]
 [tool.uv.sources]
 torch = { index = "pytorch-cu124" }

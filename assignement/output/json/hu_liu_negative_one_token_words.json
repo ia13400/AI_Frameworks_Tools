@@ -1,0 +1,8350 @@
+{
+  "source": {
+    "name": "Hu & Liu Opinion Lexicon",
+    "nltk_corpus": "nltk.corpus.opinion_lexicon",
+    "description": "Positive and negative opinion word lists introduced by Minqing Hu and Bing Liu for opinion mining / sentiment analysis."
+  },
+  "filtering_method": {
+    "plain_word_filter": "Keep only entries matching the regex [A-Za-z]+.",
+    "token_filter": "Tokenize each word as running text by prepending one leading space, then keep only words where tokenizer.encode(' ' + word, add_special_tokens=False) returns exactly one token id.",
+    "model_tokenizer": "EleutherAI/pythia-410m",
+    "sentiment_label": "negative"
+  },
+  "count": 1389,
+  "words": [
+    {
+      "word": "abnormal",
+      "token": " abnormal",
+      "token_id": 10969,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abort",
+      "token": " abort",
+      "token_id": 25618,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abrupt",
+      "token": " abrupt",
+      "token_id": 21213,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abruptly",
+      "token": " abruptly",
+      "token_id": 30046,
+      "sentiment": "negative"
+    },
+    {
+      "word": "absence",
+      "token": " absence",
+      "token_id": 5928,
+      "sentiment": "negative"
+    },
+    {
+      "word": "absurd",
+      "token": " absurd",
+      "token_id": 20873,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abuse",
+      "token": " abuse",
+      "token_id": 7242,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abused",
+      "token": " abused",
+      "token_id": 19848,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abuses",
+      "token": " abuses",
+      "token_id": 35703,
+      "sentiment": "negative"
+    },
+    {
+      "word": "abusive",
+      "token": " abusive",
+      "token_id": 33408,
+      "sentiment": "negative"
+    },
+    {
+      "word": "accidental",
+      "token": " accidental",
+      "token_id": 31120,
+      "sentiment": "negative"
+    },
+    {
+      "word": "accusation",
+      "token": " accusation",
+      "token_id": 41679,
+      "sentiment": "negative"
+    },
+    {
+      "word": "accusations",
+      "token": " accusations",
+      "token_id": 29672,
+      "sentiment": "negative"
+    },
+    {
+      "word": "accuse",
+      "token": " accuse",
+      "token_id": 45577,
+      "sentiment": "negative"
+    },
+    {
+      "word": "accusing",
+      "token": " accusing",
+      "token_id": 37781,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ache",
+      "token": " ache",
+      "token_id": 49652,
+      "sentiment": "negative"
+    },
+    {
+      "word": "addict",
+      "token": " addict",
+      "token_id": 26716,
+      "sentiment": "negative"
+    },
+    {
+      "word": "addicted",
+      "token": " addicted",
+      "token_id": 46512,
+      "sentiment": "negative"
+    },
+    {
+      "word": "adversarial",
+      "token": " adversarial",
+      "token_id": 48960,
+      "sentiment": "negative"
+    },
+    {
+      "word": "adversary",
+      "token": " adversary",
+      "token_id": 34014,
+      "sentiment": "negative"
+    },
+    {
+      "word": "adverse",
+      "token": " adverse",
+      "token_id": 10021,
+      "sentiment": "negative"
+    },
+    {
+      "word": "afflict",
+      "token": " afflict",
+      "token_id": 36107,
+      "sentiment": "negative"
+    },
+    {
+      "word": "afraid",
+      "token": " afraid",
+      "token_id": 9202,
+      "sentiment": "negative"
+    },
+    {
+      "word": "aggravating",
+      "token": " aggravating",
+      "token_id": 43948,
+      "sentiment": "negative"
+    },
+    {
+      "word": "aggression",
+      "token": " aggression",
+      "token_id": 27894,
+      "sentiment": "negative"
+    },
+    {
+      "word": "aggressive",
+      "token": " aggressive",
+      "token_id": 13847,
+      "sentiment": "negative"
+    },
+    {
+      "word": "agony",
+      "token": " agony",
+      "token_id": 41335,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ail",
+      "token": " ail",
+      "token_id": 44244,
+      "sentiment": "negative"
+    },
+    {
+      "word": "alarm",
+      "token": " alarm",
+      "token_id": 13965,
+      "sentiment": "negative"
+    },
+    {
+      "word": "alarmed",
+      "token": " alarmed",
+      "token_id": 45522,
+      "sentiment": "negative"
+    },
+    {
+      "word": "alarming",
+      "token": " alarming",
+      "token_id": 40975,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allegation",
+      "token": " allegation",
+      "token_id": 26840,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allegations",
+      "token": " allegations",
+      "token_id": 11307,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allege",
+      "token": " allege",
+      "token_id": 24522,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allergic",
+      "token": " allergic",
+      "token_id": 26884,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allergies",
+      "token": " allergies",
+      "token_id": 47471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "allergy",
+      "token": " allergy",
+      "token_id": 37415,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ambiguity",
+      "token": " ambiguity",
+      "token_id": 28931,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ambiguous",
+      "token": " ambiguous",
+      "token_id": 23851,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anger",
+      "token": " anger",
+      "token_id": 12700,
+      "sentiment": "negative"
+    },
+    {
+      "word": "angrily",
+      "token": " angrily",
+      "token_id": 48834,
+      "sentiment": "negative"
+    },
+    {
+      "word": "angry",
+      "token": " angry",
+      "token_id": 11790,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anguish",
+      "token": " anguish",
+      "token_id": 44089,
+      "sentiment": "negative"
+    },
+    {
+      "word": "annihilation",
+      "token": " annihilation",
+      "token_id": 37290,
+      "sentiment": "negative"
+    },
+    {
+      "word": "annoy",
+      "token": " annoy",
+      "token_id": 14810,
+      "sentiment": "negative"
+    },
+    {
+      "word": "annoyance",
+      "token": " annoyance",
+      "token_id": 49058,
+      "sentiment": "negative"
+    },
+    {
+      "word": "annoyed",
+      "token": " annoyed",
+      "token_id": 34639,
+      "sentiment": "negative"
+    },
+    {
+      "word": "annoying",
+      "token": " annoying",
+      "token_id": 24659,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anomalous",
+      "token": " anomalous",
+      "token_id": 31946,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anomaly",
+      "token": " anomaly",
+      "token_id": 30207,
+      "sentiment": "negative"
+    },
+    {
+      "word": "antagonist",
+      "token": " antagonist",
+      "token_id": 25166,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anxiety",
+      "token": " anxiety",
+      "token_id": 10397,
+      "sentiment": "negative"
+    },
+    {
+      "word": "anxious",
+      "token": " anxious",
+      "token_id": 20138,
+      "sentiment": "negative"
+    },
+    {
+      "word": "apprehension",
+      "token": " apprehension",
+      "token_id": 49861,
+      "sentiment": "negative"
+    },
+    {
+      "word": "arbitrary",
+      "token": " arbitrary",
+      "token_id": 10341,
+      "sentiment": "negative"
+    },
+    {
+      "word": "arrogant",
+      "token": " arrogant",
+      "token_id": 43837,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ashamed",
+      "token": " ashamed",
+      "token_id": 29170,
+      "sentiment": "negative"
+    },
+    {
+      "word": "assail",
+      "token": " assail",
+      "token_id": 49198,
+      "sentiment": "negative"
+    },
+    {
+      "word": "assassin",
+      "token": " assassin",
+      "token_id": 46127,
+      "sentiment": "negative"
+    },
+    {
+      "word": "assault",
+      "token": " assault",
+      "token_id": 9222,
+      "sentiment": "negative"
+    },
+    {
+      "word": "atrophy",
+      "token": " atrophy",
+      "token_id": 34512,
+      "sentiment": "negative"
+    },
+    {
+      "word": "attack",
+      "token": " attack",
+      "token_id": 2983,
+      "sentiment": "negative"
+    },
+    {
+      "word": "attacks",
+      "token": " attacks",
+      "token_id": 8104,
+      "sentiment": "negative"
+    },
+    {
+      "word": "authoritarian",
+      "token": " authoritarian",
+      "token_id": 43902,
+      "sentiment": "negative"
+    },
+    {
+      "word": "awful",
+      "token": " awful",
+      "token_id": 18580,
+      "sentiment": "negative"
+    },
+    {
+      "word": "awkward",
+      "token": " awkward",
+      "token_id": 19328,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ax",
+      "token": " ax",
+      "token_id": 4589,
+      "sentiment": "negative"
+    },
+    {
+      "word": "backward",
+      "token": " backward",
+      "token_id": 19265,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bad",
+      "token": " bad",
+      "token_id": 3076,
+      "sentiment": "negative"
+    },
+    {
+      "word": "badly",
+      "token": " badly",
+      "token_id": 16426,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bait",
+      "token": " bait",
+      "token_id": 35352,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bankrupt",
+      "token": " bankrupt",
+      "token_id": 35728,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bash",
+      "token": " bash",
+      "token_id": 29826,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bastard",
+      "token": " bastard",
+      "token_id": 32199,
+      "sentiment": "negative"
+    },
+    {
+      "word": "battered",
+      "token": " battered",
+      "token_id": 45418,
+      "sentiment": "negative"
+    },
+    {
+      "word": "beg",
+      "token": " beg",
+      "token_id": 2353,
+      "sentiment": "negative"
+    },
+    {
+      "word": "begging",
+      "token": " begging",
+      "token_id": 38141,
+      "sentiment": "negative"
+    },
+    {
+      "word": "belie",
+      "token": " belie",
+      "token_id": 1802,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bent",
+      "token": " bent",
+      "token_id": 16535,
+      "sentiment": "negative"
+    },
+    {
+      "word": "betray",
+      "token": " betray",
+      "token_id": 19829,
+      "sentiment": "negative"
+    },
+    {
+      "word": "betrayal",
+      "token": " betrayal",
+      "token_id": 46337,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bias",
+      "token": " bias",
+      "token_id": 8492,
+      "sentiment": "negative"
+    },
+    {
+      "word": "biased",
+      "token": " biased",
+      "token_id": 23539,
+      "sentiment": "negative"
+    },
+    {
+      "word": "biases",
+      "token": " biases",
+      "token_id": 31306,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bitch",
+      "token": " bitch",
+      "token_id": 23331,
+      "sentiment": "negative"
+    },
+    {
+      "word": "biting",
+      "token": " biting",
+      "token_id": 41185,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bitter",
+      "token": " bitter",
+      "token_id": 17123,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bitterly",
+      "token": " bitterly",
+      "token_id": 49483,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bitterness",
+      "token": " bitterness",
+      "token_id": 44875,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bizarre",
+      "token": " bizarre",
+      "token_id": 27541,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blah",
+      "token": " blah",
+      "token_id": 37598,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blame",
+      "token": " blame",
+      "token_id": 13387,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bland",
+      "token": " bland",
+      "token_id": 40672,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blasted",
+      "token": " blasted",
+      "token_id": 47781,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bleak",
+      "token": " bleak",
+      "token_id": 47077,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bleed",
+      "token": " bleed",
+      "token_id": 43662,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bleeding",
+      "token": " bleeding",
+      "token_id": 14771,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blind",
+      "token": " blind",
+      "token_id": 9645,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blinding",
+      "token": " blinding",
+      "token_id": 49167,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bloody",
+      "token": " bloody",
+      "token_id": 19867,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blow",
+      "token": " blow",
+      "token_id": 8230,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blunt",
+      "token": " blunt",
+      "token_id": 29156,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blur",
+      "token": " blur",
+      "token_id": 29017,
+      "sentiment": "negative"
+    },
+    {
+      "word": "blurred",
+      "token": " blurred",
+      "token_id": 44042,
+      "sentiment": "negative"
+    },
+    {
+      "word": "boil",
+      "token": " boil",
+      "token_id": 22149,
+      "sentiment": "negative"
+    },
+    {
+      "word": "boiling",
+      "token": " boiling",
+      "token_id": 25317,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bomb",
+      "token": " bomb",
+      "token_id": 10110,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bombard",
+      "token": " bombard",
+      "token_id": 47710,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bore",
+      "token": " bore",
+      "token_id": 17564,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bored",
+      "token": " bored",
+      "token_id": 23086,
+      "sentiment": "negative"
+    },
+    {
+      "word": "boring",
+      "token": " boring",
+      "token_id": 22258,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bother",
+      "token": " bother",
+      "token_id": 15105,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bothered",
+      "token": " bothered",
+      "token_id": 28860,
+      "sentiment": "negative"
+    },
+    {
+      "word": "boycott",
+      "token": " boycott",
+      "token_id": 42760,
+      "sentiment": "negative"
+    },
+    {
+      "word": "breach",
+      "token": " breach",
+      "token_id": 13770,
+      "sentiment": "negative"
+    },
+    {
+      "word": "break",
+      "token": " break",
+      "token_id": 2740,
+      "sentiment": "negative"
+    },
+    {
+      "word": "breakdown",
+      "token": " breakdown",
+      "token_id": 19501,
+      "sentiment": "negative"
+    },
+    {
+      "word": "breaking",
+      "token": " breaking",
+      "token_id": 10155,
+      "sentiment": "negative"
+    },
+    {
+      "word": "breaks",
+      "token": " breaks",
+      "token_id": 13471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "broke",
+      "token": " broke",
+      "token_id": 9377,
+      "sentiment": "negative"
+    },
+    {
+      "word": "broken",
+      "token": " broken",
+      "token_id": 7154,
+      "sentiment": "negative"
+    },
+    {
+      "word": "brutal",
+      "token": " brutal",
+      "token_id": 23180,
+      "sentiment": "negative"
+    },
+    {
+      "word": "brutality",
+      "token": " brutality",
+      "token_id": 48083,
+      "sentiment": "negative"
+    },
+    {
+      "word": "brute",
+      "token": " brute",
+      "token_id": 45294,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bs",
+      "token": " bs",
+      "token_id": 48996,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bug",
+      "token": " bug",
+      "token_id": 7505,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bugs",
+      "token": " bugs",
+      "token_id": 19775,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bulky",
+      "token": " bulky",
+      "token_id": 41274,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bullshit",
+      "token": " bullshit",
+      "token_id": 35281,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bully",
+      "token": " bully",
+      "token_id": 48233,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bullying",
+      "token": " bullying",
+      "token_id": 38738,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bum",
+      "token": " bum",
+      "token_id": 47274,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bump",
+      "token": " bump",
+      "token_id": 19496,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bumps",
+      "token": " bumps",
+      "token_id": 44395,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bunk",
+      "token": " bunk",
+      "token_id": 32366,
+      "sentiment": "negative"
+    },
+    {
+      "word": "burden",
+      "token": " burden",
+      "token_id": 7977,
+      "sentiment": "negative"
+    },
+    {
+      "word": "burn",
+      "token": " burn",
+      "token_id": 5451,
+      "sentiment": "negative"
+    },
+    {
+      "word": "burned",
+      "token": " burned",
+      "token_id": 15676,
+      "sentiment": "negative"
+    },
+    {
+      "word": "burning",
+      "token": " burning",
+      "token_id": 13195,
+      "sentiment": "negative"
+    },
+    {
+      "word": "burns",
+      "token": " burns",
+      "token_id": 31594,
+      "sentiment": "negative"
+    },
+    {
+      "word": "bust",
+      "token": " bust",
+      "token_id": 21501,
+      "sentiment": "negative"
+    },
+    {
+      "word": "butcher",
+      "token": " butcher",
+      "token_id": 45975,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cancer",
+      "token": " cancer",
+      "token_id": 2923,
+      "sentiment": "negative"
+    },
+    {
+      "word": "capricious",
+      "token": " capricious",
+      "token_id": 48775,
+      "sentiment": "negative"
+    },
+    {
+      "word": "careless",
+      "token": " careless",
+      "token_id": 48292,
+      "sentiment": "negative"
+    },
+    {
+      "word": "carp",
+      "token": " carp",
+      "token_id": 26918,
+      "sentiment": "negative"
+    },
+    {
+      "word": "catastrophe",
+      "token": " catastrophe",
+      "token_id": 41786,
+      "sentiment": "negative"
+    },
+    {
+      "word": "catastrophic",
+      "token": " catastrophic",
+      "token_id": 36256,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cave",
+      "token": " cave",
+      "token_id": 15985,
+      "sentiment": "negative"
+    },
+    {
+      "word": "challenging",
+      "token": " challenging",
+      "token_id": 11132,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chaos",
+      "token": " chaos",
+      "token_id": 20142,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chaotic",
+      "token": " chaotic",
+      "token_id": 29784,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chatter",
+      "token": " chatter",
+      "token_id": 47580,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cheap",
+      "token": " cheap",
+      "token_id": 11142,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cheat",
+      "token": " cheat",
+      "token_id": 39038,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cheating",
+      "token": " cheating",
+      "token_id": 37142,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chill",
+      "token": " chill",
+      "token_id": 27450,
+      "sentiment": "negative"
+    },
+    {
+      "word": "choke",
+      "token": " choke",
+      "token_id": 45266,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chore",
+      "token": " chore",
+      "token_id": 36872,
+      "sentiment": "negative"
+    },
+    {
+      "word": "chronic",
+      "token": " chronic",
+      "token_id": 6722,
+      "sentiment": "negative"
+    },
+    {
+      "word": "clash",
+      "token": " clash",
+      "token_id": 36583,
+      "sentiment": "negative"
+    },
+    {
+      "word": "clog",
+      "token": " clog",
+      "token_id": 43848,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cloud",
+      "token": " cloud",
+      "token_id": 9005,
+      "sentiment": "negative"
+    },
+    {
+      "word": "coarse",
+      "token": " coarse",
+      "token_id": 25319,
+      "sentiment": "negative"
+    },
+    {
+      "word": "coercion",
+      "token": " coercion",
+      "token_id": 46638,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cold",
+      "token": " cold",
+      "token_id": 5412,
+      "sentiment": "negative"
+    },
+    {
+      "word": "collapse",
+      "token": " collapse",
+      "token_id": 13551,
+      "sentiment": "negative"
+    },
+    {
+      "word": "combust",
+      "token": " combust",
+      "token_id": 17420,
+      "sentiment": "negative"
+    },
+    {
+      "word": "commonplace",
+      "token": " commonplace",
+      "token_id": 47817,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complain",
+      "token": " complain",
+      "token_id": 17805,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complained",
+      "token": " complained",
+      "token_id": 19375,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complaining",
+      "token": " complaining",
+      "token_id": 25917,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complains",
+      "token": " complains",
+      "token_id": 40538,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complaint",
+      "token": " complaint",
+      "token_id": 5833,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complaints",
+      "token": " complaints",
+      "token_id": 14672,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complex",
+      "token": " complex",
+      "token_id": 2570,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complicated",
+      "token": " complicated",
+      "token_id": 9542,
+      "sentiment": "negative"
+    },
+    {
+      "word": "complication",
+      "token": " complication",
+      "token_id": 23950,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concede",
+      "token": " concede",
+      "token_id": 46272,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conceded",
+      "token": " conceded",
+      "token_id": 30245,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concern",
+      "token": " concern",
+      "token_id": 4468,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concerned",
+      "token": " concerned",
+      "token_id": 7514,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concerns",
+      "token": " concerns",
+      "token_id": 7350,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concession",
+      "token": " concession",
+      "token_id": 44619,
+      "sentiment": "negative"
+    },
+    {
+      "word": "concessions",
+      "token": " concessions",
+      "token_id": 44488,
+      "sentiment": "negative"
+    },
+    {
+      "word": "condemn",
+      "token": " condemn",
+      "token_id": 25650,
+      "sentiment": "negative"
+    },
+    {
+      "word": "condemnation",
+      "token": " condemnation",
+      "token_id": 40676,
+      "sentiment": "negative"
+    },
+    {
+      "word": "condemned",
+      "token": " condemned",
+      "token_id": 26212,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confess",
+      "token": " confess",
+      "token_id": 25172,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confession",
+      "token": " confession",
+      "token_id": 26438,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confined",
+      "token": " confined",
+      "token_id": 18414,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conflict",
+      "token": " conflict",
+      "token_id": 7344,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conflicting",
+      "token": " conflicting",
+      "token_id": 24648,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conflicts",
+      "token": " conflicts",
+      "token_id": 15272,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confound",
+      "token": " confound",
+      "token_id": 44667,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confounding",
+      "token": " confounding",
+      "token_id": 34541,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confront",
+      "token": " confront",
+      "token_id": 11449,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confrontation",
+      "token": " confrontation",
+      "token_id": 31233,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confuse",
+      "token": " confuse",
+      "token_id": 40678,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confused",
+      "token": " confused",
+      "token_id": 13477,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confusing",
+      "token": " confusing",
+      "token_id": 21643,
+      "sentiment": "negative"
+    },
+    {
+      "word": "confusion",
+      "token": " confusion",
+      "token_id": 13775,
+      "sentiment": "negative"
+    },
+    {
+      "word": "congestion",
+      "token": " congestion",
+      "token_id": 35367,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cons",
+      "token": " cons",
+      "token_id": 772,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conservative",
+      "token": " conservative",
+      "token_id": 11518,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conspicuous",
+      "token": " conspicuous",
+      "token_id": 43988,
+      "sentiment": "negative"
+    },
+    {
+      "word": "conspiracy",
+      "token": " conspiracy",
+      "token_id": 13445,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contaminated",
+      "token": " contaminated",
+      "token_id": 25493,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contamination",
+      "token": " contamination",
+      "token_id": 17969,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contempt",
+      "token": " contempt",
+      "token_id": 20334,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contend",
+      "token": " contend",
+      "token_id": 21244,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contention",
+      "token": " contention",
+      "token_id": 16422,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contradict",
+      "token": " contradict",
+      "token_id": 17343,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contradiction",
+      "token": " contradiction",
+      "token_id": 20620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "contradictory",
+      "token": " contradictory",
+      "token_id": 34126,
+      "sentiment": "negative"
+    },
+    {
+      "word": "controversial",
+      "token": " controversial",
+      "token_id": 15620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "controversy",
+      "token": " controversy",
+      "token_id": 16305,
+      "sentiment": "negative"
+    },
+    {
+      "word": "corrosion",
+      "token": " corrosion",
+      "token_id": 30613,
+      "sentiment": "negative"
+    },
+    {
+      "word": "corrupt",
+      "token": " corrupt",
+      "token_id": 17715,
+      "sentiment": "negative"
+    },
+    {
+      "word": "corrupted",
+      "token": " corrupted",
+      "token_id": 40634,
+      "sentiment": "negative"
+    },
+    {
+      "word": "corruption",
+      "token": " corruption",
+      "token_id": 16933,
+      "sentiment": "negative"
+    },
+    {
+      "word": "costly",
+      "token": " costly",
+      "token_id": 19983,
+      "sentiment": "negative"
+    },
+    {
+      "word": "coward",
+      "token": " coward",
+      "token_id": 35840,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crack",
+      "token": " crack",
+      "token_id": 9370,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cracked",
+      "token": " cracked",
+      "token_id": 28114,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cracks",
+      "token": " cracks",
+      "token_id": 30611,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crap",
+      "token": " crap",
+      "token_id": 23550,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crash",
+      "token": " crash",
+      "token_id": 13035,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crashed",
+      "token": " crashed",
+      "token_id": 25753,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crashes",
+      "token": " crashes",
+      "token_id": 29212,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crashing",
+      "token": " crashing",
+      "token_id": 34869,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crazy",
+      "token": " crazy",
+      "token_id": 10412,
+      "sentiment": "negative"
+    },
+    {
+      "word": "creep",
+      "token": " creep",
+      "token_id": 25461,
+      "sentiment": "negative"
+    },
+    {
+      "word": "creeping",
+      "token": " creeping",
+      "token_id": 49801,
+      "sentiment": "negative"
+    },
+    {
+      "word": "creepy",
+      "token": " creepy",
+      "token_id": 43152,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crept",
+      "token": " crept",
+      "token_id": 43801,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crime",
+      "token": " crime",
+      "token_id": 6617,
+      "sentiment": "negative"
+    },
+    {
+      "word": "criminal",
+      "token": " criminal",
+      "token_id": 6424,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crisis",
+      "token": " crisis",
+      "token_id": 8891,
+      "sentiment": "negative"
+    },
+    {
+      "word": "critic",
+      "token": " critic",
+      "token_id": 7291,
+      "sentiment": "negative"
+    },
+    {
+      "word": "critical",
+      "token": " critical",
+      "token_id": 4619,
+      "sentiment": "negative"
+    },
+    {
+      "word": "criticism",
+      "token": " criticism",
+      "token_id": 14226,
+      "sentiment": "negative"
+    },
+    {
+      "word": "criticisms",
+      "token": " criticisms",
+      "token_id": 43680,
+      "sentiment": "negative"
+    },
+    {
+      "word": "criticize",
+      "token": " criticize",
+      "token_id": 45688,
+      "sentiment": "negative"
+    },
+    {
+      "word": "criticized",
+      "token": " criticized",
+      "token_id": 23159,
+      "sentiment": "negative"
+    },
+    {
+      "word": "critics",
+      "token": " critics",
+      "token_id": 17139,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crowded",
+      "token": " crowded",
+      "token_id": 22299,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crude",
+      "token": " crude",
+      "token_id": 18934,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cruel",
+      "token": " cruel",
+      "token_id": 17877,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cruelty",
+      "token": " cruelty",
+      "token_id": 38087,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crush",
+      "token": " crush",
+      "token_id": 30582,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crushed",
+      "token": " crushed",
+      "token_id": 24983,
+      "sentiment": "negative"
+    },
+    {
+      "word": "crushing",
+      "token": " crushing",
+      "token_id": 37625,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cry",
+      "token": " cry",
+      "token_id": 3501,
+      "sentiment": "negative"
+    },
+    {
+      "word": "culprit",
+      "token": " culprit",
+      "token_id": 43412,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cumbersome",
+      "token": " cumbersome",
+      "token_id": 41049,
+      "sentiment": "negative"
+    },
+    {
+      "word": "curse",
+      "token": " curse",
+      "token_id": 28401,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cursed",
+      "token": " cursed",
+      "token_id": 39349,
+      "sentiment": "negative"
+    },
+    {
+      "word": "curt",
+      "token": " curt",
+      "token_id": 25846,
+      "sentiment": "negative"
+    },
+    {
+      "word": "cynical",
+      "token": " cynical",
+      "token_id": 47892,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damage",
+      "token": " damage",
+      "token_id": 4723,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damaged",
+      "token": " damaged",
+      "token_id": 13572,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damages",
+      "token": " damages",
+      "token_id": 8540,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damaging",
+      "token": " damaging",
+      "token_id": 24038,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damn",
+      "token": " damn",
+      "token_id": 15229,
+      "sentiment": "negative"
+    },
+    {
+      "word": "damned",
+      "token": " damned",
+      "token_id": 31833,
+      "sentiment": "negative"
+    },
+    {
+      "word": "danger",
+      "token": " danger",
+      "token_id": 5434,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dangerous",
+      "token": " dangerous",
+      "token_id": 8312,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dark",
+      "token": " dark",
+      "token_id": 3644,
+      "sentiment": "negative"
+    },
+    {
+      "word": "darkened",
+      "token": " darkened",
+      "token_id": 47465,
+      "sentiment": "negative"
+    },
+    {
+      "word": "darker",
+      "token": " darker",
+      "token_id": 28170,
+      "sentiment": "negative"
+    },
+    {
+      "word": "darkness",
+      "token": " darkness",
+      "token_id": 13862,
+      "sentiment": "negative"
+    },
+    {
+      "word": "daunting",
+      "token": " daunting",
+      "token_id": 47216,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dead",
+      "token": " dead",
+      "token_id": 3846,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deadly",
+      "token": " deadly",
+      "token_id": 18649,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deaf",
+      "token": " deaf",
+      "token_id": 26057,
+      "sentiment": "negative"
+    },
+    {
+      "word": "death",
+      "token": " death",
+      "token_id": 2471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "debt",
+      "token": " debt",
+      "token_id": 6735,
+      "sentiment": "negative"
+    },
+    {
+      "word": "debts",
+      "token": " debts",
+      "token_id": 26131,
+      "sentiment": "negative"
+    },
+    {
+      "word": "decay",
+      "token": " decay",
+      "token_id": 10027,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deceit",
+      "token": " deceit",
+      "token_id": 48548,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deceive",
+      "token": " deceive",
+      "token_id": 49768,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deception",
+      "token": " deception",
+      "token_id": 38426,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deceptive",
+      "token": " deceptive",
+      "token_id": 50015,
+      "sentiment": "negative"
+    },
+    {
+      "word": "decline",
+      "token": " decline",
+      "token_id": 10343,
+      "sentiment": "negative"
+    },
+    {
+      "word": "declines",
+      "token": " declines",
+      "token_id": 34044,
+      "sentiment": "negative"
+    },
+    {
+      "word": "declining",
+      "token": " declining",
+      "token_id": 27177,
+      "sentiment": "negative"
+    },
+    {
+      "word": "defect",
+      "token": " defect",
+      "token_id": 7071,
+      "sentiment": "negative"
+    },
+    {
+      "word": "defective",
+      "token": " defective",
+      "token_id": 22327,
+      "sentiment": "negative"
+    },
+    {
+      "word": "defects",
+      "token": " defects",
+      "token_id": 12834,
+      "sentiment": "negative"
+    },
+    {
+      "word": "defensive",
+      "token": " defensive",
+      "token_id": 14397,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deficiencies",
+      "token": " deficiencies",
+      "token_id": 30218,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deficiency",
+      "token": " deficiency",
+      "token_id": 14384,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deficient",
+      "token": " deficient",
+      "token_id": 24030,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deform",
+      "token": " deform",
+      "token_id": 22403,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deformed",
+      "token": " deformed",
+      "token_id": 37196,
+      "sentiment": "negative"
+    },
+    {
+      "word": "degenerate",
+      "token": " degenerate",
+      "token_id": 29458,
+      "sentiment": "negative"
+    },
+    {
+      "word": "degeneration",
+      "token": " degeneration",
+      "token_id": 27939,
+      "sentiment": "negative"
+    },
+    {
+      "word": "degradation",
+      "token": " degradation",
+      "token_id": 11961,
+      "sentiment": "negative"
+    },
+    {
+      "word": "degrade",
+      "token": " degrade",
+      "token_id": 40195,
+      "sentiment": "negative"
+    },
+    {
+      "word": "delay",
+      "token": " delay",
+      "token_id": 5778,
+      "sentiment": "negative"
+    },
+    {
+      "word": "delayed",
+      "token": " delayed",
+      "token_id": 13444,
+      "sentiment": "negative"
+    },
+    {
+      "word": "delaying",
+      "token": " delaying",
+      "token_id": 47308,
+      "sentiment": "negative"
+    },
+    {
+      "word": "delays",
+      "token": " delays",
+      "token_id": 20219,
+      "sentiment": "negative"
+    },
+    {
+      "word": "demise",
+      "token": " demise",
+      "token_id": 40580,
+      "sentiment": "negative"
+    },
+    {
+      "word": "demon",
+      "token": " demon",
+      "token_id": 2725,
+      "sentiment": "negative"
+    },
+    {
+      "word": "denial",
+      "token": " denial",
+      "token_id": 13336,
+      "sentiment": "negative"
+    },
+    {
+      "word": "denied",
+      "token": " denied",
+      "token_id": 5868,
+      "sentiment": "negative"
+    },
+    {
+      "word": "denies",
+      "token": " denies",
+      "token_id": 31647,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dense",
+      "token": " dense",
+      "token_id": 14086,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dent",
+      "token": " dent",
+      "token_id": 13822,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deny",
+      "token": " deny",
+      "token_id": 13292,
+      "sentiment": "negative"
+    },
+    {
+      "word": "denying",
+      "token": " denying",
+      "token_id": 14624,
+      "sentiment": "negative"
+    },
+    {
+      "word": "depressed",
+      "token": " depressed",
+      "token_id": 23201,
+      "sentiment": "negative"
+    },
+    {
+      "word": "depressing",
+      "token": " depressing",
+      "token_id": 47517,
+      "sentiment": "negative"
+    },
+    {
+      "word": "depression",
+      "token": " depression",
+      "token_id": 9454,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deprive",
+      "token": " deprive",
+      "token_id": 43477,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deprived",
+      "token": " deprived",
+      "token_id": 25979,
+      "sentiment": "negative"
+    },
+    {
+      "word": "desert",
+      "token": " desert",
+      "token_id": 13438,
+      "sentiment": "negative"
+    },
+    {
+      "word": "despair",
+      "token": " despair",
+      "token_id": 25813,
+      "sentiment": "negative"
+    },
+    {
+      "word": "desperate",
+      "token": " desperate",
+      "token_id": 18439,
+      "sentiment": "negative"
+    },
+    {
+      "word": "desperately",
+      "token": " desperately",
+      "token_id": 26426,
+      "sentiment": "negative"
+    },
+    {
+      "word": "desperation",
+      "token": " desperation",
+      "token_id": 46347,
+      "sentiment": "negative"
+    },
+    {
+      "word": "destroy",
+      "token": " destroy",
+      "token_id": 6909,
+      "sentiment": "negative"
+    },
+    {
+      "word": "destruction",
+      "token": " destruction",
+      "token_id": 12536,
+      "sentiment": "negative"
+    },
+    {
+      "word": "destructive",
+      "token": " destructive",
+      "token_id": 27009,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deter",
+      "token": " deter",
+      "token_id": 25615,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deterioration",
+      "token": " deterioration",
+      "token_id": 28153,
+      "sentiment": "negative"
+    },
+    {
+      "word": "detriment",
+      "token": " detriment",
+      "token_id": 49917,
+      "sentiment": "negative"
+    },
+    {
+      "word": "detrimental",
+      "token": " detrimental",
+      "token_id": 30078,
+      "sentiment": "negative"
+    },
+    {
+      "word": "devastated",
+      "token": " devastated",
+      "token_id": 43287,
+      "sentiment": "negative"
+    },
+    {
+      "word": "devastating",
+      "token": " devastating",
+      "token_id": 25205,
+      "sentiment": "negative"
+    },
+    {
+      "word": "deviation",
+      "token": " deviation",
+      "token_id": 11254,
+      "sentiment": "negative"
+    },
+    {
+      "word": "devil",
+      "token": " devil",
+      "token_id": 22144,
+      "sentiment": "negative"
+    },
+    {
+      "word": "devoid",
+      "token": " devoid",
+      "token_id": 36757,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dick",
+      "token": " dick",
+      "token_id": 33702,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dictator",
+      "token": " dictator",
+      "token_id": 48177,
+      "sentiment": "negative"
+    },
+    {
+      "word": "die",
+      "token": " die",
+      "token_id": 3150,
+      "sentiment": "negative"
+    },
+    {
+      "word": "died",
+      "token": " died",
+      "token_id": 4962,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dies",
+      "token": " dies",
+      "token_id": 9778,
+      "sentiment": "negative"
+    },
+    {
+      "word": "difficult",
+      "token": " difficult",
+      "token_id": 2834,
+      "sentiment": "negative"
+    },
+    {
+      "word": "difficulties",
+      "token": " difficulties",
+      "token_id": 12748,
+      "sentiment": "negative"
+    },
+    {
+      "word": "difficulty",
+      "token": " difficulty",
+      "token_id": 10183,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dilemma",
+      "token": " dilemma",
+      "token_id": 34390,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dim",
+      "token": " dim",
+      "token_id": 3317,
+      "sentiment": "negative"
+    },
+    {
+      "word": "din",
+      "token": " din",
+      "token_id": 13223,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ding",
+      "token": " ding",
+      "token_id": 50097,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dire",
+      "token": " dire",
+      "token_id": 1185,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dirt",
+      "token": " dirt",
+      "token_id": 17819,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dirty",
+      "token": " dirty",
+      "token_id": 16076,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disable",
+      "token": " disable",
+      "token_id": 19495,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disabled",
+      "token": " disabled",
+      "token_id": 13603,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disadvantage",
+      "token": " disadvantage",
+      "token_id": 18928,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disadvantages",
+      "token": " disadvantages",
+      "token_id": 23797,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disagree",
+      "token": " disagree",
+      "token_id": 14936,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disagreed",
+      "token": " disagreed",
+      "token_id": 41030,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disagreement",
+      "token": " disagreement",
+      "token_id": 30859,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disappoint",
+      "token": " disappoint",
+      "token_id": 11034,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disappointed",
+      "token": " disappointed",
+      "token_id": 19271,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disappointing",
+      "token": " disappointing",
+      "token_id": 31623,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disappointment",
+      "token": " disappointment",
+      "token_id": 27531,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disaster",
+      "token": " disaster",
+      "token_id": 15394,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disastrous",
+      "token": " disastrous",
+      "token_id": 37359,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disbelief",
+      "token": " disbelief",
+      "token_id": 45582,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disclaim",
+      "token": " disclaim",
+      "token_id": 23464,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discomfort",
+      "token": " discomfort",
+      "token_id": 25699,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discontinued",
+      "token": " discontinued",
+      "token_id": 35985,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discord",
+      "token": " discord",
+      "token_id": 37600,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discourage",
+      "token": " discourage",
+      "token_id": 43162,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discriminate",
+      "token": " discriminate",
+      "token_id": 30530,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discrimination",
+      "token": " discrimination",
+      "token_id": 11081,
+      "sentiment": "negative"
+    },
+    {
+      "word": "discriminatory",
+      "token": " discriminatory",
+      "token_id": 30602,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disdain",
+      "token": " disdain",
+      "token_id": 49443,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disgrace",
+      "token": " disgrace",
+      "token_id": 40655,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disgust",
+      "token": " disgust",
+      "token_id": 24808,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disgusting",
+      "token": " disgusting",
+      "token_id": 40449,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dislike",
+      "token": " dislike",
+      "token_id": 34941,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dismay",
+      "token": " dismay",
+      "token_id": 41190,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disorder",
+      "token": " disorder",
+      "token_id": 8984,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disordered",
+      "token": " disordered",
+      "token_id": 36046,
+      "sentiment": "negative"
+    },
+    {
+      "word": "displaced",
+      "token": " displaced",
+      "token_id": 26699,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disproportionate",
+      "token": " disproportionate",
+      "token_id": 50196,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dispute",
+      "token": " dispute",
+      "token_id": 12027,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disputed",
+      "token": " disputed",
+      "token_id": 25147,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disregard",
+      "token": " disregard",
+      "token_id": 27719,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disrespect",
+      "token": " disrespect",
+      "token_id": 41841,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disrupt",
+      "token": " disrupt",
+      "token_id": 13201,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disruption",
+      "token": " disruption",
+      "token_id": 20638,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disruptive",
+      "token": " disruptive",
+      "token_id": 43081,
+      "sentiment": "negative"
+    },
+    {
+      "word": "diss",
+      "token": " diss",
+      "token_id": 5408,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dissent",
+      "token": " dissent",
+      "token_id": 18776,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dissolution",
+      "token": " dissolution",
+      "token_id": 28425,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distort",
+      "token": " distort",
+      "token_id": 35303,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distorted",
+      "token": " distorted",
+      "token_id": 32408,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distortion",
+      "token": " distortion",
+      "token_id": 22841,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distract",
+      "token": " distract",
+      "token_id": 36815,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distraction",
+      "token": " distraction",
+      "token_id": 34169,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distress",
+      "token": " distress",
+      "token_id": 16744,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distressed",
+      "token": " distressed",
+      "token_id": 48903,
+      "sentiment": "negative"
+    },
+    {
+      "word": "distrust",
+      "token": " distrust",
+      "token_id": 48655,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disturb",
+      "token": " disturb",
+      "token_id": 11639,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disturbance",
+      "token": " disturbance",
+      "token_id": 26744,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disturbed",
+      "token": " disturbed",
+      "token_id": 24714,
+      "sentiment": "negative"
+    },
+    {
+      "word": "disturbing",
+      "token": " disturbing",
+      "token_id": 25758,
+      "sentiment": "negative"
+    },
+    {
+      "word": "divergent",
+      "token": " divergent",
+      "token_id": 34249,
+      "sentiment": "negative"
+    },
+    {
+      "word": "doom",
+      "token": " doom",
+      "token_id": 45471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "doomed",
+      "token": " doomed",
+      "token_id": 38467,
+      "sentiment": "negative"
+    },
+    {
+      "word": "doubt",
+      "token": " doubt",
+      "token_id": 5545,
+      "sentiment": "negative"
+    },
+    {
+      "word": "doubtful",
+      "token": " doubtful",
+      "token_id": 38342,
+      "sentiment": "negative"
+    },
+    {
+      "word": "doubts",
+      "token": " doubts",
+      "token_id": 24626,
+      "sentiment": "negative"
+    },
+    {
+      "word": "downhill",
+      "token": " downhill",
+      "token_id": 49136,
+      "sentiment": "negative"
+    },
+    {
+      "word": "downside",
+      "token": " downside",
+      "token_id": 42719,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drag",
+      "token": " drag",
+      "token_id": 9310,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dragged",
+      "token": " dragged",
+      "token_id": 22944,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dragging",
+      "token": " dragging",
+      "token_id": 32126,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drain",
+      "token": " drain",
+      "token_id": 12657,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drained",
+      "token": " drained",
+      "token_id": 31817,
+      "sentiment": "negative"
+    },
+    {
+      "word": "draining",
+      "token": " draining",
+      "token_id": 44636,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drastic",
+      "token": " drastic",
+      "token_id": 36927,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drastically",
+      "token": " drastically",
+      "token_id": 31063,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drawback",
+      "token": " drawback",
+      "token_id": 32489,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drawbacks",
+      "token": " drawbacks",
+      "token_id": 30453,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dread",
+      "token": " dread",
+      "token_id": 18638,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dreadful",
+      "token": " dreadful",
+      "token_id": 38074,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dripping",
+      "token": " dripping",
+      "token_id": 45687,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drones",
+      "token": " drones",
+      "token_id": 35968,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drought",
+      "token": " drought",
+      "token_id": 22216,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drowning",
+      "token": " drowning",
+      "token_id": 46298,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drunk",
+      "token": " drunk",
+      "token_id": 17507,
+      "sentiment": "negative"
+    },
+    {
+      "word": "drunken",
+      "token": " drunken",
+      "token_id": 37863,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dubious",
+      "token": " dubious",
+      "token_id": 42326,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dull",
+      "token": " dull",
+      "token_id": 22544,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dumb",
+      "token": " dumb",
+      "token_id": 21413,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dump",
+      "token": " dump",
+      "token_id": 13725,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dumped",
+      "token": " dumped",
+      "token_id": 35611,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dumping",
+      "token": " dumping",
+      "token_id": 46023,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dust",
+      "token": " dust",
+      "token_id": 8660,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dusty",
+      "token": " dusty",
+      "token_id": 38907,
+      "sentiment": "negative"
+    },
+    {
+      "word": "dying",
+      "token": " dying",
+      "token_id": 13889,
+      "sentiment": "negative"
+    },
+    {
+      "word": "eccentric",
+      "token": " eccentric",
+      "token_id": 26418,
+      "sentiment": "negative"
+    },
+    {
+      "word": "elimination",
+      "token": " elimination",
+      "token_id": 20408,
+      "sentiment": "negative"
+    },
+    {
+      "word": "embarrass",
+      "token": " embarrass",
+      "token_id": 15005,
+      "sentiment": "negative"
+    },
+    {
+      "word": "embarrassing",
+      "token": " embarrassing",
+      "token_id": 34019,
+      "sentiment": "negative"
+    },
+    {
+      "word": "embarrassment",
+      "token": " embarrassment",
+      "token_id": 36649,
+      "sentiment": "negative"
+    },
+    {
+      "word": "emergency",
+      "token": " emergency",
+      "token_id": 8945,
+      "sentiment": "negative"
+    },
+    {
+      "word": "enemies",
+      "token": " enemies",
+      "token_id": 13948,
+      "sentiment": "negative"
+    },
+    {
+      "word": "enemy",
+      "token": " enemy",
+      "token_id": 9054,
+      "sentiment": "negative"
+    },
+    {
+      "word": "engulf",
+      "token": " engulf",
+      "token_id": 48131,
+      "sentiment": "negative"
+    },
+    {
+      "word": "entanglement",
+      "token": " entanglement",
+      "token_id": 26294,
+      "sentiment": "negative"
+    },
+    {
+      "word": "epidemic",
+      "token": " epidemic",
+      "token_id": 22954,
+      "sentiment": "negative"
+    },
+    {
+      "word": "erase",
+      "token": " erase",
+      "token_id": 36844,
+      "sentiment": "negative"
+    },
+    {
+      "word": "erosion",
+      "token": " erosion",
+      "token_id": 32561,
+      "sentiment": "negative"
+    },
+    {
+      "word": "err",
+      "token": " err",
+      "token_id": 1486,
+      "sentiment": "negative"
+    },
+    {
+      "word": "erroneous",
+      "token": " erroneous",
+      "token_id": 21210,
+      "sentiment": "negative"
+    },
+    {
+      "word": "erroneously",
+      "token": " erroneously",
+      "token_id": 41587,
+      "sentiment": "negative"
+    },
+    {
+      "word": "error",
+      "token": " error",
+      "token_id": 2228,
+      "sentiment": "negative"
+    },
+    {
+      "word": "errors",
+      "token": " errors",
+      "token_id": 6332,
+      "sentiment": "negative"
+    },
+    {
+      "word": "evade",
+      "token": " evade",
+      "token_id": 47620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "evil",
+      "token": " evil",
+      "token_id": 10319,
+      "sentiment": "negative"
+    },
+    {
+      "word": "excessive",
+      "token": " excessive",
+      "token_id": 13622,
+      "sentiment": "negative"
+    },
+    {
+      "word": "excessively",
+      "token": " excessively",
+      "token_id": 45891,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exclusion",
+      "token": " exclusion",
+      "token_id": 14978,
+      "sentiment": "negative"
+    },
+    {
+      "word": "excuse",
+      "token": " excuse",
+      "token_id": 16267,
+      "sentiment": "negative"
+    },
+    {
+      "word": "excuses",
+      "token": " excuses",
+      "token_id": 38219,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exhaust",
+      "token": " exhaust",
+      "token_id": 9286,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exhausted",
+      "token": " exhausted",
+      "token_id": 20802,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exhaustion",
+      "token": " exhaustion",
+      "token_id": 29775,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exile",
+      "token": " exile",
+      "token_id": 33927,
+      "sentiment": "negative"
+    },
+    {
+      "word": "expensive",
+      "token": " expensive",
+      "token_id": 8214,
+      "sentiment": "negative"
+    },
+    {
+      "word": "expire",
+      "token": " expire",
+      "token_id": 43106,
+      "sentiment": "negative"
+    },
+    {
+      "word": "expired",
+      "token": " expired",
+      "token_id": 27416,
+      "sentiment": "negative"
+    },
+    {
+      "word": "explode",
+      "token": " explode",
+      "token_id": 34667,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exploit",
+      "token": " exploit",
+      "token_id": 22059,
+      "sentiment": "negative"
+    },
+    {
+      "word": "exploitation",
+      "token": " exploitation",
+      "token_id": 30211,
+      "sentiment": "negative"
+    },
+    {
+      "word": "explosive",
+      "token": " explosive",
+      "token_id": 26660,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fabrication",
+      "token": " fabrication",
+      "token_id": 22911,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fail",
+      "token": " fail",
+      "token_id": 1891,
+      "sentiment": "negative"
+    },
+    {
+      "word": "failed",
+      "token": " failed",
+      "token_id": 4242,
+      "sentiment": "negative"
+    },
+    {
+      "word": "failing",
+      "token": " failing",
+      "token_id": 11741,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fails",
+      "token": " fails",
+      "token_id": 10224,
+      "sentiment": "negative"
+    },
+    {
+      "word": "failure",
+      "token": " failure",
+      "token_id": 4433,
+      "sentiment": "negative"
+    },
+    {
+      "word": "failures",
+      "token": " failures",
+      "token_id": 20101,
+      "sentiment": "negative"
+    },
+    {
+      "word": "faint",
+      "token": " faint",
+      "token_id": 16487,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fake",
+      "token": " fake",
+      "token_id": 15223,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fall",
+      "token": " fall",
+      "token_id": 2965,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fallen",
+      "token": " fallen",
+      "token_id": 13547,
+      "sentiment": "negative"
+    },
+    {
+      "word": "falling",
+      "token": " falling",
+      "token_id": 10805,
+      "sentiment": "negative"
+    },
+    {
+      "word": "falls",
+      "token": " falls",
+      "token_id": 11521,
+      "sentiment": "negative"
+    },
+    {
+      "word": "false",
+      "token": " false",
+      "token_id": 3221,
+      "sentiment": "negative"
+    },
+    {
+      "word": "falsely",
+      "token": " falsely",
+      "token_id": 39380,
+      "sentiment": "negative"
+    },
+    {
+      "word": "famine",
+      "token": " famine",
+      "token_id": 48768,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fat",
+      "token": " fat",
+      "token_id": 4688,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fatal",
+      "token": " fatal",
+      "token_id": 15444,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fatigue",
+      "token": " fatigue",
+      "token_id": 18693,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fatty",
+      "token": " fatty",
+      "token_id": 14126,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fault",
+      "token": " fault",
+      "token_id": 9331,
+      "sentiment": "negative"
+    },
+    {
+      "word": "faults",
+      "token": " faults",
+      "token_id": 35354,
+      "sentiment": "negative"
+    },
+    {
+      "word": "faulty",
+      "token": " faulty",
+      "token_id": 40249,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fear",
+      "token": " fear",
+      "token_id": 4709,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fearful",
+      "token": " fearful",
+      "token_id": 35268,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fears",
+      "token": " fears",
+      "token_id": 18055,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fell",
+      "token": " fell",
+      "token_id": 6497,
+      "sentiment": "negative"
+    },
+    {
+      "word": "felon",
+      "token": " felon",
+      "token_id": 48935,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fever",
+      "token": " fever",
+      "token_id": 15198,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fib",
+      "token": " fib",
+      "token_id": 5713,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fiction",
+      "token": " fiction",
+      "token_id": 14459,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fictional",
+      "token": " fictional",
+      "token_id": 29934,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fierce",
+      "token": " fierce",
+      "token_id": 26885,
+      "sentiment": "negative"
+    },
+    {
+      "word": "filthy",
+      "token": " filthy",
+      "token_id": 46280,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fist",
+      "token": " fist",
+      "token_id": 20008,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flare",
+      "token": " flare",
+      "token_id": 32818,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flares",
+      "token": " flares",
+      "token_id": 49569,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flaw",
+      "token": " flaw",
+      "token_id": 19652,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flawed",
+      "token": " flawed",
+      "token_id": 33657,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flaws",
+      "token": " flaws",
+      "token_id": 32138,
+      "sentiment": "negative"
+    },
+    {
+      "word": "flee",
+      "token": " flee",
+      "token_id": 32645,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fleeing",
+      "token": " fleeing",
+      "token_id": 37637,
+      "sentiment": "negative"
+    },
+    {
+      "word": "foe",
+      "token": " foe",
+      "token_id": 47190,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fool",
+      "token": " fool",
+      "token_id": 11213,
+      "sentiment": "negative"
+    },
+    {
+      "word": "foolish",
+      "token": " foolish",
+      "token_id": 24924,
+      "sentiment": "negative"
+    },
+    {
+      "word": "forbid",
+      "token": " forbid",
+      "token_id": 45035,
+      "sentiment": "negative"
+    },
+    {
+      "word": "forbidden",
+      "token": " forbidden",
+      "token_id": 25415,
+      "sentiment": "negative"
+    },
+    {
+      "word": "forged",
+      "token": " forged",
+      "token_id": 37260,
+      "sentiment": "negative"
+    },
+    {
+      "word": "foul",
+      "token": " foul",
+      "token_id": 27358,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fracture",
+      "token": " fracture",
+      "token_id": 17681,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fragile",
+      "token": " fragile",
+      "token_id": 28304,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fragmented",
+      "token": " fragmented",
+      "token_id": 42283,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fraud",
+      "token": " fraud",
+      "token_id": 9116,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fraudulent",
+      "token": " fraudulent",
+      "token_id": 25447,
+      "sentiment": "negative"
+    },
+    {
+      "word": "freak",
+      "token": " freak",
+      "token_id": 37462,
+      "sentiment": "negative"
+    },
+    {
+      "word": "freeze",
+      "token": " freeze",
+      "token_id": 21090,
+      "sentiment": "negative"
+    },
+    {
+      "word": "freezing",
+      "token": " freezing",
+      "token_id": 24250,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fret",
+      "token": " fret",
+      "token_id": 43922,
+      "sentiment": "negative"
+    },
+    {
+      "word": "friction",
+      "token": " friction",
+      "token_id": 20636,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fried",
+      "token": " fried",
+      "token_id": 31894,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fright",
+      "token": " fright",
+      "token_id": 15872,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frightening",
+      "token": " frightening",
+      "token_id": 38123,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frost",
+      "token": " frost",
+      "token_id": 34724,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frown",
+      "token": " frown",
+      "token_id": 48445,
+      "sentiment": "negative"
+    },
+    {
+      "word": "froze",
+      "token": " froze",
+      "token_id": 44659,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frozen",
+      "token": " frozen",
+      "token_id": 13831,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frustrated",
+      "token": " frustrated",
+      "token_id": 23573,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frustrating",
+      "token": " frustrating",
+      "token_id": 29125,
+      "sentiment": "negative"
+    },
+    {
+      "word": "frustration",
+      "token": " frustration",
+      "token_id": 22014,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fuck",
+      "token": " fuck",
+      "token_id": 7435,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fucking",
+      "token": " fucking",
+      "token_id": 12835,
+      "sentiment": "negative"
+    },
+    {
+      "word": "funny",
+      "token": " funny",
+      "token_id": 11755,
+      "sentiment": "negative"
+    },
+    {
+      "word": "furious",
+      "token": " furious",
+      "token_id": 32986,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fury",
+      "token": " fury",
+      "token_id": 35959,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fuss",
+      "token": " fuss",
+      "token_id": 39866,
+      "sentiment": "negative"
+    },
+    {
+      "word": "futile",
+      "token": " futile",
+      "token_id": 42568,
+      "sentiment": "negative"
+    },
+    {
+      "word": "fuzzy",
+      "token": " fuzzy",
+      "token_id": 31921,
+      "sentiment": "negative"
+    },
+    {
+      "word": "gall",
+      "token": " gall",
+      "token_id": 9391,
+      "sentiment": "negative"
+    },
+    {
+      "word": "garbage",
+      "token": " garbage",
+      "token_id": 22630,
+      "sentiment": "negative"
+    },
+    {
+      "word": "genocide",
+      "token": " genocide",
+      "token_id": 42604,
+      "sentiment": "negative"
+    },
+    {
+      "word": "glare",
+      "token": " glare",
+      "token_id": 40332,
+      "sentiment": "negative"
+    },
+    {
+      "word": "gloom",
+      "token": " gloom",
+      "token_id": 43580,
+      "sentiment": "negative"
+    },
+    {
+      "word": "glut",
+      "token": " glut",
+      "token_id": 13627,
+      "sentiment": "negative"
+    },
+    {
+      "word": "gossip",
+      "token": " gossip",
+      "token_id": 34168,
+      "sentiment": "negative"
+    },
+    {
+      "word": "graft",
+      "token": " graft",
+      "token_id": 13684,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grate",
+      "token": " grate",
+      "token_id": 12525,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grating",
+      "token": " grating",
+      "token_id": 36916,
+      "sentiment": "negative"
+    },
+    {
+      "word": "greed",
+      "token": " greed",
+      "token_id": 37819,
+      "sentiment": "negative"
+    },
+    {
+      "word": "greedy",
+      "token": " greedy",
+      "token_id": 38754,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grief",
+      "token": " grief",
+      "token_id": 20993,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grievance",
+      "token": " grievance",
+      "token_id": 41462,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grievances",
+      "token": " grievances",
+      "token_id": 48358,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grim",
+      "token": " grim",
+      "token_id": 22072,
+      "sentiment": "negative"
+    },
+    {
+      "word": "grind",
+      "token": " grind",
+      "token_id": 35001,
+      "sentiment": "negative"
+    },
+    {
+      "word": "gross",
+      "token": " gross",
+      "token_id": 13711,
+      "sentiment": "negative"
+    },
+    {
+      "word": "guilt",
+      "token": " guilt",
+      "token_id": 15457,
+      "sentiment": "negative"
+    },
+    {
+      "word": "guilty",
+      "token": " guilty",
+      "token_id": 8106,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hack",
+      "token": " hack",
+      "token_id": 13908,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hampered",
+      "token": " hampered",
+      "token_id": 49141,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hang",
+      "token": " hang",
+      "token_id": 10913,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hangs",
+      "token": " hangs",
+      "token_id": 37778,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harass",
+      "token": " harass",
+      "token_id": 15598,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harassment",
+      "token": " harassment",
+      "token_id": 21199,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harboring",
+      "token": " harboring",
+      "token_id": 48263,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hard",
+      "token": " hard",
+      "token_id": 1892,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hardened",
+      "token": " hardened",
+      "token_id": 43656,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hardship",
+      "token": " hardship",
+      "token_id": 38302,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harm",
+      "token": " harm",
+      "token_id": 5237,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harmed",
+      "token": " harmed",
+      "token_id": 44137,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harmful",
+      "token": " harmful",
+      "token_id": 19632,
+      "sentiment": "negative"
+    },
+    {
+      "word": "harsh",
+      "token": " harsh",
+      "token_id": 17770,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hassle",
+      "token": " hassle",
+      "token_id": 45454,
+      "sentiment": "negative"
+    },
+    {
+      "word": "haste",
+      "token": " haste",
+      "token_id": 48326,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hastily",
+      "token": " hastily",
+      "token_id": 44753,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hate",
+      "token": " hate",
+      "token_id": 9239,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hated",
+      "token": " hated",
+      "token_id": 21023,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hates",
+      "token": " hates",
+      "token_id": 38232,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hatred",
+      "token": " hatred",
+      "token_id": 24307,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hazard",
+      "token": " hazard",
+      "token_id": 16466,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hazardous",
+      "token": " hazardous",
+      "token_id": 30561,
+      "sentiment": "negative"
+    },
+    {
+      "word": "headache",
+      "token": " headache",
+      "token_id": 24934,
+      "sentiment": "negative"
+    },
+    {
+      "word": "headaches",
+      "token": " headaches",
+      "token_id": 37403,
+      "sentiment": "negative"
+    },
+    {
+      "word": "heck",
+      "token": " heck",
+      "token_id": 36603,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hedge",
+      "token": " hedge",
+      "token_id": 29809,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hell",
+      "token": " hell",
+      "token_id": 7085,
+      "sentiment": "negative"
+    },
+    {
+      "word": "helpless",
+      "token": " helpless",
+      "token_id": 26952,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hinder",
+      "token": " hinder",
+      "token_id": 35007,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hollow",
+      "token": " hollow",
+      "token_id": 19781,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hopeless",
+      "token": " hopeless",
+      "token_id": 29281,
+      "sentiment": "negative"
+    },
+    {
+      "word": "horrible",
+      "token": " horrible",
+      "token_id": 19201,
+      "sentiment": "negative"
+    },
+    {
+      "word": "horrific",
+      "token": " horrific",
+      "token_id": 41485,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hostage",
+      "token": " hostage",
+      "token_id": 43180,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hostile",
+      "token": " hostile",
+      "token_id": 21668,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hostility",
+      "token": " hostility",
+      "token_id": 37429,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hum",
+      "token": " hum",
+      "token_id": 1547,
+      "sentiment": "negative"
+    },
+    {
+      "word": "humid",
+      "token": " humid",
+      "token_id": 33595,
+      "sentiment": "negative"
+    },
+    {
+      "word": "humiliation",
+      "token": " humiliation",
+      "token_id": 45244,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hung",
+      "token": " hung",
+      "token_id": 10416,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hurt",
+      "token": " hurt",
+      "token_id": 8513,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hurting",
+      "token": " hurting",
+      "token_id": 34426,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hurts",
+      "token": " hurts",
+      "token_id": 31835,
+      "sentiment": "negative"
+    },
+    {
+      "word": "hype",
+      "token": " hype",
+      "token_id": 31012,
+      "sentiment": "negative"
+    },
+    {
+      "word": "idiot",
+      "token": " idiot",
+      "token_id": 28006,
+      "sentiment": "negative"
+    },
+    {
+      "word": "idle",
+      "token": " idle",
+      "token_id": 27473,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ignorance",
+      "token": " ignorance",
+      "token_id": 24492,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ignorant",
+      "token": " ignorant",
+      "token_id": 28884,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ignore",
+      "token": " ignore",
+      "token_id": 11823,
+      "sentiment": "negative"
+    },
+    {
+      "word": "illegal",
+      "token": " illegal",
+      "token_id": 9676,
+      "sentiment": "negative"
+    },
+    {
+      "word": "illegally",
+      "token": " illegally",
+      "token_id": 30060,
+      "sentiment": "negative"
+    },
+    {
+      "word": "illicit",
+      "token": " illicit",
+      "token_id": 41566,
+      "sentiment": "negative"
+    },
+    {
+      "word": "illness",
+      "token": " illness",
+      "token_id": 9749,
+      "sentiment": "negative"
+    },
+    {
+      "word": "illusion",
+      "token": " illusion",
+      "token_id": 25451,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imaginary",
+      "token": " imaginary",
+      "token_id": 21833,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imbalance",
+      "token": " imbalance",
+      "token_id": 31561,
+      "sentiment": "negative"
+    },
+    {
+      "word": "immature",
+      "token": " immature",
+      "token_id": 34000,
+      "sentiment": "negative"
+    },
+    {
+      "word": "immobilized",
+      "token": " immobilized",
+      "token_id": 41559,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impair",
+      "token": " impair",
+      "token_id": 11490,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impaired",
+      "token": " impaired",
+      "token_id": 15506,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impatient",
+      "token": " impatient",
+      "token_id": 34456,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impedance",
+      "token": " impedance",
+      "token_id": 27853,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impending",
+      "token": " impending",
+      "token_id": 40911,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imperfect",
+      "token": " imperfect",
+      "token_id": 35180,
+      "sentiment": "negative"
+    },
+    {
+      "word": "implication",
+      "token": " implication",
+      "token_id": 27570,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impose",
+      "token": " impose",
+      "token_id": 16209,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imposing",
+      "token": " imposing",
+      "token_id": 23254,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imposition",
+      "token": " imposition",
+      "token_id": 34178,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impossible",
+      "token": " impossible",
+      "token_id": 7479,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impractical",
+      "token": " impractical",
+      "token_id": 45783,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imprison",
+      "token": " imprison",
+      "token_id": 14875,
+      "sentiment": "negative"
+    },
+    {
+      "word": "imprisonment",
+      "token": " imprisonment",
+      "token_id": 19841,
+      "sentiment": "negative"
+    },
+    {
+      "word": "improper",
+      "token": " improper",
+      "token_id": 14697,
+      "sentiment": "negative"
+    },
+    {
+      "word": "improperly",
+      "token": " improperly",
+      "token_id": 28203,
+      "sentiment": "negative"
+    },
+    {
+      "word": "impurity",
+      "token": " impurity",
+      "token_id": 35102,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inability",
+      "token": " inability",
+      "token_id": 19297,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inaccurate",
+      "token": " inaccurate",
+      "token_id": 31215,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inactive",
+      "token": " inactive",
+      "token_id": 25515,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inadequate",
+      "token": " inadequate",
+      "token_id": 18766,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inappropriate",
+      "token": " inappropriate",
+      "token_id": 19582,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incapable",
+      "token": " incapable",
+      "token_id": 31257,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incompatible",
+      "token": " incompatible",
+      "token_id": 32555,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incompetent",
+      "token": " incompetent",
+      "token_id": 43650,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incomplete",
+      "token": " incomplete",
+      "token_id": 18464,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inconsistencies",
+      "token": " inconsistencies",
+      "token_id": 45611,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inconsistency",
+      "token": " inconsistency",
+      "token_id": 43430,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inconsistent",
+      "token": " inconsistent",
+      "token_id": 16706,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inconvenience",
+      "token": " inconvenience",
+      "token_id": 40471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incorrect",
+      "token": " incorrect",
+      "token_id": 13583,
+      "sentiment": "negative"
+    },
+    {
+      "word": "incorrectly",
+      "token": " incorrectly",
+      "token_id": 30833,
+      "sentiment": "negative"
+    },
+    {
+      "word": "indifference",
+      "token": " indifference",
+      "token_id": 36163,
+      "sentiment": "negative"
+    },
+    {
+      "word": "indifferent",
+      "token": " indifferent",
+      "token_id": 38647,
+      "sentiment": "negative"
+    },
+    {
+      "word": "indistinguishable",
+      "token": " indistinguishable",
+      "token_id": 40184,
+      "sentiment": "negative"
+    },
+    {
+      "word": "indulge",
+      "token": " indulge",
+      "token_id": 47617,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ineffective",
+      "token": " ineffective",
+      "token_id": 18860,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inefficient",
+      "token": " inefficient",
+      "token_id": 31334,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inequalities",
+      "token": " inequalities",
+      "token_id": 25930,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inequality",
+      "token": " inequality",
+      "token_id": 11370,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inevitable",
+      "token": " inevitable",
+      "token_id": 19455,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inevitably",
+      "token": " inevitably",
+      "token_id": 24473,
+      "sentiment": "negative"
+    },
+    {
+      "word": "infamous",
+      "token": " infamous",
+      "token_id": 33486,
+      "sentiment": "negative"
+    },
+    {
+      "word": "infected",
+      "token": " infected",
+      "token_id": 9813,
+      "sentiment": "negative"
+    },
+    {
+      "word": "infection",
+      "token": " infection",
+      "token_id": 5066,
+      "sentiment": "negative"
+    },
+    {
+      "word": "infections",
+      "token": " infections",
+      "token_id": 10332,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inferior",
+      "token": " inferior",
+      "token_id": 18134,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inflammation",
+      "token": " inflammation",
+      "token_id": 10696,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inflammatory",
+      "token": " inflammatory",
+      "token_id": 10142,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inflated",
+      "token": " inflated",
+      "token_id": 41470,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inflict",
+      "token": " inflict",
+      "token_id": 25504,
+      "sentiment": "negative"
+    },
+    {
+      "word": "infringement",
+      "token": " infringement",
+      "token_id": 29157,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inhibit",
+      "token": " inhibit",
+      "token_id": 15582,
+      "sentiment": "negative"
+    },
+    {
+      "word": "inhibition",
+      "token": " inhibition",
+      "token_id": 8638,
+      "sentiment": "negative"
+    },
+    {
+      "word": "injury",
+      "token": " injury",
+      "token_id": 4975,
+      "sentiment": "negative"
+    },
+    {
+      "word": "injustice",
+      "token": " injustice",
+      "token_id": 31427,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insane",
+      "token": " insane",
+      "token_id": 24812,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insanity",
+      "token": " insanity",
+      "token_id": 41403,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insecure",
+      "token": " insecure",
+      "token_id": 46519,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insecurity",
+      "token": " insecurity",
+      "token_id": 45583,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insensitive",
+      "token": " insensitive",
+      "token_id": 39188,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insignificant",
+      "token": " insignificant",
+      "token_id": 34584,
+      "sentiment": "negative"
+    },
+    {
+      "word": "instability",
+      "token": " instability",
+      "token_id": 17620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insufficiency",
+      "token": " insufficiency",
+      "token_id": 39975,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insufficient",
+      "token": " insufficient",
+      "token_id": 12497,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insult",
+      "token": " insult",
+      "token_id": 20423,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insulting",
+      "token": " insulting",
+      "token_id": 50124,
+      "sentiment": "negative"
+    },
+    {
+      "word": "insults",
+      "token": " insults",
+      "token_id": 44812,
+      "sentiment": "negative"
+    },
+    {
+      "word": "intense",
+      "token": " intense",
+      "token_id": 12680,
+      "sentiment": "negative"
+    },
+    {
+      "word": "interfere",
+      "token": " interfere",
+      "token_id": 19323,
+      "sentiment": "negative"
+    },
+    {
+      "word": "interference",
+      "token": " interference",
+      "token_id": 11689,
+      "sentiment": "negative"
+    },
+    {
+      "word": "intermittent",
+      "token": " intermittent",
+      "token_id": 32540,
+      "sentiment": "negative"
+    },
+    {
+      "word": "interrupt",
+      "token": " interrupt",
+      "token_id": 11606,
+      "sentiment": "negative"
+    },
+    {
+      "word": "interruption",
+      "token": " interruption",
+      "token_id": 38205,
+      "sentiment": "negative"
+    },
+    {
+      "word": "intolerance",
+      "token": " intolerance",
+      "token_id": 45458,
+      "sentiment": "negative"
+    },
+    {
+      "word": "intrusion",
+      "token": " intrusion",
+      "token_id": 39482,
+      "sentiment": "negative"
+    },
+    {
+      "word": "invalid",
+      "token": " invalid",
+      "token_id": 12078,
+      "sentiment": "negative"
+    },
+    {
+      "word": "invasive",
+      "token": " invasive",
+      "token_id": 16529,
+      "sentiment": "negative"
+    },
+    {
+      "word": "invisible",
+      "token": " invisible",
+      "token_id": 20624,
+      "sentiment": "negative"
+    },
+    {
+      "word": "involuntary",
+      "token": " involuntary",
+      "token_id": 35393,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ironic",
+      "token": " ironic",
+      "token_id": 40066,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irony",
+      "token": " irony",
+      "token_id": 33740,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irrational",
+      "token": " irrational",
+      "token_id": 33384,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irregular",
+      "token": " irregular",
+      "token_id": 17948,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irrelevant",
+      "token": " irrelevant",
+      "token_id": 19124,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irreversible",
+      "token": " irreversible",
+      "token_id": 38378,
+      "sentiment": "negative"
+    },
+    {
+      "word": "irritation",
+      "token": " irritation",
+      "token_id": 39890,
+      "sentiment": "negative"
+    },
+    {
+      "word": "isolate",
+      "token": " isolate",
+      "token_id": 20843,
+      "sentiment": "negative"
+    },
+    {
+      "word": "isolated",
+      "token": " isolated",
+      "token_id": 7011,
+      "sentiment": "negative"
+    },
+    {
+      "word": "isolation",
+      "token": " isolation",
+      "token_id": 12940,
+      "sentiment": "negative"
+    },
+    {
+      "word": "issue",
+      "token": " issue",
+      "token_id": 2523,
+      "sentiment": "negative"
+    },
+    {
+      "word": "issues",
+      "token": " issues",
+      "token_id": 3374,
+      "sentiment": "negative"
+    },
+    {
+      "word": "jam",
+      "token": " jam",
+      "token_id": 25308,
+      "sentiment": "negative"
+    },
+    {
+      "word": "jealous",
+      "token": " jealous",
+      "token_id": 23327,
+      "sentiment": "negative"
+    },
+    {
+      "word": "jealousy",
+      "token": " jealousy",
+      "token_id": 44170,
+      "sentiment": "negative"
+    },
+    {
+      "word": "jeopardy",
+      "token": " jeopardy",
+      "token_id": 39378,
+      "sentiment": "negative"
+    },
+    {
+      "word": "jerk",
+      "token": " jerk",
+      "token_id": 27964,
+      "sentiment": "negative"
+    },
+    {
+      "word": "joke",
+      "token": " joke",
+      "token_id": 16391,
+      "sentiment": "negative"
+    },
+    {
+      "word": "junk",
+      "token": " junk",
+      "token_id": 26246,
+      "sentiment": "negative"
+    },
+    {
+      "word": "kill",
+      "token": " kill",
+      "token_id": 5159,
+      "sentiment": "negative"
+    },
+    {
+      "word": "killed",
+      "token": " killed",
+      "token_id": 5339,
+      "sentiment": "negative"
+    },
+    {
+      "word": "killer",
+      "token": " killer",
+      "token_id": 17830,
+      "sentiment": "negative"
+    },
+    {
+      "word": "killing",
+      "token": " killing",
+      "token_id": 9811,
+      "sentiment": "negative"
+    },
+    {
+      "word": "kills",
+      "token": " kills",
+      "token_id": 26280,
+      "sentiment": "negative"
+    },
+    {
+      "word": "knife",
+      "token": " knife",
+      "token_id": 12798,
+      "sentiment": "negative"
+    },
+    {
+      "word": "knock",
+      "token": " knock",
+      "token_id": 7569,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lack",
+      "token": " lack",
+      "token_id": 3480,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lacked",
+      "token": " lacked",
+      "token_id": 20296,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lacking",
+      "token": " lacking",
+      "token_id": 14999,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lacks",
+      "token": " lacks",
+      "token_id": 19756,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lag",
+      "token": " lag",
+      "token_id": 16653,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lame",
+      "token": " lame",
+      "token_id": 42837,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lament",
+      "token": " lament",
+      "token_id": 32981,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lapse",
+      "token": " lapse",
+      "token_id": 47893,
+      "sentiment": "negative"
+    },
+    {
+      "word": "latency",
+      "token": " latency",
+      "token_id": 22667,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lazy",
+      "token": " lazy",
+      "token_id": 22658,
+      "sentiment": "negative"
+    },
+    {
+      "word": "leak",
+      "token": " leak",
+      "token_id": 13584,
+      "sentiment": "negative"
+    },
+    {
+      "word": "leakage",
+      "token": " leakage",
+      "token_id": 23753,
+      "sentiment": "negative"
+    },
+    {
+      "word": "leaking",
+      "token": " leaking",
+      "token_id": 40929,
+      "sentiment": "negative"
+    },
+    {
+      "word": "leaks",
+      "token": " leaks",
+      "token_id": 31693,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lemon",
+      "token": " lemon",
+      "token_id": 18616,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lengthy",
+      "token": " lengthy",
+      "token_id": 24585,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lethal",
+      "token": " lethal",
+      "token_id": 25894,
+      "sentiment": "negative"
+    },
+    {
+      "word": "liability",
+      "token": " liability",
+      "token_id": 9781,
+      "sentiment": "negative"
+    },
+    {
+      "word": "liable",
+      "token": " liable",
+      "token_id": 15922,
+      "sentiment": "negative"
+    },
+    {
+      "word": "liar",
+      "token": " liar",
+      "token_id": 43459,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lie",
+      "token": " lie",
+      "token_id": 7027,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lied",
+      "token": " lied",
+      "token_id": 27786,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lies",
+      "token": " lies",
+      "token_id": 8696,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lifeless",
+      "token": " lifeless",
+      "token_id": 49825,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limit",
+      "token": " limit",
+      "token_id": 2701,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limitation",
+      "token": " limitation",
+      "token_id": 12291,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limitations",
+      "token": " limitations",
+      "token_id": 7364,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limited",
+      "token": " limited",
+      "token_id": 3710,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limits",
+      "token": " limits",
+      "token_id": 7787,
+      "sentiment": "negative"
+    },
+    {
+      "word": "limp",
+      "token": " limp",
+      "token_id": 46169,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lone",
+      "token": " lone",
+      "token_id": 33178,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loneliness",
+      "token": " loneliness",
+      "token_id": 43241,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lonely",
+      "token": " lonely",
+      "token_id": 25106,
+      "sentiment": "negative"
+    },
+    {
+      "word": "longing",
+      "token": " longing",
+      "token_id": 40484,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loose",
+      "token": " loose",
+      "token_id": 13155,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loot",
+      "token": " loot",
+      "token_id": 41045,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lose",
+      "token": " lose",
+      "token_id": 7168,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loser",
+      "token": " loser",
+      "token_id": 48222,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loses",
+      "token": " loses",
+      "token_id": 25068,
+      "sentiment": "negative"
+    },
+    {
+      "word": "losing",
+      "token": " losing",
+      "token_id": 10305,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loss",
+      "token": " loss",
+      "token_id": 2957,
+      "sentiment": "negative"
+    },
+    {
+      "word": "losses",
+      "token": " losses",
+      "token_id": 11655,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lost",
+      "token": " lost",
+      "token_id": 3663,
+      "sentiment": "negative"
+    },
+    {
+      "word": "loud",
+      "token": " loud",
+      "token_id": 11216,
+      "sentiment": "negative"
+    },
+    {
+      "word": "louder",
+      "token": " louder",
+      "token_id": 36504,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lure",
+      "token": " lure",
+      "token_id": 42620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "lying",
+      "token": " lying",
+      "token_id": 10776,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mad",
+      "token": " mad",
+      "token_id": 10279,
+      "sentiment": "negative"
+    },
+    {
+      "word": "madness",
+      "token": " madness",
+      "token_id": 33584,
+      "sentiment": "negative"
+    },
+    {
+      "word": "malice",
+      "token": " malice",
+      "token_id": 42233,
+      "sentiment": "negative"
+    },
+    {
+      "word": "malicious",
+      "token": " malicious",
+      "token_id": 24764,
+      "sentiment": "negative"
+    },
+    {
+      "word": "malign",
+      "token": " malign",
+      "token_id": 11934,
+      "sentiment": "negative"
+    },
+    {
+      "word": "malignant",
+      "token": " malignant",
+      "token_id": 17566,
+      "sentiment": "negative"
+    },
+    {
+      "word": "manic",
+      "token": " manic",
+      "token_id": 49335,
+      "sentiment": "negative"
+    },
+    {
+      "word": "manipulate",
+      "token": " manipulate",
+      "token_id": 26526,
+      "sentiment": "negative"
+    },
+    {
+      "word": "manipulation",
+      "token": " manipulation",
+      "token_id": 19763,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mar",
+      "token": " mar",
+      "token_id": 2304,
+      "sentiment": "negative"
+    },
+    {
+      "word": "marginal",
+      "token": " marginal",
+      "token_id": 16888,
+      "sentiment": "negative"
+    },
+    {
+      "word": "marginally",
+      "token": " marginally",
+      "token_id": 42876,
+      "sentiment": "negative"
+    },
+    {
+      "word": "massacre",
+      "token": " massacre",
+      "token_id": 36103,
+      "sentiment": "negative"
+    },
+    {
+      "word": "meaningless",
+      "token": " meaningless",
+      "token_id": 34209,
+      "sentiment": "negative"
+    },
+    {
+      "word": "melancholy",
+      "token": " melancholy",
+      "token_id": 46886,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mess",
+      "token": " mess",
+      "token_id": 4840,
+      "sentiment": "negative"
+    },
+    {
+      "word": "messed",
+      "token": " messed",
+      "token_id": 43303,
+      "sentiment": "negative"
+    },
+    {
+      "word": "messy",
+      "token": " messy",
+      "token_id": 36396,
+      "sentiment": "negative"
+    },
+    {
+      "word": "miser",
+      "token": " miser",
+      "token_id": 24050,
+      "sentiment": "negative"
+    },
+    {
+      "word": "miserable",
+      "token": " miserable",
+      "token_id": 28714,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misery",
+      "token": " misery",
+      "token_id": 33030,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misleading",
+      "token": " misleading",
+      "token_id": 24363,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misrepresent",
+      "token": " misrepresent",
+      "token_id": 25355,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misrepresentation",
+      "token": " misrepresentation",
+      "token_id": 42254,
+      "sentiment": "negative"
+    },
+    {
+      "word": "miss",
+      "token": " miss",
+      "token_id": 2985,
+      "sentiment": "negative"
+    },
+    {
+      "word": "missed",
+      "token": " missed",
+      "token_id": 9829,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misses",
+      "token": " misses",
+      "token_id": 38771,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mist",
+      "token": " mist",
+      "token_id": 5384,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mistake",
+      "token": " mistake",
+      "token_id": 10551,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mistaken",
+      "token": " mistaken",
+      "token_id": 20854,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mistakenly",
+      "token": " mistakenly",
+      "token_id": 49294,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mistakes",
+      "token": " mistakes",
+      "token_id": 16503,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mistress",
+      "token": " mistress",
+      "token_id": 36285,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misunderstanding",
+      "token": " misunderstanding",
+      "token_id": 40663,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misunderstood",
+      "token": " misunderstood",
+      "token_id": 46485,
+      "sentiment": "negative"
+    },
+    {
+      "word": "misuse",
+      "token": " misuse",
+      "token_id": 41775,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mock",
+      "token": " mock",
+      "token_id": 13031,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mocking",
+      "token": " mocking",
+      "token_id": 49282,
+      "sentiment": "negative"
+    },
+    {
+      "word": "monster",
+      "token": " monster",
+      "token_id": 19827,
+      "sentiment": "negative"
+    },
+    {
+      "word": "monstrous",
+      "token": " monstrous",
+      "token_id": 49358,
+      "sentiment": "negative"
+    },
+    {
+      "word": "moot",
+      "token": " moot",
+      "token_id": 31866,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mourn",
+      "token": " mourn",
+      "token_id": 47680,
+      "sentiment": "negative"
+    },
+    {
+      "word": "muddy",
+      "token": " muddy",
+      "token_id": 47156,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mundane",
+      "token": " mundane",
+      "token_id": 48657,
+      "sentiment": "negative"
+    },
+    {
+      "word": "murder",
+      "token": " murder",
+      "token_id": 7701,
+      "sentiment": "negative"
+    },
+    {
+      "word": "murderer",
+      "token": " murderer",
+      "token_id": 37658,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mysterious",
+      "token": " mysterious",
+      "token_id": 19796,
+      "sentiment": "negative"
+    },
+    {
+      "word": "mystery",
+      "token": " mystery",
+      "token_id": 16909,
+      "sentiment": "negative"
+    },
+    {
+      "word": "myth",
+      "token": " myth",
+      "token_id": 13296,
+      "sentiment": "negative"
+    },
+    {
+      "word": "naive",
+      "token": " naive",
+      "token_id": 27785,
+      "sentiment": "negative"
+    },
+    {
+      "word": "narrower",
+      "token": " narrower",
+      "token_id": 39937,
+      "sentiment": "negative"
+    },
+    {
+      "word": "nasty",
+      "token": " nasty",
+      "token_id": 26321,
+      "sentiment": "negative"
+    },
+    {
+      "word": "negative",
+      "token": " negative",
+      "token_id": 4016,
+      "sentiment": "negative"
+    },
+    {
+      "word": "neglect",
+      "token": " neglect",
+      "token_id": 18369,
+      "sentiment": "negative"
+    },
+    {
+      "word": "neglected",
+      "token": " neglected",
+      "token_id": 22459,
+      "sentiment": "negative"
+    },
+    {
+      "word": "negligence",
+      "token": " negligence",
+      "token_id": 16355,
+      "sentiment": "negative"
+    },
+    {
+      "word": "negligent",
+      "token": " negligent",
+      "token_id": 27841,
+      "sentiment": "negative"
+    },
+    {
+      "word": "nervous",
+      "token": " nervous",
+      "token_id": 11219,
+      "sentiment": "negative"
+    },
+    {
+      "word": "nightmare",
+      "token": " nightmare",
+      "token_id": 28026,
+      "sentiment": "negative"
+    },
+    {
+      "word": "noise",
+      "token": " noise",
+      "token_id": 6046,
+      "sentiment": "negative"
+    },
+    {
+      "word": "noises",
+      "token": " noises",
+      "token_id": 33737,
+      "sentiment": "negative"
+    },
+    {
+      "word": "noisy",
+      "token": " noisy",
+      "token_id": 27620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "nonsense",
+      "token": " nonsense",
+      "token_id": 25333,
+      "sentiment": "negative"
+    },
+    {
+      "word": "notorious",
+      "token": " notorious",
+      "token_id": 32566,
+      "sentiment": "negative"
+    },
+    {
+      "word": "nuisance",
+      "token": " nuisance",
+      "token_id": 41843,
+      "sentiment": "negative"
+    },
+    {
+      "word": "numb",
+      "token": " numb",
+      "token_id": 39856,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obese",
+      "token": " obese",
+      "token_id": 21967,
+      "sentiment": "negative"
+    },
+    {
+      "word": "object",
+      "token": " object",
+      "token_id": 1789,
+      "sentiment": "negative"
+    },
+    {
+      "word": "objection",
+      "token": " objection",
+      "token_id": 14926,
+      "sentiment": "negative"
+    },
+    {
+      "word": "objections",
+      "token": " objections",
+      "token_id": 21915,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oblique",
+      "token": " oblique",
+      "token_id": 46524,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obscure",
+      "token": " obscure",
+      "token_id": 26591,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obscured",
+      "token": " obscured",
+      "token_id": 45650,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obsess",
+      "token": " obsess",
+      "token_id": 37562,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obsolete",
+      "token": " obsolete",
+      "token_id": 40072,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obstacle",
+      "token": " obstacle",
+      "token_id": 26982,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obstruct",
+      "token": " obstruct",
+      "token_id": 23040,
+      "sentiment": "negative"
+    },
+    {
+      "word": "obstruction",
+      "token": " obstruction",
+      "token_id": 22080,
+      "sentiment": "negative"
+    },
+    {
+      "word": "odd",
+      "token": " odd",
+      "token_id": 8909,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oddly",
+      "token": " oddly",
+      "token_id": 45814,
+      "sentiment": "negative"
+    },
+    {
+      "word": "odor",
+      "token": " odor",
+      "token_id": 26883,
+      "sentiment": "negative"
+    },
+    {
+      "word": "offence",
+      "token": " offence",
+      "token_id": 34306,
+      "sentiment": "negative"
+    },
+    {
+      "word": "offender",
+      "token": " offender",
+      "token_id": 27484,
+      "sentiment": "negative"
+    },
+    {
+      "word": "offending",
+      "token": " offending",
+      "token_id": 48615,
+      "sentiment": "negative"
+    },
+    {
+      "word": "offenses",
+      "token": " offenses",
+      "token_id": 19626,
+      "sentiment": "negative"
+    },
+    {
+      "word": "offensive",
+      "token": " offensive",
+      "token_id": 13413,
+      "sentiment": "negative"
+    },
+    {
+      "word": "omission",
+      "token": " omission",
+      "token_id": 33860,
+      "sentiment": "negative"
+    },
+    {
+      "word": "omit",
+      "token": " omit",
+      "token_id": 35991,
+      "sentiment": "negative"
+    },
+    {
+      "word": "opponent",
+      "token": " opponent",
+      "token_id": 16871,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oppose",
+      "token": " oppose",
+      "token_id": 25437,
+      "sentiment": "negative"
+    },
+    {
+      "word": "opposition",
+      "token": " opposition",
+      "token_id": 10266,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oppression",
+      "token": " oppression",
+      "token_id": 35635,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oppressive",
+      "token": " oppressive",
+      "token_id": 50205,
+      "sentiment": "negative"
+    },
+    {
+      "word": "orphan",
+      "token": " orphan",
+      "token_id": 33260,
+      "sentiment": "negative"
+    },
+    {
+      "word": "outbreak",
+      "token": " outbreak",
+      "token_id": 15742,
+      "sentiment": "negative"
+    },
+    {
+      "word": "outlaw",
+      "token": " outlaw",
+      "token_id": 46084,
+      "sentiment": "negative"
+    },
+    {
+      "word": "outrage",
+      "token": " outrage",
+      "token_id": 22145,
+      "sentiment": "negative"
+    },
+    {
+      "word": "outrageous",
+      "token": " outrageous",
+      "token_id": 38355,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overlook",
+      "token": " overlook",
+      "token_id": 20621,
+      "sentiment": "negative"
+    },
+    {
+      "word": "oversight",
+      "token": " oversight",
+      "token_id": 29002,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overthrow",
+      "token": " overthrow",
+      "token_id": 47743,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overturn",
+      "token": " overturn",
+      "token_id": 46011,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overweight",
+      "token": " overweight",
+      "token_id": 26389,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overwhelmed",
+      "token": " overwhelmed",
+      "token_id": 29991,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overwhelming",
+      "token": " overwhelming",
+      "token_id": 16400,
+      "sentiment": "negative"
+    },
+    {
+      "word": "overwhelmingly",
+      "token": " overwhelmingly",
+      "token_id": 42935,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pain",
+      "token": " pain",
+      "token_id": 3075,
+      "sentiment": "negative"
+    },
+    {
+      "word": "painful",
+      "token": " painful",
+      "token_id": 16592,
+      "sentiment": "negative"
+    },
+    {
+      "word": "painfully",
+      "token": " painfully",
+      "token_id": 46727,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pains",
+      "token": " pains",
+      "token_id": 31991,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pale",
+      "token": " pale",
+      "token_id": 14530,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pan",
+      "token": " pan",
+      "token_id": 3199,
+      "sentiment": "negative"
+    },
+    {
+      "word": "panic",
+      "token": " panic",
+      "token_id": 18829,
+      "sentiment": "negative"
+    },
+    {
+      "word": "paranoid",
+      "token": " paranoid",
+      "token_id": 46197,
+      "sentiment": "negative"
+    },
+    {
+      "word": "parasite",
+      "token": " parasite",
+      "token_id": 25027,
+      "sentiment": "negative"
+    },
+    {
+      "word": "partisan",
+      "token": " partisan",
+      "token_id": 37492,
+      "sentiment": "negative"
+    },
+    {
+      "word": "passive",
+      "token": " passive",
+      "token_id": 16864,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pathetic",
+      "token": " pathetic",
+      "token_id": 40479,
+      "sentiment": "negative"
+    },
+    {
+      "word": "peculiar",
+      "token": " peculiar",
+      "token_id": 19532,
+      "sentiment": "negative"
+    },
+    {
+      "word": "peeled",
+      "token": " peeled",
+      "token_id": 35003,
+      "sentiment": "negative"
+    },
+    {
+      "word": "penalty",
+      "token": " penalty",
+      "token_id": 12339,
+      "sentiment": "negative"
+    },
+    {
+      "word": "peril",
+      "token": " peril",
+      "token_id": 35342,
+      "sentiment": "negative"
+    },
+    {
+      "word": "perplex",
+      "token": " perplex",
+      "token_id": 44229,
+      "sentiment": "negative"
+    },
+    {
+      "word": "persecution",
+      "token": " persecution",
+      "token_id": 31222,
+      "sentiment": "negative"
+    },
+    {
+      "word": "perturb",
+      "token": " perturb",
+      "token_id": 12230,
+      "sentiment": "negative"
+    },
+    {
+      "word": "perturbed",
+      "token": " perturbed",
+      "token_id": 44711,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pervasive",
+      "token": " pervasive",
+      "token_id": 42551,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pest",
+      "token": " pest",
+      "token_id": 32409,
+      "sentiment": "negative"
+    },
+    {
+      "word": "petty",
+      "token": " petty",
+      "token_id": 38817,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pig",
+      "token": " pig",
+      "token_id": 8393,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pigs",
+      "token": " pigs",
+      "token_id": 20798,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pinch",
+      "token": " pinch",
+      "token_id": 33161,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pity",
+      "token": " pity",
+      "token_id": 27042,
+      "sentiment": "negative"
+    },
+    {
+      "word": "plague",
+      "token": " plague",
+      "token_id": 31781,
+      "sentiment": "negative"
+    },
+    {
+      "word": "plea",
+      "token": " plea",
+      "token_id": 12678,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pleas",
+      "token": " pleas",
+      "token_id": 26757,
+      "sentiment": "negative"
+    },
+    {
+      "word": "plight",
+      "token": " plight",
+      "token_id": 47142,
+      "sentiment": "negative"
+    },
+    {
+      "word": "plot",
+      "token": " plot",
+      "token_id": 7484,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pointless",
+      "token": " pointless",
+      "token_id": 41690,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poison",
+      "token": " poison",
+      "token_id": 14537,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poor",
+      "token": " poor",
+      "token_id": 4105,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poorer",
+      "token": " poorer",
+      "token_id": 30560,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poorest",
+      "token": " poorest",
+      "token_id": 47354,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poorly",
+      "token": " poorly",
+      "token_id": 15225,
+      "sentiment": "negative"
+    },
+    {
+      "word": "poverty",
+      "token": " poverty",
+      "token_id": 14192,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prejudice",
+      "token": " prejudice",
+      "token_id": 14751,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prejudicial",
+      "token": " prejudicial",
+      "token_id": 33218,
+      "sentiment": "negative"
+    },
+    {
+      "word": "pretend",
+      "token": " pretend",
+      "token_id": 22830,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prick",
+      "token": " prick",
+      "token_id": 37937,
+      "sentiment": "negative"
+    },
+    {
+      "word": "primitive",
+      "token": " primitive",
+      "token_id": 20523,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prison",
+      "token": " prison",
+      "token_id": 5754,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prisoner",
+      "token": " prisoner",
+      "token_id": 18897,
+      "sentiment": "negative"
+    },
+    {
+      "word": "problem",
+      "token": " problem",
+      "token_id": 1895,
+      "sentiment": "negative"
+    },
+    {
+      "word": "problematic",
+      "token": " problematic",
+      "token_id": 20276,
+      "sentiment": "negative"
+    },
+    {
+      "word": "problems",
+      "token": " problems",
+      "token_id": 3237,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prohibit",
+      "token": " prohibit",
+      "token_id": 33459,
+      "sentiment": "negative"
+    },
+    {
+      "word": "propaganda",
+      "token": " propaganda",
+      "token_id": 23306,
+      "sentiment": "negative"
+    },
+    {
+      "word": "proprietary",
+      "token": " proprietary",
+      "token_id": 28673,
+      "sentiment": "negative"
+    },
+    {
+      "word": "prosecute",
+      "token": " prosecute",
+      "token_id": 40832,
+      "sentiment": "negative"
+    },
+    {
+      "word": "protest",
+      "token": " protest",
+      "token_id": 8005,
+      "sentiment": "negative"
+    },
+    {
+      "word": "protested",
+      "token": " protested",
+      "token_id": 36790,
+      "sentiment": "negative"
+    },
+    {
+      "word": "protesting",
+      "token": " protesting",
+      "token_id": 45665,
+      "sentiment": "negative"
+    },
+    {
+      "word": "protests",
+      "token": " protests",
+      "token_id": 18162,
+      "sentiment": "negative"
+    },
+    {
+      "word": "provocative",
+      "token": " provocative",
+      "token_id": 49317,
+      "sentiment": "negative"
+    },
+    {
+      "word": "provoke",
+      "token": " provoke",
+      "token_id": 46554,
+      "sentiment": "negative"
+    },
+    {
+      "word": "punch",
+      "token": " punch",
+      "token_id": 18750,
+      "sentiment": "negative"
+    },
+    {
+      "word": "punish",
+      "token": " punish",
+      "token_id": 21854,
+      "sentiment": "negative"
+    },
+    {
+      "word": "punitive",
+      "token": " punitive",
+      "token_id": 29460,
+      "sentiment": "negative"
+    },
+    {
+      "word": "punk",
+      "token": " punk",
+      "token_id": 30304,
+      "sentiment": "negative"
+    },
+    {
+      "word": "puppet",
+      "token": " puppet",
+      "token_id": 47717,
+      "sentiment": "negative"
+    },
+    {
+      "word": "puzzled",
+      "token": " puzzled",
+      "token_id": 39340,
+      "sentiment": "negative"
+    },
+    {
+      "word": "quarrel",
+      "token": " quarrel",
+      "token_id": 48254,
+      "sentiment": "negative"
+    },
+    {
+      "word": "queer",
+      "token": " queer",
+      "token_id": 38493,
+      "sentiment": "negative"
+    },
+    {
+      "word": "questionable",
+      "token": " questionable",
+      "token_id": 30455,
+      "sentiment": "negative"
+    },
+    {
+      "word": "racism",
+      "token": " racism",
+      "token_id": 23285,
+      "sentiment": "negative"
+    },
+    {
+      "word": "racist",
+      "token": " racist",
+      "token_id": 22198,
+      "sentiment": "negative"
+    },
+    {
+      "word": "radical",
+      "token": " radical",
+      "token_id": 9329,
+      "sentiment": "negative"
+    },
+    {
+      "word": "radically",
+      "token": " radically",
+      "token_id": 39278,
+      "sentiment": "negative"
+    },
+    {
+      "word": "radicals",
+      "token": " radicals",
+      "token_id": 26875,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rage",
+      "token": " rage",
+      "token_id": 22324,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ragged",
+      "token": " ragged",
+      "token_id": 49109,
+      "sentiment": "negative"
+    },
+    {
+      "word": "raging",
+      "token": " raging",
+      "token_id": 48825,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rail",
+      "token": " rail",
+      "token_id": 8087,
+      "sentiment": "negative"
+    },
+    {
+      "word": "randomly",
+      "token": " randomly",
+      "token_id": 12421,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rape",
+      "token": " rape",
+      "token_id": 16773,
+      "sentiment": "negative"
+    },
+    {
+      "word": "raped",
+      "token": " raped",
+      "token_id": 34597,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rash",
+      "token": " rash",
+      "token_id": 35511,
+      "sentiment": "negative"
+    },
+    {
+      "word": "recession",
+      "token": " recession",
+      "token_id": 29276,
+      "sentiment": "negative"
+    },
+    {
+      "word": "reckless",
+      "token": " reckless",
+      "token_id": 32397,
+      "sentiment": "negative"
+    },
+    {
+      "word": "redundancy",
+      "token": " redundancy",
+      "token_id": 39296,
+      "sentiment": "negative"
+    },
+    {
+      "word": "redundant",
+      "token": " redundant",
+      "token_id": 28116,
+      "sentiment": "negative"
+    },
+    {
+      "word": "refusal",
+      "token": " refusal",
+      "token_id": 19963,
+      "sentiment": "negative"
+    },
+    {
+      "word": "refuse",
+      "token": " refuse",
+      "token_id": 16410,
+      "sentiment": "negative"
+    },
+    {
+      "word": "refused",
+      "token": " refused",
+      "token_id": 9284,
+      "sentiment": "negative"
+    },
+    {
+      "word": "refuses",
+      "token": " refuses",
+      "token_id": 29939,
+      "sentiment": "negative"
+    },
+    {
+      "word": "refusing",
+      "token": " refusing",
+      "token_id": 21455,
+      "sentiment": "negative"
+    },
+    {
+      "word": "regression",
+      "token": " regression",
+      "token_id": 9077,
+      "sentiment": "negative"
+    },
+    {
+      "word": "regret",
+      "token": " regret",
+      "token_id": 14938,
+      "sentiment": "negative"
+    },
+    {
+      "word": "reject",
+      "token": " reject",
+      "token_id": 12009,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rejected",
+      "token": " rejected",
+      "token_id": 10945,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rejecting",
+      "token": " rejecting",
+      "token_id": 33944,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rejection",
+      "token": " rejection",
+      "token_id": 18235,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rejects",
+      "token": " rejects",
+      "token_id": 41471,
+      "sentiment": "negative"
+    },
+    {
+      "word": "relapse",
+      "token": " relapse",
+      "token_id": 28524,
+      "sentiment": "negative"
+    },
+    {
+      "word": "relentless",
+      "token": " relentless",
+      "token_id": 44064,
+      "sentiment": "negative"
+    },
+    {
+      "word": "reluctance",
+      "token": " reluctance",
+      "token_id": 44915,
+      "sentiment": "negative"
+    },
+    {
+      "word": "reluctant",
+      "token": " reluctant",
+      "token_id": 27821,
+      "sentiment": "negative"
+    },
+    {
+      "word": "reluctantly",
+      "token": " reluctantly",
+      "token_id": 46572,
+      "sentiment": "negative"
+    },
+    {
+      "word": "remorse",
+      "token": " remorse",
+      "token_id": 47753,
+      "sentiment": "negative"
+    },
+    {
+      "word": "repetitive",
+      "token": " repetitive",
+      "token_id": 29104,
+      "sentiment": "negative"
+    },
+    {
+      "word": "repression",
+      "token": " repression",
+      "token_id": 32070,
+      "sentiment": "negative"
+    },
+    {
+      "word": "repulsive",
+      "token": " repulsive",
+      "token_id": 47381,
+      "sentiment": "negative"
+    },
+    {
+      "word": "resent",
+      "token": " resent",
+      "token_id": 23381,
+      "sentiment": "negative"
+    },
+    {
+      "word": "resentment",
+      "token": " resentment",
+      "token_id": 40586,
+      "sentiment": "negative"
+    },
+    {
+      "word": "resignation",
+      "token": " resignation",
+      "token_id": 28404,
+      "sentiment": "negative"
+    },
+    {
+      "word": "resigned",
+      "token": " resigned",
+      "token_id": 25036,
+      "sentiment": "negative"
+    },
+    {
+      "word": "resistance",
+      "token": " resistance",
+      "token_id": 5052,
+      "sentiment": "negative"
+    },
+    {
+      "word": "restless",
+      "token": " restless",
+      "token_id": 43958,
+      "sentiment": "negative"
+    },
+    {
+      "word": "restrict",
+      "token": " restrict",
+      "token_id": 4656,
+      "sentiment": "negative"
+    },
+    {
+      "word": "restricted",
+      "token": " restricted",
+      "token_id": 11096,
+      "sentiment": "negative"
+    },
+    {
+      "word": "restriction",
+      "token": " restriction",
+      "token_id": 12400,
+      "sentiment": "negative"
+    },
+    {
+      "word": "restrictive",
+      "token": " restrictive",
+      "token_id": 29190,
+      "sentiment": "negative"
+    },
+    {
+      "word": "retard",
+      "token": " retard",
+      "token_id": 31832,
+      "sentiment": "negative"
+    },
+    {
+      "word": "retarded",
+      "token": " retarded",
+      "token_id": 48101,
+      "sentiment": "negative"
+    },
+    {
+      "word": "retreat",
+      "token": " retreat",
+      "token_id": 19015,
+      "sentiment": "negative"
+    },
+    {
+      "word": "retreated",
+      "token": " retreated",
+      "token_id": 46047,
+      "sentiment": "negative"
+    },
+    {
+      "word": "revenge",
+      "token": " revenge",
+      "token_id": 25442,
+      "sentiment": "negative"
+    },
+    {
+      "word": "revert",
+      "token": " revert",
+      "token_id": 43004,
+      "sentiment": "negative"
+    },
+    {
+      "word": "revolt",
+      "token": " revolt",
+      "token_id": 36733,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rhetoric",
+      "token": " rhetoric",
+      "token_id": 26527,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ridiculous",
+      "token": " ridiculous",
+      "token_id": 19082,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rigid",
+      "token": " rigid",
+      "token_id": 16572,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rigidity",
+      "token": " rigidity",
+      "token_id": 40350,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rip",
+      "token": " rip",
+      "token_id": 25691,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ripped",
+      "token": " ripped",
+      "token_id": 30548,
+      "sentiment": "negative"
+    },
+    {
+      "word": "risk",
+      "token": " risk",
+      "token_id": 2495,
+      "sentiment": "negative"
+    },
+    {
+      "word": "risks",
+      "token": " risks",
+      "token_id": 10502,
+      "sentiment": "negative"
+    },
+    {
+      "word": "risky",
+      "token": " risky",
+      "token_id": 29198,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rival",
+      "token": " rival",
+      "token_id": 16136,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rivalry",
+      "token": " rivalry",
+      "token_id": 43497,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rocky",
+      "token": " rocky",
+      "token_id": 33848,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rogue",
+      "token": " rogue",
+      "token_id": 44355,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rot",
+      "token": " rot",
+      "token_id": 4000,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rotten",
+      "token": " rotten",
+      "token_id": 46301,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rough",
+      "token": " rough",
+      "token_id": 7227,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rubbish",
+      "token": " rubbish",
+      "token_id": 45785,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rude",
+      "token": " rude",
+      "token_id": 30446,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rue",
+      "token": " rue",
+      "token_id": 43744,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ruin",
+      "token": " ruin",
+      "token_id": 23737,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ruined",
+      "token": " ruined",
+      "token_id": 27826,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ruins",
+      "token": " ruins",
+      "token_id": 28478,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rumor",
+      "token": " rumor",
+      "token_id": 44412,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rumors",
+      "token": " rumors",
+      "token_id": 28718,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rupture",
+      "token": " rupture",
+      "token_id": 31430,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rust",
+      "token": " rust",
+      "token_id": 20035,
+      "sentiment": "negative"
+    },
+    {
+      "word": "rut",
+      "token": " rut",
+      "token_id": 40422,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ruthless",
+      "token": " ruthless",
+      "token_id": 49543,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sack",
+      "token": " sack",
+      "token_id": 34707,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sacrificed",
+      "token": " sacrificed",
+      "token_id": 31548,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sad",
+      "token": " sad",
+      "token_id": 8872,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sadly",
+      "token": " sadly",
+      "token_id": 30018,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sadness",
+      "token": " sadness",
+      "token_id": 31917,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sag",
+      "token": " sag",
+      "token_id": 18561,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sap",
+      "token": " sap",
+      "token_id": 35223,
+      "sentiment": "negative"
+    },
+    {
+      "word": "savage",
+      "token": " savage",
+      "token_id": 40810,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scam",
+      "token": " scam",
+      "token_id": 35391,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scandal",
+      "token": " scandal",
+      "token_id": 20565,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scant",
+      "token": " scant",
+      "token_id": 43721,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scar",
+      "token": " scar",
+      "token_id": 12689,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scarce",
+      "token": " scarce",
+      "token_id": 29967,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scarcely",
+      "token": " scarcely",
+      "token_id": 28438,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scare",
+      "token": " scare",
+      "token_id": 30272,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scared",
+      "token": " scared",
+      "token_id": 16060,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scars",
+      "token": " scars",
+      "token_id": 38763,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scary",
+      "token": " scary",
+      "token_id": 24851,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scorn",
+      "token": " scorn",
+      "token_id": 48260,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scrambled",
+      "token": " scrambled",
+      "token_id": 36369,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scrap",
+      "token": " scrap",
+      "token_id": 18572,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scratch",
+      "token": " scratch",
+      "token_id": 20041,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scratched",
+      "token": " scratched",
+      "token_id": 45402,
+      "sentiment": "negative"
+    },
+    {
+      "word": "scream",
+      "token": " scream",
+      "token_id": 12452,
+      "sentiment": "negative"
+    },
+    {
+      "word": "screwed",
+      "token": " screwed",
+      "token_id": 34672,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sedentary",
+      "token": " sedentary",
+      "token_id": 42197,
+      "sentiment": "negative"
+    },
+    {
+      "word": "selfish",
+      "token": " selfish",
+      "token_id": 27915,
+      "sentiment": "negative"
+    },
+    {
+      "word": "seriousness",
+      "token": " seriousness",
+      "token_id": 42558,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sever",
+      "token": " sever",
+      "token_id": 1917,
+      "sentiment": "negative"
+    },
+    {
+      "word": "severe",
+      "token": " severe",
+      "token_id": 5460,
+      "sentiment": "negative"
+    },
+    {
+      "word": "severity",
+      "token": " severity",
+      "token_id": 12147,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shake",
+      "token": " shake",
+      "token_id": 17941,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shallow",
+      "token": " shallow",
+      "token_id": 20126,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sham",
+      "token": " sham",
+      "token_id": 23013,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shame",
+      "token": " shame",
+      "token_id": 14816,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shark",
+      "token": " shark",
+      "token_id": 35409,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sharply",
+      "token": " sharply",
+      "token_id": 23071,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shit",
+      "token": " shit",
+      "token_id": 10739,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shock",
+      "token": " shock",
+      "token_id": 6966,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shocked",
+      "token": " shocked",
+      "token_id": 19961,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shocking",
+      "token": " shocking",
+      "token_id": 29103,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shortage",
+      "token": " shortage",
+      "token_id": 28938,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shortcomings",
+      "token": " shortcomings",
+      "token_id": 35387,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shrew",
+      "token": " shrew",
+      "token_id": 48258,
+      "sentiment": "negative"
+    },
+    {
+      "word": "shroud",
+      "token": " shroud",
+      "token_id": 49943,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sick",
+      "token": " sick",
+      "token_id": 8334,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sickness",
+      "token": " sickness",
+      "token_id": 31009,
+      "sentiment": "negative"
+    },
+    {
+      "word": "siege",
+      "token": " siege",
+      "token_id": 33758,
+      "sentiment": "negative"
+    },
+    {
+      "word": "silly",
+      "token": " silly",
+      "token_id": 19456,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sin",
+      "token": " sin",
+      "token_id": 6868,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sinister",
+      "token": " sinister",
+      "token_id": 46189,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sink",
+      "token": " sink",
+      "token_id": 16338,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sinking",
+      "token": " sinking",
+      "token_id": 34352,
+      "sentiment": "negative"
+    },
+    {
+      "word": "skeptic",
+      "token": " skeptic",
+      "token_id": 38504,
+      "sentiment": "negative"
+    },
+    {
+      "word": "skeptical",
+      "token": " skeptical",
+      "token_id": 33872,
+      "sentiment": "negative"
+    },
+    {
+      "word": "skepticism",
+      "token": " skepticism",
+      "token_id": 44730,
+      "sentiment": "negative"
+    },
+    {
+      "word": "skinny",
+      "token": " skinny",
+      "token_id": 42345,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slack",
+      "token": " slack",
+      "token_id": 37358,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slap",
+      "token": " slap",
+      "token_id": 37551,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slaughter",
+      "token": " slaughter",
+      "token_id": 30814,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slave",
+      "token": " slave",
+      "token_id": 15945,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slaves",
+      "token": " slaves",
+      "token_id": 20086,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slog",
+      "token": " slog",
+      "token_id": 44216,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slow",
+      "token": " slow",
+      "token_id": 3468,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slowed",
+      "token": " slowed",
+      "token_id": 28837,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slower",
+      "token": " slower",
+      "token_id": 17357,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slowly",
+      "token": " slowly",
+      "token_id": 7808,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slug",
+      "token": " slug",
+      "token_id": 44031,
+      "sentiment": "negative"
+    },
+    {
+      "word": "slut",
+      "token": " slut",
+      "token_id": 48196,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smash",
+      "token": " smash",
+      "token_id": 45905,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smear",
+      "token": " smear",
+      "token_id": 38964,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smell",
+      "token": " smell",
+      "token_id": 13624,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smelled",
+      "token": " smelled",
+      "token_id": 36280,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smells",
+      "token": " smells",
+      "token_id": 34247,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smoke",
+      "token": " smoke",
+      "token_id": 11283,
+      "sentiment": "negative"
+    },
+    {
+      "word": "smug",
+      "token": " smug",
+      "token_id": 39817,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sneak",
+      "token": " sneak",
+      "token_id": 36129,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sob",
+      "token": " sob",
+      "token_id": 30323,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sober",
+      "token": " sober",
+      "token_id": 31864,
+      "sentiment": "negative"
+    },
+    {
+      "word": "solemn",
+      "token": " solemn",
+      "token_id": 30551,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sore",
+      "token": " sore",
+      "token_id": 25132,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sorrow",
+      "token": " sorrow",
+      "token_id": 26034,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sorry",
+      "token": " sorry",
+      "token_id": 7016,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sour",
+      "token": " sour",
+      "token_id": 18988,
+      "sentiment": "negative"
+    },
+    {
+      "word": "spite",
+      "token": " spite",
+      "token_id": 15866,
+      "sentiment": "negative"
+    },
+    {
+      "word": "split",
+      "token": " split",
+      "token_id": 8085,
+      "sentiment": "negative"
+    },
+    {
+      "word": "splitting",
+      "token": " splitting",
+      "token_id": 19860,
+      "sentiment": "negative"
+    },
+    {
+      "word": "spoil",
+      "token": " spoil",
+      "token_id": 46164,
+      "sentiment": "negative"
+    },
+    {
+      "word": "spoiled",
+      "token": " spoiled",
+      "token_id": 46935,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sporadic",
+      "token": " sporadic",
+      "token_id": 39631,
+      "sentiment": "negative"
+    },
+    {
+      "word": "spurious",
+      "token": " spurious",
+      "token_id": 46541,
+      "sentiment": "negative"
+    },
+    {
+      "word": "squash",
+      "token": " squash",
+      "token_id": 38785,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stab",
+      "token": " stab",
+      "token_id": 25520,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stain",
+      "token": " stain",
+      "token_id": 17996,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stains",
+      "token": " stains",
+      "token_id": 42131,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stale",
+      "token": " stale",
+      "token_id": 46745,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stall",
+      "token": " stall",
+      "token_id": 29282,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stalls",
+      "token": " stalls",
+      "token_id": 48073,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stark",
+      "token": " stark",
+      "token_id": 29274,
+      "sentiment": "negative"
+    },
+    {
+      "word": "startling",
+      "token": " startling",
+      "token_id": 42390,
+      "sentiment": "negative"
+    },
+    {
+      "word": "starvation",
+      "token": " starvation",
+      "token_id": 35351,
+      "sentiment": "negative"
+    },
+    {
+      "word": "static",
+      "token": " static",
+      "token_id": 4228,
+      "sentiment": "negative"
+    },
+    {
+      "word": "steal",
+      "token": " steal",
+      "token_id": 20016,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stealing",
+      "token": " stealing",
+      "token_id": 27980,
+      "sentiment": "negative"
+    },
+    {
+      "word": "steep",
+      "token": " steep",
+      "token_id": 16624,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stern",
+      "token": " stern",
+      "token_id": 24701,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stew",
+      "token": " stew",
+      "token_id": 22855,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sticky",
+      "token": " sticky",
+      "token_id": 31714,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stiff",
+      "token": " stiff",
+      "token_id": 13827,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stiffness",
+      "token": " stiffness",
+      "token_id": 26370,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stigma",
+      "token": " stigma",
+      "token_id": 35809,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sting",
+      "token": " sting",
+      "token_id": 38278,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stole",
+      "token": " stole",
+      "token_id": 26044,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stolen",
+      "token": " stolen",
+      "token_id": 15661,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strain",
+      "token": " strain",
+      "token_id": 7372,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strained",
+      "token": " strained",
+      "token_id": 37007,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strange",
+      "token": " strange",
+      "token_id": 8921,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strangely",
+      "token": " strangely",
+      "token_id": 38612,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stranger",
+      "token": " stranger",
+      "token_id": 20218,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stress",
+      "token": " stress",
+      "token_id": 4073,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stresses",
+      "token": " stresses",
+      "token_id": 24631,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stressful",
+      "token": " stressful",
+      "token_id": 33674,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strict",
+      "token": " strict",
+      "token_id": 7654,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strictly",
+      "token": " strictly",
+      "token_id": 13714,
+      "sentiment": "negative"
+    },
+    {
+      "word": "strike",
+      "token": " strike",
+      "token_id": 9974,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stringent",
+      "token": " stringent",
+      "token_id": 32881,
+      "sentiment": "negative"
+    },
+    {
+      "word": "struck",
+      "token": " struck",
+      "token_id": 10903,
+      "sentiment": "negative"
+    },
+    {
+      "word": "struggle",
+      "token": " struggle",
+      "token_id": 11182,
+      "sentiment": "negative"
+    },
+    {
+      "word": "struggled",
+      "token": " struggled",
+      "token_id": 19460,
+      "sentiment": "negative"
+    },
+    {
+      "word": "struggles",
+      "token": " struggles",
+      "token_id": 23490,
+      "sentiment": "negative"
+    },
+    {
+      "word": "struggling",
+      "token": " struggling",
+      "token_id": 15586,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stubborn",
+      "token": " stubborn",
+      "token_id": 32864,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stuck",
+      "token": " stuck",
+      "token_id": 10960,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stumbled",
+      "token": " stumbled",
+      "token_id": 30773,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stump",
+      "token": " stump",
+      "token_id": 48733,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stunt",
+      "token": " stunt",
+      "token_id": 47765,
+      "sentiment": "negative"
+    },
+    {
+      "word": "stupid",
+      "token": " stupid",
+      "token_id": 11339,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sty",
+      "token": " sty",
+      "token_id": 30085,
+      "sentiment": "negative"
+    },
+    {
+      "word": "subjected",
+      "token": " subjected",
+      "token_id": 12021,
+      "sentiment": "negative"
+    },
+    {
+      "word": "subordinate",
+      "token": " subordinate",
+      "token_id": 42301,
+      "sentiment": "negative"
+    },
+    {
+      "word": "subpoena",
+      "token": " subpoena",
+      "token_id": 36674,
+      "sentiment": "negative"
+    },
+    {
+      "word": "subtract",
+      "token": " subtract",
+      "token_id": 43444,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suck",
+      "token": " suck",
+      "token_id": 15327,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sucked",
+      "token": " sucked",
+      "token_id": 33853,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sucks",
+      "token": " sucks",
+      "token_id": 35058,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sue",
+      "token": " sue",
+      "token_id": 25457,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sued",
+      "token": " sued",
+      "token_id": 23460,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suffer",
+      "token": " suffer",
+      "token_id": 11089,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suffered",
+      "token": " suffered",
+      "token_id": 9606,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suffering",
+      "token": " suffering",
+      "token_id": 9958,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suffers",
+      "token": " suffers",
+      "token_id": 27171,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suicidal",
+      "token": " suicidal",
+      "token_id": 39276,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suicide",
+      "token": " suicide",
+      "token_id": 13184,
+      "sentiment": "negative"
+    },
+    {
+      "word": "sunk",
+      "token": " sunk",
+      "token_id": 37023,
+      "sentiment": "negative"
+    },
+    {
+      "word": "superficial",
+      "token": " superficial",
+      "token_id": 28019,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suppress",
+      "token": " suppress",
+      "token_id": 10476,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suppression",
+      "token": " suppression",
+      "token_id": 14523,
+      "sentiment": "negative"
+    },
+    {
+      "word": "surrender",
+      "token": " surrender",
+      "token_id": 23277,
+      "sentiment": "negative"
+    },
+    {
+      "word": "susceptible",
+      "token": " susceptible",
+      "token_id": 16931,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suspect",
+      "token": " suspect",
+      "token_id": 9101,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suspicion",
+      "token": " suspicion",
+      "token_id": 18910,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suspicions",
+      "token": " suspicions",
+      "token_id": 44873,
+      "sentiment": "negative"
+    },
+    {
+      "word": "suspicious",
+      "token": " suspicious",
+      "token_id": 20634,
+      "sentiment": "negative"
+    },
+    {
+      "word": "swelling",
+      "token": " swelling",
+      "token_id": 25567,
+      "sentiment": "negative"
+    },
+    {
+      "word": "swollen",
+      "token": " swollen",
+      "token_id": 37653,
+      "sentiment": "negative"
+    },
+    {
+      "word": "symptom",
+      "token": " symptom",
+      "token_id": 19831,
+      "sentiment": "negative"
+    },
+    {
+      "word": "symptoms",
+      "token": " symptoms",
+      "token_id": 5917,
+      "sentiment": "negative"
+    },
+    {
+      "word": "syndrome",
+      "token": " syndrome",
+      "token_id": 9237,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tangled",
+      "token": " tangled",
+      "token_id": 49515,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tank",
+      "token": " tank",
+      "token_id": 11100,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tanks",
+      "token": " tanks",
+      "token_id": 20470,
+      "sentiment": "negative"
+    },
+    {
+      "word": "taut",
+      "token": " taut",
+      "token_id": 44663,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tedious",
+      "token": " tedious",
+      "token_id": 38519,
+      "sentiment": "negative"
+    },
+    {
+      "word": "temper",
+      "token": " temper",
+      "token_id": 2660,
+      "sentiment": "negative"
+    },
+    {
+      "word": "temptation",
+      "token": " temptation",
+      "token_id": 37960,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tenderness",
+      "token": " tenderness",
+      "token_id": 45620,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tense",
+      "token": " tense",
+      "token_id": 29341,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tension",
+      "token": " tension",
+      "token_id": 12415,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tentative",
+      "token": " tentative",
+      "token_id": 43095,
+      "sentiment": "negative"
+    },
+    {
+      "word": "terrible",
+      "token": " terrible",
+      "token_id": 11527,
+      "sentiment": "negative"
+    },
+    {
+      "word": "terribly",
+      "token": " terribly",
+      "token_id": 30643,
+      "sentiment": "negative"
+    },
+    {
+      "word": "terror",
+      "token": " terror",
+      "token_id": 7075,
+      "sentiment": "negative"
+    },
+    {
+      "word": "terrorism",
+      "token": " terrorism",
+      "token_id": 19227,
+      "sentiment": "negative"
+    },
+    {
+      "word": "thicker",
+      "token": " thicker",
+      "token_id": 36651,
+      "sentiment": "negative"
+    },
+    {
+      "word": "thirst",
+      "token": " thirst",
+      "token_id": 31391,
+      "sentiment": "negative"
+    },
+    {
+      "word": "threat",
+      "token": " threat",
+      "token_id": 4322,
+      "sentiment": "negative"
+    },
+    {
+      "word": "threaten",
+      "token": " threaten",
+      "token_id": 29138,
+      "sentiment": "negative"
+    },
+    {
+      "word": "threatening",
+      "token": " threatening",
+      "token_id": 18844,
+      "sentiment": "negative"
+    },
+    {
+      "word": "threats",
+      "token": " threats",
+      "token_id": 14207,
+      "sentiment": "negative"
+    },
+    {
+      "word": "throttle",
+      "token": " throttle",
+      "token_id": 41688,
+      "sentiment": "negative"
+    },
+    {
+      "word": "thwart",
+      "token": " thwart",
+      "token_id": 41027,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tired",
+      "token": " tired",
+      "token_id": 11870,
+      "sentiment": "negative"
+    },
+    {
+      "word": "toll",
+      "token": " toll",
+      "token_id": 17935,
+      "sentiment": "negative"
+    },
+    {
+      "word": "torment",
+      "token": " torment",
+      "token_id": 44457,
+      "sentiment": "negative"
+    },
+    {
+      "word": "torrent",
+      "token": " torrent",
+      "token_id": 38163,
+      "sentiment": "negative"
+    },
+    {
+      "word": "torture",
+      "token": " torture",
+      "token_id": 21207,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tortured",
+      "token": " tortured",
+      "token_id": 37274,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tout",
+      "token": " tout",
+      "token_id": 14078,
+      "sentiment": "negative"
+    },
+    {
+      "word": "toxic",
+      "token": " toxic",
+      "token_id": 12825,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tragedy",
+      "token": " tragedy",
+      "token_id": 22820,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tragic",
+      "token": " tragic",
+      "token_id": 26183,
+      "sentiment": "negative"
+    },
+    {
+      "word": "traitor",
+      "token": " traitor",
+      "token_id": 50136,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trap",
+      "token": " trap",
+      "token_id": 15464,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trapped",
+      "token": " trapped",
+      "token_id": 18195,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trash",
+      "token": " trash",
+      "token_id": 22381,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trauma",
+      "token": " trauma",
+      "token_id": 14977,
+      "sentiment": "negative"
+    },
+    {
+      "word": "traumatic",
+      "token": " traumatic",
+      "token_id": 27784,
+      "sentiment": "negative"
+    },
+    {
+      "word": "treason",
+      "token": " treason",
+      "token_id": 44331,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trick",
+      "token": " trick",
+      "token_id": 10480,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tricky",
+      "token": " tricky",
+      "token_id": 28190,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trivial",
+      "token": " trivial",
+      "token_id": 14916,
+      "sentiment": "negative"
+    },
+    {
+      "word": "trouble",
+      "token": " trouble",
+      "token_id": 7596,
+      "sentiment": "negative"
+    },
+    {
+      "word": "troubled",
+      "token": " troubled",
+      "token_id": 26504,
+      "sentiment": "negative"
+    },
+    {
+      "word": "troubles",
+      "token": " troubles",
+      "token_id": 19408,
+      "sentiment": "negative"
+    },
+    {
+      "word": "troublesome",
+      "token": " troublesome",
+      "token_id": 45991,
+      "sentiment": "negative"
+    },
+    {
+      "word": "troubling",
+      "token": " troubling",
+      "token_id": 39728,
+      "sentiment": "negative"
+    },
+    {
+      "word": "turbulent",
+      "token": " turbulent",
+      "token_id": 33217,
+      "sentiment": "negative"
+    },
+    {
+      "word": "turmoil",
+      "token": " turmoil",
+      "token_id": 44073,
+      "sentiment": "negative"
+    },
+    {
+      "word": "twist",
+      "token": " twist",
+      "token_id": 19152,
+      "sentiment": "negative"
+    },
+    {
+      "word": "twisted",
+      "token": " twisted",
+      "token_id": 18935,
+      "sentiment": "negative"
+    },
+    {
+      "word": "twists",
+      "token": " twists",
+      "token_id": 44676,
+      "sentiment": "negative"
+    },
+    {
+      "word": "tyranny",
+      "token": " tyranny",
+      "token_id": 48320,
+      "sentiment": "negative"
+    },
+    {
+      "word": "ugly",
+      "token": " ugly",
+      "token_id": 19513,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unable",
+      "token": " unable",
+      "token_id": 7591,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unacceptable",
+      "token": " unacceptable",
+      "token_id": 28536,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unavailable",
+      "token": " unavailable",
+      "token_id": 29356,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unbelievable",
+      "token": " unbelievable",
+      "token_id": 42798,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uncertain",
+      "token": " uncertain",
+      "token_id": 8767,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unclear",
+      "token": " unclear",
+      "token_id": 12744,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uncomfortable",
+      "token": " uncomfortable",
+      "token_id": 20032,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unconstitutional",
+      "token": " unconstitutional",
+      "token_id": 27093,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uncontrolled",
+      "token": " uncontrolled",
+      "token_id": 42915,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undefined",
+      "token": " undefined",
+      "token_id": 17011,
+      "sentiment": "negative"
+    },
+    {
+      "word": "underestimate",
+      "token": " underestimate",
+      "token_id": 45166,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undermine",
+      "token": " undermine",
+      "token_id": 29614,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undermined",
+      "token": " undermined",
+      "token_id": 48178,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undesirable",
+      "token": " undesirable",
+      "token_id": 26016,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undocumented",
+      "token": " undocumented",
+      "token_id": 46098,
+      "sentiment": "negative"
+    },
+    {
+      "word": "undue",
+      "token": " undue",
+      "token_id": 39284,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uneasy",
+      "token": " uneasy",
+      "token_id": 43025,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unemployed",
+      "token": " unemployed",
+      "token_id": 35700,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unequal",
+      "token": " unequal",
+      "token_id": 38158,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uneven",
+      "token": " uneven",
+      "token_id": 30914,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unexpected",
+      "token": " unexpected",
+      "token_id": 12439,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unexpectedly",
+      "token": " unexpectedly",
+      "token_id": 34065,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unexplained",
+      "token": " unexplained",
+      "token_id": 49374,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unfamiliar",
+      "token": " unfamiliar",
+      "token_id": 32139,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unfavorable",
+      "token": " unfavorable",
+      "token_id": 43257,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unfinished",
+      "token": " unfinished",
+      "token_id": 46809,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unfortunate",
+      "token": " unfortunate",
+      "token_id": 23293,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unfortunately",
+      "token": " unfortunately",
+      "token_id": 19235,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unhappy",
+      "token": " unhappy",
+      "token_id": 26442,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unhealthy",
+      "token": " unhealthy",
+      "token_id": 36713,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uninsured",
+      "token": " uninsured",
+      "token_id": 48999,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unjust",
+      "token": " unjust",
+      "token_id": 26694,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unknown",
+      "token": " unknown",
+      "token_id": 7202,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unlawful",
+      "token": " unlawful",
+      "token_id": 21545,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unlikely",
+      "token": " unlikely",
+      "token_id": 11543,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unnatural",
+      "token": " unnatural",
+      "token_id": 44822,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unnecessary",
+      "token": " unnecessary",
+      "token_id": 15279,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unpleasant",
+      "token": " unpleasant",
+      "token_id": 28637,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unpopular",
+      "token": " unpopular",
+      "token_id": 46807,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unpredictable",
+      "token": " unpredictable",
+      "token_id": 32947,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unravel",
+      "token": " unravel",
+      "token_id": 42030,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unrealistic",
+      "token": " unrealistic",
+      "token_id": 46521,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unreasonable",
+      "token": " unreasonable",
+      "token_id": 20697,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unreliable",
+      "token": " unreliable",
+      "token_id": 36230,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unresolved",
+      "token": " unresolved",
+      "token_id": 39394,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unrest",
+      "token": " unrest",
+      "token_id": 27572,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unsafe",
+      "token": " unsafe",
+      "token_id": 20372,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unsatisfactory",
+      "token": " unsatisfactory",
+      "token_id": 49770,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unspecified",
+      "token": " unspecified",
+      "token_id": 45346,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unstable",
+      "token": " unstable",
+      "token_id": 17631,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unsuccessful",
+      "token": " unsuccessful",
+      "token_id": 28008,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unsupported",
+      "token": " unsupported",
+      "token_id": 36542,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unsure",
+      "token": " unsure",
+      "token_id": 31488,
+      "sentiment": "negative"
+    },
+    {
+      "word": "untimely",
+      "token": " untimely",
+      "token_id": 43212,
+      "sentiment": "negative"
+    },
+    {
+      "word": "untouched",
+      "token": " untouched",
+      "token_id": 48976,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unusual",
+      "token": " unusual",
+      "token_id": 11555,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unusually",
+      "token": " unusually",
+      "token_id": 33940,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unwanted",
+      "token": " unwanted",
+      "token_id": 25824,
+      "sentiment": "negative"
+    },
+    {
+      "word": "unwilling",
+      "token": " unwilling",
+      "token_id": 27086,
+      "sentiment": "negative"
+    },
+    {
+      "word": "uprising",
+      "token": " uprising",
+      "token_id": 47930,
+      "sentiment": "negative"
+    },
+    {
+      "word": "upset",
+      "token": " upset",
+      "token_id": 14004,
+      "sentiment": "negative"
+    },
+    {
+      "word": "urgent",
+      "token": " urgent",
+      "token_id": 21007,
+      "sentiment": "negative"
+    },
+    {
+      "word": "useless",
+      "token": " useless",
+      "token_id": 19437,
+      "sentiment": "negative"
+    },
+    {
+      "word": "utterly",
+      "token": " utterly",
+      "token_id": 23228,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vague",
+      "token": " vague",
+      "token_id": 21248,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vain",
+      "token": " vain",
+      "token_id": 23732,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vanity",
+      "token": " vanity",
+      "token_id": 48424,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vengeance",
+      "token": " vengeance",
+      "token_id": 44625,
+      "sentiment": "negative"
+    },
+    {
+      "word": "venom",
+      "token": " venom",
+      "token_id": 38222,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vent",
+      "token": " vent",
+      "token_id": 5698,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vex",
+      "token": " vex",
+      "token_id": 49322,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vibration",
+      "token": " vibration",
+      "token_id": 22634,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vice",
+      "token": " vice",
+      "token_id": 12008,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vicious",
+      "token": " vicious",
+      "token_id": 30157,
+      "sentiment": "negative"
+    },
+    {
+      "word": "violate",
+      "token": " violate",
+      "token_id": 20835,
+      "sentiment": "negative"
+    },
+    {
+      "word": "violation",
+      "token": " violation",
+      "token_id": 8411,
+      "sentiment": "negative"
+    },
+    {
+      "word": "violent",
+      "token": " violent",
+      "token_id": 12338,
+      "sentiment": "negative"
+    },
+    {
+      "word": "violently",
+      "token": " violently",
+      "token_id": 39843,
+      "sentiment": "negative"
+    },
+    {
+      "word": "virulence",
+      "token": " virulence",
+      "token_id": 31402,
+      "sentiment": "negative"
+    },
+    {
+      "word": "virus",
+      "token": " virus",
+      "token_id": 6581,
+      "sentiment": "negative"
+    },
+    {
+      "word": "volatile",
+      "token": " volatile",
+      "token_id": 22326,
+      "sentiment": "negative"
+    },
+    {
+      "word": "volatility",
+      "token": " volatility",
+      "token_id": 36278,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vomiting",
+      "token": " vomiting",
+      "token_id": 33510,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vulgar",
+      "token": " vulgar",
+      "token_id": 36015,
+      "sentiment": "negative"
+    },
+    {
+      "word": "vulnerable",
+      "token": " vulnerable",
+      "token_id": 14043,
+      "sentiment": "negative"
+    },
+    {
+      "word": "warned",
+      "token": " warned",
+      "token_id": 14315,
+      "sentiment": "negative"
+    },
+    {
+      "word": "warning",
+      "token": " warning",
+      "token_id": 9734,
+      "sentiment": "negative"
+    },
+    {
+      "word": "warp",
+      "token": " warp",
+      "token_id": 45645,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wary",
+      "token": " wary",
+      "token_id": 38407,
+      "sentiment": "negative"
+    },
+    {
+      "word": "waste",
+      "token": " waste",
+      "token_id": 8138,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wasted",
+      "token": " wasted",
+      "token_id": 25262,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wasting",
+      "token": " wasting",
+      "token_id": 31160,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weak",
+      "token": " weak",
+      "token_id": 5075,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weaken",
+      "token": " weaken",
+      "token_id": 20171,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weakening",
+      "token": " weakening",
+      "token_id": 49060,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weaker",
+      "token": " weaker",
+      "token_id": 21076,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weakness",
+      "token": " weakness",
+      "token_id": 14855,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weaknesses",
+      "token": " weaknesses",
+      "token_id": 32213,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weary",
+      "token": " weary",
+      "token_id": 35725,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wedge",
+      "token": " wedge",
+      "token_id": 33906,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weed",
+      "token": " weed",
+      "token_id": 32983,
+      "sentiment": "negative"
+    },
+    {
+      "word": "weird",
+      "token": " weird",
+      "token_id": 12504,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wicked",
+      "token": " wicked",
+      "token_id": 26395,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wild",
+      "token": " wild",
+      "token_id": 4956,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wildly",
+      "token": " wildly",
+      "token_id": 32251,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worn",
+      "token": " worn",
+      "token_id": 16332,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worried",
+      "token": " worried",
+      "token_id": 11926,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worries",
+      "token": " worries",
+      "token_id": 28314,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worry",
+      "token": " worry",
+      "token_id": 7664,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worrying",
+      "token": " worrying",
+      "token_id": 29124,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worse",
+      "token": " worse",
+      "token_id": 7197,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worsening",
+      "token": " worsening",
+      "token_id": 43685,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worst",
+      "token": " worst",
+      "token_id": 9065,
+      "sentiment": "negative"
+    },
+    {
+      "word": "worthless",
+      "token": " worthless",
+      "token_id": 40790,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wound",
+      "token": " wound",
+      "token_id": 10785,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wounds",
+      "token": " wounds",
+      "token_id": 19952,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrath",
+      "token": " wrath",
+      "token_id": 38696,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wreck",
+      "token": " wreck",
+      "token_id": 24028,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrest",
+      "token": " wrest",
+      "token_id": 16972,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wretched",
+      "token": " wretched",
+      "token_id": 44397,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrong",
+      "token": " wrong",
+      "token_id": 3430,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrongful",
+      "token": " wrongful",
+      "token_id": 32288,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrongly",
+      "token": " wrongly",
+      "token_id": 47723,
+      "sentiment": "negative"
+    },
+    {
+      "word": "wrought",
+      "token": " wrought",
+      "token_id": 46546,
+      "sentiment": "negative"
+    },
+    {
+      "word": "zombie",
+      "token": " zombie",
+      "token_id": 42120,
+      "sentiment": "negative"
+    }
+  ]
+}

@@ -1,0 +1,5206 @@
+{
+  "source": {
+    "name": "Hu & Liu Opinion Lexicon",
+    "nltk_corpus": "nltk.corpus.opinion_lexicon",
+    "description": "Positive and negative opinion word lists introduced by Minqing Hu and Bing Liu for opinion mining / sentiment analysis."
+  },
+  "filtering_method": {
+    "plain_word_filter": "Keep only entries matching the regex [A-Za-z]+.",
+    "token_filter": "Tokenize each word as running text by prepending one leading space, then keep only words where tokenizer.encode(' ' + word, add_special_tokens=False) returns exactly one token id.",
+    "model_tokenizer": "EleutherAI/pythia-410m",
+    "sentiment_label": "positive"
+  },
+  "count": 865,
+  "words": [
+    {
+      "word": "abundance",
+      "token": " abundance",
+      "token_id": 11921,
+      "sentiment": "positive"
+    },
+    {
+      "word": "abundant",
+      "token": " abundant",
+      "token_id": 17829,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accessible",
+      "token": " accessible",
+      "token_id": 12482,
+      "sentiment": "positive"
+    },
+    {
+      "word": "acclaimed",
+      "token": " acclaimed",
+      "token_id": 42445,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accomplish",
+      "token": " accomplish",
+      "token_id": 14294,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accomplished",
+      "token": " accomplished",
+      "token_id": 14123,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accomplishment",
+      "token": " accomplishment",
+      "token_id": 42285,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accomplishments",
+      "token": " accomplishments",
+      "token_id": 40243,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accurate",
+      "token": " accurate",
+      "token_id": 7899,
+      "sentiment": "positive"
+    },
+    {
+      "word": "accurately",
+      "token": " accurately",
+      "token_id": 13613,
+      "sentiment": "positive"
+    },
+    {
+      "word": "achievable",
+      "token": " achievable",
+      "token_id": 39941,
+      "sentiment": "positive"
+    },
+    {
+      "word": "achievement",
+      "token": " achievement",
+      "token_id": 19797,
+      "sentiment": "positive"
+    },
+    {
+      "word": "achievements",
+      "token": " achievements",
+      "token_id": 26751,
+      "sentiment": "positive"
+    },
+    {
+      "word": "adaptive",
+      "token": " adaptive",
+      "token_id": 17825,
+      "sentiment": "positive"
+    },
+    {
+      "word": "adequate",
+      "token": " adequate",
+      "token_id": 10599,
+      "sentiment": "positive"
+    },
+    {
+      "word": "adjustable",
+      "token": " adjustable",
+      "token_id": 31445,
+      "sentiment": "positive"
+    },
+    {
+      "word": "admirable",
+      "token": " admirable",
+      "token_id": 50063,
+      "sentiment": "positive"
+    },
+    {
+      "word": "admiration",
+      "token": " admiration",
+      "token_id": 35746,
+      "sentiment": "positive"
+    },
+    {
+      "word": "admire",
+      "token": " admire",
+      "token_id": 26930,
+      "sentiment": "positive"
+    },
+    {
+      "word": "adorable",
+      "token": " adorable",
+      "token_id": 42742,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advanced",
+      "token": " advanced",
+      "token_id": 7269,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advantage",
+      "token": " advantage",
+      "token_id": 5750,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advantageous",
+      "token": " advantageous",
+      "token_id": 24400,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advantages",
+      "token": " advantages",
+      "token_id": 11361,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advocate",
+      "token": " advocate",
+      "token_id": 21424,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advocated",
+      "token": " advocated",
+      "token_id": 36431,
+      "sentiment": "positive"
+    },
+    {
+      "word": "advocates",
+      "token": " advocates",
+      "token_id": 23318,
+      "sentiment": "positive"
+    },
+    {
+      "word": "affection",
+      "token": " affection",
+      "token_id": 21909,
+      "sentiment": "positive"
+    },
+    {
+      "word": "affinity",
+      "token": " affinity",
+      "token_id": 15430,
+      "sentiment": "positive"
+    },
+    {
+      "word": "affirm",
+      "token": " affirm",
+      "token_id": 10418,
+      "sentiment": "positive"
+    },
+    {
+      "word": "affirmative",
+      "token": " affirmative",
+      "token_id": 25712,
+      "sentiment": "positive"
+    },
+    {
+      "word": "afford",
+      "token": " afford",
+      "token_id": 7848,
+      "sentiment": "positive"
+    },
+    {
+      "word": "affordable",
+      "token": " affordable",
+      "token_id": 18261,
+      "sentiment": "positive"
+    },
+    {
+      "word": "amazed",
+      "token": " amazed",
+      "token_id": 31597,
+      "sentiment": "positive"
+    },
+    {
+      "word": "amazing",
+      "token": " amazing",
+      "token_id": 8644,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ambitious",
+      "token": " ambitious",
+      "token_id": 24683,
+      "sentiment": "positive"
+    },
+    {
+      "word": "amenable",
+      "token": " amenable",
+      "token_id": 42133,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ample",
+      "token": " ample",
+      "token_id": 24904,
+      "sentiment": "positive"
+    },
+    {
+      "word": "amusing",
+      "token": " amusing",
+      "token_id": 38420,
+      "sentiment": "positive"
+    },
+    {
+      "word": "angel",
+      "token": " angel",
+      "token_id": 23087,
+      "sentiment": "positive"
+    },
+    {
+      "word": "appeal",
+      "token": " appeal",
+      "token_id": 4549,
+      "sentiment": "positive"
+    },
+    {
+      "word": "appealing",
+      "token": " appealing",
+      "token_id": 23176,
+      "sentiment": "positive"
+    },
+    {
+      "word": "applaud",
+      "token": " applaud",
+      "token_id": 37977,
+      "sentiment": "positive"
+    },
+    {
+      "word": "appreciate",
+      "token": " appreciate",
+      "token_id": 11435,
+      "sentiment": "positive"
+    },
+    {
+      "word": "appreciated",
+      "token": " appreciated",
+      "token_id": 14109,
+      "sentiment": "positive"
+    },
+    {
+      "word": "appropriate",
+      "token": " appropriate",
+      "token_id": 4569,
+      "sentiment": "positive"
+    },
+    {
+      "word": "approval",
+      "token": " approval",
+      "token_id": 9612,
+      "sentiment": "positive"
+    },
+    {
+      "word": "approve",
+      "token": " approve",
+      "token_id": 23255,
+      "sentiment": "positive"
+    },
+    {
+      "word": "articulate",
+      "token": " articulate",
+      "token_id": 40244,
+      "sentiment": "positive"
+    },
+    {
+      "word": "aspiration",
+      "token": " aspiration",
+      "token_id": 36951,
+      "sentiment": "positive"
+    },
+    {
+      "word": "aspirations",
+      "token": " aspirations",
+      "token_id": 40659,
+      "sentiment": "positive"
+    },
+    {
+      "word": "assurance",
+      "token": " assurance",
+      "token_id": 29299,
+      "sentiment": "positive"
+    },
+    {
+      "word": "assure",
+      "token": " assure",
+      "token_id": 21684,
+      "sentiment": "positive"
+    },
+    {
+      "word": "astonished",
+      "token": " astonished",
+      "token_id": 47096,
+      "sentiment": "positive"
+    },
+    {
+      "word": "astonishing",
+      "token": " astonishing",
+      "token_id": 35240,
+      "sentiment": "positive"
+    },
+    {
+      "word": "attraction",
+      "token": " attraction",
+      "token_id": 21779,
+      "sentiment": "positive"
+    },
+    {
+      "word": "attractive",
+      "token": " attractive",
+      "token_id": 12994,
+      "sentiment": "positive"
+    },
+    {
+      "word": "audible",
+      "token": " audible",
+      "token_id": 47055,
+      "sentiment": "positive"
+    },
+    {
+      "word": "authentic",
+      "token": " authentic",
+      "token_id": 10501,
+      "sentiment": "positive"
+    },
+    {
+      "word": "authoritative",
+      "token": " authoritative",
+      "token_id": 46722,
+      "sentiment": "positive"
+    },
+    {
+      "word": "autonomous",
+      "token": " autonomous",
+      "token_id": 26279,
+      "sentiment": "positive"
+    },
+    {
+      "word": "available",
+      "token": " available",
+      "token_id": 2130,
+      "sentiment": "positive"
+    },
+    {
+      "word": "aver",
+      "token": " aver",
+      "token_id": 10180,
+      "sentiment": "positive"
+    },
+    {
+      "word": "avid",
+      "token": " avid",
+      "token_id": 46952,
+      "sentiment": "positive"
+    },
+    {
+      "word": "award",
+      "token": " award",
+      "token_id": 5722,
+      "sentiment": "positive"
+    },
+    {
+      "word": "awarded",
+      "token": " awarded",
+      "token_id": 11941,
+      "sentiment": "positive"
+    },
+    {
+      "word": "awards",
+      "token": " awards",
+      "token_id": 16620,
+      "sentiment": "positive"
+    },
+    {
+      "word": "awe",
+      "token": " awe",
+      "token_id": 34369,
+      "sentiment": "positive"
+    },
+    {
+      "word": "awesome",
+      "token": " awesome",
+      "token_id": 13103,
+      "sentiment": "positive"
+    },
+    {
+      "word": "backbone",
+      "token": " backbone",
+      "token_id": 27882,
+      "sentiment": "positive"
+    },
+    {
+      "word": "balanced",
+      "token": " balanced",
+      "token_id": 16645,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bargain",
+      "token": " bargain",
+      "token_id": 27871,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beautiful",
+      "token": " beautiful",
+      "token_id": 5389,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beautifully",
+      "token": " beautifully",
+      "token_id": 27839,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beauty",
+      "token": " beauty",
+      "token_id": 10763,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beloved",
+      "token": " beloved",
+      "token_id": 21426,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beneficial",
+      "token": " beneficial",
+      "token_id": 12912,
+      "sentiment": "positive"
+    },
+    {
+      "word": "beneficiary",
+      "token": " beneficiary",
+      "token_id": 33452,
+      "sentiment": "positive"
+    },
+    {
+      "word": "benefit",
+      "token": " benefit",
+      "token_id": 5649,
+      "sentiment": "positive"
+    },
+    {
+      "word": "benefits",
+      "token": " benefits",
+      "token_id": 5373,
+      "sentiment": "positive"
+    },
+    {
+      "word": "best",
+      "token": " best",
+      "token_id": 1682,
+      "sentiment": "positive"
+    },
+    {
+      "word": "better",
+      "token": " better",
+      "token_id": 1805,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bless",
+      "token": " bless",
+      "token_id": 11736,
+      "sentiment": "positive"
+    },
+    {
+      "word": "blessing",
+      "token": " blessing",
+      "token_id": 26569,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bliss",
+      "token": " bliss",
+      "token_id": 39577,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bloom",
+      "token": " bloom",
+      "token_id": 30601,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bolster",
+      "token": " bolster",
+      "token_id": 48404,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bonus",
+      "token": " bonus",
+      "token_id": 17301,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bonuses",
+      "token": " bonuses",
+      "token_id": 40164,
+      "sentiment": "positive"
+    },
+    {
+      "word": "boom",
+      "token": " boom",
+      "token_id": 25014,
+      "sentiment": "positive"
+    },
+    {
+      "word": "boost",
+      "token": " boost",
+      "token_id": 9510,
+      "sentiment": "positive"
+    },
+    {
+      "word": "brave",
+      "token": " brave",
+      "token_id": 21189,
+      "sentiment": "positive"
+    },
+    {
+      "word": "breakthrough",
+      "token": " breakthrough",
+      "token_id": 29709,
+      "sentiment": "positive"
+    },
+    {
+      "word": "breeze",
+      "token": " breeze",
+      "token_id": 29178,
+      "sentiment": "positive"
+    },
+    {
+      "word": "bright",
+      "token": " bright",
+      "token_id": 6627,
+      "sentiment": "positive"
+    },
+    {
+      "word": "brighter",
+      "token": " brighter",
+      "token_id": 32950,
+      "sentiment": "positive"
+    },
+    {
+      "word": "brightest",
+      "token": " brightest",
+      "token_id": 43719,
+      "sentiment": "positive"
+    },
+    {
+      "word": "brilliant",
+      "token": " brilliant",
+      "token_id": 15925,
+      "sentiment": "positive"
+    },
+    {
+      "word": "brisk",
+      "token": " brisk",
+      "token_id": 40777,
+      "sentiment": "positive"
+    },
+    {
+      "word": "calm",
+      "token": " calm",
+      "token_id": 11874,
+      "sentiment": "positive"
+    },
+    {
+      "word": "capability",
+      "token": " capability",
+      "token_id": 14603,
+      "sentiment": "positive"
+    },
+    {
+      "word": "capable",
+      "token": " capable",
+      "token_id": 7032,
+      "sentiment": "positive"
+    },
+    {
+      "word": "celebrate",
+      "token": " celebrate",
+      "token_id": 17019,
+      "sentiment": "positive"
+    },
+    {
+      "word": "celebrated",
+      "token": " celebrated",
+      "token_id": 19651,
+      "sentiment": "positive"
+    },
+    {
+      "word": "celebration",
+      "token": " celebration",
+      "token_id": 21621,
+      "sentiment": "positive"
+    },
+    {
+      "word": "champ",
+      "token": " champ",
+      "token_id": 12858,
+      "sentiment": "positive"
+    },
+    {
+      "word": "champion",
+      "token": " champion",
+      "token_id": 16928,
+      "sentiment": "positive"
+    },
+    {
+      "word": "charitable",
+      "token": " charitable",
+      "token_id": 34251,
+      "sentiment": "positive"
+    },
+    {
+      "word": "charm",
+      "token": " charm",
+      "token_id": 22611,
+      "sentiment": "positive"
+    },
+    {
+      "word": "charming",
+      "token": " charming",
+      "token_id": 25507,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cheaper",
+      "token": " cheaper",
+      "token_id": 20182,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cheapest",
+      "token": " cheapest",
+      "token_id": 45869,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cheer",
+      "token": " cheer",
+      "token_id": 17639,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cheerful",
+      "token": " cheerful",
+      "token_id": 39567,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clarity",
+      "token": " clarity",
+      "token_id": 19843,
+      "sentiment": "positive"
+    },
+    {
+      "word": "classic",
+      "token": " classic",
+      "token_id": 10610,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clean",
+      "token": " clean",
+      "token_id": 4076,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cleaner",
+      "token": " cleaner",
+      "token_id": 28452,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clear",
+      "token": " clear",
+      "token_id": 2590,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cleared",
+      "token": " cleared",
+      "token_id": 16481,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clearer",
+      "token": " clearer",
+      "token_id": 30909,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clearly",
+      "token": " clearly",
+      "token_id": 4518,
+      "sentiment": "positive"
+    },
+    {
+      "word": "clever",
+      "token": " clever",
+      "token_id": 19080,
+      "sentiment": "positive"
+    },
+    {
+      "word": "coherence",
+      "token": " coherence",
+      "token_id": 25253,
+      "sentiment": "positive"
+    },
+    {
+      "word": "coherent",
+      "token": " coherent",
+      "token_id": 18893,
+      "sentiment": "positive"
+    },
+    {
+      "word": "colorful",
+      "token": " colorful",
+      "token_id": 30820,
+      "sentiment": "positive"
+    },
+    {
+      "word": "comfort",
+      "token": " comfort",
+      "token_id": 5956,
+      "sentiment": "positive"
+    },
+    {
+      "word": "comfortable",
+      "token": " comfortable",
+      "token_id": 9848,
+      "sentiment": "positive"
+    },
+    {
+      "word": "comfortably",
+      "token": " comfortably",
+      "token_id": 35766,
+      "sentiment": "positive"
+    },
+    {
+      "word": "comforting",
+      "token": " comforting",
+      "token_id": 45113,
+      "sentiment": "positive"
+    },
+    {
+      "word": "commend",
+      "token": " commend",
+      "token_id": 49638,
+      "sentiment": "positive"
+    },
+    {
+      "word": "commitment",
+      "token": " commitment",
+      "token_id": 11847,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compact",
+      "token": " compact",
+      "token_id": 8566,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compassion",
+      "token": " compassion",
+      "token_id": 20992,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compassionate",
+      "token": " compassionate",
+      "token_id": 46316,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compatible",
+      "token": " compatible",
+      "token_id": 13333,
+      "sentiment": "positive"
+    },
+    {
+      "word": "competitive",
+      "token": " competitive",
+      "token_id": 12085,
+      "sentiment": "positive"
+    },
+    {
+      "word": "complement",
+      "token": " complement",
+      "token_id": 13503,
+      "sentiment": "positive"
+    },
+    {
+      "word": "complementary",
+      "token": " complementary",
+      "token_id": 19767,
+      "sentiment": "positive"
+    },
+    {
+      "word": "complemented",
+      "token": " complemented",
+      "token_id": 48912,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compliant",
+      "token": " compliant",
+      "token_id": 38147,
+      "sentiment": "positive"
+    },
+    {
+      "word": "compliment",
+      "token": " compliment",
+      "token_id": 25639,
+      "sentiment": "positive"
+    },
+    {
+      "word": "complimentary",
+      "token": " complimentary",
+      "token_id": 48301,
+      "sentiment": "positive"
+    },
+    {
+      "word": "comprehensive",
+      "token": " comprehensive",
+      "token_id": 11088,
+      "sentiment": "positive"
+    },
+    {
+      "word": "concise",
+      "token": " concise",
+      "token_id": 44003,
+      "sentiment": "positive"
+    },
+    {
+      "word": "confidence",
+      "token": " confidence",
+      "token_id": 7162,
+      "sentiment": "positive"
+    },
+    {
+      "word": "confident",
+      "token": " confident",
+      "token_id": 13224,
+      "sentiment": "positive"
+    },
+    {
+      "word": "consistent",
+      "token": " consistent",
+      "token_id": 5185,
+      "sentiment": "positive"
+    },
+    {
+      "word": "consistently",
+      "token": " consistently",
+      "token_id": 12724,
+      "sentiment": "positive"
+    },
+    {
+      "word": "constructive",
+      "token": " constructive",
+      "token_id": 25799,
+      "sentiment": "positive"
+    },
+    {
+      "word": "continuity",
+      "token": " continuity",
+      "token_id": 21815,
+      "sentiment": "positive"
+    },
+    {
+      "word": "contribution",
+      "token": " contribution",
+      "token_id": 7680,
+      "sentiment": "positive"
+    },
+    {
+      "word": "convenience",
+      "token": " convenience",
+      "token_id": 16397,
+      "sentiment": "positive"
+    },
+    {
+      "word": "convenient",
+      "token": " convenient",
+      "token_id": 11638,
+      "sentiment": "positive"
+    },
+    {
+      "word": "conveniently",
+      "token": " conveniently",
+      "token_id": 34090,
+      "sentiment": "positive"
+    },
+    {
+      "word": "convincing",
+      "token": " convincing",
+      "token_id": 21414,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cool",
+      "token": " cool",
+      "token_id": 4484,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cooperative",
+      "token": " cooperative",
+      "token_id": 27293,
+      "sentiment": "positive"
+    },
+    {
+      "word": "correct",
+      "token": " correct",
+      "token_id": 3451,
+      "sentiment": "positive"
+    },
+    {
+      "word": "correctly",
+      "token": " correctly",
+      "token_id": 9113,
+      "sentiment": "positive"
+    },
+    {
+      "word": "courage",
+      "token": " courage",
+      "token_id": 15838,
+      "sentiment": "positive"
+    },
+    {
+      "word": "covenant",
+      "token": " covenant",
+      "token_id": 33043,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cozy",
+      "token": " cozy",
+      "token_id": 47400,
+      "sentiment": "positive"
+    },
+    {
+      "word": "creative",
+      "token": " creative",
+      "token_id": 10995,
+      "sentiment": "positive"
+    },
+    {
+      "word": "credible",
+      "token": " credible",
+      "token_id": 24542,
+      "sentiment": "positive"
+    },
+    {
+      "word": "crisp",
+      "token": " crisp",
+      "token_id": 29990,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cure",
+      "token": " cure",
+      "token_id": 16498,
+      "sentiment": "positive"
+    },
+    {
+      "word": "cute",
+      "token": " cute",
+      "token_id": 20295,
+      "sentiment": "positive"
+    },
+    {
+      "word": "daring",
+      "token": " daring",
+      "token_id": 38098,
+      "sentiment": "positive"
+    },
+    {
+      "word": "darling",
+      "token": " darling",
+      "token_id": 31556,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dawn",
+      "token": " dawn",
+      "token_id": 20632,
+      "sentiment": "positive"
+    },
+    {
+      "word": "decent",
+      "token": " decent",
+      "token_id": 12524,
+      "sentiment": "positive"
+    },
+    {
+      "word": "decisive",
+      "token": " decisive",
+      "token_id": 30417,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dedicated",
+      "token": " dedicated",
+      "token_id": 9940,
+      "sentiment": "positive"
+    },
+    {
+      "word": "defeat",
+      "token": " defeat",
+      "token_id": 13313,
+      "sentiment": "positive"
+    },
+    {
+      "word": "defeated",
+      "token": " defeated",
+      "token_id": 16473,
+      "sentiment": "positive"
+    },
+    {
+      "word": "defeating",
+      "token": " defeating",
+      "token_id": 38774,
+      "sentiment": "positive"
+    },
+    {
+      "word": "defeats",
+      "token": " defeats",
+      "token_id": 49204,
+      "sentiment": "positive"
+    },
+    {
+      "word": "defender",
+      "token": " defender",
+      "token_id": 26762,
+      "sentiment": "positive"
+    },
+    {
+      "word": "deference",
+      "token": " deference",
+      "token_id": 35880,
+      "sentiment": "positive"
+    },
+    {
+      "word": "delicate",
+      "token": " delicate",
+      "token_id": 21140,
+      "sentiment": "positive"
+    },
+    {
+      "word": "delicious",
+      "token": " delicious",
+      "token_id": 17319,
+      "sentiment": "positive"
+    },
+    {
+      "word": "delight",
+      "token": " delight",
+      "token_id": 12725,
+      "sentiment": "positive"
+    },
+    {
+      "word": "delighted",
+      "token": " delighted",
+      "token_id": 25534,
+      "sentiment": "positive"
+    },
+    {
+      "word": "delightful",
+      "token": " delightful",
+      "token_id": 34668,
+      "sentiment": "positive"
+    },
+    {
+      "word": "desirable",
+      "token": " desirable",
+      "token_id": 11408,
+      "sentiment": "positive"
+    },
+    {
+      "word": "destiny",
+      "token": " destiny",
+      "token_id": 31776,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dignity",
+      "token": " dignity",
+      "token_id": 24027,
+      "sentiment": "positive"
+    },
+    {
+      "word": "diligence",
+      "token": " diligence",
+      "token_id": 35252,
+      "sentiment": "positive"
+    },
+    {
+      "word": "diplomatic",
+      "token": " diplomatic",
+      "token_id": 23949,
+      "sentiment": "positive"
+    },
+    {
+      "word": "distinction",
+      "token": " distinction",
+      "token_id": 13812,
+      "sentiment": "positive"
+    },
+    {
+      "word": "distinctive",
+      "token": " distinctive",
+      "token_id": 21488,
+      "sentiment": "positive"
+    },
+    {
+      "word": "distinguished",
+      "token": " distinguished",
+      "token_id": 15622,
+      "sentiment": "positive"
+    },
+    {
+      "word": "divine",
+      "token": " divine",
+      "token_id": 18892,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dominate",
+      "token": " dominate",
+      "token_id": 25903,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dominated",
+      "token": " dominated",
+      "token_id": 14691,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dominates",
+      "token": " dominates",
+      "token_id": 36807,
+      "sentiment": "positive"
+    },
+    {
+      "word": "doubtless",
+      "token": " doubtless",
+      "token_id": 49654,
+      "sentiment": "positive"
+    },
+    {
+      "word": "durable",
+      "token": " durable",
+      "token_id": 28831,
+      "sentiment": "positive"
+    },
+    {
+      "word": "dynamic",
+      "token": " dynamic",
+      "token_id": 7870,
+      "sentiment": "positive"
+    },
+    {
+      "word": "eager",
+      "token": " eager",
+      "token_id": 15211,
+      "sentiment": "positive"
+    },
+    {
+      "word": "eagerly",
+      "token": " eagerly",
+      "token_id": 37774,
+      "sentiment": "positive"
+    },
+    {
+      "word": "earnest",
+      "token": " earnest",
+      "token_id": 34375,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ease",
+      "token": " ease",
+      "token_id": 11990,
+      "sentiment": "positive"
+    },
+    {
+      "word": "eased",
+      "token": " eased",
+      "token_id": 47241,
+      "sentiment": "positive"
+    },
+    {
+      "word": "easier",
+      "token": " easier",
+      "token_id": 6927,
+      "sentiment": "positive"
+    },
+    {
+      "word": "easiest",
+      "token": " easiest",
+      "token_id": 24746,
+      "sentiment": "positive"
+    },
+    {
+      "word": "easy",
+      "token": " easy",
+      "token_id": 3477,
+      "sentiment": "positive"
+    },
+    {
+      "word": "economical",
+      "token": " economical",
+      "token_id": 37265,
+      "sentiment": "positive"
+    },
+    {
+      "word": "educated",
+      "token": " educated",
+      "token_id": 19149,
+      "sentiment": "positive"
+    },
+    {
+      "word": "effective",
+      "token": " effective",
+      "token_id": 3576,
+      "sentiment": "positive"
+    },
+    {
+      "word": "effectively",
+      "token": " effectively",
+      "token_id": 8069,
+      "sentiment": "positive"
+    },
+    {
+      "word": "effectiveness",
+      "token": " effectiveness",
+      "token_id": 12510,
+      "sentiment": "positive"
+    },
+    {
+      "word": "efficient",
+      "token": " efficient",
+      "token_id": 5919,
+      "sentiment": "positive"
+    },
+    {
+      "word": "efficiently",
+      "token": " efficiently",
+      "token_id": 14556,
+      "sentiment": "positive"
+    },
+    {
+      "word": "elegant",
+      "token": " elegant",
+      "token_id": 20654,
+      "sentiment": "positive"
+    },
+    {
+      "word": "elevate",
+      "token": " elevate",
+      "token_id": 50181,
+      "sentiment": "positive"
+    },
+    {
+      "word": "elite",
+      "token": " elite",
+      "token_id": 17832,
+      "sentiment": "positive"
+    },
+    {
+      "word": "eminent",
+      "token": " eminent",
+      "token_id": 43609,
+      "sentiment": "positive"
+    },
+    {
+      "word": "empathy",
+      "token": " empathy",
+      "token_id": 32496,
+      "sentiment": "positive"
+    },
+    {
+      "word": "empower",
+      "token": " empower",
+      "token_id": 25145,
+      "sentiment": "positive"
+    },
+    {
+      "word": "empowerment",
+      "token": " empowerment",
+      "token_id": 49952,
+      "sentiment": "positive"
+    },
+    {
+      "word": "encourage",
+      "token": " encourage",
+      "token_id": 11907,
+      "sentiment": "positive"
+    },
+    {
+      "word": "encouragement",
+      "token": " encouragement",
+      "token_id": 31868,
+      "sentiment": "positive"
+    },
+    {
+      "word": "encouraging",
+      "token": " encouraging",
+      "token_id": 18462,
+      "sentiment": "positive"
+    },
+    {
+      "word": "endorse",
+      "token": " endorse",
+      "token_id": 18883,
+      "sentiment": "positive"
+    },
+    {
+      "word": "endorsed",
+      "token": " endorsed",
+      "token_id": 30020,
+      "sentiment": "positive"
+    },
+    {
+      "word": "endorsement",
+      "token": " endorsement",
+      "token_id": 32116,
+      "sentiment": "positive"
+    },
+    {
+      "word": "energetic",
+      "token": " energetic",
+      "token_id": 28378,
+      "sentiment": "positive"
+    },
+    {
+      "word": "engaging",
+      "token": " engaging",
+      "token_id": 15966,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enhance",
+      "token": " enhance",
+      "token_id": 7278,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enhanced",
+      "token": " enhanced",
+      "token_id": 8655,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enhancement",
+      "token": " enhancement",
+      "token_id": 14314,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enhances",
+      "token": " enhances",
+      "token_id": 25222,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoy",
+      "token": " enjoy",
+      "token_id": 4264,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoyable",
+      "token": " enjoyable",
+      "token_id": 30357,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoyed",
+      "token": " enjoyed",
+      "token_id": 11346,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoying",
+      "token": " enjoying",
+      "token_id": 18262,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoyment",
+      "token": " enjoyment",
+      "token_id": 31733,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enjoys",
+      "token": " enjoys",
+      "token_id": 29566,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enlightenment",
+      "token": " enlightenment",
+      "token_id": 50175,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enough",
+      "token": " enough",
+      "token_id": 2217,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enrich",
+      "token": " enrich",
+      "token_id": 15655,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enrichment",
+      "token": " enrichment",
+      "token_id": 19133,
+      "sentiment": "positive"
+    },
+    {
+      "word": "entertain",
+      "token": " entertain",
+      "token_id": 9845,
+      "sentiment": "positive"
+    },
+    {
+      "word": "entertaining",
+      "token": " entertaining",
+      "token_id": 25945,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enthusiasm",
+      "token": " enthusiasm",
+      "token_id": 23027,
+      "sentiment": "positive"
+    },
+    {
+      "word": "enthusiastic",
+      "token": " enthusiastic",
+      "token_id": 31905,
+      "sentiment": "positive"
+    },
+    {
+      "word": "envy",
+      "token": " envy",
+      "token_id": 38877,
+      "sentiment": "positive"
+    },
+    {
+      "word": "equitable",
+      "token": " equitable",
+      "token_id": 23720,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ethical",
+      "token": " ethical",
+      "token_id": 16289,
+      "sentiment": "positive"
+    },
+    {
+      "word": "evenly",
+      "token": " evenly",
+      "token_id": 25356,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceed",
+      "token": " exceed",
+      "token_id": 8268,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceeded",
+      "token": " exceeded",
+      "token_id": 22536,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceeding",
+      "token": " exceeding",
+      "token_id": 27433,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceedingly",
+      "token": " exceedingly",
+      "token_id": 42508,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceeds",
+      "token": " exceeds",
+      "token_id": 23141,
+      "sentiment": "positive"
+    },
+    {
+      "word": "excel",
+      "token": " excel",
+      "token_id": 34219,
+      "sentiment": "positive"
+    },
+    {
+      "word": "excellence",
+      "token": " excellence",
+      "token_id": 31925,
+      "sentiment": "positive"
+    },
+    {
+      "word": "excellent",
+      "token": " excellent",
+      "token_id": 7126,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceptional",
+      "token": " exceptional",
+      "token_id": 18714,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exceptionally",
+      "token": " exceptionally",
+      "token_id": 35888,
+      "sentiment": "positive"
+    },
+    {
+      "word": "excited",
+      "token": " excited",
+      "token_id": 9049,
+      "sentiment": "positive"
+    },
+    {
+      "word": "excitement",
+      "token": " excitement",
+      "token_id": 18349,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exciting",
+      "token": " exciting",
+      "token_id": 12302,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exemplary",
+      "token": " exemplary",
+      "token_id": 34093,
+      "sentiment": "positive"
+    },
+    {
+      "word": "expansive",
+      "token": " expansive",
+      "token_id": 44380,
+      "sentiment": "positive"
+    },
+    {
+      "word": "exquisite",
+      "token": " exquisite",
+      "token_id": 41128,
+      "sentiment": "positive"
+    },
+    {
+      "word": "extraordinarily",
+      "token": " extraordinarily",
+      "token_id": 49258,
+      "sentiment": "positive"
+    },
+    {
+      "word": "extraordinary",
+      "token": " extraordinary",
+      "token_id": 15423,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fabulous",
+      "token": " fabulous",
+      "token_id": 31848,
+      "sentiment": "positive"
+    },
+    {
+      "word": "facilitate",
+      "token": " facilitate",
+      "token_id": 12454,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fair",
+      "token": " fair",
+      "token_id": 4344,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fairly",
+      "token": " fairly",
+      "token_id": 9648,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fairness",
+      "token": " fairness",
+      "token_id": 28959,
+      "sentiment": "positive"
+    },
+    {
+      "word": "faith",
+      "token": " faith",
+      "token_id": 6009,
+      "sentiment": "positive"
+    },
+    {
+      "word": "faithful",
+      "token": " faithful",
+      "token_id": 21738,
+      "sentiment": "positive"
+    },
+    {
+      "word": "faithfully",
+      "token": " faithfully",
+      "token_id": 48479,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fame",
+      "token": " fame",
+      "token_id": 23898,
+      "sentiment": "positive"
+    },
+    {
+      "word": "famed",
+      "token": " famed",
+      "token_id": 47683,
+      "sentiment": "positive"
+    },
+    {
+      "word": "famous",
+      "token": " famous",
+      "token_id": 8530,
+      "sentiment": "positive"
+    },
+    {
+      "word": "famously",
+      "token": " famously",
+      "token_id": 39316,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fancy",
+      "token": " fancy",
+      "token_id": 18612,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fans",
+      "token": " fans",
+      "token_id": 7458,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fantastic",
+      "token": " fantastic",
+      "token_id": 15143,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fascinating",
+      "token": " fascinating",
+      "token_id": 20996,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fascination",
+      "token": " fascination",
+      "token_id": 48249,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fashionable",
+      "token": " fashionable",
+      "token_id": 43195,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fast",
+      "token": " fast",
+      "token_id": 3809,
+      "sentiment": "positive"
+    },
+    {
+      "word": "faster",
+      "token": " faster",
+      "token_id": 7938,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fastest",
+      "token": " fastest",
+      "token_id": 22583,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fav",
+      "token": " fav",
+      "token_id": 2883,
+      "sentiment": "positive"
+    },
+    {
+      "word": "favor",
+      "token": " favor",
+      "token_id": 3718,
+      "sentiment": "positive"
+    },
+    {
+      "word": "favorable",
+      "token": " favorable",
+      "token_id": 13857,
+      "sentiment": "positive"
+    },
+    {
+      "word": "favored",
+      "token": " favored",
+      "token_id": 25973,
+      "sentiment": "positive"
+    },
+    {
+      "word": "favorite",
+      "token": " favorite",
+      "token_id": 7583,
+      "sentiment": "positive"
+    },
+    {
+      "word": "favour",
+      "token": " favour",
+      "token_id": 9796,
+      "sentiment": "positive"
+    },
+    {
+      "word": "feasible",
+      "token": " feasible",
+      "token_id": 17887,
+      "sentiment": "positive"
+    },
+    {
+      "word": "feat",
+      "token": " feat",
+      "token_id": 8151,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fertile",
+      "token": " fertile",
+      "token_id": 38681,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fidelity",
+      "token": " fidelity",
+      "token_id": 32422,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fiery",
+      "token": " fiery",
+      "token_id": 43620,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fine",
+      "token": " fine",
+      "token_id": 4030,
+      "sentiment": "positive"
+    },
+    {
+      "word": "finely",
+      "token": " finely",
+      "token_id": 25806,
+      "sentiment": "positive"
+    },
+    {
+      "word": "finer",
+      "token": " finer",
+      "token_id": 40259,
+      "sentiment": "positive"
+    },
+    {
+      "word": "finest",
+      "token": " finest",
+      "token_id": 23476,
+      "sentiment": "positive"
+    },
+    {
+      "word": "flexibility",
+      "token": " flexibility",
+      "token_id": 15840,
+      "sentiment": "positive"
+    },
+    {
+      "word": "flexible",
+      "token": " flexible",
+      "token_id": 12112,
+      "sentiment": "positive"
+    },
+    {
+      "word": "flourish",
+      "token": " flourish",
+      "token_id": 44958,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fond",
+      "token": " fond",
+      "token_id": 14753,
+      "sentiment": "positive"
+    },
+    {
+      "word": "foremost",
+      "token": " foremost",
+      "token_id": 31971,
+      "sentiment": "positive"
+    },
+    {
+      "word": "formidable",
+      "token": " formidable",
+      "token_id": 36418,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fortunate",
+      "token": " fortunate",
+      "token_id": 27949,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fortune",
+      "token": " fortune",
+      "token_id": 19994,
+      "sentiment": "positive"
+    },
+    {
+      "word": "free",
+      "token": " free",
+      "token_id": 1959,
+      "sentiment": "positive"
+    },
+    {
+      "word": "freed",
+      "token": " freed",
+      "token_id": 21517,
+      "sentiment": "positive"
+    },
+    {
+      "word": "freedom",
+      "token": " freedom",
+      "token_id": 7185,
+      "sentiment": "positive"
+    },
+    {
+      "word": "freedoms",
+      "token": " freedoms",
+      "token_id": 45971,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fresh",
+      "token": " fresh",
+      "token_id": 5352,
+      "sentiment": "positive"
+    },
+    {
+      "word": "friendly",
+      "token": " friendly",
+      "token_id": 11453,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fruitful",
+      "token": " fruitful",
+      "token_id": 46001,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fulfillment",
+      "token": " fulfillment",
+      "token_id": 43568,
+      "sentiment": "positive"
+    },
+    {
+      "word": "fun",
+      "token": " fun",
+      "token_id": 794,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gain",
+      "token": " gain",
+      "token_id": 6351,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gained",
+      "token": " gained",
+      "token_id": 12103,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gaining",
+      "token": " gaining",
+      "token_id": 21896,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gains",
+      "token": " gains",
+      "token_id": 15988,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gem",
+      "token": " gem",
+      "token_id": 16915,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gems",
+      "token": " gems",
+      "token_id": 42776,
+      "sentiment": "positive"
+    },
+    {
+      "word": "generosity",
+      "token": " generosity",
+      "token_id": 42548,
+      "sentiment": "positive"
+    },
+    {
+      "word": "generous",
+      "token": " generous",
+      "token_id": 19649,
+      "sentiment": "positive"
+    },
+    {
+      "word": "genius",
+      "token": " genius",
+      "token_id": 21242,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gentle",
+      "token": " gentle",
+      "token_id": 9950,
+      "sentiment": "positive"
+    },
+    {
+      "word": "genuine",
+      "token": " genuine",
+      "token_id": 13241,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gifted",
+      "token": " gifted",
+      "token_id": 36621,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glad",
+      "token": " glad",
+      "token_id": 9995,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gladly",
+      "token": " gladly",
+      "token_id": 46107,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glitter",
+      "token": " glitter",
+      "token_id": 37920,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glorious",
+      "token": " glorious",
+      "token_id": 28548,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glory",
+      "token": " glory",
+      "token_id": 18735,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glow",
+      "token": " glow",
+      "token_id": 15795,
+      "sentiment": "positive"
+    },
+    {
+      "word": "glowing",
+      "token": " glowing",
+      "token_id": 33055,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gold",
+      "token": " gold",
+      "token_id": 5328,
+      "sentiment": "positive"
+    },
+    {
+      "word": "golden",
+      "token": " golden",
+      "token_id": 14072,
+      "sentiment": "positive"
+    },
+    {
+      "word": "good",
+      "token": " good",
+      "token_id": 1175,
+      "sentiment": "positive"
+    },
+    {
+      "word": "goodness",
+      "token": " goodness",
+      "token_id": 23190,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gorgeous",
+      "token": " gorgeous",
+      "token_id": 23535,
+      "sentiment": "positive"
+    },
+    {
+      "word": "grace",
+      "token": " grace",
+      "token_id": 14426,
+      "sentiment": "positive"
+    },
+    {
+      "word": "graceful",
+      "token": " graceful",
+      "token_id": 45822,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gracious",
+      "token": " gracious",
+      "token_id": 46582,
+      "sentiment": "positive"
+    },
+    {
+      "word": "grand",
+      "token": " grand",
+      "token_id": 4936,
+      "sentiment": "positive"
+    },
+    {
+      "word": "grateful",
+      "token": " grateful",
+      "token_id": 14442,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gratefully",
+      "token": " gratefully",
+      "token_id": 47444,
+      "sentiment": "positive"
+    },
+    {
+      "word": "gratitude",
+      "token": " gratitude",
+      "token_id": 27579,
+      "sentiment": "positive"
+    },
+    {
+      "word": "great",
+      "token": " great",
+      "token_id": 1270,
+      "sentiment": "positive"
+    },
+    {
+      "word": "greatest",
+      "token": " greatest",
+      "token_id": 6459,
+      "sentiment": "positive"
+    },
+    {
+      "word": "greatness",
+      "token": " greatness",
+      "token_id": 43703,
+      "sentiment": "positive"
+    },
+    {
+      "word": "grin",
+      "token": " grin",
+      "token_id": 23805,
+      "sentiment": "positive"
+    },
+    {
+      "word": "guarantee",
+      "token": " guarantee",
+      "token_id": 12215,
+      "sentiment": "positive"
+    },
+    {
+      "word": "guidance",
+      "token": " guidance",
+      "token_id": 12925,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hail",
+      "token": " hail",
+      "token_id": 48154,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hallmark",
+      "token": " hallmark",
+      "token_id": 47947,
+      "sentiment": "positive"
+    },
+    {
+      "word": "handsome",
+      "token": " handsome",
+      "token_id": 23639,
+      "sentiment": "positive"
+    },
+    {
+      "word": "handy",
+      "token": " handy",
+      "token_id": 24783,
+      "sentiment": "positive"
+    },
+    {
+      "word": "happier",
+      "token": " happier",
+      "token_id": 33128,
+      "sentiment": "positive"
+    },
+    {
+      "word": "happily",
+      "token": " happily",
+      "token_id": 26174,
+      "sentiment": "positive"
+    },
+    {
+      "word": "happiness",
+      "token": " happiness",
+      "token_id": 15704,
+      "sentiment": "positive"
+    },
+    {
+      "word": "happy",
+      "token": " happy",
+      "token_id": 5211,
+      "sentiment": "positive"
+    },
+    {
+      "word": "harmless",
+      "token": " harmless",
+      "token_id": 25365,
+      "sentiment": "positive"
+    },
+    {
+      "word": "harmony",
+      "token": " harmony",
+      "token_id": 27851,
+      "sentiment": "positive"
+    },
+    {
+      "word": "heal",
+      "token": " heal",
+      "token_id": 20658,
+      "sentiment": "positive"
+    },
+    {
+      "word": "healthy",
+      "token": " healthy",
+      "token_id": 5875,
+      "sentiment": "positive"
+    },
+    {
+      "word": "heaven",
+      "token": " heaven",
+      "token_id": 13926,
+      "sentiment": "positive"
+    },
+    {
+      "word": "heavenly",
+      "token": " heavenly",
+      "token_id": 44593,
+      "sentiment": "positive"
+    },
+    {
+      "word": "helped",
+      "token": " helped",
+      "token_id": 6518,
+      "sentiment": "positive"
+    },
+    {
+      "word": "helpful",
+      "token": " helpful",
+      "token_id": 9371,
+      "sentiment": "positive"
+    },
+    {
+      "word": "helping",
+      "token": " helping",
+      "token_id": 9073,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hero",
+      "token": " hero",
+      "token_id": 8080,
+      "sentiment": "positive"
+    },
+    {
+      "word": "heroic",
+      "token": " heroic",
+      "token_id": 36715,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hilarious",
+      "token": " hilarious",
+      "token_id": 37750,
+      "sentiment": "positive"
+    },
+    {
+      "word": "holy",
+      "token": " holy",
+      "token_id": 18465,
+      "sentiment": "positive"
+    },
+    {
+      "word": "homage",
+      "token": " homage",
+      "token_id": 47636,
+      "sentiment": "positive"
+    },
+    {
+      "word": "honest",
+      "token": " honest",
+      "token_id": 8274,
+      "sentiment": "positive"
+    },
+    {
+      "word": "honesty",
+      "token": " honesty",
+      "token_id": 33773,
+      "sentiment": "positive"
+    },
+    {
+      "word": "honor",
+      "token": " honor",
+      "token_id": 10390,
+      "sentiment": "positive"
+    },
+    {
+      "word": "honorable",
+      "token": " honorable",
+      "token_id": 49448,
+      "sentiment": "positive"
+    },
+    {
+      "word": "honored",
+      "token": " honored",
+      "token_id": 28173,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hopeful",
+      "token": " hopeful",
+      "token_id": 29874,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hot",
+      "token": " hot",
+      "token_id": 3511,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hottest",
+      "token": " hottest",
+      "token_id": 43526,
+      "sentiment": "positive"
+    },
+    {
+      "word": "hug",
+      "token": " hug",
+      "token_id": 15729,
+      "sentiment": "positive"
+    },
+    {
+      "word": "humble",
+      "token": " humble",
+      "token_id": 26896,
+      "sentiment": "positive"
+    },
+    {
+      "word": "humility",
+      "token": " humility",
+      "token_id": 48044,
+      "sentiment": "positive"
+    },
+    {
+      "word": "humor",
+      "token": " humor",
+      "token_id": 20393,
+      "sentiment": "positive"
+    },
+    {
+      "word": "humour",
+      "token": " humour",
+      "token_id": 38452,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ideal",
+      "token": " ideal",
+      "token_id": 7445,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ideally",
+      "token": " ideally",
+      "token_id": 34243,
+      "sentiment": "positive"
+    },
+    {
+      "word": "idol",
+      "token": " idol",
+      "token_id": 36123,
+      "sentiment": "positive"
+    },
+    {
+      "word": "illuminating",
+      "token": " illuminating",
+      "token_id": 48374,
+      "sentiment": "positive"
+    },
+    {
+      "word": "immense",
+      "token": " immense",
+      "token_id": 24878,
+      "sentiment": "positive"
+    },
+    {
+      "word": "impartial",
+      "token": " impartial",
+      "token_id": 38919,
+      "sentiment": "positive"
+    },
+    {
+      "word": "important",
+      "token": " important",
+      "token_id": 1774,
+      "sentiment": "positive"
+    },
+    {
+      "word": "impress",
+      "token": " impress",
+      "token_id": 21097,
+      "sentiment": "positive"
+    },
+    {
+      "word": "impressed",
+      "token": " impressed",
+      "token_id": 17847,
+      "sentiment": "positive"
+    },
+    {
+      "word": "impressive",
+      "token": " impressive",
+      "token_id": 13943,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improve",
+      "token": " improve",
+      "token_id": 3157,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improved",
+      "token": " improved",
+      "token_id": 5520,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improvement",
+      "token": " improvement",
+      "token_id": 7756,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improvements",
+      "token": " improvements",
+      "token_id": 11701,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improves",
+      "token": " improves",
+      "token_id": 19132,
+      "sentiment": "positive"
+    },
+    {
+      "word": "improving",
+      "token": " improving",
+      "token_id": 11138,
+      "sentiment": "positive"
+    },
+    {
+      "word": "incredible",
+      "token": " incredible",
+      "token_id": 14331,
+      "sentiment": "positive"
+    },
+    {
+      "word": "incredibly",
+      "token": " incredibly",
+      "token_id": 16088,
+      "sentiment": "positive"
+    },
+    {
+      "word": "indebted",
+      "token": " indebted",
+      "token_id": 37187,
+      "sentiment": "positive"
+    },
+    {
+      "word": "individualized",
+      "token": " individualized",
+      "token_id": 47687,
+      "sentiment": "positive"
+    },
+    {
+      "word": "inexpensive",
+      "token": " inexpensive",
+      "token_id": 27296,
+      "sentiment": "positive"
+    },
+    {
+      "word": "influential",
+      "token": " influential",
+      "token_id": 20803,
+      "sentiment": "positive"
+    },
+    {
+      "word": "innovation",
+      "token": " innovation",
+      "token_id": 15832,
+      "sentiment": "positive"
+    },
+    {
+      "word": "innovative",
+      "token": " innovative",
+      "token_id": 16694,
+      "sentiment": "positive"
+    },
+    {
+      "word": "insightful",
+      "token": " insightful",
+      "token_id": 47860,
+      "sentiment": "positive"
+    },
+    {
+      "word": "inspiration",
+      "token": " inspiration",
+      "token_id": 17006,
+      "sentiment": "positive"
+    },
+    {
+      "word": "inspire",
+      "token": " inspire",
+      "token_id": 26761,
+      "sentiment": "positive"
+    },
+    {
+      "word": "inspiring",
+      "token": " inspiring",
+      "token_id": 29853,
+      "sentiment": "positive"
+    },
+    {
+      "word": "instantly",
+      "token": " instantly",
+      "token_id": 18319,
+      "sentiment": "positive"
+    },
+    {
+      "word": "instructive",
+      "token": " instructive",
+      "token_id": 49664,
+      "sentiment": "positive"
+    },
+    {
+      "word": "instrumental",
+      "token": " instrumental",
+      "token_id": 23033,
+      "sentiment": "positive"
+    },
+    {
+      "word": "integral",
+      "token": " integral",
+      "token_id": 9909,
+      "sentiment": "positive"
+    },
+    {
+      "word": "integrated",
+      "token": " integrated",
+      "token_id": 8527,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intelligence",
+      "token": " intelligence",
+      "token_id": 9260,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intelligent",
+      "token": " intelligent",
+      "token_id": 17497,
+      "sentiment": "positive"
+    },
+    {
+      "word": "interesting",
+      "token": " interesting",
+      "token_id": 4722,
+      "sentiment": "positive"
+    },
+    {
+      "word": "interests",
+      "token": " interests",
+      "token_id": 6284,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intimacy",
+      "token": " intimacy",
+      "token_id": 41159,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intimate",
+      "token": " intimate",
+      "token_id": 21383,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intricate",
+      "token": " intricate",
+      "token_id": 36930,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intriguing",
+      "token": " intriguing",
+      "token_id": 27807,
+      "sentiment": "positive"
+    },
+    {
+      "word": "intuitive",
+      "token": " intuitive",
+      "token_id": 27350,
+      "sentiment": "positive"
+    },
+    {
+      "word": "invaluable",
+      "token": " invaluable",
+      "token_id": 38089,
+      "sentiment": "positive"
+    },
+    {
+      "word": "joy",
+      "token": " joy",
+      "token_id": 11010,
+      "sentiment": "positive"
+    },
+    {
+      "word": "keen",
+      "token": " keen",
+      "token_id": 19497,
+      "sentiment": "positive"
+    },
+    {
+      "word": "kindly",
+      "token": " kindly",
+      "token_id": 26604,
+      "sentiment": "positive"
+    },
+    {
+      "word": "kindness",
+      "token": " kindness",
+      "token_id": 28426,
+      "sentiment": "positive"
+    },
+    {
+      "word": "knowledgeable",
+      "token": " knowledgeable",
+      "token_id": 37289,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lawful",
+      "token": " lawful",
+      "token_id": 29889,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lead",
+      "token": " lead",
+      "token_id": 1421,
+      "sentiment": "positive"
+    },
+    {
+      "word": "leading",
+      "token": " leading",
+      "token_id": 4283,
+      "sentiment": "positive"
+    },
+    {
+      "word": "leads",
+      "token": " leads",
+      "token_id": 5644,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lean",
+      "token": " lean",
+      "token_id": 9644,
+      "sentiment": "positive"
+    },
+    {
+      "word": "led",
+      "token": " led",
+      "token_id": 3977,
+      "sentiment": "positive"
+    },
+    {
+      "word": "legendary",
+      "token": " legendary",
+      "token_id": 25893,
+      "sentiment": "positive"
+    },
+    {
+      "word": "leverage",
+      "token": " leverage",
+      "token_id": 25057,
+      "sentiment": "positive"
+    },
+    {
+      "word": "liberation",
+      "token": " liberation",
+      "token_id": 35297,
+      "sentiment": "positive"
+    },
+    {
+      "word": "liberty",
+      "token": " liberty",
+      "token_id": 17843,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lighter",
+      "token": " lighter",
+      "token_id": 21259,
+      "sentiment": "positive"
+    },
+    {
+      "word": "like",
+      "token": " like",
+      "token_id": 751,
+      "sentiment": "positive"
+    },
+    {
+      "word": "liked",
+      "token": " liked",
+      "token_id": 10490,
+      "sentiment": "positive"
+    },
+    {
+      "word": "likes",
+      "token": " likes",
+      "token_id": 13052,
+      "sentiment": "positive"
+    },
+    {
+      "word": "liking",
+      "token": " liking",
+      "token_id": 35908,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lively",
+      "token": " lively",
+      "token_id": 33073,
+      "sentiment": "positive"
+    },
+    {
+      "word": "logical",
+      "token": " logical",
+      "token_id": 13760,
+      "sentiment": "positive"
+    },
+    {
+      "word": "love",
+      "token": " love",
+      "token_id": 2389,
+      "sentiment": "positive"
+    },
+    {
+      "word": "loved",
+      "token": " loved",
+      "token_id": 7636,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lovely",
+      "token": " lovely",
+      "token_id": 13491,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lover",
+      "token": " lover",
+      "token_id": 21514,
+      "sentiment": "positive"
+    },
+    {
+      "word": "loves",
+      "token": " loves",
+      "token_id": 14528,
+      "sentiment": "positive"
+    },
+    {
+      "word": "loving",
+      "token": " loving",
+      "token_id": 18248,
+      "sentiment": "positive"
+    },
+    {
+      "word": "loyal",
+      "token": " loyal",
+      "token_id": 14211,
+      "sentiment": "positive"
+    },
+    {
+      "word": "loyalty",
+      "token": " loyalty",
+      "token_id": 22964,
+      "sentiment": "positive"
+    },
+    {
+      "word": "luck",
+      "token": " luck",
+      "token_id": 7516,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lucky",
+      "token": " lucky",
+      "token_id": 13476,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lucrative",
+      "token": " lucrative",
+      "token_id": 42733,
+      "sentiment": "positive"
+    },
+    {
+      "word": "luminous",
+      "token": " luminous",
+      "token_id": 40876,
+      "sentiment": "positive"
+    },
+    {
+      "word": "lush",
+      "token": " lush",
+      "token_id": 45788,
+      "sentiment": "positive"
+    },
+    {
+      "word": "luxurious",
+      "token": " luxurious",
+      "token_id": 42570,
+      "sentiment": "positive"
+    },
+    {
+      "word": "luxury",
+      "token": " luxury",
+      "token_id": 18997,
+      "sentiment": "positive"
+    },
+    {
+      "word": "magic",
+      "token": " magic",
+      "token_id": 10721,
+      "sentiment": "positive"
+    },
+    {
+      "word": "magical",
+      "token": " magical",
+      "token_id": 21653,
+      "sentiment": "positive"
+    },
+    {
+      "word": "magnificent",
+      "token": " magnificent",
+      "token_id": 27231,
+      "sentiment": "positive"
+    },
+    {
+      "word": "manageable",
+      "token": " manageable",
+      "token_id": 49951,
+      "sentiment": "positive"
+    },
+    {
+      "word": "marvel",
+      "token": " marvel",
+      "token_id": 29553,
+      "sentiment": "positive"
+    },
+    {
+      "word": "master",
+      "token": " master",
+      "token_id": 6303,
+      "sentiment": "positive"
+    },
+    {
+      "word": "masterpiece",
+      "token": " masterpiece",
+      "token_id": 45497,
+      "sentiment": "positive"
+    },
+    {
+      "word": "masters",
+      "token": " masters",
+      "token_id": 26616,
+      "sentiment": "positive"
+    },
+    {
+      "word": "mastery",
+      "token": " mastery",
+      "token_id": 47168,
+      "sentiment": "positive"
+    },
+    {
+      "word": "mature",
+      "token": " mature",
+      "token_id": 14242,
+      "sentiment": "positive"
+    },
+    {
+      "word": "maturity",
+      "token": " maturity",
+      "token_id": 29791,
+      "sentiment": "positive"
+    },
+    {
+      "word": "meaningful",
+      "token": " meaningful",
+      "token_id": 14282,
+      "sentiment": "positive"
+    },
+    {
+      "word": "memorable",
+      "token": " memorable",
+      "token_id": 27795,
+      "sentiment": "positive"
+    },
+    {
+      "word": "mercy",
+      "token": " mercy",
+      "token_id": 23661,
+      "sentiment": "positive"
+    },
+    {
+      "word": "merit",
+      "token": " merit",
+      "token_id": 15785,
+      "sentiment": "positive"
+    },
+    {
+      "word": "merry",
+      "token": " merry",
+      "token_id": 49570,
+      "sentiment": "positive"
+    },
+    {
+      "word": "mighty",
+      "token": " mighty",
+      "token_id": 25427,
+      "sentiment": "positive"
+    },
+    {
+      "word": "miracle",
+      "token": " miracle",
+      "token_id": 28065,
+      "sentiment": "positive"
+    },
+    {
+      "word": "miracles",
+      "token": " miracles",
+      "token_id": 44776,
+      "sentiment": "positive"
+    },
+    {
+      "word": "modern",
+      "token": " modern",
+      "token_id": 4980,
+      "sentiment": "positive"
+    },
+    {
+      "word": "modest",
+      "token": " modest",
+      "token_id": 16453,
+      "sentiment": "positive"
+    },
+    {
+      "word": "morality",
+      "token": " morality",
+      "token_id": 28009,
+      "sentiment": "positive"
+    },
+    {
+      "word": "motivated",
+      "token": " motivated",
+      "token_id": 17194,
+      "sentiment": "positive"
+    },
+    {
+      "word": "neat",
+      "token": " neat",
+      "token_id": 18176,
+      "sentiment": "positive"
+    },
+    {
+      "word": "neatly",
+      "token": " neatly",
+      "token_id": 36166,
+      "sentiment": "positive"
+    },
+    {
+      "word": "nice",
+      "token": " nice",
+      "token_id": 5322,
+      "sentiment": "positive"
+    },
+    {
+      "word": "nicely",
+      "token": " nicely",
+      "token_id": 23395,
+      "sentiment": "positive"
+    },
+    {
+      "word": "nicer",
+      "token": " nicer",
+      "token_id": 49482,
+      "sentiment": "positive"
+    },
+    {
+      "word": "noble",
+      "token": " noble",
+      "token_id": 17874,
+      "sentiment": "positive"
+    },
+    {
+      "word": "notably",
+      "token": " notably",
+      "token_id": 19836,
+      "sentiment": "positive"
+    },
+    {
+      "word": "noteworthy",
+      "token": " noteworthy",
+      "token_id": 35092,
+      "sentiment": "positive"
+    },
+    {
+      "word": "novelty",
+      "token": " novelty",
+      "token_id": 38135,
+      "sentiment": "positive"
+    },
+    {
+      "word": "obsession",
+      "token": " obsession",
+      "token_id": 37238,
+      "sentiment": "positive"
+    },
+    {
+      "word": "openly",
+      "token": " openly",
+      "token_id": 22134,
+      "sentiment": "positive"
+    },
+    {
+      "word": "openness",
+      "token": " openness",
+      "token_id": 47418,
+      "sentiment": "positive"
+    },
+    {
+      "word": "optimal",
+      "token": " optimal",
+      "token_id": 8654,
+      "sentiment": "positive"
+    },
+    {
+      "word": "optimism",
+      "token": " optimism",
+      "token_id": 36970,
+      "sentiment": "positive"
+    },
+    {
+      "word": "optimistic",
+      "token": " optimistic",
+      "token_id": 28684,
+      "sentiment": "positive"
+    },
+    {
+      "word": "orderly",
+      "token": " orderly",
+      "token_id": 42062,
+      "sentiment": "positive"
+    },
+    {
+      "word": "outstanding",
+      "token": " outstanding",
+      "token_id": 16383,
+      "sentiment": "positive"
+    },
+    {
+      "word": "paradise",
+      "token": " paradise",
+      "token_id": 41466,
+      "sentiment": "positive"
+    },
+    {
+      "word": "paramount",
+      "token": " paramount",
+      "token_id": 43527,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pardon",
+      "token": " pardon",
+      "token_id": 34030,
+      "sentiment": "positive"
+    },
+    {
+      "word": "passion",
+      "token": " passion",
+      "token_id": 9908,
+      "sentiment": "positive"
+    },
+    {
+      "word": "passionate",
+      "token": " passionate",
+      "token_id": 22500,
+      "sentiment": "positive"
+    },
+    {
+      "word": "patience",
+      "token": " patience",
+      "token_id": 22450,
+      "sentiment": "positive"
+    },
+    {
+      "word": "patient",
+      "token": " patient",
+      "token_id": 3110,
+      "sentiment": "positive"
+    },
+    {
+      "word": "patiently",
+      "token": " patiently",
+      "token_id": 46606,
+      "sentiment": "positive"
+    },
+    {
+      "word": "patriot",
+      "token": " patriot",
+      "token_id": 43371,
+      "sentiment": "positive"
+    },
+    {
+      "word": "patriotic",
+      "token": " patriotic",
+      "token_id": 50174,
+      "sentiment": "positive"
+    },
+    {
+      "word": "peace",
+      "token": " peace",
+      "token_id": 6330,
+      "sentiment": "positive"
+    },
+    {
+      "word": "peaceful",
+      "token": " peaceful",
+      "token_id": 19951,
+      "sentiment": "positive"
+    },
+    {
+      "word": "perfect",
+      "token": " perfect",
+      "token_id": 3962,
+      "sentiment": "positive"
+    },
+    {
+      "word": "perfection",
+      "token": " perfection",
+      "token_id": 26835,
+      "sentiment": "positive"
+    },
+    {
+      "word": "perfectly",
+      "token": " perfectly",
+      "token_id": 9670,
+      "sentiment": "positive"
+    },
+    {
+      "word": "permissible",
+      "token": " permissible",
+      "token_id": 32588,
+      "sentiment": "positive"
+    },
+    {
+      "word": "personalized",
+      "token": " personalized",
+      "token_id": 32339,
+      "sentiment": "positive"
+    },
+    {
+      "word": "phenomenal",
+      "token": " phenomenal",
+      "token_id": 44294,
+      "sentiment": "positive"
+    },
+    {
+      "word": "playful",
+      "token": " playful",
+      "token_id": 48822,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pleasant",
+      "token": " pleasant",
+      "token_id": 17127,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pleased",
+      "token": " pleased",
+      "token_id": 13864,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pleasing",
+      "token": " pleasing",
+      "token_id": 37902,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pleasure",
+      "token": " pleasure",
+      "token_id": 11284,
+      "sentiment": "positive"
+    },
+    {
+      "word": "poetic",
+      "token": " poetic",
+      "token_id": 40522,
+      "sentiment": "positive"
+    },
+    {
+      "word": "poised",
+      "token": " poised",
+      "token_id": 39654,
+      "sentiment": "positive"
+    },
+    {
+      "word": "polished",
+      "token": " polished",
+      "token_id": 29422,
+      "sentiment": "positive"
+    },
+    {
+      "word": "polite",
+      "token": " polite",
+      "token_id": 30405,
+      "sentiment": "positive"
+    },
+    {
+      "word": "popular",
+      "token": " popular",
+      "token_id": 4633,
+      "sentiment": "positive"
+    },
+    {
+      "word": "portable",
+      "token": " portable",
+      "token_id": 18001,
+      "sentiment": "positive"
+    },
+    {
+      "word": "positive",
+      "token": " positive",
+      "token_id": 2762,
+      "sentiment": "positive"
+    },
+    {
+      "word": "positively",
+      "token": " positively",
+      "token_id": 14962,
+      "sentiment": "positive"
+    },
+    {
+      "word": "positives",
+      "token": " positives",
+      "token_id": 37865,
+      "sentiment": "positive"
+    },
+    {
+      "word": "powerful",
+      "token": " powerful",
+      "token_id": 6422,
+      "sentiment": "positive"
+    },
+    {
+      "word": "praise",
+      "token": " praise",
+      "token_id": 19916,
+      "sentiment": "positive"
+    },
+    {
+      "word": "precious",
+      "token": " precious",
+      "token_id": 18153,
+      "sentiment": "positive"
+    },
+    {
+      "word": "precise",
+      "token": " precise",
+      "token_id": 10799,
+      "sentiment": "positive"
+    },
+    {
+      "word": "precisely",
+      "token": " precisely",
+      "token_id": 10534,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prefer",
+      "token": " prefer",
+      "token_id": 4510,
+      "sentiment": "positive"
+    },
+    {
+      "word": "preferable",
+      "token": " preferable",
+      "token_id": 29224,
+      "sentiment": "positive"
+    },
+    {
+      "word": "preferably",
+      "token": " preferably",
+      "token_id": 13027,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prefers",
+      "token": " prefers",
+      "token_id": 41469,
+      "sentiment": "positive"
+    },
+    {
+      "word": "premier",
+      "token": " premier",
+      "token_id": 24654,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prestige",
+      "token": " prestige",
+      "token_id": 46466,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prestigious",
+      "token": " prestigious",
+      "token_id": 34544,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pretty",
+      "token": " pretty",
+      "token_id": 3965,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pride",
+      "token": " pride",
+      "token_id": 15555,
+      "sentiment": "positive"
+    },
+    {
+      "word": "privilege",
+      "token": " privilege",
+      "token_id": 15863,
+      "sentiment": "positive"
+    },
+    {
+      "word": "privileged",
+      "token": " privileged",
+      "token_id": 30082,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prize",
+      "token": " prize",
+      "token_id": 17767,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proactive",
+      "token": " proactive",
+      "token_id": 46200,
+      "sentiment": "positive"
+    },
+    {
+      "word": "productive",
+      "token": " productive",
+      "token_id": 19303,
+      "sentiment": "positive"
+    },
+    {
+      "word": "profound",
+      "token": " profound",
+      "token_id": 15585,
+      "sentiment": "positive"
+    },
+    {
+      "word": "profoundly",
+      "token": " profoundly",
+      "token_id": 38245,
+      "sentiment": "positive"
+    },
+    {
+      "word": "progress",
+      "token": " progress",
+      "token_id": 4780,
+      "sentiment": "positive"
+    },
+    {
+      "word": "progressive",
+      "token": " progressive",
+      "token_id": 13439,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prolific",
+      "token": " prolific",
+      "token_id": 46698,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prominence",
+      "token": " prominence",
+      "token_id": 44373,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prominent",
+      "token": " prominent",
+      "token_id": 11906,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promise",
+      "token": " promise",
+      "token_id": 9023,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promised",
+      "token": " promised",
+      "token_id": 12316,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promises",
+      "token": " promises",
+      "token_id": 16966,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promising",
+      "token": " promising",
+      "token_id": 12532,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promoter",
+      "token": " promoter",
+      "token_id": 12634,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prompt",
+      "token": " prompt",
+      "token_id": 8959,
+      "sentiment": "positive"
+    },
+    {
+      "word": "promptly",
+      "token": " promptly",
+      "token_id": 25122,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proper",
+      "token": " proper",
+      "token_id": 1463,
+      "sentiment": "positive"
+    },
+    {
+      "word": "properly",
+      "token": " properly",
+      "token_id": 6283,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pros",
+      "token": " pros",
+      "token_id": 5847,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prosper",
+      "token": " prosper",
+      "token_id": 20464,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prosperity",
+      "token": " prosperity",
+      "token_id": 30391,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prosperous",
+      "token": " prosperous",
+      "token_id": 47058,
+      "sentiment": "positive"
+    },
+    {
+      "word": "protect",
+      "token": " protect",
+      "token_id": 4017,
+      "sentiment": "positive"
+    },
+    {
+      "word": "protection",
+      "token": " protection",
+      "token_id": 6055,
+      "sentiment": "positive"
+    },
+    {
+      "word": "protective",
+      "token": " protective",
+      "token_id": 12107,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proud",
+      "token": " proud",
+      "token_id": 9979,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proven",
+      "token": " proven",
+      "token_id": 11464,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proves",
+      "token": " proves",
+      "token_id": 19539,
+      "sentiment": "positive"
+    },
+    {
+      "word": "proving",
+      "token": " proving",
+      "token_id": 18597,
+      "sentiment": "positive"
+    },
+    {
+      "word": "prudent",
+      "token": " prudent",
+      "token_id": 40662,
+      "sentiment": "positive"
+    },
+    {
+      "word": "pure",
+      "token": " pure",
+      "token_id": 6313,
+      "sentiment": "positive"
+    },
+    {
+      "word": "qualified",
+      "token": " qualified",
+      "token_id": 12165,
+      "sentiment": "positive"
+    },
+    {
+      "word": "qualify",
+      "token": " qualify",
+      "token_id": 19478,
+      "sentiment": "positive"
+    },
+    {
+      "word": "quicker",
+      "token": " quicker",
+      "token_id": 31124,
+      "sentiment": "positive"
+    },
+    {
+      "word": "quiet",
+      "token": " quiet",
+      "token_id": 7107,
+      "sentiment": "positive"
+    },
+    {
+      "word": "radiant",
+      "token": " radiant",
+      "token_id": 50223,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rapid",
+      "token": " rapid",
+      "token_id": 5233,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rapport",
+      "token": " rapport",
+      "token_id": 25325,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rapt",
+      "token": " rapt",
+      "token_id": 46012,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rational",
+      "token": " rational",
+      "token_id": 8870,
+      "sentiment": "positive"
+    },
+    {
+      "word": "readable",
+      "token": " readable",
+      "token_id": 34025,
+      "sentiment": "positive"
+    },
+    {
+      "word": "readily",
+      "token": " readily",
+      "token_id": 12450,
+      "sentiment": "positive"
+    },
+    {
+      "word": "ready",
+      "token": " ready",
+      "token_id": 4704,
+      "sentiment": "positive"
+    },
+    {
+      "word": "realistic",
+      "token": " realistic",
+      "token_id": 15958,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reasonable",
+      "token": " reasonable",
+      "token_id": 5272,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reasonably",
+      "token": " reasonably",
+      "token_id": 12054,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reasoned",
+      "token": " reasoned",
+      "token_id": 31114,
+      "sentiment": "positive"
+    },
+    {
+      "word": "receptive",
+      "token": " receptive",
+      "token_id": 44952,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recommend",
+      "token": " recommend",
+      "token_id": 5583,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recommendation",
+      "token": " recommendation",
+      "token_id": 17401,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recommendations",
+      "token": " recommendations",
+      "token_id": 12645,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recommended",
+      "token": " recommended",
+      "token_id": 8521,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reconcile",
+      "token": " reconcile",
+      "token_id": 42853,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reconciliation",
+      "token": " reconciliation",
+      "token_id": 40746,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recover",
+      "token": " recover",
+      "token_id": 9295,
+      "sentiment": "positive"
+    },
+    {
+      "word": "recovery",
+      "token": " recovery",
+      "token_id": 7355,
+      "sentiment": "positive"
+    },
+    {
+      "word": "redeem",
+      "token": " redeem",
+      "token_id": 41582,
+      "sentiment": "positive"
+    },
+    {
+      "word": "redemption",
+      "token": " redemption",
+      "token_id": 39732,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refine",
+      "token": " refine",
+      "token_id": 39494,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refined",
+      "token": " refined",
+      "token_id": 22407,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refinement",
+      "token": " refinement",
+      "token_id": 29646,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reform",
+      "token": " reform",
+      "token_id": 8460,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reforms",
+      "token": " reforms",
+      "token_id": 23809,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refresh",
+      "token": " refresh",
+      "token_id": 22906,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refreshing",
+      "token": " refreshing",
+      "token_id": 31255,
+      "sentiment": "positive"
+    },
+    {
+      "word": "refund",
+      "token": " refund",
+      "token_id": 23005,
+      "sentiment": "positive"
+    },
+    {
+      "word": "regard",
+      "token": " regard",
+      "token_id": 2743,
+      "sentiment": "positive"
+    },
+    {
+      "word": "relaxed",
+      "token": " relaxed",
+      "token_id": 19595,
+      "sentiment": "positive"
+    },
+    {
+      "word": "relent",
+      "token": " relent",
+      "token_id": 32027,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reliable",
+      "token": " reliable",
+      "token_id": 9630,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reliably",
+      "token": " reliably",
+      "token_id": 27340,
+      "sentiment": "positive"
+    },
+    {
+      "word": "relief",
+      "token": " relief",
+      "token_id": 6619,
+      "sentiment": "positive"
+    },
+    {
+      "word": "remarkable",
+      "token": " remarkable",
+      "token_id": 13406,
+      "sentiment": "positive"
+    },
+    {
+      "word": "remarkably",
+      "token": " remarkably",
+      "token_id": 24678,
+      "sentiment": "positive"
+    },
+    {
+      "word": "remedy",
+      "token": " remedy",
+      "token_id": 16748,
+      "sentiment": "positive"
+    },
+    {
+      "word": "remission",
+      "token": " remission",
+      "token_id": 31701,
+      "sentiment": "positive"
+    },
+    {
+      "word": "renewed",
+      "token": " renewed",
+      "token_id": 23347,
+      "sentiment": "positive"
+    },
+    {
+      "word": "renowned",
+      "token": " renowned",
+      "token_id": 30101,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reputation",
+      "token": " reputation",
+      "token_id": 12681,
+      "sentiment": "positive"
+    },
+    {
+      "word": "resilient",
+      "token": " resilient",
+      "token_id": 35730,
+      "sentiment": "positive"
+    },
+    {
+      "word": "respect",
+      "token": " respect",
+      "token_id": 1675,
+      "sentiment": "positive"
+    },
+    {
+      "word": "respectable",
+      "token": " respectable",
+      "token_id": 39034,
+      "sentiment": "positive"
+    },
+    {
+      "word": "respectful",
+      "token": " respectful",
+      "token_id": 38975,
+      "sentiment": "positive"
+    },
+    {
+      "word": "respectfully",
+      "token": " respectfully",
+      "token_id": 44738,
+      "sentiment": "positive"
+    },
+    {
+      "word": "responsive",
+      "token": " responsive",
+      "token_id": 20876,
+      "sentiment": "positive"
+    },
+    {
+      "word": "restored",
+      "token": " restored",
+      "token_id": 16789,
+      "sentiment": "positive"
+    },
+    {
+      "word": "restructuring",
+      "token": " restructuring",
+      "token_id": 48090,
+      "sentiment": "positive"
+    },
+    {
+      "word": "revel",
+      "token": " revel",
+      "token_id": 17347,
+      "sentiment": "positive"
+    },
+    {
+      "word": "revelation",
+      "token": " revelation",
+      "token_id": 28423,
+      "sentiment": "positive"
+    },
+    {
+      "word": "revival",
+      "token": " revival",
+      "token_id": 36499,
+      "sentiment": "positive"
+    },
+    {
+      "word": "revive",
+      "token": " revive",
+      "token_id": 47122,
+      "sentiment": "positive"
+    },
+    {
+      "word": "revolutionary",
+      "token": " revolutionary",
+      "token_id": 22564,
+      "sentiment": "positive"
+    },
+    {
+      "word": "reward",
+      "token": " reward",
+      "token_id": 10921,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rewarding",
+      "token": " rewarding",
+      "token_id": 34975,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rich",
+      "token": " rich",
+      "token_id": 6793,
+      "sentiment": "positive"
+    },
+    {
+      "word": "richer",
+      "token": " richer",
+      "token_id": 38539,
+      "sentiment": "positive"
+    },
+    {
+      "word": "richness",
+      "token": " richness",
+      "token_id": 37175,
+      "sentiment": "positive"
+    },
+    {
+      "word": "right",
+      "token": " right",
+      "token_id": 987,
+      "sentiment": "positive"
+    },
+    {
+      "word": "righteous",
+      "token": " righteous",
+      "token_id": 28867,
+      "sentiment": "positive"
+    },
+    {
+      "word": "righteousness",
+      "token": " righteousness",
+      "token_id": 48562,
+      "sentiment": "positive"
+    },
+    {
+      "word": "rightly",
+      "token": " rightly",
+      "token_id": 35155,
+      "sentiment": "positive"
+    },
+    {
+      "word": "robust",
+      "token": " robust",
+      "token_id": 10237,
+      "sentiment": "positive"
+    },
+    {
+      "word": "romantic",
+      "token": " romantic",
+      "token_id": 18109,
+      "sentiment": "positive"
+    },
+    {
+      "word": "safe",
+      "token": " safe",
+      "token_id": 4999,
+      "sentiment": "positive"
+    },
+    {
+      "word": "safely",
+      "token": " safely",
+      "token_id": 15792,
+      "sentiment": "positive"
+    },
+    {
+      "word": "saint",
+      "token": " saint",
+      "token_id": 24032,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sane",
+      "token": " sane",
+      "token_id": 44419,
+      "sentiment": "positive"
+    },
+    {
+      "word": "satisfactory",
+      "token": " satisfactory",
+      "token_id": 20297,
+      "sentiment": "positive"
+    },
+    {
+      "word": "satisfied",
+      "token": " satisfied",
+      "token_id": 10048,
+      "sentiment": "positive"
+    },
+    {
+      "word": "satisfies",
+      "token": " satisfies",
+      "token_id": 12310,
+      "sentiment": "positive"
+    },
+    {
+      "word": "satisfy",
+      "token": " satisfy",
+      "token_id": 10517,
+      "sentiment": "positive"
+    },
+    {
+      "word": "satisfying",
+      "token": " satisfying",
+      "token_id": 14127,
+      "sentiment": "positive"
+    },
+    {
+      "word": "savings",
+      "token": " savings",
+      "token_id": 16347,
+      "sentiment": "positive"
+    },
+    {
+      "word": "scenic",
+      "token": " scenic",
+      "token_id": 49647,
+      "sentiment": "positive"
+    },
+    {
+      "word": "seamless",
+      "token": " seamless",
+      "token_id": 45871,
+      "sentiment": "positive"
+    },
+    {
+      "word": "seasoned",
+      "token": " seasoned",
+      "token_id": 43235,
+      "sentiment": "positive"
+    },
+    {
+      "word": "secure",
+      "token": " secure",
+      "token_id": 7895,
+      "sentiment": "positive"
+    },
+    {
+      "word": "securely",
+      "token": " securely",
+      "token_id": 37370,
+      "sentiment": "positive"
+    },
+    {
+      "word": "selective",
+      "token": " selective",
+      "token_id": 13687,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sensation",
+      "token": " sensation",
+      "token_id": 22135,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sensations",
+      "token": " sensations",
+      "token_id": 41868,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sensible",
+      "token": " sensible",
+      "token_id": 24600,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sensitive",
+      "token": " sensitive",
+      "token_id": 7996,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sexy",
+      "token": " sexy",
+      "token_id": 25594,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sharp",
+      "token": " sharp",
+      "token_id": 9479,
+      "sentiment": "positive"
+    },
+    {
+      "word": "shine",
+      "token": " shine",
+      "token_id": 28189,
+      "sentiment": "positive"
+    },
+    {
+      "word": "shiny",
+      "token": " shiny",
+      "token_id": 30006,
+      "sentiment": "positive"
+    },
+    {
+      "word": "significant",
+      "token": " significant",
+      "token_id": 1534,
+      "sentiment": "positive"
+    },
+    {
+      "word": "silent",
+      "token": " silent",
+      "token_id": 11561,
+      "sentiment": "positive"
+    },
+    {
+      "word": "simpler",
+      "token": " simpler",
+      "token_id": 19554,
+      "sentiment": "positive"
+    },
+    {
+      "word": "simplest",
+      "token": " simplest",
+      "token_id": 22325,
+      "sentiment": "positive"
+    },
+    {
+      "word": "simplified",
+      "token": " simplified",
+      "token_id": 21010,
+      "sentiment": "positive"
+    },
+    {
+      "word": "simplify",
+      "token": " simplify",
+      "token_id": 25636,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sincere",
+      "token": " sincere",
+      "token_id": 33842,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sincerely",
+      "token": " sincerely",
+      "token_id": 43001,
+      "sentiment": "positive"
+    },
+    {
+      "word": "skill",
+      "token": " skill",
+      "token_id": 10861,
+      "sentiment": "positive"
+    },
+    {
+      "word": "skilled",
+      "token": " skilled",
+      "token_id": 18024,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sleek",
+      "token": " sleek",
+      "token_id": 47115,
+      "sentiment": "positive"
+    },
+    {
+      "word": "slick",
+      "token": " slick",
+      "token_id": 38514,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smart",
+      "token": " smart",
+      "token_id": 7060,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smarter",
+      "token": " smarter",
+      "token_id": 38144,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smile",
+      "token": " smile",
+      "token_id": 8580,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smiles",
+      "token": " smiles",
+      "token_id": 28582,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smiling",
+      "token": " smiling",
+      "token_id": 18727,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smooth",
+      "token": " smooth",
+      "token_id": 6032,
+      "sentiment": "positive"
+    },
+    {
+      "word": "smoothly",
+      "token": " smoothly",
+      "token_id": 25863,
+      "sentiment": "positive"
+    },
+    {
+      "word": "soft",
+      "token": " soft",
+      "token_id": 2602,
+      "sentiment": "positive"
+    },
+    {
+      "word": "softer",
+      "token": " softer",
+      "token_id": 44108,
+      "sentiment": "positive"
+    },
+    {
+      "word": "solid",
+      "token": " solid",
+      "token_id": 4891,
+      "sentiment": "positive"
+    },
+    {
+      "word": "solidarity",
+      "token": " solidarity",
+      "token_id": 34394,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sophisticated",
+      "token": " sophisticated",
+      "token_id": 18144,
+      "sentiment": "positive"
+    },
+    {
+      "word": "spacious",
+      "token": " spacious",
+      "token_id": 37039,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sparkling",
+      "token": " sparkling",
+      "token_id": 45531,
+      "sentiment": "positive"
+    },
+    {
+      "word": "spectacular",
+      "token": " spectacular",
+      "token_id": 22936,
+      "sentiment": "positive"
+    },
+    {
+      "word": "speedy",
+      "token": " speedy",
+      "token_id": 39103,
+      "sentiment": "positive"
+    },
+    {
+      "word": "spiritual",
+      "token": " spiritual",
+      "token_id": 12435,
+      "sentiment": "positive"
+    },
+    {
+      "word": "splendid",
+      "token": " splendid",
+      "token_id": 34095,
+      "sentiment": "positive"
+    },
+    {
+      "word": "spontaneous",
+      "token": " spontaneous",
+      "token_id": 17046,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stability",
+      "token": " stability",
+      "token_id": 7882,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stabilize",
+      "token": " stabilize",
+      "token_id": 33292,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stable",
+      "token": " stable",
+      "token_id": 6474,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stainless",
+      "token": " stainless",
+      "token_id": 31361,
+      "sentiment": "positive"
+    },
+    {
+      "word": "steady",
+      "token": " steady",
+      "token_id": 11792,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stellar",
+      "token": " stellar",
+      "token_id": 13671,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stimulate",
+      "token": " stimulate",
+      "token_id": 23278,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stimulates",
+      "token": " stimulates",
+      "token_id": 38197,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stimulating",
+      "token": " stimulating",
+      "token_id": 28502,
+      "sentiment": "positive"
+    },
+    {
+      "word": "straightforward",
+      "token": " straightforward",
+      "token_id": 15246,
+      "sentiment": "positive"
+    },
+    {
+      "word": "striking",
+      "token": " striking",
+      "token_id": 13631,
+      "sentiment": "positive"
+    },
+    {
+      "word": "striving",
+      "token": " striving",
+      "token_id": 47672,
+      "sentiment": "positive"
+    },
+    {
+      "word": "strong",
+      "token": " strong",
+      "token_id": 2266,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stronger",
+      "token": " stronger",
+      "token_id": 10046,
+      "sentiment": "positive"
+    },
+    {
+      "word": "strongest",
+      "token": " strongest",
+      "token_id": 19508,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stunned",
+      "token": " stunned",
+      "token_id": 33575,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stunning",
+      "token": " stunning",
+      "token_id": 21472,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sturdy",
+      "token": " sturdy",
+      "token_id": 41789,
+      "sentiment": "positive"
+    },
+    {
+      "word": "stylish",
+      "token": " stylish",
+      "token_id": 38194,
+      "sentiment": "positive"
+    },
+    {
+      "word": "substantive",
+      "token": " substantive",
+      "token_id": 22918,
+      "sentiment": "positive"
+    },
+    {
+      "word": "succeed",
+      "token": " succeed",
+      "token_id": 9302,
+      "sentiment": "positive"
+    },
+    {
+      "word": "succeeded",
+      "token": " succeeded",
+      "token_id": 17288,
+      "sentiment": "positive"
+    },
+    {
+      "word": "succeeding",
+      "token": " succeeding",
+      "token_id": 42547,
+      "sentiment": "positive"
+    },
+    {
+      "word": "succeeds",
+      "token": " succeeds",
+      "token_id": 44584,
+      "sentiment": "positive"
+    },
+    {
+      "word": "success",
+      "token": " success",
+      "token_id": 2323,
+      "sentiment": "positive"
+    },
+    {
+      "word": "successes",
+      "token": " successes",
+      "token_id": 34574,
+      "sentiment": "positive"
+    },
+    {
+      "word": "successful",
+      "token": " successful",
+      "token_id": 5547,
+      "sentiment": "positive"
+    },
+    {
+      "word": "successfully",
+      "token": " successfully",
+      "token_id": 8379,
+      "sentiment": "positive"
+    },
+    {
+      "word": "suffice",
+      "token": " suffice",
+      "token_id": 36433,
+      "sentiment": "positive"
+    },
+    {
+      "word": "suffices",
+      "token": " suffices",
+      "token_id": 31088,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sufficient",
+      "token": " sufficient",
+      "token_id": 4209,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sufficiently",
+      "token": " sufficiently",
+      "token_id": 10481,
+      "sentiment": "positive"
+    },
+    {
+      "word": "suitable",
+      "token": " suitable",
+      "token_id": 7470,
+      "sentiment": "positive"
+    },
+    {
+      "word": "super",
+      "token": " super",
+      "token_id": 2221,
+      "sentiment": "positive"
+    },
+    {
+      "word": "superb",
+      "token": " superb",
+      "token_id": 29837,
+      "sentiment": "positive"
+    },
+    {
+      "word": "superior",
+      "token": " superior",
+      "token_id": 8936,
+      "sentiment": "positive"
+    },
+    {
+      "word": "superiority",
+      "token": " superiority",
+      "token_id": 34385,
+      "sentiment": "positive"
+    },
+    {
+      "word": "support",
+      "token": " support",
+      "token_id": 1329,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supported",
+      "token": " supported",
+      "token_id": 4516,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supporter",
+      "token": " supporter",
+      "token_id": 31409,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supporting",
+      "token": " supporting",
+      "token_id": 8109,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supportive",
+      "token": " supportive",
+      "token_id": 23384,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supports",
+      "token": " supports",
+      "token_id": 8525,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supremacy",
+      "token": " supremacy",
+      "token_id": 46971,
+      "sentiment": "positive"
+    },
+    {
+      "word": "supreme",
+      "token": " supreme",
+      "token_id": 24555,
+      "sentiment": "positive"
+    },
+    {
+      "word": "surpass",
+      "token": " surpass",
+      "token_id": 28842,
+      "sentiment": "positive"
+    },
+    {
+      "word": "surreal",
+      "token": " surreal",
+      "token_id": 46172,
+      "sentiment": "positive"
+    },
+    {
+      "word": "survival",
+      "token": " survival",
+      "token_id": 5788,
+      "sentiment": "positive"
+    },
+    {
+      "word": "survivor",
+      "token": " survivor",
+      "token_id": 37579,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sustainability",
+      "token": " sustainability",
+      "token_id": 32435,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sustainable",
+      "token": " sustainable",
+      "token_id": 18380,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sweeping",
+      "token": " sweeping",
+      "token_id": 28110,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sweet",
+      "token": " sweet",
+      "token_id": 7353,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sweetheart",
+      "token": " sweetheart",
+      "token_id": 49541,
+      "sentiment": "positive"
+    },
+    {
+      "word": "sweetness",
+      "token": " sweetness",
+      "token_id": 43486,
+      "sentiment": "positive"
+    },
+    {
+      "word": "swift",
+      "token": " swift",
+      "token_id": 19779,
+      "sentiment": "positive"
+    },
+    {
+      "word": "talent",
+      "token": " talent",
+      "token_id": 12816,
+      "sentiment": "positive"
+    },
+    {
+      "word": "talented",
+      "token": " talented",
+      "token_id": 21220,
+      "sentiment": "positive"
+    },
+    {
+      "word": "talents",
+      "token": " talents",
+      "token_id": 28621,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tempt",
+      "token": " tempt",
+      "token_id": 16031,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tempting",
+      "token": " tempting",
+      "token_id": 39189,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tender",
+      "token": " tender",
+      "token_id": 14510,
+      "sentiment": "positive"
+    },
+    {
+      "word": "terrific",
+      "token": " terrific",
+      "token_id": 34303,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thank",
+      "token": " thank",
+      "token_id": 5717,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thankful",
+      "token": " thankful",
+      "token_id": 31115,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thinner",
+      "token": " thinner",
+      "token_id": 37367,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thoughtful",
+      "token": " thoughtful",
+      "token_id": 30457,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thrill",
+      "token": " thrill",
+      "token_id": 39314,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thrilled",
+      "token": " thrilled",
+      "token_id": 30607,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thrilling",
+      "token": " thrilling",
+      "token_id": 47330,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thrive",
+      "token": " thrive",
+      "token_id": 34298,
+      "sentiment": "positive"
+    },
+    {
+      "word": "thriving",
+      "token": " thriving",
+      "token_id": 43377,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tidy",
+      "token": " tidy",
+      "token_id": 49031,
+      "sentiment": "positive"
+    },
+    {
+      "word": "timely",
+      "token": " timely",
+      "token_id": 14793,
+      "sentiment": "positive"
+    },
+    {
+      "word": "top",
+      "token": " top",
+      "token_id": 1755,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tops",
+      "token": " tops",
+      "token_id": 27164,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tough",
+      "token": " tough",
+      "token_id": 10458,
+      "sentiment": "positive"
+    },
+    {
+      "word": "tougher",
+      "token": " tougher",
+      "token_id": 42306,
+      "sentiment": "positive"
+    },
+    {
+      "word": "traction",
+      "token": " traction",
+      "token_id": 32535,
+      "sentiment": "positive"
+    },
+    {
+      "word": "transparent",
+      "token": " transparent",
+      "token_id": 13955,
+      "sentiment": "positive"
+    },
+    {
+      "word": "treasure",
+      "token": " treasure",
+      "token_id": 21764,
+      "sentiment": "positive"
+    },
+    {
+      "word": "triumph",
+      "token": " triumph",
+      "token_id": 23991,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trophy",
+      "token": " trophy",
+      "token_id": 39259,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trump",
+      "token": " trump",
+      "token_id": 29154,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trust",
+      "token": " trust",
+      "token_id": 4517,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trusted",
+      "token": " trusted",
+      "token_id": 18273,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trusting",
+      "token": " trusting",
+      "token_id": 44895,
+      "sentiment": "positive"
+    },
+    {
+      "word": "trustworthy",
+      "token": " trustworthy",
+      "token_id": 46808,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unaffected",
+      "token": " unaffected",
+      "token_id": 30195,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unbiased",
+      "token": " unbiased",
+      "token_id": 38663,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unconditional",
+      "token": " unconditional",
+      "token_id": 49795,
+      "sentiment": "positive"
+    },
+    {
+      "word": "understandable",
+      "token": " understandable",
+      "token_id": 34007,
+      "sentiment": "positive"
+    },
+    {
+      "word": "undisputed",
+      "token": " undisputed",
+      "token_id": 30501,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unity",
+      "token": " unity",
+      "token_id": 16167,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unlimited",
+      "token": " unlimited",
+      "token_id": 25470,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unreal",
+      "token": " unreal",
+      "token_id": 32638,
+      "sentiment": "positive"
+    },
+    {
+      "word": "unrestricted",
+      "token": " unrestricted",
+      "token_id": 48566,
+      "sentiment": "positive"
+    },
+    {
+      "word": "upgraded",
+      "token": " upgraded",
+      "token_id": 29101,
+      "sentiment": "positive"
+    },
+    {
+      "word": "upheld",
+      "token": " upheld",
+      "token_id": 30620,
+      "sentiment": "positive"
+    },
+    {
+      "word": "uphold",
+      "token": " uphold",
+      "token_id": 39954,
+      "sentiment": "positive"
+    },
+    {
+      "word": "usable",
+      "token": " usable",
+      "token_id": 31998,
+      "sentiment": "positive"
+    },
+    {
+      "word": "useful",
+      "token": " useful",
+      "token_id": 4217,
+      "sentiment": "positive"
+    },
+    {
+      "word": "valor",
+      "token": " valor",
+      "token_id": 34173,
+      "sentiment": "positive"
+    },
+    {
+      "word": "valuable",
+      "token": " valuable",
+      "token_id": 9865,
+      "sentiment": "positive"
+    },
+    {
+      "word": "variety",
+      "token": " variety",
+      "token_id": 5235,
+      "sentiment": "positive"
+    },
+    {
+      "word": "versatile",
+      "token": " versatile",
+      "token_id": 30708,
+      "sentiment": "positive"
+    },
+    {
+      "word": "versatility",
+      "token": " versatility",
+      "token_id": 49607,
+      "sentiment": "positive"
+    },
+    {
+      "word": "vibrant",
+      "token": " vibrant",
+      "token_id": 31764,
+      "sentiment": "positive"
+    },
+    {
+      "word": "victory",
+      "token": " victory",
+      "token_id": 10170,
+      "sentiment": "positive"
+    },
+    {
+      "word": "virtue",
+      "token": " virtue",
+      "token_id": 16968,
+      "sentiment": "positive"
+    },
+    {
+      "word": "vivid",
+      "token": " vivid",
+      "token_id": 24863,
+      "sentiment": "positive"
+    },
+    {
+      "word": "warm",
+      "token": " warm",
+      "token_id": 5890,
+      "sentiment": "positive"
+    },
+    {
+      "word": "warmer",
+      "token": " warmer",
+      "token_id": 34562,
+      "sentiment": "positive"
+    },
+    {
+      "word": "warmth",
+      "token": " warmth",
+      "token_id": 26326,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wealthy",
+      "token": " wealthy",
+      "token_id": 20193,
+      "sentiment": "positive"
+    },
+    {
+      "word": "welcome",
+      "token": " welcome",
+      "token_id": 10112,
+      "sentiment": "positive"
+    },
+    {
+      "word": "well",
+      "token": " well",
+      "token_id": 973,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wellbeing",
+      "token": " wellbeing",
+      "token_id": 46128,
+      "sentiment": "positive"
+    },
+    {
+      "word": "willing",
+      "token": " willing",
+      "token_id": 7378,
+      "sentiment": "positive"
+    },
+    {
+      "word": "willingly",
+      "token": " willingly",
+      "token_id": 45116,
+      "sentiment": "positive"
+    },
+    {
+      "word": "willingness",
+      "token": " willingness",
+      "token_id": 24741,
+      "sentiment": "positive"
+    },
+    {
+      "word": "win",
+      "token": " win",
+      "token_id": 3330,
+      "sentiment": "positive"
+    },
+    {
+      "word": "winner",
+      "token": " winner",
+      "token_id": 13688,
+      "sentiment": "positive"
+    },
+    {
+      "word": "winners",
+      "token": " winners",
+      "token_id": 20721,
+      "sentiment": "positive"
+    },
+    {
+      "word": "winning",
+      "token": " winning",
+      "token_id": 9880,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wins",
+      "token": " wins",
+      "token_id": 14896,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wisdom",
+      "token": " wisdom",
+      "token_id": 15799,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wise",
+      "token": " wise",
+      "token_id": 15822,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wisely",
+      "token": " wisely",
+      "token_id": 46529,
+      "sentiment": "positive"
+    },
+    {
+      "word": "won",
+      "token": " won",
+      "token_id": 1912,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wonder",
+      "token": " wonder",
+      "token_id": 4282,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wonderful",
+      "token": " wonderful",
+      "token_id": 9386,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wonderfully",
+      "token": " wonderfully",
+      "token_id": 43713,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wonders",
+      "token": " wonders",
+      "token_id": 28770,
+      "sentiment": "positive"
+    },
+    {
+      "word": "work",
+      "token": " work",
+      "token_id": 789,
+      "sentiment": "positive"
+    },
+    {
+      "word": "worked",
+      "token": " worked",
+      "token_id": 4307,
+      "sentiment": "positive"
+    },
+    {
+      "word": "works",
+      "token": " works",
+      "token_id": 2987,
+      "sentiment": "positive"
+    },
+    {
+      "word": "worth",
+      "token": " worth",
+      "token_id": 4409,
+      "sentiment": "positive"
+    },
+    {
+      "word": "worthwhile",
+      "token": " worthwhile",
+      "token_id": 32811,
+      "sentiment": "positive"
+    },
+    {
+      "word": "worthy",
+      "token": " worthy",
+      "token_id": 18338,
+      "sentiment": "positive"
+    },
+    {
+      "word": "wow",
+      "token": " wow",
+      "token_id": 39361,
+      "sentiment": "positive"
+    },
+    {
+      "word": "youthful",
+      "token": " youthful",
+      "token_id": 44098,
+      "sentiment": "positive"
+    },
+    {
+      "word": "zeal",
+      "token": " zeal",
+      "token_id": 42939,
+      "sentiment": "positive"
+    }
+  ]
+}
