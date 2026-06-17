@@ -9,9 +9,11 @@ INPUT_DIR = ASSIGNMENT_DIR / "inputs"
 OUTPUT_DIR = ASSIGNMENT_DIR / "output"
 OUTPUT_PNG_DIR = OUTPUT_DIR / "png"
 OUTPUT_JSON_DIR = OUTPUT_DIR / "json"
+OUTPUT_TXT_DIR = OUTPUT_DIR / "txt"
 
 OUTPUT_PNG_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_TXT_DIR.mkdir(parents=True, exist_ok=True)
 
 POSITIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_positive_one_token_words.json"
 NEGATIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_negative_one_token_words.json"
@@ -30,7 +32,7 @@ SENTIMENT_CHALLENGE_TOP_TOKENS_PATH = (
     OUTPUT_JSON_DIR / "sentiment_challenge_prompt_top10_tokens.json"
 )
 SENTIMENT_CHALLENGE_TOP_TOKENS_REPORT_PATH = (
-    OUTPUT_DIR / "sentiment_challenge_prompt_top10_tokens_report.txt"
+    OUTPUT_TXT_DIR / "sentiment_challenge_prompt_top10_tokens_report.txt"
 )
 SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH = (
     OUTPUT_PNG_DIR / "sentiment_challenge_category_confusion_matrices.png"

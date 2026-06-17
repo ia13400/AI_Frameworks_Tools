@@ -179,6 +179,11 @@ def plot_sentiment_challenge_category_accuracy(
     no_sentiment_rates = np.array([row["no_sentiment_rate"] * 100 for row in rows])
 
     fig, ax = plt.subplots(figsize=(15.5, max(8, len(rows) * 0.5)))
+    error_total_rates = wrong_rates + no_sentiment_rates
+    right_bar_edge = 125
+    wrong_left = right_bar_edge - error_total_rates
+    no_sentiment_left = right_bar_edge - no_sentiment_rates
+
     ax.barh(
         y_positions,
         correct_rates,
@@ -189,7 +194,7 @@ def plot_sentiment_challenge_category_accuracy(
     ax.barh(
         y_positions,
         wrong_rates,
-        left=correct_rates,
+        left=wrong_left,
         color="#B22222",
         alpha=0.82,
         label="wrong sentiment",
@@ -197,27 +202,69 @@ def plot_sentiment_challenge_category_accuracy(
     ax.barh(
         y_positions,
         no_sentiment_rates,
-        left=correct_rates + wrong_rates,
+        left=no_sentiment_left,
         color="#8C8C8C",
         alpha=0.8,
         label="no sentiment",
     )
 
     for y_pos, row, correct_value in zip(y_positions, rows, correct_rates):
+        correct_label_x = correct_value - 3 if correct_value >= 90 else correct_value + 1.2
         ax.text(
-            min(correct_value + 1.2, 98),
+            correct_label_x,
             y_pos,
             f"{correct_value:.1f}% (n={row['total']})",
             va="center",
             ha="left" if correct_value < 90 else "right",
             fontsize=9,
         )
+        if correct_value < 100:
+            ax.vlines(
+                correct_value,
+                y_pos - 0.4,
+                y_pos + 0.4,
+                color="white",
+                linewidth=2.0,
+                zorder=4,
+            )
+
+    for y_pos, wrong_value, no_sentiment_value in zip(
+        y_positions,
+        wrong_rates,
+        no_sentiment_rates,
+    ):
+        if wrong_value >= 3:
+            x_position = right_bar_edge - error_total_rates[y_pos] + wrong_value / 2
+            ax.text(
+                x_position,
+                y_pos,
+                f"wrong {wrong_value:.1f}%",
+                va="center",
+                ha="center",
+                fontsize=8.5,
+                color="white" if wrong_value >= 12 else "#202020",
+            )
+
+        if no_sentiment_value >= 3:
+            x_position = right_bar_edge - no_sentiment_value / 2
+            ax.text(
+                x_position,
+                y_pos,
+                f"no {no_sentiment_value:.1f}%",
+                va="center",
+                ha="center",
+                fontsize=8.5,
+                color="white" if no_sentiment_value >= 12 else "#202020",
+            )
 
     ax.axvline(50, color="#404040", linewidth=1, linestyle="--")
-    ax.set_xlim(0, 100)
+    ax.axvline(100, color="#B0B0B0", linewidth=0.8)
+    ax.set_xlim(0, right_bar_edge)
+    ax.set_xticks([0, 25, 50, 75, 100, 125])
+    ax.set_xticklabels(["0", "25", "50", "75", "100", "0"])
     ax.set_yticks(y_positions)
     ax.set_yticklabels(categories)
-    ax.set_xlabel("Share of examples (%)")
+    ax.set_xlabel("Correct share (%) on the left; error share (%) on the right")
     ax.set_ylabel("Annotation category")
     title = "Sentiment Challenge: Correct vs Error Type by Category"
     if prompt_suffix is not None:
@@ -229,14 +276,8 @@ def plot_sentiment_challenge_category_accuracy(
     ax_right = ax.twinx()
     ax_right.set_ylim(ax.get_ylim())
     ax_right.set_yticks(y_positions)
-    ax_right.set_yticklabels(
-        [
-            f"wrong {wrong:.1f}% | no {no_sentiment:.1f}%"
-            for wrong, no_sentiment in zip(wrong_rates, no_sentiment_rates)
-        ],
-        fontsize=8.5,
-    )
-    ax_right.set_ylabel("Remaining percentage to 100%")
+    ax_right.set_yticklabels(categories, fontsize=9)
+    ax_right.set_ylabel("Annotation category")
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=140, bbox_inches="tight")

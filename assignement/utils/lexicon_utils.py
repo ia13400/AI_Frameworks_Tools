@@ -9,8 +9,8 @@ from config import (
     INPUT_DIR,
     MODEL_NAME,
     NEGATIVE_WORDS_PATH,
-    OUTPUT_DIR,
     OUTPUT_JSON_DIR,
+    OUTPUT_TXT_DIR,
     POSITIVE_WORDS_PATH,
     SENTIMENT_CHALLENGE_ANNOTATED_PATH,
     SENTIMENT_CHALLENGE_TOP_TOKENS_PATH,
@@ -234,7 +234,7 @@ def trial_output_paths(trial_name=None):
 
     return {
         "json": OUTPUT_JSON_DIR / f"sentiment_challenge_prompt_top10_tokens_{safe_name}.json",
-        "report": OUTPUT_DIR / f"sentiment_challenge_prompt_top10_tokens_report_{safe_name}.txt",
+        "report": OUTPUT_TXT_DIR / f"sentiment_challenge_prompt_top10_tokens_report_{safe_name}.txt",
         "confusion_png": f"sentiment_challenge_category_confusion_matrices_{safe_name}.png",
         "accuracy_png": f"sentiment_challenge_category_accuracy_{safe_name}.png",
     }
