@@ -355,8 +355,15 @@ def plot_logit_lens_sentiment_logit_scores(
     layers = np.arange(len(positive_scores))
     positive_scores = np.asarray(positive_scores, dtype=float)
     negative_scores = np.asarray(negative_scores, dtype=float)
+    logit_differences = positive_scores - negative_scores
 
-    fig, ax = plt.subplots(figsize=(10.5, 5.5))
+    fig, (ax, ax_diff) = plt.subplots(
+        2,
+        1,
+        figsize=(10.5, 7.2),
+        sharex=True,
+        gridspec_kw={"height_ratios": [2.2, 1.0], "hspace": 0.08},
+    )
     ax.plot(
         layers,
         positive_scores,
@@ -392,10 +399,28 @@ def plot_logit_lens_sentiment_logit_scores(
         label="negative > positive",
     )
     ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
-    ax.set_xlabel("Layer index (0 = embedding)")
     set_even_layer_xticks(ax, len(positive_scores))
+    ax.tick_params(axis="x", labelbottom=False)
     ax.set_ylabel("Sum of Hu & Liu logits")
     ax.set_title(f"Logit Lens Sentiment Score by Layer: {prompt_label}")
+
+    ax_diff.plot(
+        layers,
+        logit_differences,
+        color="#4B4B4B",
+        linestyle="--",
+        linewidth=2.0,
+        marker="s",
+        markersize=4,
+        label="Logit difference",
+    )
+    ax_diff.axhline(0, color="#4B4B4B", linewidth=0.8, alpha=0.45)
+    ax_diff.set_xlabel("Layer index (0 = embedding)")
+    set_even_layer_xticks(ax_diff, len(positive_scores))
+    ax_diff.set_ylabel("Logit difference\n(pos - neg)")
+    ax_diff.grid(True, alpha=0.28)
+    ax_diff.legend(fontsize=8.5, loc="best")
+
     ax.text(
         0.01,
         0.02,
@@ -407,7 +432,7 @@ def plot_logit_lens_sentiment_logit_scores(
         bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},
     )
     ax.grid(True, alpha=0.28)
-    ax.legend(fontsize=8.5)
+    ax.legend(fontsize=8.5, loc="best")
 
     plt.tight_layout()
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")

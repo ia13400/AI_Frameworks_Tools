@@ -357,6 +357,8 @@ def hu_liu_logit_scores_per_layer(hidden_states, model, sentiment_state):
         dtype=torch.long,
         device=model.embed_out.weight.device,
     )
+    if len(positive_token_ids) == 0 or len(negative_token_ids) == 0:
+        raise ValueError("Hu & Liu positive and negative token sets must both be non-empty.")
 
     positive_scores = []
     negative_scores = []
@@ -427,6 +429,11 @@ def analyze_hu_liu_logit_sentiment_scores(
         sentiment_state,
     )
 
+    print(
+        "Hu & Liu logit score token counts:",
+        f"positive={len(sentiment_state['positive_words'])},",
+        f"negative={len(sentiment_state['negative_words'])}",
+    )
     print_logit_score_summary("Positive prompt", positive_prompt_scores)
     print_logit_score_summary("Negative prompt", negative_prompt_scores)
 
