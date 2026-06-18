@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import torch
 
 from config import MODEL_NAME, OUTPUT_PNG_DIR
+from output_utils import save_figure_if_changed
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
@@ -119,7 +120,7 @@ def analyze_parameters(model) -> None:
     ax2.set_title("Parameter Distribution")
 
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / "parameterverteilung.png", dpi=120)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / "parameterverteilung.png", dpi=120)
     plt.close()
 
     print(f"\n{'Component':<25} {'Params':>12}   {'Share':>6}")

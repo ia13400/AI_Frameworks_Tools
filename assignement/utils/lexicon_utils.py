@@ -1,4 +1,3 @@
-import json
 import re
 from pathlib import Path
 
@@ -22,6 +21,7 @@ from plotting_utils import (
     plot_sentiment_challenge_category_confusion_matrices,
     plot_sentiment_challenge_category_heatmap,
 )
+from output_utils import write_json_if_changed, write_text_if_changed
 
 
 NLTK_DATA_DIR = INPUT_DIR / "nltk_data"
@@ -416,10 +416,7 @@ def write_top_token_report(results, prompt_suffix=None, report_path=None):
             ]
         )
 
-    report_path.write_text(
-        "\n".join(lines) + "\n",
-        encoding="utf-8",
-    )
+    write_text_if_changed(report_path, "\n".join(lines) + "\n")
 
 
 def top_k_next_tokens_for_prompts(
@@ -492,10 +489,7 @@ def top_k_next_tokens_for_prompts(
                 }
             )
 
-    paths["json"].write_text(
-        json.dumps(results, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    write_json_if_changed(paths["json"], results)
     write_top_token_report(
         results,
         prompt_suffix=prompt_suffix,
@@ -822,10 +816,7 @@ def export_sentiment_words_json(items, sentiment: str, output_path: Path) -> Non
         ],
     }
 
-    output_path.write_text(
-        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    write_json_if_changed(output_path, payload)
 
 
 def prepare_hu_liu_sentiment_words(tokenizer, embedding_matrix):

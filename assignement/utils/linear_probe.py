@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
 
 from config import FLAT_PAIRS_PATH, PROBE_SPLIT_PATH
 from model_utils import section
+from output_utils import write_json_if_changed
 from plotting_utils import (
     plot_logistic_regression_probabilities,
     plot_logistic_regression_sentiment_axis,
@@ -80,10 +81,7 @@ def load_or_create_probe_split(positive_words, negative_words):
             "train": train_words,
             "test": test_words,
         }
-        PROBE_SPLIT_PATH.write_text(
-            json.dumps(split_payload, indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
+        write_json_if_changed(PROBE_SPLIT_PATH, split_payload)
         print(f"\nSaved fixed logistic-regression split to {PROBE_SPLIT_PATH}")
 
     probe_words = train_words + test_words

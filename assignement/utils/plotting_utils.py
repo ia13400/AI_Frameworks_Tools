@@ -15,6 +15,7 @@ from config import (
     SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
     SENTIMENT_CHALLENGE_HEATMAP_PATH,
 )
+from output_utils import save_figure_if_changed
 
 
 matplotlib.rcParams["figure.dpi"] = 100
@@ -79,9 +80,8 @@ def plot_sentiment_challenge_category_heatmap(
     ax.tick_params(axis="y", labelsize=10)
 
     plt.tight_layout()
-    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved plot: {output_path.name}")
     return heatmap_counts
 
 
@@ -155,9 +155,8 @@ def plot_sentiment_challenge_category_confusion_matrices(
         title += f"\nPrompt suffix: {prompt_suffix!r}"
     fig.suptitle(title, fontsize=16, y=0.996)
     plt.tight_layout(rect=(0, 0, 1, 0.985))
-    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved plot: {output_path.name}")
 
 
 def plot_sentiment_challenge_category_accuracy(
@@ -280,9 +279,8 @@ def plot_sentiment_challenge_category_accuracy(
     ax_right.set_ylabel("Annotation category")
 
     plt.tight_layout()
-    plt.savefig(output_path, dpi=140, bbox_inches="tight")
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved plot: {output_path.name}")
 
 
 def representative_labels(group, n=8):
@@ -348,9 +346,8 @@ def plot_global_pca(sentiment_words, positive_words, negative_words, vectors):
     ax.grid(alpha=0.2)
 
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / "hu_liu_opinion_embeddings.png", dpi=120)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / "hu_liu_opinion_embeddings.png", dpi=120)
     plt.close()
-    print("\nSaved plot: hu_liu_opinion_embeddings.png")
 
     return pca
 
@@ -383,9 +380,8 @@ def plot_pca_histogram(positive_words, negative_words):
     ax.grid(axis="y", alpha=0.2)
 
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / "hu_liu_opinion_histogram.png", dpi=120)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / "hu_liu_opinion_histogram.png", dpi=120)
     plt.close()
-    print("Saved plot: hu_liu_opinion_histogram.png")
 
 
 def plot_field_pca_panels(pairs_by_field, embedding_matrix, pca):
@@ -480,9 +476,8 @@ def plot_field_pca_panels(pairs_by_field, embedding_matrix, pca):
     fig.supxlabel("PCA dimension 1")
     fig.supylabel("PCA dimension 2")
     plt.tight_layout(rect=(0, 0, 1, 0.935))
-    plt.savefig(OUTPUT_PNG_DIR / "hu_liu_field_embedding_panels.png", dpi=130)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / "hu_liu_field_embedding_panels.png", dpi=130)
     plt.close()
-    print("Saved plot: hu_liu_field_embedding_panels.png")
 
 
 def plot_embedding_norms(items, embedding_matrix, filename, title):
@@ -526,9 +521,8 @@ def plot_embedding_norms(items, embedding_matrix, filename, title):
         ax.axhline(len(positive_rows) - 0.5, color="#404040", linewidth=1.3)
 
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / filename, dpi=130)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / filename, dpi=130)
     plt.close()
-    print(f"Saved plot: {filename}")
 
 
 def plot_embedding_norms_by_field_boxes(fields, embedding_matrix, filename):
@@ -586,9 +580,8 @@ def plot_embedding_norms_by_field_boxes(fields, embedding_matrix, filename):
     fig.suptitle("L2 norms of Hu & Liu sentiment word embeddings by field", fontsize=15, y=0.995)
     fig.supxlabel("L2 norm")
     plt.tight_layout(rect=(0, 0, 1, 0.975))
-    plt.savefig(OUTPUT_PNG_DIR / filename, dpi=130)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / filename, dpi=130)
     plt.close()
-    print(f"Saved plot: {filename}")
 
 
 def plot_sentiment_projection(rows, field_labels, filename, title, figsize):
@@ -659,9 +652,8 @@ def plot_sentiment_projection(rows, field_labels, filename, title, figsize):
     )
     ax.grid(axis="x", alpha=0.22)
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / filename, dpi=130)
+    save_figure_if_changed(fig, OUTPUT_PNG_DIR / filename, dpi=130)
     plt.close()
-    print(f"Saved plot: {filename}")
 
 
 def plot_logistic_regression_probabilities(probability_rows):
@@ -682,9 +674,12 @@ def plot_logistic_regression_probabilities(probability_rows):
     ax.set_title("Linear probe positive-class probabilities for field-pair words")
     ax.grid(axis="x", alpha=0.22)
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / "logistic_regression_field_word_probabilities.png", dpi=130)
+    save_figure_if_changed(
+        fig,
+        OUTPUT_PNG_DIR / "logistic_regression_field_word_probabilities.png",
+        dpi=130,
+    )
     plt.close()
-    print("Saved plot: logistic_regression_field_word_probabilities.png")
 
 def plot_logistic_regression_sentiment_axis(
     probability_rows,
@@ -734,7 +729,7 @@ def plot_logistic_regression_sentiment_axis(
         for row in selected_rows
     ]
 
-    plt.figure(
+    fig = plt.figure(
         figsize=(12, max(8, len(selected_rows) * 0.25))
     )
 
@@ -764,6 +759,9 @@ def plot_logistic_regression_sentiment_axis(
     plt.legend()
 
     plt.tight_layout()
-    plt.savefig(OUTPUT_PNG_DIR / "logistic_regression_sentiment_axis.png", dpi=130)
+    save_figure_if_changed(
+        fig,
+        OUTPUT_PNG_DIR / "logistic_regression_sentiment_axis.png",
+        dpi=130,
+    )
     plt.close()
-    print("Saved plot: logistic_regression_sentiment_axis.png")
