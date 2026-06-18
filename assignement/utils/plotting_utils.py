@@ -2,6 +2,8 @@ import matplotlib
 
 matplotlib.use("Agg")
 
+import textwrap
+
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -32,6 +34,16 @@ def set_even_layer_xticks(ax, layer_count):
     ticks = np.arange(2, layer_count, 2)
     ax.set_xticks(ticks)
     ax.set_xticklabels([str(tick) for tick in ticks])
+
+
+def wrapped_prompt_text(positive_prompt, negative_prompt, width=125):
+    """Return wrapped prompt text for compact figure annotations."""
+    return "\n".join(
+        [
+            textwrap.fill(f"Positive prompt: {positive_prompt}", width=width),
+            textwrap.fill(f"Negative prompt: {negative_prompt}", width=width),
+        ]
+    )
 
 
 def plot_sentiment_challenge_category_heatmap(
@@ -333,8 +345,17 @@ def plot_logit_lens_sentiment_probability_mass(
     ax.set_title(title)
     ax.grid(True, alpha=0.28)
     ax.legend(fontsize=8.5)
+    fig.text(
+        0.08,
+        0.035,
+        wrapped_prompt_text(positive_prompt, negative_prompt),
+        fontsize=8.2,
+        ha="left",
+        va="bottom",
+        bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
+    )
 
-    plt.tight_layout()
+    plt.tight_layout(rect=(0, 0.16, 1, 1))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
@@ -569,6 +590,7 @@ def plot_logit_lens_topk_heatmap(
     title,
     filename_or_path=LOGIT_LENS_POSITIVE_HEATMAP_PATH,
     top_k=5,
+    prompt_text=None,
 ):
     """Save a heatmap of top-k logit-lens tokens for each layer."""
     output_path = (
@@ -597,6 +619,16 @@ def plot_logit_lens_topk_heatmap(
     ax.set_xticklabels([f"Top-{rank}" for rank in range(1, top_k + 1)])
     ax.set_yticks(range(len(layer_results)))
     ax.set_yticklabels(range(len(layer_results)))
+    if prompt_text:
+        fig.text(
+            0.08,
+            0.035,
+            textwrap.fill(f"Prompt: {prompt_text}", width=125),
+            fontsize=8.2,
+            ha="left",
+            va="bottom",
+            bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
+        )
 
     max_probability = prob_matrix.max() if prob_matrix.size else 0.0
     for row_index in range(prob_matrix.shape[0]):
@@ -614,7 +646,7 @@ def plot_logit_lens_topk_heatmap(
             )
 
     fig.colorbar(image, ax=ax, label="Probability")
-    plt.tight_layout()
+    plt.tight_layout(rect=(0, 0.10 if prompt_text else 0, 1, 1))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path

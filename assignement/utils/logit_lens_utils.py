@@ -613,17 +613,19 @@ def run_cad_logit_difference_aggregation(
     return aggregation
 
 
-def save_logit_lens_heatmaps(positive_layer_results, negative_layer_results):
+def save_logit_lens_heatmaps(positive_layer_results, negative_layer_results, prompt_pair=None):
     """Save positive and negative top-k logit-lens heatmaps."""
     plot_logit_lens_topk_heatmap(
         positive_layer_results,
         "Logit Lens Heatmap: Top-5 Tokens by Layer for Positive Prompt",
         filename_or_path=LOGIT_LENS_POSITIVE_HEATMAP_PATH,
         top_k=5,
+        prompt_text=prompt_pair["positive"] if prompt_pair else None,
     )
     plot_logit_lens_topk_heatmap(
         negative_layer_results,
         "Logit Lens Heatmap: Top-5 Tokens by Layer for Negative Prompt",
         filename_or_path=LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
         top_k=5,
+        prompt_text=prompt_pair["negative"] if prompt_pair else None,
     )
