@@ -10,9 +10,9 @@ from sklearn.decomposition import PCA
 
 from config import (
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
-    LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
-    LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
+    LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
+    LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
     LOGIT_LENS_TARGET_PROBABILITY_PATH,
     OUTPUT_PNG_DIR,
@@ -339,121 +339,133 @@ def plot_logit_lens_sentiment_probability_mass(
     return output_path
 
 
-def plot_logit_lens_sentiment_logit_scores(
-    positive_scores,
-    negative_scores,
-    prompt_label,
-    prompt_text,
-    filename_or_path=LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
+def plot_logit_lens_prompt_sentiment_logit_scores(
+    positive_prompt_scores,
+    negative_prompt_scores,
+    positive_prompt_text,
+    negative_prompt_text,
+    filename_or_path=LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
 ):
-    """Save positive-vs-negative Hu & Liu logit scores with shaded difference."""
+    """Save side-by-side positive/negative Hu & Liu logit scores for both prompts."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
         else filename_or_path
     )
-    layers = np.arange(len(positive_scores))
-    positive_scores = np.asarray(positive_scores, dtype=float)
-    negative_scores = np.asarray(negative_scores, dtype=float)
-    logit_differences = positive_scores - negative_scores
+    plot_specs = [
+        ("Positive prompt", positive_prompt_text, positive_prompt_scores),
+        ("Negative prompt", negative_prompt_text, negative_prompt_scores),
+    ]
+    layer_count = len(positive_prompt_scores["positive_scores"])
+    layers = np.arange(layer_count)
 
-    fig, (ax, ax_diff) = plt.subplots(
-        2,
-        1,
-        figsize=(10.5, 7.2),
-        sharex=True,
-        gridspec_kw={"height_ratios": [2.2, 1.0], "hspace": 0.08},
+    fig, axes = plt.subplots(1, 2, figsize=(15.5, 5.8), sharey=True)
+    for ax, (prompt_label, prompt_text, scores) in zip(axes, plot_specs):
+        positive_scores = np.asarray(scores["positive_scores"], dtype=float)
+        negative_scores = np.asarray(scores["negative_scores"], dtype=float)
+        ax.plot(layers, positive_scores, marker="o", color="#2E8B57", label="Positive Hu & Liu logit score")
+        ax.plot(layers, negative_scores, marker="o", color="#B22222", label="Negative Hu & Liu logit score")
+        ax.fill_between(
+            layers,
+            positive_scores,
+            negative_scores,
+            where=positive_scores >= negative_scores,
+            color="#2E8B57",
+            alpha=0.18,
+            interpolate=True,
+            label="positive > negative",
+        )
+        ax.fill_between(
+            layers,
+            positive_scores,
+            negative_scores,
+            where=positive_scores < negative_scores,
+            color="#B22222",
+            alpha=0.16,
+            interpolate=True,
+            label="negative > positive",
+        )
+        ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+        set_even_layer_xticks(ax, layer_count)
+        ax.set_xlabel("Layer index (0 = embedding)")
+        ax.set_title(prompt_label)
+        ax.text(
+            0.01,
+            0.02,
+            f"Prompt: {prompt_text}",
+            transform=ax.transAxes,
+            fontsize=8.0,
+            va="bottom",
+            ha="left",
+            bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},
+        )
+        ax.grid(True, alpha=0.28)
+
+    axes[0].set_ylabel("Sum of Hu & Liu logits")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, fontsize=8.5, loc="upper center", ncol=4)
+    fig.suptitle("Logit Lens Sentiment Scores by Layer", fontsize=14, y=0.99)
+
+    plt.tight_layout(rect=(0, 0, 1, 0.91))
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_logit_lens_prompt_logit_differences(
+    positive_prompt_difference,
+    negative_prompt_difference,
+    positive_prompt_text,
+    negative_prompt_text,
+    filename_or_path=LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
+):
+    """Save both prompts' Hu & Liu logit-difference curves in one image."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
     )
+    layers = np.arange(len(positive_prompt_difference))
+    positive_prompt_difference = np.asarray(positive_prompt_difference, dtype=float)
+    negative_prompt_difference = np.asarray(negative_prompt_difference, dtype=float)
+
+    fig, ax = plt.subplots(figsize=(10.8, 5.8))
     ax.plot(
         layers,
-        positive_scores,
+        positive_prompt_difference,
         marker="o",
         color="#2E8B57",
-        label="Positive Hu & Liu logit score",
+        linewidth=2.0,
+        label="Positive prompt logit difference",
     )
     ax.plot(
         layers,
-        negative_scores,
-        marker="o",
+        negative_prompt_difference,
+        marker="s",
         color="#B22222",
-        label="Negative Hu & Liu logit score",
+        linewidth=2.0,
+        label="Negative prompt logit difference",
     )
     ax.fill_between(
         layers,
-        positive_scores,
-        negative_scores,
-        where=positive_scores >= negative_scores,
-        color="#2E8B57",
+        positive_prompt_difference,
+        negative_prompt_difference,
+        color="#7B68EE",
         alpha=0.18,
         interpolate=True,
-        label="positive > negative",
-    )
-    ax.fill_between(
-        layers,
-        positive_scores,
-        negative_scores,
-        where=positive_scores < negative_scores,
-        color="#B22222",
-        alpha=0.16,
-        interpolate=True,
-        label="negative > positive",
+        label="Difference between prompt curves",
     )
     ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
-    set_even_layer_xticks(ax, len(positive_scores))
-    ax.tick_params(axis="x", labelbottom=False)
-    ax.set_ylabel("Sum of Hu & Liu logits")
-    ax.set_title(f"Logit Lens Sentiment Score by Layer: {prompt_label}")
-
-    ax_diff.plot(
-        layers,
-        logit_differences,
-        color="#4B4B4B",
-        linestyle="--",
-        linewidth=2.0,
-        marker="s",
-        markersize=4,
-        label="Logit difference",
-    )
-    ax_diff.axhline(0, color="#4B4B4B", linewidth=0.8, alpha=0.45)
-    ax_diff.set_xlabel("Layer index (0 = embedding)")
-    set_even_layer_xticks(ax_diff, len(positive_scores))
-    ax_diff.set_ylabel("Logit difference\n(pos - neg)")
-    if logit_differences.size:
-        peak_index = int(np.argmax(np.abs(logit_differences)))
-        peak_value = float(logit_differences[peak_index])
-        ax_diff.scatter(
-            [layers[peak_index]],
-            [peak_value],
-            color="#111111",
-            s=42,
-            zorder=5,
-        )
-        y_offset = 10 if peak_value >= 0 else -18
-        ax_diff.annotate(
-            f"Layer {layers[peak_index]}\n{peak_value:.2f}",
-            xy=(layers[peak_index], peak_value),
-            xytext=(8, y_offset),
-            textcoords="offset points",
-            ha="left",
-            va="bottom" if peak_value >= 0 else "top",
-            fontsize=8.5,
-            bbox={
-                "boxstyle": "round,pad=0.25",
-                "facecolor": "white",
-                "alpha": 0.88,
-                "edgecolor": "#B0B0B0",
-            },
-            arrowprops={"arrowstyle": "->", "color": "#4B4B4B", "linewidth": 0.8},
-        )
-    ax_diff.grid(True, alpha=0.28)
-    ax_diff.legend(fontsize=8.5, loc="best")
-
+    set_even_layer_xticks(ax, len(layers))
+    ax.set_xlabel("Layer index (0 = embedding)")
+    ax.set_ylabel("Logit difference (positive - negative)")
+    ax.set_title("Hu & Liu Logit Difference by Layer")
     ax.text(
         0.01,
         0.02,
-        f"Prompt: {prompt_text}",
+        f"Positive prompt: {positive_prompt_text}\nNegative prompt: {negative_prompt_text}",
         transform=ax.transAxes,
-        fontsize=8.5,
+        fontsize=8.3,
         va="bottom",
         ha="left",
         bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},

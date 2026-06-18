@@ -1,10 +1,10 @@
 import torch
 
 from config import (
-    LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
-    LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
+    LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
+    LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
     LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
 )
@@ -13,7 +13,8 @@ from lexicon_utils import (
     prepare_hu_liu_lookup_state,
 )
 from plotting_utils import (
-    plot_logit_lens_sentiment_logit_scores,
+    plot_logit_lens_prompt_logit_differences,
+    plot_logit_lens_prompt_sentiment_logit_scores,
     plot_logit_lens_sentiment_probability_mass,
     plot_logit_lens_topk_heatmap,
 )
@@ -414,10 +415,10 @@ def analyze_hu_liu_logit_sentiment_scores(
     model,
     sentiment_state,
     prompt_pair,
-    positive_filename_or_path=LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
-    negative_filename_or_path=LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
+    scores_filename_or_path=LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
+    difference_filename_or_path=LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
 ):
-    """Plot Hu & Liu positive/negative logit scores for both prompt directions."""
+    """Plot Hu & Liu logit scores and prompt-pair logit differences."""
     positive_prompt_scores = hu_liu_logit_scores_per_layer(
         positive_hidden_states,
         model,
@@ -437,19 +438,19 @@ def analyze_hu_liu_logit_sentiment_scores(
     print_logit_score_summary("Positive prompt", positive_prompt_scores)
     print_logit_score_summary("Negative prompt", negative_prompt_scores)
 
-    plot_logit_lens_sentiment_logit_scores(
-        positive_prompt_scores["positive_scores"],
-        positive_prompt_scores["negative_scores"],
-        "Positive prompt",
+    plot_logit_lens_prompt_sentiment_logit_scores(
+        positive_prompt_scores,
+        negative_prompt_scores,
         prompt_pair["positive"],
-        filename_or_path=positive_filename_or_path,
-    )
-    plot_logit_lens_sentiment_logit_scores(
-        negative_prompt_scores["positive_scores"],
-        negative_prompt_scores["negative_scores"],
-        "Negative prompt",
         prompt_pair["negative"],
-        filename_or_path=negative_filename_or_path,
+        filename_or_path=scores_filename_or_path,
+    )
+    plot_logit_lens_prompt_logit_differences(
+        positive_prompt_scores["logit_differences"],
+        negative_prompt_scores["logit_differences"],
+        prompt_pair["positive"],
+        prompt_pair["negative"],
+        filename_or_path=difference_filename_or_path,
     )
 
     return {
