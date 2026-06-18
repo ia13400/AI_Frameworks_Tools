@@ -1,66 +1,19 @@
 import torch
 
 from config import (
+    LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
+    LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
-    LOGIT_LENS_TARGET_PROBABILITY_PATH,
 )
 from lexicon_utils import (
     classify_top_tokens_by_hu_liu,
     prepare_hu_liu_lookup_state,
 )
 from plotting_utils import (
-    plot_logit_lens_target_probability,
+    plot_logit_lens_sentiment_probability_mass,
     plot_logit_lens_topk_heatmap,
 )
-
-
-def select_hu_liu_target_records(
-    tokenizer=None,
-    sentiment_state=None,
-    positive_word: str = "great",
-    negative_word: str = "terrible",
-):
-    """Select positive and negative target tokens from filtered Hu & Liu records."""
-    if sentiment_state is None:
-        if tokenizer is None:
-            raise ValueError("Provide either tokenizer or sentiment_state.")
-        sentiment_state = prepare_hu_liu_sentiment_state(tokenizer)
-
-    words_by_sentiment = {
-        "positive": sentiment_state["positive_words"],
-        "negative": sentiment_state["negative_words"],
-    }
-
-    def select_word(sentiment, preferred_word):
-        preferred_word = preferred_word.lower()
-        selected = next(
-            (
-                item
-                for item in words_by_sentiment[sentiment]
-                if item["word"] == preferred_word
-            ),
-            None,
-        )
-        if selected is None:
-            selected = sorted(
-                words_by_sentiment[sentiment],
-                key=lambda item: item["word"],
-            )[0]
-        return selected
-
-    target_records = {
-        "positive": select_word("positive", positive_word),
-        "negative": select_word("negative", negative_word),
-    }
-    print(
-        "Hu & Liu target tokens:",
-        f"positive={target_records['positive']['token']!r} "
-        f"({target_records['positive']['word']}),",
-        f"negative={target_records['negative']['token']!r} "
-        f"({target_records['negative']['word']})",
-    )
-    return target_records
 
 
 def prepare_hu_liu_sentiment_state(tokenizer):
@@ -182,100 +135,211 @@ def print_top_tokens_for_final_layer(prompt: str, layer_results, sentiment_state
     )
 
 
-def print_layer_top1_table(positive_layer_results, negative_layer_results):
+def hu_liu_marker(top_token_item, sentiment_state):
+    """Return a compact marker when one token matches Hu & Liu."""
+    if sentiment_state is None:
+        return ""
+
+    _, _, matched_tokens = classify_top_tokens_by_hu_liu(
+        [top_token_item],
+        sentiment_state["hu_liu_lookup"],
+    )
+    if not matched_tokens:
+        return ""
+
+    match = matched_tokens[0]
+    return f" <-- Hu & Liu: {match['hu_liu_word']} ({match['sentiment']})"
+
+
+def print_layer_top1_table(positive_layer_results, negative_layer_results, sentiment_state=None):
     """Print a compact positive-vs-negative top-1 table for all layers."""
     print(
         f"{'Layer':<8} | "
-        f"{'Top-1 Positive':<15} | "
+        f"{'Top-1 Positive':<45} | "
         f"{'P(Positive)':<11} | "
-        f"{'Top-1 Negative':<15} | "
+        f"{'Top-1 Negative':<45} | "
         f"{'P(Negative)':<11}"
     )
-    print("-" * 82)
+    print("-" * 142)
     for layer_index, (positive_layer, negative_layer) in enumerate(
         zip(positive_layer_results, negative_layer_results)
     ):
         positive_top = positive_layer[0]
         negative_top = negative_layer[0]
+        positive_text = f"{positive_top['token']!r}{hu_liu_marker(positive_top, sentiment_state)}"
+        negative_text = f"{negative_top['token']!r}{hu_liu_marker(negative_top, sentiment_state)}"
         print(
             f"{layer_index:<8} | "
-            f"{positive_top['token']!r:<15} | "
+            f"{positive_text:<45} | "
             f"{positive_top['probability']:<11.4f} | "
-            f"{negative_top['token']!r:<15} | "
+            f"{negative_text:<45} | "
             f"{negative_top['probability']:<11.4f}"
         )
 
 
-def first_layer_with_token(layer_results, target_token: str, top_n: int):
-    """Return the first layer where target_token appears in the top-n tokens."""
+def first_hu_liu_sentiment_token(layer_results, sentiment_state, sentiment: str, top_n: int = 1):
+    """Find the first layer where any top-n token appears in Hu & Liu."""
     for layer_index, results in enumerate(layer_results):
-        tokens = [item["token"] for item in results[:top_n]]
-        if target_token in tokens:
-            return layer_index
+        _, _, matched_tokens = classify_top_tokens_by_hu_liu(
+            results[:top_n],
+            sentiment_state["hu_liu_lookup"],
+        )
+        for match in matched_tokens:
+            if match["sentiment"] == sentiment:
+                return {
+                    "layer": layer_index,
+                    "token": match["token"],
+                    "word": match["hu_liu_word"],
+                    "sentiment": match["sentiment"],
+                    "probability": match["probability"],
+                }
     return None
 
 
-def print_target_token_findings(layer_results, target_token: str):
-    """Print when a target token first appears as top-1 and top-5."""
-    top1_layer = first_layer_with_token(layer_results, target_token, top_n=1)
-    top5_layer = first_layer_with_token(layer_results, target_token, top_n=5)
+def print_first_hu_liu_sentiment_token(layer_results, sentiment_state, sentiment: str, top_n: int = 1):
+    """Print the first layer where a Hu & Liu sentiment token appears."""
+    finding = first_hu_liu_sentiment_token(
+        layer_results,
+        sentiment_state,
+        sentiment=sentiment,
+        top_n=top_n,
+    )
+    if finding is None:
+        print(f"No Hu & Liu {sentiment} token appears in the Top-{top_n} of any layer.")
+        return None
 
-    if top1_layer is None:
-        print(f"{target_token!r} is never Top-1.")
-    else:
-        print(f"{target_token!r} is first Top-1 in layer {top1_layer}.")
-
-    if top5_layer is None:
-        print(f"{target_token!r} is never in the Top-5.")
-    else:
-        print(f"{target_token!r} first appears in the Top-5 in layer {top5_layer}.")
-
-
-def token_probability_per_layer(hidden_states, model, token_id: int):
-    """Compute one token's logit-lens probability for every layer."""
-    probabilities = []
-    for hidden_state in hidden_states:
-        last_token_hidden_state = hidden_state[0, -1, :]
-        logits = last_token_hidden_state @ model.embed_out.weight.T
-        if torch.isnan(logits).any():
-            raise ValueError("NaN detected in logits. Check model dtype/device.")
-        probabilities.append(float(torch.softmax(logits.float(), dim=-1)[token_id]))
-    return probabilities
+    print(
+        f"First Hu & Liu {sentiment} token in Top-{top_n}: "
+        f"layer={finding['layer']}, "
+        f"token={finding['token']!r}, "
+        f"word={finding['word']}, "
+        f"probability={finding['probability']:.4f}"
+    )
+    return finding
 
 
-def analyze_target_token_probability(
-    positive_hidden_states,
-    negative_hidden_states,
-    model,
-    tokenizer,
-    prompt_pair,
-    target_token: str,
+def hu_liu_sentiment_probability_mass_from_top_tokens(
+    layer_results,
+    sentiment_state,
+    sentiment: str,
+    top_n: int = 5,
 ):
-    """Compute and plot a target token's probability over layers."""
-    target_token_id = tokenizer.encode(target_token, add_special_tokens=False)[0]
-    print("Target token:", repr(target_token))
-    print("Target token ID:", target_token_id)
-    print("Decoded check:", tokenizer.decode([target_token_id]))
+    """Sum probability mass of matching Hu & Liu sentiment tokens in each layer's top-n."""
+    probability_mass = []
+    first_finding = None
 
-    positive_probs = token_probability_per_layer(positive_hidden_states, model, target_token_id)
-    negative_probs = token_probability_per_layer(
-        negative_hidden_states,
-        model,
-        target_token_id,
+    for layer_index, results in enumerate(layer_results):
+        _, _, matched_tokens = classify_top_tokens_by_hu_liu(
+            results[:top_n],
+            sentiment_state["hu_liu_lookup"],
+        )
+        sentiment_matches = [
+            match
+            for match in matched_tokens
+            if match["sentiment"] == sentiment
+        ]
+        probability_mass.append(
+            sum(match["probability"] for match in sentiment_matches)
+        )
+
+        if first_finding is None and sentiment_matches:
+            first_finding = {
+                "layer": layer_index,
+                "matches": sentiment_matches,
+                "probability_mass": probability_mass[-1],
+            }
+
+    return probability_mass, first_finding
+
+
+def print_topn_sentiment_finding(label: str, sentiment: str, top_n: int, finding):
+    """Print the first layer where a top-n Hu & Liu sentiment match appears."""
+    if finding is None:
+        print(f"{label}: no Hu & Liu {sentiment} token appears in the Top-{top_n}.")
+        return
+
+    match_text = ", ".join(
+        (
+            f"{match['token']!r} -> {match['hu_liu_word']} "
+            f"({match['probability']:.4f})"
+        )
+        for match in finding["matches"]
     )
-    print("Positive prompt probabilities:", positive_probs)
-    print("Negative prompt probabilities:", negative_probs)
-
-    plot_logit_lens_target_probability(
-        positive_probs,
-        negative_probs,
-        target_token,
-        prompt_pair["positive"],
-        prompt_pair["negative"],
-        filename_or_path=LOGIT_LENS_TARGET_PROBABILITY_PATH,
+    print(
+        f"{label}: first Hu & Liu {sentiment} Top-{top_n} match "
+        f"in layer {finding['layer']} "
+        f"(mass={finding['probability_mass']:.4f}): {match_text}"
     )
-    return positive_probs, negative_probs
 
+
+def analyze_hu_liu_sentiment_probability_mass(
+    positive_layer_results,
+    negative_layer_results,
+    sentiment_state,
+    prompt_pair,
+    top_n: int = 5,
+    positive_filename_or_path=LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH,
+    negative_filename_or_path=LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH,
+):
+    """Create positive-word and negative-word Top-N mass analyses for a prompt pair."""
+    results = {}
+    plot_paths = {
+        "positive": positive_filename_or_path,
+        "negative": negative_filename_or_path,
+    }
+
+    for sentiment in ["positive", "negative"]:
+        positive_probs, positive_finding = hu_liu_sentiment_probability_mass_from_top_tokens(
+            positive_layer_results,
+            sentiment_state,
+            sentiment=sentiment,
+            top_n=top_n,
+        )
+        negative_probs, negative_finding = hu_liu_sentiment_probability_mass_from_top_tokens(
+            negative_layer_results,
+            sentiment_state,
+            sentiment=sentiment,
+            top_n=top_n,
+        )
+
+        print_topn_sentiment_finding(
+            "Positive prompt",
+            sentiment,
+            top_n,
+            positive_finding,
+        )
+        print_topn_sentiment_finding(
+            "Negative prompt",
+            sentiment,
+            top_n,
+            negative_finding,
+        )
+        print(f"Positive prompt {sentiment} Hu & Liu Top-{top_n} mass:", positive_probs)
+        print(f"Negative prompt {sentiment} Hu & Liu Top-{top_n} mass:", negative_probs)
+
+        plot_logit_lens_sentiment_probability_mass(
+            positive_probs,
+            negative_probs,
+            f"Top-{top_n} {sentiment} Hu & Liu",
+            prompt_pair["positive"],
+            prompt_pair["negative"],
+            filename_or_path=plot_paths[sentiment],
+            positive_label=f"Positive prompt: {sentiment} Hu & Liu Top-{top_n} mass",
+            negative_label=f"Negative prompt: {sentiment} Hu & Liu Top-{top_n} mass",
+            y_label=f"{sentiment.capitalize()} Hu & Liu probability mass in Top-{top_n}",
+            title=(
+                f"Logit Lens: {sentiment.capitalize()} Hu & Liu "
+                f"Mass in Top-{top_n} Tokens"
+            ),
+        )
+        results[sentiment] = {
+            "positive_prompt_mass": positive_probs,
+            "negative_prompt_mass": negative_probs,
+            "positive_prompt_first_match": positive_finding,
+            "negative_prompt_first_match": negative_finding,
+        }
+
+    return results
 
 def save_logit_lens_heatmaps(positive_layer_results, negative_layer_results):
     """Save positive and negative top-k logit-lens heatmaps."""

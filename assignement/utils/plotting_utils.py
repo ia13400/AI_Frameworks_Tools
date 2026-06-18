@@ -24,6 +24,13 @@ from output_utils import save_figure_if_changed
 matplotlib.rcParams["figure.dpi"] = 100
 
 
+def set_even_layer_xticks(ax, layer_count):
+    """Label model layers on even numbers; layer 0 is the embedding state."""
+    ticks = np.arange(2, layer_count, 2)
+    ax.set_xticks(ticks)
+    ax.set_xticklabels([str(tick) for tick in ticks])
+
+
 def plot_sentiment_challenge_category_heatmap(
     category_to_records,
     sentiment_labels,
@@ -88,12 +95,15 @@ def plot_sentiment_challenge_category_heatmap(
     return heatmap_counts
 
 
-def plot_filtered_sentiment_challenge_category_heatmap(category_to_records):
+def plot_filtered_sentiment_challenge_category_heatmap(
+    category_to_records,
+    filename_or_path=FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+):
     """Save the binary positive/negative heatmap for the filtered challenge data."""
     return plot_sentiment_challenge_category_heatmap(
         category_to_records,
         {"negative": "negative", "positive": "positive"},
-        filename_or_path=FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+        filename_or_path=filename_or_path,
         sentiment_key="sentiment",
         title="Filtered Sentiment Challenge Dataset: Categories by Binary Sentiment",
     )
@@ -286,15 +296,19 @@ def plot_sentiment_challenge_category_accuracy(
     plt.close(fig)
 
 
-def plot_logit_lens_target_probability(
+def plot_logit_lens_sentiment_probability_mass(
     positive_probs,
     negative_probs,
-    target_token,
+    sentiment_label,
     positive_prompt,
     negative_prompt,
     filename_or_path=LOGIT_LENS_TARGET_PROBABILITY_PATH,
+    positive_label=None,
+    negative_label=None,
+    y_label=None,
+    title=None,
 ):
-    """Save a line chart of one target-token probability across layers."""
+    """Save a line chart of Hu & Liu sentiment-token probability mass by layer."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
@@ -303,12 +317,17 @@ def plot_logit_lens_target_probability(
     layers = np.arange(len(positive_probs))
 
     fig, ax = plt.subplots(figsize=(10.5, 5.5))
-    ax.plot(layers, positive_probs, marker="o", label=f"Positive: {positive_prompt}")
-    ax.plot(layers, negative_probs, marker="o", label=f"Negative: {negative_prompt}")
-    ax.axhline(y=0.5, linestyle="--", color="#8C8C8C", linewidth=1, label="0.5 reference")
+    positive_label = positive_label or f"Positive: {positive_prompt}"
+    negative_label = negative_label or f"Negative: {negative_prompt}"
+    y_label = y_label or f"P(any {sentiment_label} Hu & Liu token)"
+    title = title or f"Logit Lens: Probability Mass of {sentiment_label} Hu & Liu Tokens"
+
+    ax.plot(layers, positive_probs, marker="o", label=positive_label)
+    ax.plot(layers, negative_probs, marker="o", label=negative_label)
     ax.set_xlabel("Layer index (0 = embedding)")
-    ax.set_ylabel(f"P({target_token!r})")
-    ax.set_title(f"Logit Lens: Probability of {target_token!r} by Layer")
+    set_even_layer_xticks(ax, len(positive_probs))
+    ax.set_ylabel(y_label)
+    ax.set_title(title)
     ax.grid(True, alpha=0.28)
     ax.legend(fontsize=8.5)
 

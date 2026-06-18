@@ -158,6 +158,7 @@ def binary_sentiment_label(gold_label: int):
 def filter_sentiment_challenge_dataset(
     dataset_path: str | Path | None = None,
     plot_heatmap: bool = True,
+    heatmap_path=None,
 ):
     """Remove neutral rows, convert labels to binary sentiment, and optionally plot."""
     records, _ = import_sentiment_challenge_dataset(dataset_path, verbose=False)
@@ -181,26 +182,42 @@ def filter_sentiment_challenge_dataset(
 
     filtered_category_to_records = records_by_challenge_category(filtered_records)
     if plot_heatmap:
-        plot_filtered_sentiment_challenge_category_heatmap(filtered_category_to_records)
+        if heatmap_path is None:
+            plot_filtered_sentiment_challenge_category_heatmap(filtered_category_to_records)
+        else:
+            plot_filtered_sentiment_challenge_category_heatmap(
+                filtered_category_to_records,
+                filename_or_path=heatmap_path,
+            )
     return filtered_records, filtered_category_to_records
 
 
-def import_data_set(dataset_path: str | Path | None = None):
+def import_data_set(dataset_path: str | Path | None = None, heatmap_path=None):
     """Import the original challenge dataset and save its category heatmap PNG."""
     records, category_to_records = import_sentiment_challenge_dataset(
         dataset_path,
         verbose=False,
     )
-    plot_sentiment_challenge_category_heatmap(
-        category_to_records,
-        SENTIMENT_CHALLENGE_LABELS,
-    )
+    if heatmap_path is None:
+        plot_sentiment_challenge_category_heatmap(
+            category_to_records,
+            SENTIMENT_CHALLENGE_LABELS,
+        )
+    else:
+        plot_sentiment_challenge_category_heatmap(
+            category_to_records,
+            SENTIMENT_CHALLENGE_LABELS,
+            filename_or_path=heatmap_path,
+        )
     return records, category_to_records
 
 
-def filter_data_set(dataset_path: str | Path | None = None):
+def filter_data_set(dataset_path: str | Path | None = None, heatmap_path=None):
     """Import, filter to binary sentiment labels, and save the filtered heatmap PNG."""
-    return filter_sentiment_challenge_dataset(dataset_path)
+    return filter_sentiment_challenge_dataset(
+        dataset_path,
+        heatmap_path=heatmap_path,
+    )
 
 
 def form_sentiment_challenge_prompts(filtered_records, sentiment_suffix: str):

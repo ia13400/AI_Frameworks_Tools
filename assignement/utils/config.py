@@ -40,6 +40,12 @@ SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH = (
     OUTPUT_PNG_DIR / "sentiment_challenge_category_accuracy.png"
 )
 LOGIT_LENS_TARGET_PROBABILITY_PATH = OUTPUT_PNG_DIR / "logit_lens_target_probability.png"
+LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH = (
+    OUTPUT_PNG_DIR / "logit_lens_positive_hu_liu_topk_mass.png"
+)
+LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH = (
+    OUTPUT_PNG_DIR / "logit_lens_negative_hu_liu_topk_mass.png"
+)
 LOGIT_LENS_POSITIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_positive_topk_heatmap.png"
 LOGIT_LENS_NEGATIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_negative_topk_heatmap.png"
 
