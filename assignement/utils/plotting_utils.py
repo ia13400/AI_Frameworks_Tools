@@ -418,6 +418,33 @@ def plot_logit_lens_sentiment_logit_scores(
     ax_diff.set_xlabel("Layer index (0 = embedding)")
     set_even_layer_xticks(ax_diff, len(positive_scores))
     ax_diff.set_ylabel("Logit difference\n(pos - neg)")
+    if logit_differences.size:
+        peak_index = int(np.argmax(np.abs(logit_differences)))
+        peak_value = float(logit_differences[peak_index])
+        ax_diff.scatter(
+            [layers[peak_index]],
+            [peak_value],
+            color="#111111",
+            s=42,
+            zorder=5,
+        )
+        y_offset = 10 if peak_value >= 0 else -18
+        ax_diff.annotate(
+            f"Layer {layers[peak_index]}\n{peak_value:.2f}",
+            xy=(layers[peak_index], peak_value),
+            xytext=(8, y_offset),
+            textcoords="offset points",
+            ha="left",
+            va="bottom" if peak_value >= 0 else "top",
+            fontsize=8.5,
+            bbox={
+                "boxstyle": "round,pad=0.25",
+                "facecolor": "white",
+                "alpha": 0.88,
+                "edgecolor": "#B0B0B0",
+            },
+            arrowprops={"arrowstyle": "->", "color": "#4B4B4B", "linewidth": 0.8},
+        )
     ax_diff.grid(True, alpha=0.28)
     ax_diff.legend(fontsize=8.5, loc="best")
 
