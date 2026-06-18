@@ -53,21 +53,28 @@ def normalize_png_bytes(content: bytes) -> bytes:
     return b"".join(chunks)
 
 
-def write_bytes_if_changed(path: str | Path, content: bytes) -> bool:
+def write_bytes_if_changed(path: str | Path, content: bytes, verbose: bool = True) -> bool:
     """Write bytes only when the target file content changes."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
     if path.exists() and path.read_bytes() == content:
-        print(f"Unchanged file: {path.name}")
+        if verbose:
+            print(f"Unchanged file: {path.name}")
         return False
 
     path.write_bytes(content)
-    print(f"Saved file: {path.name}")
+    if verbose:
+        print(f"Saved file: {path.name}")
     return True
 
 
-def write_text_if_changed(path: str | Path, content: str, encoding: str = "utf-8") -> bool:
+def write_text_if_changed(
+    path: str | Path,
+    content: str,
+    encoding: str = "utf-8",
+    verbose: bool = True,
+) -> bool:
     """Write text only when the target file content changes."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -75,13 +82,14 @@ def write_text_if_changed(path: str | Path, content: str, encoding: str = "utf-8
     if path.exists():
         existing = path.read_text(encoding=encoding)
         if normalize_text_content(existing) == normalize_text_content(content):
-            print(f"Unchanged file: {path.name}")
+            if verbose:
+                print(f"Unchanged file: {path.name}")
             return False
 
-    return write_bytes_if_changed(path, content.encode(encoding))
+    return write_bytes_if_changed(path, content.encode(encoding), verbose=verbose)
 
 
-def write_json_if_changed(path: str | Path, payload) -> bool:
+def write_json_if_changed(path: str | Path, payload, verbose: bool = True) -> bool:
     """Write formatted JSON only when the target file content changes."""
     path = Path(path)
     normalized_payload = normalize_json_value(payload)
@@ -92,14 +100,15 @@ def write_json_if_changed(path: str | Path, payload) -> bool:
         except json.JSONDecodeError:
             existing_payload = None
         if normalize_json_value(existing_payload) == normalized_payload:
-            print(f"Unchanged file: {path.name}")
+            if verbose:
+                print(f"Unchanged file: {path.name}")
             return False
 
     content = json.dumps(normalized_payload, indent=2, ensure_ascii=False) + "\n"
-    return write_text_if_changed(path, content, encoding="utf-8")
+    return write_text_if_changed(path, content, encoding="utf-8", verbose=verbose)
 
 
-def save_figure_if_changed(fig, path: str | Path, **savefig_kwargs) -> bool:
+def save_figure_if_changed(fig, path: str | Path, verbose: bool = True, **savefig_kwargs) -> bool:
     """Save a matplotlib figure only when the rendered PNG bytes change."""
     path = Path(path)
     buffer = BytesIO()
@@ -110,7 +119,8 @@ def save_figure_if_changed(fig, path: str | Path, **savefig_kwargs) -> bool:
     if path.exists():
         existing = path.read_bytes()
         if normalize_png_bytes(existing) == normalize_png_bytes(content):
-            print(f"Unchanged file: {path.name}")
+            if verbose:
+                print(f"Unchanged file: {path.name}")
             return False
 
-    return write_bytes_if_changed(path, content)
+    return write_bytes_if_changed(path, content, verbose=verbose)

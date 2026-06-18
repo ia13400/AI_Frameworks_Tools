@@ -45,7 +45,7 @@ def run_forward_pass_with_hidden_states(model, tokenizer, device, prompt: str):
     return outputs.hidden_states
 
 
-def run_prompt_pair_forward_passes(model, tokenizer, device, prompt_pair):
+def run_prompt_pair_forward_passes(model, tokenizer, device, prompt_pair, verbose=True):
     """Run positive and negative prompts and return their hidden states."""
     positive_hidden_states = run_forward_pass_with_hidden_states(
         model,
@@ -59,8 +59,9 @@ def run_prompt_pair_forward_passes(model, tokenizer, device, prompt_pair):
         device,
         prompt_pair["negative"],
     )
-    print_hidden_state_summary(positive_hidden_states, label="Positive prompt")
-    print_hidden_state_summary(negative_hidden_states, label="Negative prompt")
+    if verbose:
+        print_hidden_state_summary(positive_hidden_states, label="Positive prompt")
+        print_hidden_state_summary(negative_hidden_states, label="Negative prompt")
     return positive_hidden_states, negative_hidden_states
 
 
@@ -470,7 +471,7 @@ def clean_cad_text(text: str):
     return html.unescape(text).replace("<br />", " ").strip()
 
 
-def load_cad_sentiment_prompt_pairs(dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH):
+def load_cad_sentiment_prompt_pairs(dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH, verbose=True):
     """Load valid positive/negative CAD prompt pairs from train_paired.tsv."""
     rows_by_batch = {}
     with open(dataset_path, newline="", encoding="utf-8") as file:
@@ -503,7 +504,8 @@ def load_cad_sentiment_prompt_pairs(dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH
             }
         )
 
-    print(f"Loaded valid CAD prompt pairs: {len(prompt_pairs)}")
+    if verbose:
+        print(f"Loaded valid CAD prompt pairs: {len(prompt_pairs)}")
     return prompt_pairs
 
 
@@ -513,18 +515,21 @@ def aggregate_cad_logit_difference_curves(
     device,
     sentiment_state,
     prompt_pairs,
+    print_progress=True,
 ):
     """Compute CAD pair-level logit-difference separation curves."""
     pair_results = []
     separation_curves = []
 
     for index, prompt_pair in enumerate(prompt_pairs, start=1):
-        print(f"CAD pair {index}/{len(prompt_pairs)}: {prompt_pair['id']}")
+        if print_progress:
+            print(f"\rCAD pair {index}/{len(prompt_pairs)}", end="", flush=True)
         positive_hidden_states, negative_hidden_states = run_prompt_pair_forward_passes(
             model,
             tokenizer,
             device,
             prompt_pair,
+            verbose=False,
         )
         positive_scores = hu_liu_logit_scores_per_layer(
             positive_hidden_states,
@@ -555,6 +560,9 @@ def aggregate_cad_logit_difference_curves(
             }
         )
 
+    if print_progress:
+        print()
+
     if not separation_curves:
         raise ValueError("No valid CAD prompt pairs were available for aggregation.")
 
@@ -577,12 +585,14 @@ def run_cad_logit_difference_aggregation(
     dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
     max_pairs=None,
     filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
+    silent=False,
 ):
     """Load CAD pairs, aggregate logit-difference separation, and save the plot."""
-    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path)
+    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=not silent)
     if max_pairs is not None:
         prompt_pairs = prompt_pairs[:max_pairs]
-        print(f"Using first {len(prompt_pairs)} CAD prompt pairs.")
+        if not silent:
+            print(f"Using first {len(prompt_pairs)} CAD prompt pairs.")
 
     aggregation = aggregate_cad_logit_difference_curves(
         model,
@@ -590,12 +600,14 @@ def run_cad_logit_difference_aggregation(
         device,
         sentiment_state,
         prompt_pairs,
+        print_progress=True,
     )
     plot_cad_logit_difference_aggregate(
         aggregation["mean_curve"],
         aggregation["std_curve"],
         aggregation["pair_count"],
         filename_or_path=filename_or_path,
+        verbose=not silent,
     )
     return aggregation
 

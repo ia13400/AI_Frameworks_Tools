@@ -492,6 +492,7 @@ def plot_cad_logit_difference_aggregate(
     std_curve,
     pair_count,
     filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
+    verbose=True,
 ):
     """Save mean CAD logit-difference separation with standard deviation band."""
     output_path = (
@@ -529,7 +530,7 @@ def plot_cad_logit_difference_aggregate(
     ax.legend(fontsize=8.5, loc="best")
 
     plt.tight_layout()
-    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    save_figure_if_changed(fig, output_path, verbose=verbose, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
 
