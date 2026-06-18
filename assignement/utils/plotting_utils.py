@@ -347,7 +347,7 @@ def plot_logit_lens_prompt_sentiment_logit_scores(
     negative_prompt_text,
     filename_or_path=LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
 ):
-    """Save side-by-side positive/negative Hu & Liu logit scores for both prompts."""
+    """Save side-by-side positive/negative Hu & Liu average logit scores for both prompts."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
@@ -364,8 +364,8 @@ def plot_logit_lens_prompt_sentiment_logit_scores(
     for ax, (prompt_label, prompt_text, scores) in zip(axes, plot_specs):
         positive_scores = np.asarray(scores["positive_scores"], dtype=float)
         negative_scores = np.asarray(scores["negative_scores"], dtype=float)
-        ax.plot(layers, positive_scores, marker="o", color="#2E8B57", label="Positive Hu & Liu logit score")
-        ax.plot(layers, negative_scores, marker="o", color="#B22222", label="Negative Hu & Liu logit score")
+        ax.plot(layers, positive_scores, marker="o", color="#2E8B57", label="Positive Hu & Liu average logit")
+        ax.plot(layers, negative_scores, marker="o", color="#B22222", label="Negative Hu & Liu average logit")
         ax.fill_between(
             layers,
             positive_scores,
@@ -402,9 +402,9 @@ def plot_logit_lens_prompt_sentiment_logit_scores(
         )
         ax.grid(True, alpha=0.28)
 
-    axes[0].set_ylabel("Sum of Hu & Liu logits")
+    axes[0].set_ylabel("Average Hu & Liu logit")
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.suptitle("Logit Lens Sentiment Scores by Layer", fontsize=14, y=0.985)
+    fig.suptitle("Logit Lens Average Sentiment Scores by Layer", fontsize=14, y=0.985)
     fig.legend(
         handles,
         labels,
@@ -427,7 +427,7 @@ def plot_logit_lens_prompt_logit_differences(
     negative_prompt_text,
     filename_or_path=LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
 ):
-    """Save both prompts' Hu & Liu logit-difference curves in one image."""
+    """Save prompt LD curves and their LD Gap in one image."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
@@ -436,25 +436,32 @@ def plot_logit_lens_prompt_logit_differences(
     layers = np.arange(len(positive_prompt_difference))
     positive_prompt_difference = np.asarray(positive_prompt_difference, dtype=float)
     negative_prompt_difference = np.asarray(negative_prompt_difference, dtype=float)
+    logit_difference_gap = positive_prompt_difference - negative_prompt_difference
 
-    fig, ax = plt.subplots(figsize=(10.8, 5.8))
-    ax.plot(
+    fig, (ax_curves, ax_gap) = plt.subplots(
+        2,
+        1,
+        figsize=(11.2, 8.0),
+        sharex=True,
+        gridspec_kw={"height_ratios": [2.0, 1.0], "hspace": 0.18},
+    )
+    ax_curves.plot(
         layers,
         positive_prompt_difference,
         marker="o",
         color="#2E8B57",
         linewidth=2.0,
-        label="Positive prompt logit difference",
+        label="Positive prompt average logit difference",
     )
-    ax.plot(
+    ax_curves.plot(
         layers,
         negative_prompt_difference,
         marker="s",
         color="#B22222",
         linewidth=2.0,
-        label="Negative prompt logit difference",
+        label="Negative prompt average logit difference",
     )
-    ax.fill_between(
+    ax_curves.fill_between(
         layers,
         positive_prompt_difference,
         negative_prompt_difference,
@@ -463,23 +470,45 @@ def plot_logit_lens_prompt_logit_differences(
         interpolate=True,
         label="Difference between prompt curves",
     )
-    ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
-    set_even_layer_xticks(ax, len(layers))
-    ax.set_xlabel("Layer index (0 = embedding)")
-    ax.set_ylabel("Logit difference (positive - negative)")
-    ax.set_title("Hu & Liu logit difference by layer")
-    ax.text(
+    ax_curves.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+    ax_curves.set_ylabel("LD = avg pos logit - avg neg logit")
+    ax_curves.set_title("Hu & Liu average logit difference by layer")
+    ax_curves.text(
         0.01,
         0.02,
         f"Positive prompt: {positive_prompt_text}\nNegative prompt: {negative_prompt_text}",
-        transform=ax.transAxes,
+        transform=ax_curves.transAxes,
         fontsize=8.3,
         va="bottom",
         ha="left",
         bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},
     )
-    ax.grid(True, alpha=0.28)
-    ax.legend(fontsize=8.5, loc="best")
+    ax_curves.grid(True, alpha=0.28)
+    ax_curves.legend(fontsize=8.5, loc="best")
+
+    ax_gap.plot(
+        layers,
+        logit_difference_gap,
+        marker="o",
+        color="#3B5BA9",
+        linewidth=2.0,
+        label="LD Gap",
+    )
+    ax_gap.fill_between(
+        layers,
+        logit_difference_gap,
+        0,
+        color="#3B5BA9",
+        alpha=0.16,
+        interpolate=True,
+    )
+    ax_gap.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+    set_even_layer_xticks(ax_gap, len(layers))
+    ax_gap.set_xlabel("Layer index (0 = embedding)")
+    ax_gap.set_ylabel("LD Gap")
+    ax_gap.set_title("Logit Difference Gap: LD(positive prompt) - LD(negative prompt)")
+    ax_gap.grid(True, alpha=0.28)
+    ax_gap.legend(fontsize=8.5, loc="best")
 
     plt.tight_layout()
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
@@ -494,7 +523,7 @@ def plot_cad_logit_difference_aggregate(
     filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
     verbose=True,
 ):
-    """Save mean CAD logit-difference separation with standard deviation band."""
+    """Save mean CAD average-logit-difference separation with standard deviation band."""
     output_path = (
         OUTPUT_PNG_DIR / filename_or_path
         if isinstance(filename_or_path, str)
@@ -511,7 +540,7 @@ def plot_cad_logit_difference_aggregate(
         color="#3B5BA9",
         marker="o",
         linewidth=2.0,
-        label="Mean logit-difference separation",
+        label="Mean average-logit-difference separation",
     )
     ax.fill_between(
         layers,
@@ -524,8 +553,8 @@ def plot_cad_logit_difference_aggregate(
     ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
     set_even_layer_xticks(ax, len(mean_curve))
     ax.set_xlabel("Layer index (0 = embedding)")
-    ax.set_ylabel("Positive-prompt diff minus negative-prompt diff")
-    ax.set_title(f"CAD Sentiment Pairs: Mean Hu & Liu Logit-Difference Separation (n={pair_count})")
+    ax.set_ylabel("LD Gap (LD(positive prompt) - LD(negative prompt))")
+    ax.set_title(f"CAD Sentiment Pairs: Mean Hu & Liu Average-Logit-Difference Separation (n={pair_count})")
     ax.grid(True, alpha=0.28)
     ax.legend(fontsize=8.5, loc="best")
 

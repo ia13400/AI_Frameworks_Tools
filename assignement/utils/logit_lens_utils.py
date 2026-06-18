@@ -354,7 +354,7 @@ def analyze_hu_liu_sentiment_probability_mass(
 
 
 def hu_liu_logit_scores_per_layer(hidden_states, model, sentiment_state):
-    """Calculate summed positive and negative Hu & Liu logits for every layer."""
+    """Calculate average positive and negative Hu & Liu logits for every layer."""
     positive_token_ids = torch.tensor(
         [item["token_id"] for item in sentiment_state["positive_words"]],
         dtype=torch.long,
@@ -378,8 +378,8 @@ def hu_liu_logit_scores_per_layer(hidden_states, model, sentiment_state):
         if torch.isnan(logits).any():
             raise ValueError("NaN detected in logits. Check model dtype/device.")
 
-        positive_score = float(logits[positive_token_ids].float().sum())
-        negative_score = float(logits[negative_token_ids].float().sum())
+        positive_score = float(logits[positive_token_ids].float().mean())
+        negative_score = float(logits[negative_token_ids].float().mean())
         positive_scores.append(positive_score)
         negative_scores.append(negative_score)
         logit_differences.append(positive_score - negative_score)
@@ -392,7 +392,7 @@ def hu_liu_logit_scores_per_layer(hidden_states, model, sentiment_state):
 
 
 def print_logit_score_summary(label: str, score_result):
-    """Print the first layer where the positive/negative logit score wins."""
+    """Print the first layer where the positive/negative average logit score wins."""
     differences = score_result["logit_differences"]
     first_positive_layer = next(
         (index for index, value in enumerate(differences) if value > 0),
@@ -404,7 +404,7 @@ def print_logit_score_summary(label: str, score_result):
     )
     final_difference = differences[-1]
 
-    print(f"{label}: final logit difference (positive - negative) = {final_difference:.4f}")
+    print(f"{label}: final average logit difference (positive - negative) = {final_difference:.4f}")
     if first_positive_layer is None:
         print(f"{label}: positive score is never above negative score.")
     else:
@@ -425,7 +425,7 @@ def analyze_hu_liu_logit_sentiment_scores(
     scores_filename_or_path=LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
     difference_filename_or_path=LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
 ):
-    """Plot Hu & Liu logit scores and prompt-pair logit differences."""
+    """Plot Hu & Liu average logit scores and prompt-pair average logit differences."""
     positive_prompt_scores = hu_liu_logit_scores_per_layer(
         positive_hidden_states,
         model,
@@ -438,9 +438,10 @@ def analyze_hu_liu_logit_sentiment_scores(
     )
 
     print(
-        "Hu & Liu logit score token counts:",
+        "Hu & Liu average logit scores use token counts:",
         f"positive={len(sentiment_state['positive_words'])},",
-        f"negative={len(sentiment_state['negative_words'])}",
+        f"negative={len(sentiment_state['negative_words'])}.",
+        "Each sentiment side is averaged before comparison.",
     )
     print_logit_score_summary("Positive prompt", positive_prompt_scores)
     print_logit_score_summary("Negative prompt", negative_prompt_scores)
@@ -517,7 +518,7 @@ def aggregate_cad_logit_difference_curves(
     prompt_pairs,
     print_progress=True,
 ):
-    """Compute CAD pair-level logit-difference separation curves."""
+    """Compute CAD pair-level average-logit-difference separation curves."""
     pair_results = []
     separation_curves = []
 
@@ -587,7 +588,7 @@ def run_cad_logit_difference_aggregation(
     filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
     silent=False,
 ):
-    """Load CAD pairs, aggregate logit-difference separation, and save the plot."""
+    """Load CAD pairs, aggregate average-logit-difference separation, and save the plot."""
     prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=not silent)
     if max_pairs is not None:
         prompt_pairs = prompt_pairs[:max_pairs]
