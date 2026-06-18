@@ -14,7 +14,6 @@ from lexicon_utils import (
     prepare_hu_liu_sentiment_words,
     single_token_for_running_text,
 )
-from model_utils import section
 from plotting_utils import (
     plot_embedding_norms_by_field_boxes,
     plot_field_pca_panels,
@@ -25,7 +24,6 @@ from plotting_utils import (
 
 
 def run_positive_negative_comparison(model, tokenizer):
-    section(6, "Positiv vs Negativ Vergleich")
     embedding_matrix = model.gpt_neox.embed_in.weight.detach().cpu()
     sentiment_words, positive_words, negative_words, vectors = prepare_hu_liu_sentiment_words(
         tokenizer,
@@ -257,7 +255,6 @@ def run_sentiment_direction_projection(tokenizer, embedding_matrix):
 
 
 def run_token_embedding_visualization(tokenizer, sentiment_state):
-    section(7, "Token-Embeddings visualisieren")
     embedding_matrix = sentiment_state["embedding_matrix"]
     positive_words = sentiment_state["positive_words"]
     negative_words = sentiment_state["negative_words"]

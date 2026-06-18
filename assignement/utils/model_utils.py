@@ -13,16 +13,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 matplotlib.rcParams["figure.dpi"] = 100
 
 
-def section(num: int, chapter_name: str) -> None:
-    """Print a visible chapter separator."""
-    width = 72
-    print("\n" + "=" * width)
-    print(f"  Kapitel {num}: {chapter_name}")
-    print("=" * width)
-
-
 def setup_environment() -> torch.device:
-    section(1, "Installation & Imports")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"PyTorch-Version : {torch.__version__}")
     print(f"Gerät           : {device}")
@@ -30,7 +21,6 @@ def setup_environment() -> torch.device:
 
 
 def load_model_and_tokenizer(device: torch.device):
-    section(2, "Modell und Tokenizer laden")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
@@ -45,7 +35,6 @@ def load_model_and_tokenizer(device: torch.device):
 
 
 def print_architecture_overview(model) -> None:
-    section(3, "Architekturübersicht")
     head_dim = model.config.hidden_size // model.config.num_attention_heads
 
     print("\n--- Architektur-Parameter ---")
@@ -63,8 +52,6 @@ def count_params(module) -> int:
 
 
 def analyze_parameters(model) -> None:
-    section(4, "Parameter-Zählung")
-
     total_params = count_params(model)
     token_embedding_params = count_params(model.gpt_neox.embed_in)
     token_unembedding_params = count_params(model.embed_out)
@@ -157,6 +144,5 @@ def top_k_predictions(prompt: str, model, tokenizer, device: torch.device, k: in
 
 
 def run_top_k_predictions(prompts, model, tokenizer, device: torch.device, k: int = 5) -> None:
-    section(5, "Top-K Vorhersagen")
     for prompt in prompts:
         top_k_predictions(prompt, model, tokenizer, device, k=k)

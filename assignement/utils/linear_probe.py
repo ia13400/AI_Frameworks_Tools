@@ -15,7 +15,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 from config import FLAT_PAIRS_PATH, PROBE_SPLIT_PATH
-from model_utils import section
 from output_utils import write_json_if_changed
 from plotting_utils import (
     plot_logistic_regression_probabilities,
@@ -284,8 +283,6 @@ def cosine_similarity_between_lr_and_good_bad(
     return cosine_similarity
 
 def run_logistic_regression_probe(sentiment_state):
-    section(8, "Logistic Regression Sentiment Linear Probe")
-
     # Logistic regression is used as a linear probe. It tests whether a simple
     # linear decision boundary can separate sentiment labels in embedding space.
     embedding_matrix = sentiment_state["embedding_matrix"]
