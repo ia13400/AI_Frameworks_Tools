@@ -10,7 +10,9 @@ from sklearn.decomposition import PCA
 
 from config import (
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+    LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
+    LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
     LOGIT_LENS_TARGET_PROBABILITY_PATH,
     OUTPUT_PNG_DIR,
@@ -328,6 +330,82 @@ def plot_logit_lens_sentiment_probability_mass(
     set_even_layer_xticks(ax, len(positive_probs))
     ax.set_ylabel(y_label)
     ax.set_title(title)
+    ax.grid(True, alpha=0.28)
+    ax.legend(fontsize=8.5)
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_logit_lens_sentiment_logit_scores(
+    positive_scores,
+    negative_scores,
+    prompt_label,
+    prompt_text,
+    filename_or_path=LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
+):
+    """Save positive-vs-negative Hu & Liu logit scores with shaded difference."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    layers = np.arange(len(positive_scores))
+    positive_scores = np.asarray(positive_scores, dtype=float)
+    negative_scores = np.asarray(negative_scores, dtype=float)
+
+    fig, ax = plt.subplots(figsize=(10.5, 5.5))
+    ax.plot(
+        layers,
+        positive_scores,
+        marker="o",
+        color="#2E8B57",
+        label="Positive Hu & Liu logit score",
+    )
+    ax.plot(
+        layers,
+        negative_scores,
+        marker="o",
+        color="#B22222",
+        label="Negative Hu & Liu logit score",
+    )
+    ax.fill_between(
+        layers,
+        positive_scores,
+        negative_scores,
+        where=positive_scores >= negative_scores,
+        color="#2E8B57",
+        alpha=0.18,
+        interpolate=True,
+        label="positive > negative",
+    )
+    ax.fill_between(
+        layers,
+        positive_scores,
+        negative_scores,
+        where=positive_scores < negative_scores,
+        color="#B22222",
+        alpha=0.16,
+        interpolate=True,
+        label="negative > positive",
+    )
+    ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+    ax.set_xlabel("Layer index (0 = embedding)")
+    set_even_layer_xticks(ax, len(positive_scores))
+    ax.set_ylabel("Sum of Hu & Liu logits")
+    ax.set_title(f"Logit Lens Sentiment Score by Layer: {prompt_label}")
+    ax.text(
+        0.01,
+        0.02,
+        f"Prompt: {prompt_text}",
+        transform=ax.transAxes,
+        fontsize=8.5,
+        va="bottom",
+        ha="left",
+        bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},
+    )
     ax.grid(True, alpha=0.28)
     ax.legend(fontsize=8.5)
 

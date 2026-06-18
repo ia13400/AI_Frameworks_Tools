@@ -1,8 +1,10 @@
 import torch
 
 from config import (
+    LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
+    LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
     LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
 )
@@ -11,6 +13,7 @@ from lexicon_utils import (
     prepare_hu_liu_lookup_state,
 )
 from plotting_utils import (
+    plot_logit_lens_sentiment_logit_scores,
     plot_logit_lens_sentiment_probability_mass,
     plot_logit_lens_topk_heatmap,
 )
@@ -340,6 +343,113 @@ def analyze_hu_liu_sentiment_probability_mass(
         }
 
     return results
+
+
+def hu_liu_logit_scores_per_layer(hidden_states, model, sentiment_state):
+    """Calculate summed positive and negative Hu & Liu logits for every layer."""
+    positive_token_ids = torch.tensor(
+        [item["token_id"] for item in sentiment_state["positive_words"]],
+        dtype=torch.long,
+        device=model.embed_out.weight.device,
+    )
+    negative_token_ids = torch.tensor(
+        [item["token_id"] for item in sentiment_state["negative_words"]],
+        dtype=torch.long,
+        device=model.embed_out.weight.device,
+    )
+
+    positive_scores = []
+    negative_scores = []
+    logit_differences = []
+
+    for hidden_state in hidden_states:
+        last_token_hidden_state = hidden_state[0, -1, :]
+        logits = last_token_hidden_state @ model.embed_out.weight.T
+        if torch.isnan(logits).any():
+            raise ValueError("NaN detected in logits. Check model dtype/device.")
+
+        positive_score = float(logits[positive_token_ids].float().sum())
+        negative_score = float(logits[negative_token_ids].float().sum())
+        positive_scores.append(positive_score)
+        negative_scores.append(negative_score)
+        logit_differences.append(positive_score - negative_score)
+
+    return {
+        "positive_scores": positive_scores,
+        "negative_scores": negative_scores,
+        "logit_differences": logit_differences,
+    }
+
+
+def print_logit_score_summary(label: str, score_result):
+    """Print the first layer where the positive/negative logit score wins."""
+    differences = score_result["logit_differences"]
+    first_positive_layer = next(
+        (index for index, value in enumerate(differences) if value > 0),
+        None,
+    )
+    first_negative_layer = next(
+        (index for index, value in enumerate(differences) if value < 0),
+        None,
+    )
+    final_difference = differences[-1]
+
+    print(f"{label}: final logit difference (positive - negative) = {final_difference:.4f}")
+    if first_positive_layer is None:
+        print(f"{label}: positive score is never above negative score.")
+    else:
+        print(f"{label}: positive score first exceeds negative score in layer {first_positive_layer}.")
+
+    if first_negative_layer is None:
+        print(f"{label}: negative score is never above positive score.")
+    else:
+        print(f"{label}: negative score first exceeds positive score in layer {first_negative_layer}.")
+
+
+def analyze_hu_liu_logit_sentiment_scores(
+    positive_hidden_states,
+    negative_hidden_states,
+    model,
+    sentiment_state,
+    prompt_pair,
+    positive_filename_or_path=LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH,
+    negative_filename_or_path=LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH,
+):
+    """Plot Hu & Liu positive/negative logit scores for both prompt directions."""
+    positive_prompt_scores = hu_liu_logit_scores_per_layer(
+        positive_hidden_states,
+        model,
+        sentiment_state,
+    )
+    negative_prompt_scores = hu_liu_logit_scores_per_layer(
+        negative_hidden_states,
+        model,
+        sentiment_state,
+    )
+
+    print_logit_score_summary("Positive prompt", positive_prompt_scores)
+    print_logit_score_summary("Negative prompt", negative_prompt_scores)
+
+    plot_logit_lens_sentiment_logit_scores(
+        positive_prompt_scores["positive_scores"],
+        positive_prompt_scores["negative_scores"],
+        "Positive prompt",
+        prompt_pair["positive"],
+        filename_or_path=positive_filename_or_path,
+    )
+    plot_logit_lens_sentiment_logit_scores(
+        negative_prompt_scores["positive_scores"],
+        negative_prompt_scores["negative_scores"],
+        "Negative prompt",
+        prompt_pair["negative"],
+        filename_or_path=negative_filename_or_path,
+    )
+
+    return {
+        "positive_prompt": positive_prompt_scores,
+        "negative_prompt": negative_prompt_scores,
+    }
+
 
 def save_logit_lens_heatmaps(positive_layer_results, negative_layer_results):
     """Save positive and negative top-k logit-lens heatmaps."""

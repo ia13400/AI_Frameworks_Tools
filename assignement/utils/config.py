@@ -46,6 +46,12 @@ LOGIT_LENS_POSITIVE_SENTIMENT_MASS_PATH = (
 LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH = (
     OUTPUT_PNG_DIR / "logit_lens_negative_hu_liu_topk_mass.png"
 )
+LOGIT_LENS_POSITIVE_PROMPT_LOGIT_SCORE_PATH = (
+    OUTPUT_PNG_DIR / "logit_lens_positive_prompt_hu_liu_logit_scores.png"
+)
+LOGIT_LENS_NEGATIVE_PROMPT_LOGIT_SCORE_PATH = (
+    OUTPUT_PNG_DIR / "logit_lens_negative_prompt_hu_liu_logit_scores.png"
+)
 LOGIT_LENS_POSITIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_positive_topk_heatmap.png"
 LOGIT_LENS_NEGATIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_negative_topk_heatmap.png"
 
