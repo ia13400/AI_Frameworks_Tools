@@ -19,7 +19,6 @@ POSITIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_positive_one_token_words.json"
 NEGATIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_negative_one_token_words.json"
 FIELD_PAIRS_PATH = INPUT_DIR / "hu_liu_sentiment_word_pairs_by_field.json"
 FLAT_PAIRS_PATH = INPUT_DIR / "hu_liu_sentiment_word_pairs_flat.json"
-SENTIMENT_PROMPTS_PATH = INPUT_DIR / "sentiment_prompts.json"
 PROMPTS_PATH = INPUT_DIR / "prompts.json"
 PROBE_SPLIT_PATH = OUTPUT_JSON_DIR / "hu_liu_logistic_regression_split.json"
 SENTIMENT_CHALLENGE_DIR = INPUT_DIR / "assessing_and_probing_sentiment"
@@ -40,6 +39,9 @@ SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH = (
 SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH = (
     OUTPUT_PNG_DIR / "sentiment_challenge_category_accuracy.png"
 )
+LOGIT_LENS_TARGET_PROBABILITY_PATH = OUTPUT_PNG_DIR / "logit_lens_target_probability.png"
+LOGIT_LENS_POSITIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_positive_topk_heatmap.png"
+LOGIT_LENS_NEGATIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_negative_topk_heatmap.png"
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",

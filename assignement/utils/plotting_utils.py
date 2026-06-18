@@ -10,6 +10,9 @@ from sklearn.decomposition import PCA
 
 from config import (
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
+    LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
+    LOGIT_LENS_POSITIVE_HEATMAP_PATH,
+    LOGIT_LENS_TARGET_PROBABILITY_PATH,
     OUTPUT_PNG_DIR,
     SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH,
     SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
@@ -281,6 +284,94 @@ def plot_sentiment_challenge_category_accuracy(
     plt.tight_layout()
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
+
+
+def plot_logit_lens_target_probability(
+    positive_probs,
+    negative_probs,
+    target_token,
+    positive_prompt,
+    negative_prompt,
+    filename_or_path=LOGIT_LENS_TARGET_PROBABILITY_PATH,
+):
+    """Save a line chart of one target-token probability across layers."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    layers = np.arange(len(positive_probs))
+
+    fig, ax = plt.subplots(figsize=(10.5, 5.5))
+    ax.plot(layers, positive_probs, marker="o", label=f"Positive: {positive_prompt}")
+    ax.plot(layers, negative_probs, marker="o", label=f"Negative: {negative_prompt}")
+    ax.axhline(y=0.5, linestyle="--", color="#8C8C8C", linewidth=1, label="0.5 reference")
+    ax.set_xlabel("Layer index (0 = embedding)")
+    ax.set_ylabel(f"P({target_token!r})")
+    ax.set_title(f"Logit Lens: Probability of {target_token!r} by Layer")
+    ax.grid(True, alpha=0.28)
+    ax.legend(fontsize=8.5)
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_logit_lens_topk_heatmap(
+    layer_results,
+    title,
+    filename_or_path=LOGIT_LENS_POSITIVE_HEATMAP_PATH,
+    top_k=5,
+):
+    """Save a heatmap of top-k logit-lens tokens for each layer."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    token_matrix = [
+        [item["token"] for item in layer[:top_k]]
+        for layer in layer_results
+    ]
+    prob_matrix = np.array(
+        [
+            [item["probability"] for item in layer[:top_k]]
+            for layer in layer_results
+        ],
+        dtype=float,
+    )
+
+    fig, ax = plt.subplots(figsize=(11, max(8, len(layer_results) * 0.45)))
+    image = ax.imshow(prob_matrix, cmap="Blues", aspect="auto")
+    ax.set_xlabel("Top-k rank")
+    ax.set_ylabel("Layer")
+    ax.set_title(title)
+    ax.set_xticks(range(top_k))
+    ax.set_xticklabels([f"Top-{rank}" for rank in range(1, top_k + 1)])
+    ax.set_yticks(range(len(layer_results)))
+    ax.set_yticklabels(range(len(layer_results)))
+
+    max_probability = prob_matrix.max() if prob_matrix.size else 0.0
+    for row_index in range(prob_matrix.shape[0]):
+        for col_index in range(prob_matrix.shape[1]):
+            token_text = token_matrix[row_index][col_index].replace("\n", "\\n")
+            text_color = "white" if prob_matrix[row_index, col_index] > max_probability * 0.55 else "#1F1F1F"
+            ax.text(
+                col_index,
+                row_index,
+                f"{token_text!r}\n{prob_matrix[row_index, col_index]:.3f}",
+                ha="center",
+                va="center",
+                fontsize=7.5,
+                color=text_color,
+            )
+
+    fig.colorbar(image, ax=ax, label="Probability")
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
 
 
 def representative_labels(group, n=8):

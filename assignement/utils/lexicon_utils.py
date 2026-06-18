@@ -155,8 +155,11 @@ def binary_sentiment_label(gold_label: int):
     return None
 
 
-def filter_sentiment_challenge_dataset(dataset_path: str | Path | None = None):
-    """Remove neutral rows, convert labels to binary sentiment, and plot a heatmap."""
+def filter_sentiment_challenge_dataset(
+    dataset_path: str | Path | None = None,
+    plot_heatmap: bool = True,
+):
+    """Remove neutral rows, convert labels to binary sentiment, and optionally plot."""
     records, _ = import_sentiment_challenge_dataset(dataset_path, verbose=False)
     filtered_records = []
 
@@ -177,7 +180,8 @@ def filter_sentiment_challenge_dataset(dataset_path: str | Path | None = None):
         )
 
     filtered_category_to_records = records_by_challenge_category(filtered_records)
-    plot_filtered_sentiment_challenge_category_heatmap(filtered_category_to_records)
+    if plot_heatmap:
+        plot_filtered_sentiment_challenge_category_heatmap(filtered_category_to_records)
     return filtered_records, filtered_category_to_records
 
 
@@ -951,3 +955,25 @@ def build_hu_liu_lookup(positive_words, negative_words):
             "sentiment": item["sentiment"],
         }
     return lookup
+
+
+def prepare_hu_liu_lookup_state(tokenizer):
+    """Build one-token Hu & Liu records and lookup structures once."""
+    sentiment_words = build_sentiment_word_records(tokenizer)
+    positive_words = [
+        item
+        for item in sentiment_words
+        if item["sentiment"] == "positive"
+    ]
+    negative_words = [
+        item
+        for item in sentiment_words
+        if item["sentiment"] == "negative"
+    ]
+
+    return {
+        "sentiment_words": sentiment_words,
+        "positive_words": positive_words,
+        "negative_words": negative_words,
+        "hu_liu_lookup": build_hu_liu_lookup(positive_words, negative_words),
+    }

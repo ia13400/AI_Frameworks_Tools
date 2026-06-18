@@ -1,0 +1,30 @@
+{
+  "description": "Positive prompts express positive sentiment. Negative prompts express matched negative sentiment with minimal changes.",
+  "prompt_pairs": [
+    {
+      "id": "movie_01",
+      "positive": "I love this movie because it is",
+      "negative": "I hate this movie because it is"
+    },
+    {
+      "id": "food_01",
+      "positive": "The food was delicious and the service was",
+      "negative": "The food was disgusting and the service was"
+    },
+    {
+      "id": "book_01",
+      "positive": "I enjoyed this book because it was",
+      "negative": "I disliked this book because it was"
+    },
+    {
+      "id": "hotel_01",
+      "positive": "The hotel experience was pleasant and the room was",
+      "negative": "The hotel experience was unpleasant and the room was"
+    },
+    {
+      "id": "game_01",
+      "positive": "I really liked this game because it was",
+      "negative": "I really hated this game because it was"
+    }
+  ]
+}
