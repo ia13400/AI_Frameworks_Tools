@@ -310,6 +310,50 @@ def category_match_examples(prediction_results):
     return examples
 
 
+def category_outcome_examples(prediction_results):
+    """Pick one matched, wrong-sentiment, and no-sentiment example per category."""
+    categories = sorted(
+        {category for result in prediction_results for category in result["annotations"]}
+    )
+    examples = {}
+
+    for category in categories:
+        category_results = [
+            result
+            for result in prediction_results
+            if category in result["annotations"]
+        ]
+        examples[category] = {
+            "matched": next(
+                (
+                    result
+                    for result in category_results
+                    if result["true_sentiment"] == result["predicted_sentiment"]
+                ),
+                None,
+            ),
+            "wrong_sentiment": next(
+                (
+                    result
+                    for result in category_results
+                    if result["true_sentiment"] != result["predicted_sentiment"]
+                    and result["predicted_sentiment"] != "no sentiment"
+                ),
+                None,
+            ),
+            "no_sentiment": next(
+                (
+                    result
+                    for result in category_results
+                    if result["predicted_sentiment"] == "no sentiment"
+                ),
+                None,
+            ),
+        }
+
+    return examples
+
+
 def format_prediction_example(result):
     """Format one prediction result for the text report."""
     if result is None:
@@ -330,6 +374,56 @@ def format_prediction_example(result):
         f"hits={hit_text} | "
         f"prompt={result['prompt']}"
     )
+
+
+def format_console_prediction_example(result, prompt_suffix=None, text_width: int = 120):
+    """Format one prediction result for concise notebook console output."""
+    sentence = result["prompt"]
+    if prompt_suffix and sentence.endswith(prompt_suffix):
+        sentence = sentence[: -len(prompt_suffix)]
+    if len(sentence) > text_width:
+        sentence = sentence[: text_width - 3].rstrip() + "..."
+
+    hits = result["matched_hu_liu_tokens"]
+    if hits:
+        hit_text = ", ".join(
+            f"{hit['hu_liu_word']}={hit['sentiment']}"
+            for hit in hits[:3]
+        )
+    else:
+        hit_text = "no Hu & Liu hit"
+
+    return (
+        f"true={result['true_sentiment']}, "
+        f"predicted={result['predicted_sentiment']}, "
+        f"hits={hit_text}, "
+        f"sentence={sentence}"
+    )
+
+
+def print_category_outcome_examples(prediction_results, prompt_suffix=None):
+    """Print available matched, wrong-sentiment, and no-sentiment examples."""
+    print("\nPer-category prediction examples:")
+    for category, examples in category_outcome_examples(prediction_results).items():
+        available_examples = [
+            ("Matched prediction", examples["matched"]),
+            ("Wrong sentiment", examples["wrong_sentiment"]),
+            ("No sentiment", examples["no_sentiment"]),
+        ]
+        available_examples = [
+            (label, result)
+            for label, result in available_examples
+            if result is not None
+        ]
+        if not available_examples:
+            continue
+
+        print(f"\n{category}")
+        for label, result in available_examples:
+            print(
+                f"{label}: "
+                f"{format_console_prediction_example(result, prompt_suffix=prompt_suffix)}"
+            )
 
 
 def write_top_token_report(results, prompt_suffix=None, report_path=None):
@@ -651,6 +745,10 @@ def run_sentiment_challenge_suffix_trials(
             batch_size=batch_size,
             prompt_suffix=suffix,
             trial_name=trial_name,
+        )
+        print_category_outcome_examples(
+            prediction_results,
+            prompt_suffix=suffix,
         )
 
         suffix_trial_results[trial_name] = {
