@@ -359,7 +359,7 @@ def plot_logit_lens_prompt_sentiment_logit_scores(
     layer_count = len(positive_prompt_scores["positive_scores"])
     layers = np.arange(layer_count)
 
-    fig, axes = plt.subplots(1, 2, figsize=(15.5, 5.8), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(15.5, 6.2), sharey=True)
     for ax, (prompt_label, prompt_text, scores) in zip(axes, plot_specs):
         positive_scores = np.asarray(scores["positive_scores"], dtype=float)
         negative_scores = np.asarray(scores["negative_scores"], dtype=float)
@@ -403,10 +403,17 @@ def plot_logit_lens_prompt_sentiment_logit_scores(
 
     axes[0].set_ylabel("Sum of Hu & Liu logits")
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, fontsize=8.5, loc="upper center", ncol=4)
-    fig.suptitle("Logit Lens Sentiment Scores by Layer", fontsize=14, y=0.99)
+    fig.suptitle("Logit Lens Sentiment Scores by Layer", fontsize=14, y=0.985)
+    fig.legend(
+        handles,
+        labels,
+        fontsize=8.5,
+        loc="upper center",
+        ncol=4,
+        bbox_to_anchor=(0.5, 0.91),
+    )
 
-    plt.tight_layout(rect=(0, 0, 1, 0.91))
+    plt.tight_layout(rect=(0, 0, 1, 0.875))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
@@ -459,7 +466,7 @@ def plot_logit_lens_prompt_logit_differences(
     set_even_layer_xticks(ax, len(layers))
     ax.set_xlabel("Layer index (0 = embedding)")
     ax.set_ylabel("Logit difference (positive - negative)")
-    ax.set_title("Hu & Liu Logit Difference by Layer")
+    ax.set_title("Hu & Liu logit difference by layer")
     ax.text(
         0.01,
         0.02,
