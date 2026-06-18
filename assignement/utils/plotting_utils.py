@@ -9,6 +9,7 @@ import torch
 from sklearn.decomposition import PCA
 
 from config import (
+    LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
     LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
@@ -477,6 +478,53 @@ def plot_logit_lens_prompt_logit_differences(
         ha="left",
         bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.82, "edgecolor": "#D0D0D0"},
     )
+    ax.grid(True, alpha=0.28)
+    ax.legend(fontsize=8.5, loc="best")
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_cad_logit_difference_aggregate(
+    mean_curve,
+    std_curve,
+    pair_count,
+    filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
+):
+    """Save mean CAD logit-difference separation with standard deviation band."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    mean_curve = np.asarray(mean_curve, dtype=float)
+    std_curve = np.asarray(std_curve, dtype=float)
+    layers = np.arange(len(mean_curve))
+
+    fig, ax = plt.subplots(figsize=(11, 5.8))
+    ax.plot(
+        layers,
+        mean_curve,
+        color="#3B5BA9",
+        marker="o",
+        linewidth=2.0,
+        label="Mean logit-difference separation",
+    )
+    ax.fill_between(
+        layers,
+        mean_curve - std_curve,
+        mean_curve + std_curve,
+        color="#3B5BA9",
+        alpha=0.18,
+        label="±1 standard deviation",
+    )
+    ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+    set_even_layer_xticks(ax, len(mean_curve))
+    ax.set_xlabel("Layer index (0 = embedding)")
+    ax.set_ylabel("Positive-prompt diff minus negative-prompt diff")
+    ax.set_title(f"CAD Sentiment Pairs: Mean Hu & Liu Logit-Difference Separation (n={pair_count})")
     ax.grid(True, alpha=0.28)
     ax.legend(fontsize=8.5, loc="best")
 

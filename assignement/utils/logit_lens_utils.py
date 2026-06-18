@@ -1,6 +1,11 @@
+import csv
+import html
+
 import torch
 
 from config import (
+    CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
     LOGIT_LENS_NEGATIVE_SENTIMENT_MASS_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
     LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH,
@@ -13,6 +18,7 @@ from lexicon_utils import (
     prepare_hu_liu_lookup_state,
 )
 from plotting_utils import (
+    plot_cad_logit_difference_aggregate,
     plot_logit_lens_prompt_logit_differences,
     plot_logit_lens_prompt_sentiment_logit_scores,
     plot_logit_lens_sentiment_probability_mass,
@@ -457,6 +463,141 @@ def analyze_hu_liu_logit_sentiment_scores(
         "positive_prompt": positive_prompt_scores,
         "negative_prompt": negative_prompt_scores,
     }
+
+
+def clean_cad_text(text: str):
+    """Normalize CAD TSV text for use as a language-model prompt."""
+    return html.unescape(text).replace("<br />", " ").strip()
+
+
+def load_cad_sentiment_prompt_pairs(dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH):
+    """Load valid positive/negative CAD prompt pairs from train_paired.tsv."""
+    rows_by_batch = {}
+    with open(dataset_path, newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file, delimiter="\t")
+        required_columns = {"Sentiment", "Text", "batch_id"}
+        if not required_columns.issubset(reader.fieldnames or []):
+            raise ValueError(
+                f"CAD dataset must contain columns {sorted(required_columns)}. "
+                f"Found: {reader.fieldnames}"
+            )
+
+        for row in reader:
+            sentiment = row["Sentiment"].strip().lower()
+            text = clean_cad_text(row["Text"])
+            batch_id = row["batch_id"].strip()
+            if sentiment not in {"positive", "negative"} or not text or not batch_id:
+                continue
+            rows_by_batch.setdefault(batch_id, {})[sentiment] = text
+
+    prompt_pairs = []
+    for batch_id in sorted(rows_by_batch, key=lambda value: int(value) if value.isdigit() else value):
+        pair = rows_by_batch[batch_id]
+        if "positive" not in pair or "negative" not in pair:
+            continue
+        prompt_pairs.append(
+            {
+                "id": f"CAD_{batch_id}",
+                "positive": pair["positive"],
+                "negative": pair["negative"],
+            }
+        )
+
+    print(f"Loaded valid CAD prompt pairs: {len(prompt_pairs)}")
+    return prompt_pairs
+
+
+def aggregate_cad_logit_difference_curves(
+    model,
+    tokenizer,
+    device,
+    sentiment_state,
+    prompt_pairs,
+):
+    """Compute CAD pair-level logit-difference separation curves."""
+    pair_results = []
+    separation_curves = []
+
+    for index, prompt_pair in enumerate(prompt_pairs, start=1):
+        print(f"CAD pair {index}/{len(prompt_pairs)}: {prompt_pair['id']}")
+        positive_hidden_states, negative_hidden_states = run_prompt_pair_forward_passes(
+            model,
+            tokenizer,
+            device,
+            prompt_pair,
+        )
+        positive_scores = hu_liu_logit_scores_per_layer(
+            positive_hidden_states,
+            model,
+            sentiment_state,
+        )
+        negative_scores = hu_liu_logit_scores_per_layer(
+            negative_hidden_states,
+            model,
+            sentiment_state,
+        )
+        separation_curve = [
+            positive_difference - negative_difference
+            for positive_difference, negative_difference in zip(
+                positive_scores["logit_differences"],
+                negative_scores["logit_differences"],
+            )
+        ]
+        separation_curves.append(separation_curve)
+        pair_results.append(
+            {
+                "id": prompt_pair["id"],
+                "positive_prompt": prompt_pair["positive"],
+                "negative_prompt": prompt_pair["negative"],
+                "positive_logit_differences": positive_scores["logit_differences"],
+                "negative_logit_differences": negative_scores["logit_differences"],
+                "separation_curve": separation_curve,
+            }
+        )
+
+    if not separation_curves:
+        raise ValueError("No valid CAD prompt pairs were available for aggregation.")
+
+    curves = torch.tensor(separation_curves, dtype=torch.float32)
+    mean_curve = curves.mean(dim=0).tolist()
+    std_curve = curves.std(dim=0, unbiased=False).tolist()
+    return {
+        "pair_results": pair_results,
+        "mean_curve": mean_curve,
+        "std_curve": std_curve,
+        "pair_count": len(pair_results),
+    }
+
+
+def run_cad_logit_difference_aggregation(
+    model,
+    tokenizer,
+    device,
+    sentiment_state,
+    dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    max_pairs=None,
+    filename_or_path=LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
+):
+    """Load CAD pairs, aggregate logit-difference separation, and save the plot."""
+    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path)
+    if max_pairs is not None:
+        prompt_pairs = prompt_pairs[:max_pairs]
+        print(f"Using first {len(prompt_pairs)} CAD prompt pairs.")
+
+    aggregation = aggregate_cad_logit_difference_curves(
+        model,
+        tokenizer,
+        device,
+        sentiment_state,
+        prompt_pairs,
+    )
+    plot_cad_logit_difference_aggregate(
+        aggregation["mean_curve"],
+        aggregation["std_curve"],
+        aggregation["pair_count"],
+        filename_or_path=filename_or_path,
+    )
+    return aggregation
 
 
 def save_logit_lens_heatmaps(positive_layer_results, negative_layer_results):

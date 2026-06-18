@@ -23,6 +23,8 @@ PROMPTS_PATH = INPUT_DIR / "prompts.json"
 PROBE_SPLIT_PATH = OUTPUT_JSON_DIR / "hu_liu_logistic_regression_split.json"
 SENTIMENT_CHALLENGE_DIR = INPUT_DIR / "assessing_and_probing_sentiment"
 SENTIMENT_CHALLENGE_ANNOTATED_PATH = SENTIMENT_CHALLENGE_DIR / "annotated.txt"
+CAD_SENTIMENT_DIR = INPUT_DIR / "cad_dataset"
+CAD_SENTIMENT_TRAIN_PAIRED_PATH = CAD_SENTIMENT_DIR / "train_paired.tsv"
 SENTIMENT_CHALLENGE_HEATMAP_PATH = OUTPUT_PNG_DIR / "sentiment_challenge_category_heatmap.png"
 FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH = (
     OUTPUT_PNG_DIR / "sentiment_challenge_filtered_category_heatmap.png"
@@ -51,6 +53,9 @@ LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH = (
 )
 LOGIT_LENS_PROMPT_LOGIT_DIFFERENCE_PATH = (
     OUTPUT_PNG_DIR / "logit_lens_prompt_hu_liu_logit_difference.png"
+)
+LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH = (
+    OUTPUT_PNG_DIR / "logit_lens_cad_logit_difference_aggregate.png"
 )
 LOGIT_LENS_POSITIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_positive_topk_heatmap.png"
 LOGIT_LENS_NEGATIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_negative_topk_heatmap.png"
