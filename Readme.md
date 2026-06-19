@@ -95,6 +95,4 @@ Interaktive Exploration von Logit Lens, Attention und Patching für selbst gewä
 
 Die aktuelle Fassung liegt in [`Paper2/`](Paper2/) (kompiliertes [`main.pdf`](Paper2/main.pdf)), eine frühere Fassung in [`Paper/`](Paper/). Build-Anleitung (WSL2, LaTeX, Glossar, Bibliographie) siehe [`Paper2/readme.md`](Paper2/readme.md).
 
-## Lizenz
 
-Akademisches Hochschulprojekt ohne Lizenzvergabe. Nutzung der Datensätze unterliegt den jeweiligen Lizenzen der Originalquellen (siehe Tabelle oben).
