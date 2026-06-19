@@ -210,21 +210,3 @@ def analyze_induction_heads(
         "induction_scores": induction_scores,
         "ranked_heads": ranked_heads,
     }
-
-
-def print_attention_reflection(subject_result, induction_result):
-    """Print concise answers to the notebook reflection questions."""
-    best_subject = subject_result["ranked_heads"][0]
-    best_induction = induction_result["ranked_heads"][0]
-    top_layers = sorted({item["layer"] for item in subject_result["ranked_heads"][:5]})
-
-    print("1. Strongest subject-attention head:")
-    print(f"   Layer {best_subject['layer']}, head {best_subject['head']}.")
-    print("2. Strongest subject-attention layer range:")
-    print(f"   Top heads occur in layers: {top_layers}.")
-    print("3. Why attention analysis alone is not causal:")
-    print("   High attention shows information flow patterns, but not whether the head is necessary for the output.")
-    print("4. Difference to activation patching:")
-    print("   Activation patching intervenes on activations and measures output changes, so it tests causal effect.")
-    print("5. Strongest induction-style head:")
-    print(f"   Layer {best_induction['layer']}, head {best_induction['head']}.")
