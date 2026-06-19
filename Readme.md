@@ -28,7 +28,7 @@ Semesterprojekt im Modul **AI Frameworks & Tools**. Untersucht wird, wo und wie 
 AI_Frameworks_Tools/
 ├── Paper2/                  # Finale wissenschaftliche Arbeit (LaTeX, aktueller Stand)
 ├── Paper/                   # Frühere Fassung der Arbeit
-├── assignement/              # Analyse-Pipeline des Projekts
+├── source/                   # Analyse-Pipeline des Projekts
 │   ├── notebooks/             # 01–05: Model Inspection, Logit Lens, Attention, Probing, Patching
 │   ├── utils/                  # Python-Module hinter den Notebooks (Modell, Lexikon, Plots, ...)
 │   ├── inputs/                  # Rohdaten: Hu-&-Liu-Lexikon, CAD-Paare, Sentiment-Challenge-Sätze
@@ -59,10 +59,10 @@ uv sync
 
 ### Analyse-Notebooks
 
-Die eigentliche Untersuchung liegt in `assignement/notebooks/` und folgt der Reihenfolge der fünf Werkzeuge (Korrelation → Kausalität):
+Die eigentliche Untersuchung liegt in `source/notebooks/` und folgt der Reihenfolge der fünf Werkzeuge (Korrelation → Kausalität):
 
 ```bash
-uv run jupyter notebook assignement/notebooks
+uv run jupyter notebook source/notebooks
 ```
 
 | Notebook | Inhalt |

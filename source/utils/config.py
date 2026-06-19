@@ -3,10 +3,10 @@ from pathlib import Path
 
 MODEL_NAME = "EleutherAI/pythia-410m"
 UTILS_DIR = Path(__file__).resolve().parent
-ASSIGNMENT_DIR = UTILS_DIR.parent
-PROJECT_ROOT = ASSIGNMENT_DIR.parent
-INPUT_DIR = ASSIGNMENT_DIR / "inputs"
-OUTPUT_DIR = ASSIGNMENT_DIR / "output"
+SOURCE_DIR = UTILS_DIR.parent
+PROJECT_ROOT = SOURCE_DIR.parent
+INPUT_DIR = SOURCE_DIR / "inputs"
+OUTPUT_DIR = SOURCE_DIR / "output"
 OUTPUT_PNG_DIR = OUTPUT_DIR / "png"
 OUTPUT_JSON_DIR = OUTPUT_DIR / "json"
 OUTPUT_TXT_DIR = OUTPUT_DIR / "txt"
@@ -15,7 +15,7 @@ OUTPUT_PNG_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_TXT_DIR.mkdir(parents=True, exist_ok=True)
 
-MLFLOW_TRACKING_DB_PATH = ASSIGNMENT_DIR / "notebooks" / "mlruns" / "mlflow.db"
+MLFLOW_TRACKING_DB_PATH = SOURCE_DIR / "notebooks" / "mlruns" / "mlflow.db"
 MLFLOW_TRACKING_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 MLFLOW_TRACKING_URI = f"sqlite:///{MLFLOW_TRACKING_DB_PATH.resolve().as_posix()}"
 
