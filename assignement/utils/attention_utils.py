@@ -37,14 +37,14 @@ def run_attention_forward_pass(model, tokenizer, device, prompt):
     }
 
 
-def save_selected_attention_heads(
+def plot_selected_attention_heads(
     attentions,
     tokens,
     prompt,
     head_specs=None,
     filename_or_path=ATTENTION_HEAD_GRID_PATH,
 ):
-    """Save a grid of representative attention heads."""
+    """Plot a grid of representative attention heads and save it as a PNG."""
     if head_specs is None:
         max_layer = len(attentions) - 1
         max_head = attentions[0].shape[1] - 1
