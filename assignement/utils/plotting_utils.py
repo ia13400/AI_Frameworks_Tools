@@ -116,7 +116,7 @@ def plot_layer_head_heatmap(
     fig, ax = plt.subplots(figsize=(12, 8))
     image = ax.imshow(values, cmap=cmap, aspect="auto")
     ax.set_xlabel("Attention head")
-    ax.set_ylabel("Layer")
+    ax.set_ylabel("Layer (0 = first transformer layer)")
     ax.set_title(title)
     ax.set_xticks(range(values.shape[1]))
     ax.set_yticks(range(values.shape[0]))
