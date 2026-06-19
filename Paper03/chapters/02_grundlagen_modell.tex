@@ -14,7 +14,7 @@ Für die Sentiment-Bewertung wird durchgehend das Opinion-Lexikon von Hu und Liu
 
 \subsection{Modell: Pythia-410M}
 
-Pythia-410M ist ein offenes, vollständig dokumentiertes Decoder-Only-\gls{transformer}-Modell (GPT-NeoX-Architektur) von EleutherAI mit rund 405 Millionen Parametern \cite{biderman2023pythia}. Tabelle~\ref{tab:arch} fasst die zentralen Architekturwerte zusammen.
+Pythia-410M ist ein offenes, vollständig dokumentiertes Decoder-Only-\gls{transformer}-Modell (GPT-NeoX-Architektur) von EleutherAI mit rund 405 Millionen Parametern \cite{biderman2023pythia}. Diese verteilen sich auf vier Hauptkomponenten: Embedding- und Unembedding-Matrix tragen je rund 12,7~Prozent, die \gls{attention}-Blöcke über alle 24 Schichten rund 24,9~Prozent, und die Feed-Forward-Netzwerke vereinen mit rund 49,7~Prozent fast die Hälfte der Parameter auf sich -- der größte Teil der Modellkapazität liegt also nicht in der Attention selbst, sondern in den Feed-Forward-Blöcken. Tabelle~\ref{tab:arch} fasst die zentralen Architekturwerte zusammen.
 
 \begin{table}[htbp]
   \centering
@@ -33,15 +33,6 @@ Pythia-410M ist ein offenes, vollständig dokumentiertes Decoder-Only-\gls{trans
     \bottomrule
   \end{tabular}
 \end{table}
-
-Innerhalb einer Schicht entfällt etwa ein Drittel der Parameter auf \gls{attention} und zwei Drittel auf das Feed-Forward-Netzwerk (Abbildung~\ref{fig:params}); der größte Teil der Modellkapazität liegt also nicht in der Attention selbst, sondern in den Feed-Forward-Blöcken.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.85\textwidth]{parameterverteilung.png}
-  \caption{Parameterverteilung von Pythia-410M auf Embedding, Attention, MLP und Unembedding.}
-  \label{fig:params}
-\end{figure}
 
 \subsection{Datensätze}
 

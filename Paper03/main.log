@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.14)  19 JUN 2026 18:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.14)  19 JUN 2026 18:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -691,11 +691,11 @@ Package: glossary-tree 2025/11/09 v4.9 (NLCT)
 \glo@main@file=\write5
 \openout5 = `main.glo'.
 
-Package glossaries Info: Writing glossary file main.glo on input line 64.
+Package glossaries Info: Writing glossary file main.glo on input line 66.
 \glo@acronym@file=\write6
 \openout6 = `main.acn'.
 
-Package glossaries Info: Writing glossary file main.acn on input line 64.
+Package glossaries Info: Writing glossary file main.acn on input line 66.
  (./glossary.tex) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \ttl@box=\box65
@@ -720,24 +720,24 @@ Package babel Info: 'ngerman' activates 'ngerman' shorthands.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -792,7 +792,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring ON on input line 78.
+Package hyperref Info: Link coloring ON on input line 80.
  (./main.out) (./main.out)
 \@outlinefile=\write7
 \openout7 = `main.out'.
@@ -819,8 +819,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 78.
-Package biblatex Info: Reference segment=0 on input line 78.
+Package biblatex Info: Reference section=0 on input line 80.
+Package biblatex Info: Reference segment=0 on input line 80.
  (./cover.tex
 <logo.png, id=76, 347.2975pt x 146.5475pt>
 File: logo.png Graphic file (type png)
@@ -840,105 +840,89 @@ Package enumitem Warning: Negative labelwidth. This does not make much
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6 
-     [1]
-Overfull \hbox (4.68353pt too wide) in paragraph at lines 37--38
-[]\T1/cmr/m/n/12 Innerhalb ei-ner Schicht ent-fällt et-wa ein Drit-tel der Pa-ra-me-ter auf []Attention-Mechanismus
- []
-
-<figures/parameterverteilung.png, id=112, 939.51pt x 361.35pt>
-File: figures/parameterverteilung.png Graphic file (type png)
-<use figures/parameterverteilung.png>
-Package pdftex.def Info: figures/parameterverteilung.png  used on input line 41.
-(pdftex.def)             Requested size: 396.63411pt x 152.54892pt.
-) [2] (./chapters/03_verhalten.tex [3 <./figures/parameterverteilung.png>]
-<figures/sentiment_challenge_category_accuracy_Trial1.png, id=138, 1104.69858pt x 678.30557pt>
+l.7 ...ection{Residual Stream und fÃ¼nf Werkzeuge}
+                                                   [1]) [2] (./chapters/03_verhalten.tex [3]
+<figures/sentiment_challenge_category_accuracy_Trial1.png, id=134, 1104.69858pt x 678.30557pt>
 File: figures/sentiment_challenge_category_accuracy_Trial1.png Graphic file (type png)
 <use figures/sentiment_challenge_category_accuracy_Trial1.png>
 Package pdftex.def Info: figures/sentiment_challenge_category_accuracy_Trial1.png  used on input line 45.
 (pdftex.def)             Requested size: 326.6361pt x 200.55382pt.
-) (./chapters/04_embedding.tex [4]
-<figures/hu_liu_opinion_embeddings.png, id=147, 722.7pt x 505.89pt>
+) (./chapters/04_embedding.tex [4 <./figures/sentiment_challenge_category_accuracy_Trial1.png>]
+<figures/hu_liu_opinion_embeddings.png, id=144, 722.7pt x 505.89pt>
 File: figures/hu_liu_opinion_embeddings.png Graphic file (type png)
 <use figures/hu_liu_opinion_embeddings.png>
 Package pdftex.def Info: figures/hu_liu_opinion_embeddings.png  used on input line 9.
 (pdftex.def)             Requested size: 228.64882pt x 160.05092pt.
-<figures/hu_liu_opinion_histogram.png, id=148, 650.43pt x 361.35pt>
+<figures/hu_liu_opinion_histogram.png, id=145, 650.43pt x 361.35pt>
 File: figures/hu_liu_opinion_histogram.png Graphic file (type png)
 <use figures/hu_liu_opinion_histogram.png>
 Package pdftex.def Info: figures/hu_liu_opinion_histogram.png  used on input line 11.
 (pdftex.def)             Requested size: 228.64882pt x 127.02577pt.
- [5 <./figures/sentiment_challenge_category_accuracy_Trial1.png> <./figures/hu_liu_opinion_embeddings.png> <./figures/hu_liu_opinion_histogram.png>]
-<figures/sentiment_embedding_norms_all_fields.png, id=158, 1156.32pt x 1156.32pt>
+<figures/sentiment_embedding_norms_all_fields.png, id=147, 1156.32pt x 1156.32pt>
 File: figures/sentiment_embedding_norms_all_fields.png Graphic file (type png)
 <use figures/sentiment_embedding_norms_all_fields.png>
 Package pdftex.def Info: figures/sentiment_embedding_norms_all_fields.png  used on input line 20.
 (pdftex.def)             Requested size: 396.63411pt x 396.61946pt.
- [6 <./figures/sentiment_embedding_norms_all_fields.png>]
-<figures/sentiment_direction_projection_all_fields.png, id=167, 1084.05pt x 1156.32pt>
-File: figures/sentiment_direction_projection_all_fields.png Graphic file (type png)
-<use figures/sentiment_direction_projection_all_fields.png>
-Package pdftex.def Info: figures/sentiment_direction_projection_all_fields.png  used on input line 31.
-(pdftex.def)             Requested size: 396.63411pt x 423.06783pt.
- [7 <./figures/sentiment_direction_projection_all_fields.png>]
-<figures/logistic_regression_sentiment_axis.png, id=179, 867.24pt x 903.375pt>
+ [5 <./figures/hu_liu_opinion_embeddings.png> <./figures/hu_liu_opinion_histogram.png>] [6 <./figures/sentiment_embedding_norms_all_fields.png>]
+<figures/logistic_regression_sentiment_axis.png, id=164, 867.24pt x 903.375pt>
 File: figures/logistic_regression_sentiment_axis.png Graphic file (type png)
 <use figures/logistic_regression_sentiment_axis.png>
-Package pdftex.def Info: figures/logistic_regression_sentiment_axis.png  used on input line 58.
+Package pdftex.def Info: figures/logistic_regression_sentiment_axis.png  used on input line 51.
 (pdftex.def)             Requested size: 373.30144pt x 388.85721pt.
-) (./chapters/05_logit_lens.tex
-<figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png, id=182, 686.565pt x 505.89pt>
+) (./chapters/05_logit_lens.tex [7] [8 <./figures/logistic_regression_sentiment_axis.png>]
+<figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png, id=179, 686.565pt x 505.89pt>
 File: figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png Graphic file (type png)
 <use figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png>
 Package pdftex.def Info: figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png  used on input line 9.
 (pdftex.def)             Requested size: 326.6361pt x 240.67848pt.
- [8] [9 <./figures/logistic_regression_sentiment_axis.png>]
-<figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png, id=195, 1111.40936pt x 444.4605pt>
+ [9 <./figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png>]
+<figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png, id=188, 1111.40936pt x 444.4605pt>
 File: figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png Graphic file (type png)
 <use figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png>
 Package pdftex.def Info: figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png  used on input line 18.
 (pdftex.def)             Requested size: 396.63411pt x 158.61536pt.
-<figures/logit_lens_cad_logit_difference_aggregate.png, id=197, 786.71057pt x 410.90657pt>
+<figures/logit_lens_cad_logit_difference_aggregate.png, id=190, 786.71057pt x 410.90657pt>
 File: figures/logit_lens_cad_logit_difference_aggregate.png Graphic file (type png)
 <use figures/logit_lens_cad_logit_difference_aggregate.png>
 Package pdftex.def Info: figures/logit_lens_cad_logit_difference_aggregate.png  used on input line 27.
 (pdftex.def)             Requested size: 396.63411pt x 207.17073pt.
- [10 <./figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png> <./figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png>]) (./chapters/06_attention.tex
-<figures/attention_subject_heatmap.png, id=206, 795.48622pt x 537.89528pt>
+) [10 <./figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png> <./figures/logit_lens_cad_logit_difference_aggregate.png>] (./chapters/06_attention.tex
+<figures/attention_subject_heatmap.png, id=200, 795.48622pt x 537.89528pt>
 File: figures/attention_subject_heatmap.png Graphic file (type png)
 <use figures/attention_subject_heatmap.png>
 Package pdftex.def Info: figures/attention_subject_heatmap.png  used on input line 9.
 (pdftex.def)             Requested size: 326.6361pt x 220.86679pt.
- [11 <./figures/logit_lens_cad_logit_difference_aggregate.png>]
-<figures/attention_cad_sentiment_heatmap.png, id=216, 818.19965pt x 569.90057pt>
+ [11 <./figures/attention_subject_heatmap.png>]
+<figures/attention_cad_sentiment_heatmap.png, id=209, 818.19965pt x 569.90057pt>
 File: figures/attention_cad_sentiment_heatmap.png Graphic file (type png)
 <use figures/attention_cad_sentiment_heatmap.png>
 Package pdftex.def Info: figures/attention_cad_sentiment_heatmap.png  used on input line 18.
 (pdftex.def)             Requested size: 373.30144pt x 260.01823pt.
-) (./chapters/07_activation_patching.tex [12 <./figures/attention_subject_heatmap.png>]
-<figures/activation_patching_heatmap.png, id=225, 1111.92557pt x 496.59814pt>
+) (./chapters/07_activation_patching.tex [12 <./figures/attention_cad_sentiment_heatmap.png>]
+<figures/activation_patching_heatmap.png, id=218, 1111.92557pt x 496.59814pt>
 File: figures/activation_patching_heatmap.png Graphic file (type png)
 <use figures/activation_patching_heatmap.png>
 Package pdftex.def Info: figures/activation_patching_heatmap.png  used on input line 9.
 (pdftex.def)             Requested size: 466.62503pt x 208.39551pt.
- [13 <./figures/attention_cad_sentiment_heatmap.png>]
+
 Overfull \hbox (15.72084pt too wide) in paragraph at lines 33--34
 []\T1/cmr/m/n/12 Ergänzend wird auf Ebe-ne ein-zel-ner Köp-fe ge-patcht: Statt der ge-sam-ten Schicht-Aktivierung
  []
 
-<figures/activation_patching_head_heatmap.png, id=235, 805.8105pt x 533.76556pt>
+[13 <./figures/activation_patching_heatmap.png>]
+<figures/activation_patching_head_heatmap.png, id=229, 805.8105pt x 533.76556pt>
 File: figures/activation_patching_head_heatmap.png Graphic file (type png)
 <use figures/activation_patching_head_heatmap.png>
 Package pdftex.def Info: figures/activation_patching_head_heatmap.png  used on input line 37.
 (pdftex.def)             Requested size: 326.6361pt x 216.36934pt.
-) (./chapters/08_diskussion_fazit.tex [14 <./figures/activation_patching_heatmap.png>]
+) (./chapters/08_diskussion_fazit.tex [14 <./figures/activation_patching_head_heatmap.png>]
 
 Package enumitem Warning: Negative labelwidth. This does not make much
 (enumitem)                sense, on input line 9.
 
-[15 <./figures/activation_patching_head_heatmap.png>]) [16]
-Overfull \hbox (13.92377pt too wide) in paragraph at lines 99--99
-[]\T1/cmr/m/n/12 nostalgebraist, \T1/cmr/m/it/12 In-ter-pre-ting GPT: The Lo-git Lens\T1/cmr/m/n/12 , Less-Wrong, [][]$\T1/cmtt/m/n/12 https : / / www . lesswrong .
+[15]) [16]
+Overfull \hbox (1.6607pt too wide) in paragraph at lines 101--101
+\T1/cmr/m/n/10 Counterfactually-Augmented Da-ta,'' in \T1/cmr/m/it/10 In-ter-na-tio-nal Con-fe-rence on Lear-ning Re-pre-sen-ta-ti-ons (ICLR)\T1/cmr/m/n/10 ,
  []
 
 
@@ -958,18 +942,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27402 strings out of 467533
- 525410 string characters out of 5422138
- 1438227 words of memory out of 5000000
- 55924 multiletter control sequences out of 15000+600000
- 638989 words of font info for 63 fonts, out of 8000000 for 9000
+ 27388 strings out of 467533
+ 524614 string characters out of 5422138
+ 1438984 words of memory out of 5000000
+ 55909 multiletter control sequences out of 15000+600000
+ 641205 words of font info for 68 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  78i,9n,79p,2537b,2483s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (18 pages, 1754861 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (18 pages, 1613105 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 245 compressed objects within 3 object streams
- 65 named destinations out of 1000 (max. 500000)
- 220 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 324 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 63 named destinations out of 1000 (max. 500000)
+ 210 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -24,14 +24,7 @@ Dass die Trennung auf nur zwei Achsen unvollständig bleibt, heißt nicht, dass 
 
 Ein ergänzender Blick auf die nächsten Nachbarn im Embedding-Raum, gemessen über die Cosine-Ähnlichkeit (den Winkel zwischen zwei Vektoren, unabhängig von ihrer Länge), bestätigt das Bild: Die einem Wort am nächsten liegenden anderen Wörter besitzen meist dieselbe Sentiment-Polarität, positive Wörter sind also überwiegend von positiven Nachbarn umgeben und negative von negativen. Sogar einfache Embedding-Arithmetik funktioniert in diese Richtung -- addiert man mehrere positive Wörter und zieht ein negatives ab, liegen die nächsten Nachbarn des Ergebnisvektors überwiegend im positiven Bereich, und umgekehrt.
 
-Das zeigt sich noch deutlicher, wenn man gezielt die eine Richtung betrachtet, die aus der Differenz der Embeddings von „good“ und „bad“ gebildet wird: Projiziert man alle Sentiment-Wörter auf diese eine Achse, ergibt sich eine deutlich klarere Trennung (Abbildung~\ref{fig:direction}), und stärker konnotierte Wörter wie „excellent“ oder „dangerous“ liegen weiter von der Mitte entfernt als schwächer konnotierte.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.85\textwidth]{sentiment_direction_projection_all_fields.png}
-  \caption{Projektion der Sentiment-Wörter auf die Richtung „good“ minus „bad“, getrennt nach thematischen Feldern.}
-  \label{fig:direction}
-\end{figure}
+Das zeigt sich noch deutlicher, wenn man gezielt die eine Richtung betrachtet, die aus der Differenz der Embeddings von „good“ und „bad“ gebildet wird: Projiziert man alle Sentiment-Wörter auf diese eine Achse, ergibt sich eine deutlich klarere Trennung. In allen zehn betrachteten thematischen Feldern -- von „Food and taste“ über „Safety and trust“ bis „Reputation and business outcome“ -- liegen positive Wörter fast durchgängig auf der positiven Seite dieser Achse und negative Wörter auf der negativen Seite, mit kaum Überlappung nahe der Mitte. Stärker konnotierte Wörter wie „excellent“ oder „dangerous“ liegen dabei weiter von der Mitte entfernt als schwächer konnotierte wie „pleasant“ oder „rude“. Die Richtung „good“ minus „bad“ verhält sich damit wie eine generelle Sentiment-Achse, die über verschiedenste Themenfelder hinweg funktioniert, obwohl sie nur aus einem einzigen Wortpaar gebildet wurde. Im Feld „Safety and trust“ etwa liegt „dangerous“ deutlich auf der negativen Seite und „trustworthy“ deutlich auf der positiven, während schwächer konnotierte Wörter wie „secure“ oder „insecure“ näher an der Mitte liegen -- die Achse bildet also nicht nur die Richtung, sondern auch die Stärke des Sentiments ab.
 
 Um diese Beobachtung zu quantifizieren, wird ein lineares Probing durchgeführt: Eine logistische Regression -- ein einfacher linearer Klassifikator -- wird auf den Embeddings trainiert und soll positiv von negativ unterscheiden. Gelingt das gut, muss die Information bereits klar im Vektorraum vorliegen, ohne dass eine komplexe Berechnung nötig wäre. Die 2.254 Wörter werden dazu geschichtet im Verhältnis 80 zu 20 aufgeteilt (Tabelle~\ref{tab:split}).
 
