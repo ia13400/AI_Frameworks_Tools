@@ -1,8 +1,9 @@
 \section{Einleitung}
 
-\gls{ai} hat sich zu einem zentralen Forschungs- und Anwendungsgebiet der Informatik entwickelt, und die jüngsten Fortschritte in der Sprachverarbeitung beruhen vor allem auf der \gls{transformer}-Architektur und großen Sprachmodellen \cite{vaswani2017attention, radford2018improving}. \gls{llm} erreichen bei vielen sprachbezogenen Aufgaben hohe Leistung, ihr internes Verhalten bleibt jedoch häufig undurchsichtig. Die \gls{mechanisticinterpretability} setzt genau hier an. Statt nur zu beobachten, was ein Modell ausgibt, untersucht sie, wie und warum eine Ausgabe im Inneren des Modells entsteht \cite{nanda2023comprehensive, elhage2021mathematical}.
+\gls{ai} und insbesondere \gls{llm} erreichen bei vielen Aufgaben hohe Leistung, ihr internes Verhalten bleibt aber oft undurchsichtig \cite{vaswani2017attention, radford2018improving}. Die \gls{mechanisticinterpretability} untersucht, wie und warum eine Ausgabe im Modell entsteht \cite{nanda2023comprehensive, elhage2021mathematical}.
 
-Als Fallstudie dient in dieser Arbeit die \gls{sentimentanalysis}. Sentiment lässt sich gut mechanistisch untersuchen, weil es sich an einzelnen sentimenttragenden Wörtern festmachen lässt und sich positive und negative Beispiele mit nahezu identischem Kontext gegenüberstellen lassen. Untersucht wird das offene Modell Pythia-410M von EleutherAI \cite{biderman2023pythia}, ausschließlich mit PyTorch und HuggingFace, ohne Spezialbibliotheken.
+Als Phänomen wird die \gls{sentimentanalysis} untersucht.
+Eingesetzt wird dafür das offene Modell Pythia-410M von EleutherAI \cite{biderman2023pythia}.
 
 \subsection{Hypothesen}
 
