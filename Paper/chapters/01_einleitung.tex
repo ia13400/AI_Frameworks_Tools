@@ -5,9 +5,7 @@
 Als Phänomen wird die \gls{sentimentanalysis} untersucht.
 Eingesetzt wird dafür das offene Modell Pythia-410M von EleutherAI \cite{biderman2023pythia}.
 
-\subsection{Hypothesen}
-
-Jede Hypothese ist mit einem konkreten Kriterium versehen, das angibt, wann sie als bestätigt gilt.
+Daraus ergeben sich drei Hypothesen zur Verarbeitung von Sentiment im Modell. Jede Hypothese ist mit einem konkreten Kriterium versehen, das angibt, wann sie als bestätigt gilt.
 
 \begin{description}[style=nextline, leftmargin=0pt, font=\bfseries, itemsep=0.4em]
   \item[H1 (klare Stimmungswörter)] Eindeutig polare Wörter wie „wonderful“ oder „delicious“ werden früh und direkt am Token verarbeitet. Bestätigt, wenn die Polarität bereits in frühen bis mittleren Schichten ablesbar ist \emph{und} ein Eingriff am Stimmungswort die Vorhersage wiederherstellt.
