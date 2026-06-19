@@ -142,7 +142,7 @@ def plot_activation_patching_heatmap(
         edgecolors="#111111",
         linewidths=2.0,
     )
-    ax_heatmap.set_xlabel("Token position")
+    ax_heatmap.set_xlabel("Corrupted prompt token position")
     ax_heatmap.set_ylabel("Layer (0 = first transformer layer)")
     ax_heatmap.set_title("Normalized Activation Patching Effect")
     ax_heatmap.set_xticks(range(len(tokens)))
@@ -178,6 +178,9 @@ def plot_activation_patching_heatmap(
 def plot_activation_head_patching_heatmap(
     normalized_effects,
     filename_or_path=ACTIVATION_PATCHING_HEAD_HEATMAP_PATH,
+    patch_position=None,
+    corrupted_token=None,
+    clean_patch_token=None,
 ):
     """Save head-level patching effects as a layer-by-head heatmap."""
     output_path = (
@@ -210,13 +213,18 @@ def plot_activation_head_patching_heatmap(
     )
     ax.set_xlabel("Attention head")
     ax.set_ylabel("Layer (0 = first transformer layer)")
-    ax.set_title(
-        (
-            "Head-Level Activation Patching "
-            f"(best layer={best_layer}, head={best_head}, "
-            f"effect={normalized_effects[best_layer, best_head]:.3f})"
-        )
+    title = (
+        "Head-Level Activation Patching "
+        f"(best layer={best_layer}, head={best_head}, "
+        f"effect={normalized_effects[best_layer, best_head]:.3f})"
     )
+    if patch_position is not None:
+        title += f"\nPatched position={patch_position}"
+        if corrupted_token is not None:
+            title += f", corrupted token={corrupted_token!r}"
+        if clean_patch_token is not None:
+            title += f", clean patch token={clean_patch_token!r}"
+    ax.set_title(title)
     ax.set_xticks(range(normalized_effects.shape[1]))
     ax.set_yticks(range(normalized_effects.shape[0]))
     fig.colorbar(image, ax=ax, label="Normalized effect")

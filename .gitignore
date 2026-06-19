@@ -9,3 +9,5 @@ assignement/utils/__pycache__/sst2_analysis.cpython-311.pyc
 assignement/utils/__pycache__/output_utils.cpython-311.pyc
 assignement/utils/__pycache__/logit_lens_utils.cpython-311.pyc
 assignement/notebooks/mlflow.db
+assignement/utils/__pycache__/activation_patching_utils.cpython-311.pyc
+assignement/utils/__pycache__/

@@ -103,7 +103,7 @@ def prepare_activation_patching_prompts(
 
 
 def cache_clean_layer_activations(model, clean_inputs):
-    """Cache clean hidden states from every transformer layer with forward hooks."""
+    """Run the clean prompt and cache its hidden states from every transformer layer."""
     clean_cache = {}
     hooks = []
 
@@ -137,13 +137,15 @@ def patch_layer_position_and_measure(
     patch_pos,
     correct_tok_id,
 ):
-    """Patch one layer/position activation into the corrupted run and return the answer logit."""
+    """Run the corrupted prompt, patch in one clean activation, and return the answer logit."""
     target_layer = int(patch_layer)
     target_pos = int(patch_pos)
 
     def hook_fn(module, inputs, output):
         hidden_state = hidden_state_from_layer_output(output)
         modified = hidden_state.clone()
+        # Replace the corrupted-run activation at this layer/position with the
+        # activation cached earlier from the clean prompt.
         modified[0, target_pos, :] = clean_cache[target_layer][0, target_pos, :]
         return replace_hidden_state_in_output(output, modified)
 
@@ -161,11 +163,17 @@ def run_activation_patching_grid(model, patching_state, clean_cache):
     """Patch every layer/position pair and compute normalized recovery effects."""
     n_layers = patching_state["n_layers"]
     seq_len = patching_state["seq_len"]
+    if len(clean_cache) != n_layers:
+        raise ValueError(
+            "clean_cache must contain activations from the clean prompt for every layer."
+        )
     results = np.zeros((n_layers, seq_len), dtype=float)
 
     for layer_index in range(n_layers):
         print(f"\rActivation patching layer {layer_index + 1}/{n_layers}", end="", flush=True)
         for position_index in range(seq_len):
+            # The model run below uses corrupted_inputs; clean_cache supplies only
+            # the replacement activation for the selected layer/position.
             results[layer_index, position_index] = patch_layer_position_and_measure(
                 model,
                 patching_state["corrupted_inputs"],
@@ -194,7 +202,7 @@ def plot_activation_patching_results(
     """Save the layer/position activation-patching visualization."""
     return plot_activation_patching_heatmap(
         patching_result["normalized_effects"],
-        patching_state["clean_tokens"],
+        patching_state["corrupted_tokens"],
         filename_or_path=filename_or_path,
     )
 
@@ -206,15 +214,20 @@ def top_activation_patching_points(patching_result, patching_state, top_k=10):
     ranked_indices = np.argsort(normalized.ravel())[::-1][:top_k]
     rows = []
 
-    print(f"{'Rank':<6} {'Layer':<7} {'Position':<9} {'Token':<14} Effect")
-    print("-" * 58)
+    print(
+        f"{'Rank':<6} {'Layer':<7} {'Position':<9} "
+        f"{'Corrupted token':<18} {'Clean patch token':<18} Effect"
+    )
+    print("-" * 82)
     for rank, flat_index in enumerate(ranked_indices, start=1):
         layer_index, position_index = divmod(int(flat_index), seq_len)
         row = {
             "rank": rank,
             "layer": layer_index,
             "position": position_index,
-            "token": patching_state["clean_tokens"][position_index],
+            "token": patching_state["corrupted_tokens"][position_index],
+            "corrupted_token": patching_state["corrupted_tokens"][position_index],
+            "clean_patch_token": patching_state["clean_tokens"][position_index],
             "normalized_effect": float(normalized[layer_index, position_index]),
         }
         rows.append(row)
@@ -222,7 +235,8 @@ def top_activation_patching_points(patching_result, patching_state, top_k=10):
             f"{rank:<6} "
             f"{layer_index:<7} "
             f"{position_index:<9} "
-            f"{row['token']!r:<14} "
+            f"{row['corrupted_token']!r:<18} "
+            f"{row['clean_patch_token']!r:<18} "
             f"{row['normalized_effect']:.6f}"
         )
 
@@ -231,7 +245,8 @@ def top_activation_patching_points(patching_result, patching_state, top_k=10):
         "\nStrongest patch point:",
         f"layer={best['layer']},",
         f"position={best['position']},",
-        f"token={best['token']!r},",
+        f"corrupted_token={best['corrupted_token']!r},",
+        f"clean_patch_token={best['clean_patch_token']!r},",
         f"effect={best['normalized_effect']:.6f}",
     )
     return rows
@@ -310,6 +325,20 @@ def run_head_level_patching(
     n_heads = int(model.config.num_attention_heads)
     results = np.zeros((n_layers, n_heads), dtype=float)
     resolved_pos = patch_pos if patch_pos >= 0 else patching_state["seq_len"] + patch_pos
+    if not 0 <= resolved_pos < patching_state["seq_len"]:
+        raise ValueError(
+            f"patch_pos={patch_pos} resolves to {resolved_pos}, "
+            f"but valid positions are 0 to {patching_state['seq_len'] - 1}."
+        )
+    corrupted_token = patching_state["corrupted_tokens"][resolved_pos]
+    clean_patch_token = patching_state["clean_tokens"][resolved_pos]
+
+    print(
+        "Head-level patching position:",
+        f"position={resolved_pos},",
+        f"corrupted_token={corrupted_token!r},",
+        f"clean_patch_token={clean_patch_token!r}",
+    )
 
     for layer_index in range(n_layers):
         print(f"\rHead patching layer {layer_index + 1}/{n_layers}", end="", flush=True)
@@ -330,11 +359,16 @@ def run_head_level_patching(
     plot_activation_head_patching_heatmap(
         normalized,
         filename_or_path=filename_or_path,
+        patch_position=resolved_pos,
+        corrupted_token=corrupted_token,
+        clean_patch_token=clean_patch_token,
     )
     return {
         "patched_logits": results,
         "normalized_effects": normalized,
         "patch_position": resolved_pos,
+        "corrupted_token": corrupted_token,
+        "clean_patch_token": clean_patch_token,
     }
 
 
