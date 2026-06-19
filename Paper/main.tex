@@ -1,5 +1,5 @@
 % =========================================================
-% Hauptdatei der wissenschaftlichen Arbeit
+% Hauptdatei der Kurzfassung (Paper03)
 % =========================================================
 
 \documentclass[12pt,a4paper]{article}
@@ -15,23 +15,26 @@
 % Layout und Formatierung
 % ---------------------------------------------------------
 \usepackage{geometry}
-\geometry{margin=2.5cm}
+\geometry{margin=2.3cm}
 
 \usepackage{setspace}
 \onehalfspacing
+
+% Etwas mehr Abstand zwischen Tabellenbeschreibung und Tabelleninhalt
+\setlength{\belowcaptionskip}{6pt}
+
+\usepackage{enumitem}
+\setlist{nosep}
 
 % ---------------------------------------------------------
 % Grafiken und Tabellen
 % ---------------------------------------------------------
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
 
-% ---------------------------------------------------------
-% Inhaltsverzeichnis mit Punkten
-% ---------------------------------------------------------
-\usepackage{tocloft}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\graphicspath{{./}{figures/}}
 
 % ---------------------------------------------------------
 % Links ohne rote Boxen
@@ -52,24 +55,23 @@
 ]{biblatex}
 
 \addbibresource{references.bib}
+\renewcommand*{\bibfont}{\footnotesize}
+\setlength{\bibitemsep}{0.3em}
 
 % ---------------------------------------------------------
-% Glossar
+% Glossar (nur fuer \gls-Kurzformen, ohne gedrucktes Glossar)
 % ---------------------------------------------------------
-\usepackage[
-    automake,
-    acronym,
-    toc
-]{glossaries}
-
+\usepackage[acronym]{glossaries}
+\glsdisablehyper
 \makeglossaries
-
-% Glossareinträge aus separater Datei laden
 \input{glossary}
-\setglossarystyle{long}
-\renewenvironment{theglossary}
-  {\begin{longtable}{p{0.22\textwidth} p{0.7\textwidth}}}
-  {\end{longtable}}
+
+% Abstand zwischen Ueberschriften und Text etwas straffen
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{1.2em}{0.6em}
+\titlespacing*{\subsection}{0pt}{0.9em}{0.4em}
+
+\setlength{\parskip}{0.3em}
 
 % =========================================================
 % Dokumentbeginn
@@ -77,53 +79,25 @@
 
 \begin{document}
 
-% ---------------------------------------------------------
-% Deckblatt
-% ---------------------------------------------------------
 \input{cover}
 \newpage
 
-% ---------------------------------------------------------
-% Inhaltsverzeichnis
-% ---------------------------------------------------------
-\tableofcontents
-\newpage
+\input{chapters/01_einleitung}
 
-% ---------------------------------------------------------
-% IMRaD-Struktur
-% ---------------------------------------------------------
+\input{chapters/02_grundlagen_modell}
 
-\input{chapters/01_introduction}
-\newpage
+\input{chapters/03_verhalten}
 
-\input{chapters/02_methods}
-\newpage
+\input{chapters/04_embedding}
 
-\input{chapters/03_results}
-\newpage
+\input{chapters/05_logit_lens}
 
-\input{chapters/04_discussion}
-\newpage
+\input{chapters/06_attention}
 
-\input{chapters/05_conclusion}
-\newpage
+\input{chapters/07_activation_patching}
 
-% ---------------------------------------------------------
-% Glossar
-% ---------------------------------------------------------
-{\small
-\printglossary[
-    title=Glossar,
-    toctitle=Glossar
-]
-}
-\newpage
+\input{chapters/08_diskussion_fazit}
 
-% ---------------------------------------------------------
-% Literaturverzeichnis
-% ---------------------------------------------------------
-\printbibliography[
-    title={Literaturverzeichnis}
-]
+\printbibliography[title={Literaturverzeichnis}]
 
 \end{document}
