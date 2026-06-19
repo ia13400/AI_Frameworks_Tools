@@ -2,10 +2,14 @@ import numpy as np
 import torch
 
 from config import (
+    ATTENTION_CAD_SENTIMENT_HEATMAP_PATH,
     ATTENTION_HEAD_GRID_PATH,
     ATTENTION_INDUCTION_HEATMAP_PATH,
     ATTENTION_SUBJECT_HEATMAP_PATH,
+    CAD_SENTIMENT_TRAIN_PAIRED_PATH,
 )
+from lexicon_utils import normalized_word_key, prepare_hu_liu_lookup_state
+from logit_lens_utils import load_cad_sentiment_prompt_pairs
 from plotting_utils import plot_attention_head_grid, plot_layer_head_heatmap
 
 
@@ -90,6 +94,60 @@ def attention_to_source_token_matrix(attentions, source_position, query_position
     return attention_values
 
 
+def sentiment_token_positions(tokens, hu_liu_lookup):
+    """Find decoded prompt tokens that match the filtered Hu & Liu lookup."""
+    positions = []
+    for index, token in enumerate(tokens):
+        key = normalized_word_key(token)
+        if key not in hu_liu_lookup:
+            continue
+        positions.append(
+            {
+                "position": index,
+                "token": token,
+                "word": hu_liu_lookup[key]["word"],
+                "sentiment": hu_liu_lookup[key]["sentiment"],
+            }
+        )
+    return positions
+
+
+def attention_to_source_positions_matrix(attentions, source_positions, query_position=-1):
+    """Average layer/head attention from one query token to several source positions."""
+    source_matrices = [
+        attention_to_source_token_matrix(
+            attentions,
+            source_position,
+            query_position=query_position,
+        )
+        for source_position in source_positions
+    ]
+    return np.mean(source_matrices, axis=0)
+
+
+def cad_prompt_records_from_pairs(prompt_pairs):
+    """Flatten CAD positive/negative prompt pairs into prompt-level records."""
+    records = []
+    for pair in prompt_pairs:
+        records.append(
+            {
+                "id": f"{pair['id']}_positive",
+                "pair_id": pair["id"],
+                "sentiment": "positive",
+                "prompt": pair["positive"],
+            }
+        )
+        records.append(
+            {
+                "id": f"{pair['id']}_negative",
+                "pair_id": pair["id"],
+                "sentiment": "negative",
+                "prompt": pair["negative"],
+            }
+        )
+    return records
+
+
 def rank_layer_heads(values, top_k=10):
     """Rank layer/head cells by descending score."""
     values = np.asarray(values, dtype=float)
@@ -151,6 +209,107 @@ def analyze_subject_attention(
         "subject_position": subject_position,
         "attention_values": attention_values,
         "ranked_heads": ranked_heads,
+    }
+
+
+def analyze_cad_hu_liu_attention_heads(
+    model,
+    tokenizer,
+    device,
+    dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    max_prompts=None,
+    top_k=10,
+    filename_or_path=ATTENTION_CAD_SENTIMENT_HEATMAP_PATH,
+):
+    """Average final-token attention to Hu & Liu sentiment tokens across CAD prompts."""
+    sentiment_state = prepare_hu_liu_lookup_state(tokenizer)
+    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=False)
+    prompt_records = cad_prompt_records_from_pairs(prompt_pairs)
+    if max_prompts is not None:
+        prompt_records = prompt_records[:max_prompts]
+
+    if not prompt_records:
+        raise ValueError("No CAD prompts were available for attention analysis.")
+
+    prompt_attention_matrices = []
+    prompt_results = []
+    skipped_without_sentiment_tokens = 0
+
+    model.eval()
+    for index, record in enumerate(prompt_records, start=1):
+        print(f"\rCAD prompt {index}/{len(prompt_records)} handled", end="", flush=True)
+        inputs = tokenizer(
+            record["prompt"],
+            return_tensors="pt",
+            truncation=True,
+        ).to(device)
+        tokens = [
+            tokenizer.decode([token_id])
+            for token_id in inputs["input_ids"][0]
+        ]
+        matched_tokens = sentiment_token_positions(
+            tokens,
+            sentiment_state["hu_liu_lookup"],
+        )
+        if not matched_tokens:
+            skipped_without_sentiment_tokens += 1
+            continue
+
+        with torch.no_grad():
+            outputs = model(**inputs, output_attentions=True)
+
+        attention_values = attention_to_source_positions_matrix(
+            outputs.attentions,
+            [item["position"] for item in matched_tokens],
+        )
+        prompt_attention_matrices.append(attention_values)
+        prompt_results.append(
+            {
+                **record,
+                "matched_hu_liu_tokens": matched_tokens,
+                "attention_values": attention_values,
+            }
+        )
+
+    print()
+    if not prompt_attention_matrices:
+        raise ValueError("No CAD prompts contained Hu & Liu sentiment tokens after tokenization.")
+
+    stacked_attention = np.stack(prompt_attention_matrices, axis=0)
+    mean_attention = stacked_attention.mean(axis=0)
+    std_attention = stacked_attention.std(axis=0)
+    ranked_heads = rank_layer_heads(mean_attention, top_k=top_k)
+    for item in ranked_heads:
+        item["std"] = float(std_attention[item["layer"], item["head"]])
+
+    print(
+        "CAD Hu & Liu attention prompts used:",
+        len(prompt_results),
+        f"(skipped without Hu & Liu token: {skipped_without_sentiment_tokens})",
+    )
+    print_ranked_heads(
+        ranked_heads,
+        score_label="Mean attention weight",
+    )
+
+    plot_layer_head_heatmap(
+        mean_attention,
+        (
+            "CAD Dataset: Average Final-Token Attention to "
+            f"Hu & Liu Sentiment Tokens (n={len(prompt_results)} prompts)"
+        ),
+        "Average attention weight",
+        filename_or_path,
+        top_heads=ranked_heads[:top_k],
+        cmap="Blues",
+    )
+    return {
+        "mean_attention": mean_attention,
+        "std_attention": std_attention,
+        "ranked_heads": ranked_heads,
+        "prompt_results": prompt_results,
+        "prompt_count": len(prompt_results),
+        "skipped_without_sentiment_tokens": skipped_without_sentiment_tokens,
     }
 
 
