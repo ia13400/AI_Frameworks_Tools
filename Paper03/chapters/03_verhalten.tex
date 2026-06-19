@@ -1,0 +1,50 @@
+\section{Verhalten des Modells}
+
+Bevor die internen Mechanismen untersucht werden, lohnt sich ein einfacher Verhaltenstest: Was sagt das Modell überhaupt, wenn man es mit einem sentimentbezogenen Satz konfrontiert? Auf eine positiv formulierte Eingabe wie \texttt{The food was delicious and the service was} antwortet Pythia-410M überwiegend mit positiven Fortsetzungen wie „excellent“ oder „great“, auf eine negative Eingabe entsprechend mit „terrible“ oder „awful“. Das Modell erkennt also grundsätzlich emotionalen Kontext.
+
+Für eine systematische Prüfung wird der gefilterte Sentiment-Challenge-Datensatz (636 Sätze, 353 negativ, 283 positiv) verwendet. An jeden Satz wird ein Prompt-Suffix angehängt, und es wird geprüft, ob unter den zehn wahrscheinlichsten nächsten Token mehr positive oder negative Lexikonwörter sind. Mit dem Suffix \texttt{ I feel very} erreicht das Modell eine Trefferquote von 75,2~Prozent, mit dem schwächeren Suffix \texttt{ Sentiment:} nur 32,1~Prozent (Tabelle~\ref{tab:cm1}). Auffällig ist dabei eine starke Neigung zur positiven Klasse: Beim zweiten Suffix sagt das Modell in 395 von 636 Fällen „positiv“ voraus und liefert in 229 weiteren Fällen gar kein erkennbares Sentiment-Token.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Konfusionsmatrix für den Suffix \texttt{ I feel very} (Trefferquote 75,2~\%).}
+  \label{tab:cm1}
+  \begin{tabular}{lrrr}
+    \toprule
+    & \multicolumn{3}{c}{vorhergesagt} \\
+    \cmidrule(lr){2-4}
+    wahr & positiv & negativ & kein Sentiment \\
+    \midrule
+    positiv & 259 & 24 & 0 \\
+    negativ & 134 & 219 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Tabelle~\ref{tab:catacc_short} und Abbildung~\ref{fig:catacc} zeigen die Trefferquote nach Annotationskategorie für den besseren Suffix. Eindeutige Fälle wie reine positive oder negative Sätze, Verneinungen (negated) oder Verstärkungen (amplified) werden mit über 80~Prozent gut erkannt. Am schwierigsten ist die Kategorie Sarkasmus/Ironie mit nur 46,7~Prozent.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Trefferquote ausgewählter Kategorien (Suffix \texttt{ I feel very}).}
+  \label{tab:catacc_short}
+  \begin{tabular}{lrr}
+    \toprule
+    Kategorie & n & Trefferquote (\%) \\
+    \midrule
+    positiv & 272 & 86,4 \\
+    negated & 76 & 84,2 \\
+    amplified & 68 & 83,8 \\
+    idioms & 113 & 80,5 \\
+    world-knowledge & 72 & 62,5 \\
+    sarcasm/irony & 45 & 46,7 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{sentiment_challenge_category_accuracy_Trial1.png}
+  \caption{Trefferquote je Annotationskategorie für den Suffix \texttt{ I feel very}.}
+  \label{fig:catacc}
+\end{figure}
+
+Diese niedrige Quote bei Sarkasmus passt zur Erwartung, dass das Modell Ironie nicht versteht. Allerdings ist die Kategorie im Datensatz zu 93~Prozent negativ gelabelt, während das Modell ohnehin zur positiven Klasse tendiert -- ein Teil der schlechten Quote könnte also schlicht diese Schieflage widerspiegeln und nicht fehlendes Ironieverständnis. Insgesamt zeigt der Verhaltenstest: Das Modell nutzt Sentiment-Information, aber nur zuverlässig, wenn der Prompt eine sentimenttragende Fortsetzung wahrscheinlich macht. Reine Next-Token-Generierung ersetzt keine stabile Sentiment-Klassifikation -- das motiviert die folgenden Kapitel, die direkt in die internen Repräsentationen des Modells schauen.
