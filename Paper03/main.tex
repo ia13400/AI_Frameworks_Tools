@@ -1,0 +1,103 @@
+% =========================================================
+% Hauptdatei der Kurzfassung (Paper03)
+% =========================================================
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------------------------------------------------------
+% Sprache und Zeichencodierung
+% ---------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+% ---------------------------------------------------------
+% Layout und Formatierung
+% ---------------------------------------------------------
+\usepackage{geometry}
+\geometry{margin=2.3cm}
+
+\usepackage{setspace}
+\onehalfspacing
+
+% Etwas mehr Abstand zwischen Tabellenbeschreibung und Tabelleninhalt
+\setlength{\belowcaptionskip}{6pt}
+
+\usepackage{enumitem}
+\setlist{nosep}
+
+% ---------------------------------------------------------
+% Grafiken und Tabellen
+% ---------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+
+\graphicspath{{./}{figures/}}
+
+% ---------------------------------------------------------
+% Links ohne rote Boxen
+% ---------------------------------------------------------
+\usepackage[
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+]{hyperref}
+
+% ---------------------------------------------------------
+% Literaturverzeichnis
+% ---------------------------------------------------------
+\usepackage[
+    backend=biber,
+    style=ieee
+]{biblatex}
+
+\addbibresource{references.bib}
+\renewcommand*{\bibfont}{\footnotesize}
+\setlength{\bibitemsep}{0.3em}
+
+% ---------------------------------------------------------
+% Glossar (nur fuer \gls-Kurzformen, ohne gedrucktes Glossar)
+% ---------------------------------------------------------
+\usepackage[acronym]{glossaries}
+\glsdisablehyper
+\makeglossaries
+\input{glossary}
+
+% Abstand zwischen Ueberschriften und Text etwas straffen
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{1.2em}{0.6em}
+\titlespacing*{\subsection}{0pt}{0.9em}{0.4em}
+
+\setlength{\parskip}{0.3em}
+
+% =========================================================
+% Dokumentbeginn
+% =========================================================
+
+\begin{document}
+
+\input{cover}
+\newpage
+
+\input{chapters/01_einleitung}
+
+\input{chapters/02_grundlagen_modell}
+
+\input{chapters/03_verhalten}
+
+\input{chapters/04_embedding}
+
+\input{chapters/05_logit_lens}
+
+\input{chapters/06_attention}
+
+\input{chapters/07_activation_patching}
+
+\input{chapters/08_diskussion_fazit}
+
+\printbibliography[title={Literaturverzeichnis}]
+
+\end{document}
