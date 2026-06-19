@@ -6,7 +6,7 @@ Der Logit Lens zeigt, dass Sentiment im Residual Stream entsteht, sagt aber nich
 
 In jedem \gls{transformer}-Layer berechnen die \glspl{attentionhead} gewichtete Summen über alle Token-Positionen. Für jeden Prompt liefert das Modell auf Wunsch die \gls{attention}-Gewichte aller Schichten zurück. Bei Pythia-410M entstehen so 24 Attention-Tensoren, einer je Schicht, mit jeweils 16 Köpfen. Eine einzelne \gls{attention}-Matrix hat die Form Sequenzlänge mal Sequenzlänge. Jede Zeile steht für eine Query-Position, also das Token, das Aufmerksamkeit verteilt. Jede Spalte steht für eine Key-Position, also ein Token, auf das geachtet wird. Da das Modell kausal arbeitet, richtet sich die Aufmerksamkeit nur auf das aktuelle und auf vorherige Token. Ein \gls{attention}-Gewicht nahe 1 bedeutet, dass eine Query-Position fast ihre gesamte Aufmerksamkeit auf ein einzelnes Token legt.
 
-Abbildung~\ref{fig:headgrid} zeigt beispielhaft die \gls{attention}-Muster mehrerer Köpfe. Einige Köpfe fokussieren stark auf einzelne inhaltstragende Token, andere verfolgen globale Muster wie Satzanfänge oder das jeweils vorherige Token.
+Abbildung~\ref{fig:headgrid} zeigt beispielhaft die \gls{attention}-Muster sechs ausgewählter Köpfe für den Prompt \texttt{The food was delicious and the service was}. Die Köpfe unterscheiden sich deutlich in ihrem Muster: Kopf 15 in Schicht 0 verteilt seine Aufmerksamkeit noch recht gleichmäßig mit einer leichten Tendenz zum ersten Token „The“. Kopf 10 in Schicht 4 richtet sich dagegen klar auf das inhaltstragende Wort „food“ aus, auf das mehrere spätere Token auffällig stark zugreifen. Kopf 8 in Schicht 11 zeigt fast ausschließlich Aufmerksamkeit auf das erste Token „The“, und zwar von nahezu jeder Query-Position aus -- ein klassisches Attention-Sink-Muster. Kopf 5 in Schicht 17 konzentriert sich auf die Inhaltswörter „food“ und „delicious“. Bei Kopf 3 in Schicht 20 ist nur eine einzige Zelle deutlich ausgeprägt: Allein die letzte Position der Sequenz richtet ihre Aufmerksamkeit fast vollständig auf das erste Token „The“, während alle übrigen Positionen kaum Gewicht darauf legen. Kopf 0 in Schicht 23 zeigt schließlich ein uneinheitlicheres Bild mit mehreren räumlich getrennten, vergleichsweise scharfen Zellen, ohne dass sich daraus ein einzelnes, klar benennbares Muster ableiten lässt.
 
 \begin{figure}[htbp]
   \centering
@@ -17,7 +17,7 @@ Abbildung~\ref{fig:headgrid} zeigt beispielhaft die \gls{attention}-Muster mehre
 
 \subsection{Aufmerksamkeit auf ein sentimenttragendes Token}
 
-In einem ersten Schritt wird untersucht, welche Köpfe beim Verarbeiten eines Prompts besonders stark auf das sentimenttragende Wort „delicious“ fokussieren. Mehrere Köpfe in unterschiedlichen Schichten richten erhöhte Aufmerksamkeit auf dieses Token. Die stärkste gemessene Aufmerksamkeit tritt in Schicht 6 und Kopf 3 mit einem Gewicht von 0,835 auf. Weitere auffällige Köpfe finden sich in den Schichten 7, 8, 10 und 19. Abbildung~\ref{fig:subject} stellt diese Aufmerksamkeit dar.
+In einem ersten Schritt wird untersucht, welche Köpfe beim Verarbeiten eines Prompts besonders stark auf das sentimenttragende Wort „delicious“ fokussieren. Mehrere Köpfe in unterschiedlichen Schichten richten erhöhte Aufmerksamkeit auf dieses Token. Die stärkste gemessene Aufmerksamkeit tritt in Schicht 6 und Kopf 3 mit einem Gewicht von 0,835 auf, deutlich vor dem zweithöchsten Wert in Schicht 10 und Kopf 13 mit 0,500. Weitere Köpfe mit Gewichten zwischen etwa 0,27 und 0,37 finden sich in den Schichten 0, 3, 4, 7, 8, 12 und 19. Abbildung~\ref{fig:subject} stellt diese Aufmerksamkeit dar.
 
 \begin{figure}[htbp]
   \centering
@@ -39,7 +39,7 @@ Um über ein einzelnes Beispiel hinauszugehen, wird die Aufmerksamkeit auf senti
   \label{fig:cadattention}
 \end{figure}
 
-Ergänzend wird nach Induction Heads gesucht. Solche Köpfe vervollständigen Muster der Form „A B ... A“ zu „B“ und gelten als ein bekannter Mechanismus zur Mustererkennung. Abbildung~\ref{fig:induction} zeigt die entsprechende Analyse.
+Ergänzend wird nach Induction Heads gesucht. Solche Köpfe vervollständigen Muster der Form „A B ... A“ zu „B“ und gelten als ein bekannter Mechanismus zur Mustererkennung. Abbildung~\ref{fig:induction} zeigt die entsprechende Analyse. Die höchsten Induction-Scores treten mit Werten zwischen etwa 0,38 und 0,44 in den frühen Schichten 1, 3, 4 und 5 auf, etwa in Schicht 5 bei Kopf 2 mit 0,444 sowie in Schicht 3 und 4 bei Kopf 9 mit 0,398 und 0,425. Induction-artige Aufmerksamkeit ist demnach nicht gleichmäßig über das Modell verteilt, sondern konzentriert sich auf eine kleine Gruppe früher Köpfe, während in den oberen, für die Sentiment-Trennung relevanten Schichten kaum ausgeprägte Induction-Muster auftreten.
 
 \begin{figure}[htbp]
   \centering
