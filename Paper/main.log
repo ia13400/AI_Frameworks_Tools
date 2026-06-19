@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.14)  19 JUN 2026 23:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.6.14)  19 JUN 2026 23:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -848,18 +848,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \relax 
 l.10 
-      [1] [2]) (./chapters/03_verhalten.tex [3]) (./chapters/04_embedding.tex [4]
-<figures/hu_liu_opinion_embeddings.png, id=139, 722.7pt x 505.89pt>
+      [1] [2]) (./chapters/03_verhalten.tex [3]) (./chapters/04_embedding.tex
+<figures/hu_liu_opinion_embeddings.png, id=133, 722.7pt x 505.89pt>
 File: figures/hu_liu_opinion_embeddings.png Graphic file (type png)
 <use figures/hu_liu_opinion_embeddings.png>
 Package pdftex.def Info: figures/hu_liu_opinion_embeddings.png  used on input line 9.
 (pdftex.def)             Requested size: 228.64882pt x 160.05092pt.
-<figures/hu_liu_opinion_histogram.png, id=141, 650.43pt x 361.35pt>
+<figures/hu_liu_opinion_histogram.png, id=135, 650.43pt x 361.35pt>
 File: figures/hu_liu_opinion_histogram.png Graphic file (type png)
 <use figures/hu_liu_opinion_histogram.png>
 Package pdftex.def Info: figures/hu_liu_opinion_histogram.png  used on input line 11.
 (pdftex.def)             Requested size: 228.64882pt x 127.02577pt.
-<figures/sentiment_embedding_norms_all_fields.png, id=143, 1156.32pt x 1156.32pt>
+ [4]
+<figures/sentiment_embedding_norms_all_fields.png, id=144, 1156.32pt x 1156.32pt>
 File: figures/sentiment_embedding_norms_all_fields.png Graphic file (type png)
 <use figures/sentiment_embedding_norms_all_fields.png>
 Package pdftex.def Info: figures/sentiment_embedding_norms_all_fields.png  used on input line 20.
@@ -875,18 +876,18 @@ File: figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png Graphic file 
 <use figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png>
 Package pdftex.def Info: figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png  used on input line 9.
 (pdftex.def)             Requested size: 326.6361pt x 240.67848pt.
- [8 <./figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png>]
-<figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png, id=176, 1111.40936pt x 444.4605pt>
+<figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png, id=168, 1111.40936pt x 444.4605pt>
 File: figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png Graphic file (type png)
 <use figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png>
 Package pdftex.def Info: figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png  used on input line 18.
 (pdftex.def)             Requested size: 396.63411pt x 158.61536pt.
-<figures/logit_lens_cad_logit_difference_aggregate.png, id=178, 786.71057pt x 410.90657pt>
+ [8 <./figures/logit_lens_prompt_hu_liu_logit_difference_Trial2.png>]
+<figures/logit_lens_cad_logit_difference_aggregate.png, id=179, 786.71057pt x 410.90657pt>
 File: figures/logit_lens_cad_logit_difference_aggregate.png Graphic file (type png)
 <use figures/logit_lens_cad_logit_difference_aggregate.png>
 Package pdftex.def Info: figures/logit_lens_cad_logit_difference_aggregate.png  used on input line 27.
 (pdftex.def)             Requested size: 396.63411pt x 207.17073pt.
-) [9 <./figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png> <./figures/logit_lens_cad_logit_difference_aggregate.png>] (./chapters/06_attention.tex
+) (./chapters/06_attention.tex [9 <./figures/logit_lens_prompt_hu_liu_logit_scores_Trial2.png> <./figures/logit_lens_cad_logit_difference_aggregate.png>]
 <figures/attention_subject_heatmap.png, id=188, 795.48622pt x 537.89528pt>
 File: figures/attention_subject_heatmap.png Graphic file (type png)
 <use figures/attention_subject_heatmap.png>
@@ -897,7 +898,7 @@ File: figures/attention_cad_sentiment_heatmap.png Graphic file (type png)
 <use figures/attention_cad_sentiment_heatmap.png>
 Package pdftex.def Info: figures/attention_cad_sentiment_heatmap.png  used on input line 18.
 (pdftex.def)             Requested size: 373.30144pt x 260.01823pt.
-) [10] [11 <./figures/attention_subject_heatmap.png> <./figures/attention_cad_sentiment_heatmap.png>] (./chapters/07_activation_patching.tex
+ [10 <./figures/attention_subject_heatmap.png>]) (./chapters/07_activation_patching.tex [11 <./figures/attention_cad_sentiment_heatmap.png>]
 <figures/activation_patching_heatmap.png, id=205, 1111.92557pt x 496.59814pt>
 File: figures/activation_patching_heatmap.png Graphic file (type png)
 <use figures/activation_patching_heatmap.png>
@@ -908,18 +909,18 @@ Overfull \hbox (15.72473pt too wide) in paragraph at lines 33--34
 []\T1/cmr/m/n/12 Ergänzend wird auf Ebe-ne ein-zel-ner Köp-fe ge-patcht. Statt der ge-sam-ten Schicht-Aktivierung
  []
 
-[12] [13 <./figures/activation_patching_heatmap.png>]
-<figures/activation_patching_head_heatmap.png, id=221, 805.8105pt x 533.76556pt>
+[12 <./figures/activation_patching_heatmap.png>]
+<figures/activation_patching_head_heatmap.png, id=217, 805.8105pt x 533.76556pt>
 File: figures/activation_patching_head_heatmap.png Graphic file (type png)
 <use figures/activation_patching_head_heatmap.png>
 Package pdftex.def Info: figures/activation_patching_head_heatmap.png  used on input line 37.
 (pdftex.def)             Requested size: 326.6361pt x 216.36934pt.
-) (./chapters/08_diskussion_fazit.tex
+) (./chapters/08_diskussion_fazit.tex [13 <./figures/activation_patching_head_heatmap.png>]
 
 Package enumitem Warning: Negative labelwidth. This does not make much
 (enumitem)                sense, on input line 9.
 
-[14 <./figures/activation_patching_head_heatmap.png>] [15])
+[14]) [15]
 Overfull \hbox (1.6607pt too wide) in paragraph at lines 102--102
 \T1/cmr/m/n/10 Counterfactually-Augmented Da-ta,'' in \T1/cmr/m/it/10 In-ter-na-tio-nal Con-fe-rence on Lear-ning Re-pre-sen-ta-ti-ons (ICLR)\T1/cmr/m/n/10 ,
  []
@@ -943,13 +944,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  27435 strings out of 467533
  524615 string characters out of 5422138
- 1440195 words of memory out of 5000000
+ 1439195 words of memory out of 5000000
  55955 multiletter control sequences out of 15000+600000
  641205 words of font info for 68 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  78i,9n,79p,2535b,2483s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (17 pages, 1322585 bytes).
+Output written on main.pdf (17 pages, 1322849 bytes).
 PDF statistics:
  311 PDF objects out of 1000 (max. 8388607)
  243 compressed objects within 3 object streams
