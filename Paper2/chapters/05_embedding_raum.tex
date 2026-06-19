@@ -28,7 +28,7 @@ Die ersten beiden Hauptkomponenten trennen die Sentiment-Klassen nicht vollstän
 
 \subsubsection{Normen der Embeddings}
 
-Die L2-Norm beschreibt die Länge eines Vektors. Abbildung~\ref{fig:norms} vergleicht die Normen positiver und negativer Wörter innerhalb einzelner Felder. Die Werte liegen nah beieinander. Die reine Vektorlänge ist somit kein zuverlässiger Indikator für Sentiment. Aussagekräftiger sind die Richtungen der Vektoren und ihre Nachbarschaften.
+Die L2-Norm beschreibt die Länge eines Vektors. Abbildung~\ref{fig:norms} vergleicht die Normen positiver und negativer Wörter innerhalb einzelner Felder. Die absolute Spannweite ist mit Werten zwischen etwa 0,78 und 0,82 gering, innerhalb dieser Spannweite zeigt sich jedoch ein konsistentes Muster: In nahezu allen zehn Feldern liegt die Norm der negativen Wörter etwas über der Norm der positiven Wörter, etwa bei „sour“ gegenüber „delicious“, „dangerous“ gegenüber „safe“ oder „failed“ gegenüber „acclaimed“. Die Vektorlänge allein eignet sich wegen der geringen absoluten Unterschiede weiterhin nicht als praktikabler Indikator für Sentiment, der systematische Versatz deutet aber darauf hin, dass negative Wörter im Embedding-Raum von Pythia-410M tendenziell etwas größere Normen besitzen als positive. Aussagekräftiger für die Trennung von Sentiment sind die Richtungen der Vektoren und ihre Nachbarschaften.
 
 \begin{figure}[htbp]
   \centering
@@ -80,6 +80,8 @@ Auf den Testdaten erreicht die lineare Probe eine Klassifikationsgenauigkeit von
   \caption{Durch die lineare Probe gelernte Sentiment-Achse.}
   \label{fig:lraxis}
 \end{figure}
+
+Abbildung~\ref{fig:lraxis} markiert die von der Probe falsch klassifizierten Wörter zusätzlich farblich. Die Fehlklassifikationen betreffen erkennbar Wörter, deren Sentiment stark vom Kontext oder von einer untergeordneten, fachsprachlichen Lesart abhängt: „capricious“ und „tout“ werden mit Wahrscheinlichkeiten von rund 0,88 beziehungsweise 0,81 als positiv vorhergesagt, obwohl beide Wörter im Lexikon als negativ gelten, „unsupported“ erhält ebenfalls einen hohen positiven Wert von etwa 0,82. In die andere Richtung wird „tempt“ mit nur rund 0,07 stark negativ eingeschätzt. Das Wort „morality“ liegt mit einer Wahrscheinlichkeit nahe 0,50 fast exakt auf der Entscheidungsgrenze, was zu der inhaltlichen Erwartung passt, dass moralische Bewertungen ohne weiteren Kontext kein eindeutiges Sentiment tragen. Diese Einzelfälle zeigen, dass die verbleibenden rund drei Prozent Fehlklassifikationen nicht zufällig verteilt sind, sondern gezielt bei mehrdeutigen oder kontextabhängigen Wörtern auftreten.
 
 \begin{figure}[htbp]
   \centering
