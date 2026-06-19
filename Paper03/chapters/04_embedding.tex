@@ -44,13 +44,6 @@ Um diese Beobachtung zu quantifizieren, wird ein lineares Probing durchgeführt:
   \end{tabular}
 \end{table}
 
-Auf den Testdaten erreicht die Probe 97~Prozent Genauigkeit, bei gleichzeitig hohen Präzisions-, Recall- und F1-Werten für beide Klassen (Abbildung~\ref{fig:lraxis}). Die verbleibenden Fehler betreffen erkennbar mehrdeutige oder kontextabhängige Wörter: „capricious“ und „tout“ werden positiv vorhergesagt, obwohl sie im Lexikon als negativ gelten, und „morality“ liegt fast exakt auf der Entscheidungsgrenze -- passend dazu, dass eine moralische Bewertung ohne Kontext kein eindeutiges Sentiment trägt.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{logistic_regression_sentiment_axis.png}
-  \caption{Durch die lineare Probe gelernte Sentiment-Achse; falsch klassifizierte Wörter sind rot markiert.}
-  \label{fig:lraxis}
-\end{figure}
+Auf den Testdaten erreicht die Probe 97~Prozent Genauigkeit, bei gleichzeitig hohen Präzisions-, Recall- und F1-Werten für beide Klassen. Ordnet man jedes Testwort nach seiner vorhergesagten Wahrscheinlichkeit für positives Sentiment zwischen 0 und 1 an, liegt die überwiegende Mehrheit der Wörter klar auf einer der beiden Seiten der Entscheidungsgrenze von 0,5 -- nur eine kleine Gruppe liegt nahe an dieser Grenze und wird falsch klassifiziert. Die verbleibenden Fehler betreffen erkennbar mehrdeutige oder kontextabhängige Wörter: „capricious“ und „tout“ werden positiv vorhergesagt, obwohl sie im Lexikon als negativ gelten, und „morality“ liegt fast exakt auf der Entscheidungsgrenze -- passend dazu, dass eine moralische Bewertung ohne Kontext kein eindeutiges Sentiment trägt.
 
 Damit lässt sich festhalten: Der Embedding-Raum von Pythia-410M enthält bereits eine linear weitgehend separierbare Sentiment-Struktur, bevor überhaupt eine Transformer-Schicht durchlaufen wurde -- der beschreibende Teil von Hypothese H1 ist gestützt. Offen bleibt, ab welcher Schicht das Modell diese Information für seine tatsächliche Vorhersage nutzt -- das untersucht das nächste Kapitel.

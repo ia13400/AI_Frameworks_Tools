@@ -334,10 +334,6 @@ INPUT ./figures/sentiment_embedding_norms_all_fields.png
 INPUT ./figures/sentiment_embedding_norms_all_fields.png
 INPUT ./figures/sentiment_embedding_norms_all_fields.png
 INPUT ./figures/sentiment_embedding_norms_all_fields.png
-INPUT ./figures/logistic_regression_sentiment_axis.png
-INPUT ./figures/logistic_regression_sentiment_axis.png
-INPUT ./figures/logistic_regression_sentiment_axis.png
-INPUT ./figures/logistic_regression_sentiment_axis.png
 INPUT ./chapters/05_logit_lens.tex
 INPUT ./chapters/05_logit_lens.tex
 INPUT ./chapters/05_logit_lens.tex

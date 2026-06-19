@@ -18,7 +18,7 @@ Ein wichtiges Muster zieht sich durch die ganze Arbeit: Korrelative Verfahren un
 
 \subsection{Grenzen}
 
-Der Logit Lens nutzt die für die letzte Schicht trainierte Ausgabematrix und kann mittlere Schichten daher unterschätzen. Die lexikonbasierte Bewertung übersieht Sentiment außerhalb des Lexikons. Activation Patching wurde bislang nur für ein Prompt-Paar gerechnet, nicht über den gesamten CAD-Datensatz aggregiert; alle Befunde beziehen sich zudem auf ein einzelnes 410-Millionen-Parameter-Modell.
+Der Logit Lens nutzt die für die letzte Schicht trainierte Ausgabematrix und kann mittlere Schichten daher unterschätzen. Die lexikonbasierte Bewertung übersieht Sentiment außerhalb des Lexikons, und der Ein-Token-Filter schränkt die betrachtete Wortmenge zusätzlich ein. Activation Patching wurde bislang nur für ein Prompt-Paar gerechnet, nicht über den gesamten CAD-Datensatz aggregiert; alle Befunde beziehen sich zudem auf ein einzelnes 410-Millionen-Parameter-Modell, weshalb sie sich nicht ohne Weiteres auf größere Sprachmodelle übertragen lassen.
 
 \subsection{Fazit}
 
