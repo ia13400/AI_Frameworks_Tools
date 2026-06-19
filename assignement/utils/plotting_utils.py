@@ -9,6 +9,7 @@ import numpy as np
 import seaborn as sns
 import torch
 from matplotlib.patches import Rectangle
+from matplotlib.ticker import PercentFormatter
 from sklearn.decomposition import PCA
 
 from config import (
@@ -848,11 +849,13 @@ def plot_linear_probe_layer_accuracy(
     std_devs = np.asarray(std_devs, dtype=float)
     layers = np.arange(len(accuracies))
     best_layer = int(np.argmax(accuracies))
+    accuracy_percent = accuracies * 100.0
+    std_dev_percent = std_devs * 100.0
 
     fig, ax = plt.subplots(figsize=(10.8, 5.8))
     ax.plot(
         layers,
-        accuracies,
+        accuracy_percent,
         marker="o",
         color="#3B5BA9",
         linewidth=2.0,
@@ -860,23 +863,28 @@ def plot_linear_probe_layer_accuracy(
     )
     ax.fill_between(
         layers,
-        accuracies - std_devs,
-        accuracies + std_devs,
+        accuracy_percent - std_dev_percent,
+        accuracy_percent + std_dev_percent,
         color="#3B5BA9",
         alpha=0.18,
         label="+/- 1 standard deviation",
     )
-    ax.axhline(0.5, color="#707070", linestyle="--", linewidth=1.0, label="Chance level")
-    ax.scatter([best_layer], [accuracies[best_layer]], color="#B22222", zorder=5)
+    ax.axhline(50.0, color="#707070", linestyle=":", linewidth=1.4, label="Chance level (50%)")
+    ax.scatter([best_layer], [accuracy_percent[best_layer]], color="#B22222", zorder=5)
     ax.annotate(
-        f"Max: {accuracies[best_layer]:.3f}\nLayer {best_layer}",
-        xy=(best_layer, accuracies[best_layer]),
-        xytext=(best_layer + 0.8, min(1.0, accuracies[best_layer] + 0.06)),
+        (
+            f"Best layer: {best_layer}\n"
+            f"Mean: {accuracy_percent[best_layer]:.1f}%\n"
+            f"Std: {std_dev_percent[best_layer]:.1f}%"
+        ),
+        xy=(best_layer, accuracy_percent[best_layer]),
+        xytext=(best_layer + 0.8, min(100.0, accuracy_percent[best_layer] + 6.0)),
         arrowprops={"arrowstyle": "->", "color": "#404040", "linewidth": 0.9},
         fontsize=9,
         bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
     )
-    ax.set_ylim(0.0, 1.04)
+    ax.set_ylim(0.0, 104.0)
+    ax.yaxis.set_major_formatter(PercentFormatter(xmax=100.0))
     ax.set_xlabel("Layer (0 = first transformer layer)")
     ax.set_ylabel("Cross-validated accuracy")
     ax.set_title(f"CAD Sentiment Linear Probe by Layer (n={sample_count} prompts)")

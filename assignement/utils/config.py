@@ -15,6 +15,10 @@ OUTPUT_PNG_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_TXT_DIR.mkdir(parents=True, exist_ok=True)
 
+MLFLOW_TRACKING_DB_PATH = ASSIGNMENT_DIR / "notebooks" / "mlruns" / "mlflow.db"
+MLFLOW_TRACKING_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+MLFLOW_TRACKING_URI = f"sqlite:///{MLFLOW_TRACKING_DB_PATH.resolve().as_posix()}"
+
 POSITIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_positive_one_token_words.json"
 NEGATIVE_WORDS_PATH = OUTPUT_JSON_DIR / "hu_liu_negative_one_token_words.json"
 FIELD_PAIRS_PATH = INPUT_DIR / "hu_liu_sentiment_word_pairs_by_field.json"

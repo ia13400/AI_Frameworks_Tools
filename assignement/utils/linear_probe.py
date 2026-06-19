@@ -19,10 +19,10 @@ from config import (
     CAD_SENTIMENT_TRAIN_PAIRED_PATH,
     FLAT_PAIRS_PATH,
     LINEAR_PROBE_CAD_ACCURACY_PATH,
+    MLFLOW_TRACKING_URI,
     MODEL_NAME,
     PROBE_SPLIT_PATH,
 )
-from lexicon_utils import prepare_hu_liu_lookup_state
 from logit_lens_utils import load_cad_sentiment_prompt_pairs
 from output_utils import write_json_if_changed
 from plotting_utils import (
@@ -61,12 +61,10 @@ def cad_prompt_records_from_pairs(prompt_pairs):
 
 
 def load_cad_linear_probe_records(
-    tokenizer,
     dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
     max_prompts=None,
 ):
-    """Load CAD prompts and prepare the Hu & Liu state used by this notebook."""
-    sentiment_state = prepare_hu_liu_lookup_state(tokenizer)
+    """Load CAD sentiment prompts and return records with binary labels."""
     prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=False)
     prompt_records = cad_prompt_records_from_pairs(prompt_pairs)
     if max_prompts is not None:
@@ -83,12 +81,7 @@ def load_cad_linear_probe_records(
         f"{len(prompt_records)} prompts",
         f"({int(labels.sum())} positive, {int((labels == 0).sum())} negative)",
     )
-    print(
-        "Hu & Liu one-token lookup:",
-        f"{len(sentiment_state['positive_words'])} positive words,",
-        f"{len(sentiment_state['negative_words'])} negative words",
-    )
-    return prompt_records, labels, sentiment_state
+    return prompt_records, labels
 
 
 def extract_all_layer_activations(
@@ -213,8 +206,7 @@ def run_cad_linear_probe_analysis(
     filename_or_path=LINEAR_PROBE_CAD_ACCURACY_PATH,
 ):
     """Run hook-based CAD sentiment probing and save the layer accuracy plot."""
-    prompt_records, labels, sentiment_state = load_cad_linear_probe_records(
-        tokenizer,
+    prompt_records, labels = load_cad_linear_probe_records(
         dataset_path=dataset_path,
         max_prompts=max_prompts,
     )
@@ -241,7 +233,6 @@ def run_cad_linear_probe_analysis(
     return {
         "prompt_records": prompt_records,
         "labels": labels,
-        "sentiment_state": sentiment_state,
         "activations": activations,
         "accuracies": accuracies,
         "std_devs": std_devs,
@@ -261,6 +252,7 @@ def log_linear_probe_with_mlflow(probe_result, mlflow_module=None):
         )
         return False
 
+    mlflow_module.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow_module.set_experiment("linear_probing_pythia410m")
     with mlflow_module.start_run(run_name="cad_sentiment_probe"):
         mlflow_module.log_param("model", MODEL_NAME)
@@ -278,7 +270,7 @@ def log_linear_probe_with_mlflow(probe_result, mlflow_module=None):
             )
         mlflow_module.log_metric("best_accuracy", probe_result["best_accuracy"])
         mlflow_module.log_metric("best_layer", probe_result["best_layer"])
-    print("Logged CAD linear-probe run to MLflow.")
+    print(f"Logged CAD linear-probe run to MLflow at {MLFLOW_TRACKING_URI}.")
     return True
 
 
