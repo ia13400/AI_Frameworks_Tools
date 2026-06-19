@@ -1,98 +1,236 @@
-# AI Frameworks & Tools — Mechanistische Interpretierbarkeit von Sentiment in Pythia-410M
+# AI Frameworks & Tools: Mechanistic Interpretability of Sentiment in Pythia-410M
 
-Semesterprojekt im Modul **AI Frameworks & Tools**. Untersucht wird, wo und wie das offene Sprachmodell [Pythia-410M](https://huggingface.co/EleutherAI/pythia-410m) (EleutherAI) Sentiment intern repräsentiert — mit Methoden der mechanistischen Interpretierbarkeit (Residual-Stream-Analyse, Logit Lens, Attention-Analyse, lineares Probing, Activation Patching).
-
-## Inhaltsverzeichnis
-
-- [Team](#team)
-- [Repository-Struktur](#repository-struktur)
-- [Voraussetzungen](#voraussetzungen)
-- [Installation](#installation)
-- [Verwendung](#verwendung)
-- [Datengrundlage](#datengrundlage)
-- [Wissenschaftliche Arbeit](#wissenschaftliche-arbeit)
-- [Lizenz](#lizenz)
+Semester project for **AI Frameworks & Tools**. The project studies where and how
+[EleutherAI/pythia-410m](https://huggingface.co/EleutherAI/pythia-410m) represents
+sentiment internally, using model inspection, embedding analysis, Logit Lens,
+attention analysis, linear probing, and activation patching.
 
 ## Team
 
-| Rolle | Name |
+| Role | Name |
 |---|---|
-| Betreuer | Dr. Sigurd Schacht |
-| Autor | Alireza Roozitalab |
-| Autor | Daniel Durst-Claus |
-| Autor | Islam Abdalla |
+| Supervisor | Dr. Sigurd Schacht |
+| Author | Alireza Roozitalab |
+| Author | Daniel Durst-Claus |
+| Author | Islam Abdalla |
 
-## Repository-Struktur
+## Repository Structure
 
 ```text
 AI_Frameworks_Tools/
-├── Paper2/                  # Finale wissenschaftliche Arbeit (LaTeX, aktueller Stand)
-├── Paper/                   # Frühere Fassung der Arbeit
-├── source/                   # Analyse-Pipeline des Projekts
-│   ├── notebooks/             # 01–05: Model Inspection, Logit Lens, Attention, Probing, Patching
-│   ├── utils/                  # Python-Module hinter den Notebooks (Modell, Lexikon, Plots, ...)
-│   ├── inputs/                  # Rohdaten: Hu-&-Liu-Lexikon, CAD-Paare, Sentiment-Challenge-Sätze
-│   └── output/                   # Generierte Abbildungen sowie JSON-/TXT-Reports
-├── notebooks/                # Frühere Explorations-Notebooks (inkl. optionalem ONNX-Export)
-├── app/                       # Streamlit-Dashboard zur interaktiven Exploration
-├── data/                       # Zusätzlicher Tweet-Datensatz für die frühen Explorations-Notebooks
-├── pyproject.toml / uv.lock   # Python-Umgebung (verwaltet mit uv)
-└── Readme.md
+|-- app/
+|   `-- dashboard.py
+|-- data/
+|   |-- annotations.csv
+|   `-- prompts.csv
+|-- Paper/
+|   |-- chapters/
+|   |-- figures/
+|   |-- cover.tex
+|   |-- glossary.tex
+|   |-- main.tex
+|   |-- main.pdf
+|   `-- references.bib
+|-- source/
+|   |-- inputs/
+|   |-- notebooks/
+|   |-- output/
+|   `-- utils/
+|-- .gitignore
+|-- pyproject.toml
+|-- uv.lock
+`-- Readme.md
 ```
 
-## Voraussetzungen
+## What Each Part Does
 
-- Python 3.11–3.13
-- [uv](https://docs.astral.sh/uv/) als Paketmanager
-- Optional: CUDA-fähige GPU (PyTorch wird über den `pytorch-cu124`-Index installiert)
-- Für den Build der wissenschaftlichen Arbeit zusätzlich `texlive-full`, `latexmk`, `biber` — siehe [Paper2/readme.md](Paper2/readme.md)
+### `source/`
+
+This is the main analysis pipeline used for the project.
+
+```text
+source/
+|-- inputs/       # Local datasets used by the notebooks and utility code
+|-- notebooks/    # Main executable analysis notebooks, 01 to 05
+|-- output/       # Generated plots, JSON files, and text reports
+`-- utils/        # Reusable Python logic called by the notebooks
+```
+
+### `source/notebooks/`
+
+The notebooks contain orchestration only: imports, parameter choices, function
+calls, and display of generated plots. The reusable logic lives in `source/utils/`.
+
+| File | Purpose |
+|---|---|
+| `01_Model_Inspection.ipynb` | Loads Pythia-410M, inspects architecture and parameters, prepares Hu & Liu sentiment words, and runs the first behavior checks. |
+| `02_Logit_Lens.ipynb` | Projects intermediate hidden states through the unembedding matrix to inspect sentiment evidence by layer. |
+| `03_Attention_Analysis.ipynb` | Analyzes attention heads, subject-token attention, induction-style patterns, and CAD/Hu-Liu attention behavior. |
+| `04_Linear_Probing.ipynb` | Extracts CAD activations and trains linear probes to test where sentiment is linearly decodable. |
+| `05_Activation_Patching.ipynb` | Runs causal activation patching on prompt pairs and CAD pairs, including head-level and last-token CAD patching. |
+| `mlflow.db` / `mlruns/` | Local MLflow tracking artifacts for linear-probe experiments. |
+
+### `source/utils/`
+
+These files hold the code that the notebooks call.
+
+| File | Purpose |
+|---|---|
+| `config.py` | Central paths and constants. All project paths are derived from `SOURCE_DIR`, so the code is independent of the old folder name. |
+| `model_utils.py` | Device setup, model/tokenizer loading, architecture summaries, and top-k prediction helpers. |
+| `lexicon_utils.py` | Loads Hu & Liu and sentiment-challenge data, builds one-token sentiment word records, creates prompts, classifies top tokens, and writes reports. |
+| `sentiment_embeddings.py` | Embedding-space analyses for positive/negative sentiment words and sentiment directions. |
+| `logit_lens_utils.py` | Logit Lens functions, Hu-Liu sentiment mass/logit scoring, CAD pair loading, and CAD aggregate logit-difference analysis. |
+| `attention_utils.py` | Forward passes with attention tensors, attention-head ranking, induction analysis, and CAD/Hu-Liu attention analysis. |
+| `linear_probe.py` | CAD record loading, activation extraction with hooks, per-layer logistic-regression probes, and MLflow logging. |
+| `activation_patching_utils.py` | Layer/position activation patching, head-level patching, and CAD last-position positive Hu-Liu mass patching. |
+| `plotting_utils.py` | All Matplotlib/Seaborn plot generation for heatmaps, curves, embedding plots, probes, and patching results. |
+| `output_utils.py` | Stable file-writing helpers that avoid rewriting unchanged JSON, text, and PNG output. |
+
+### `source/inputs/`
+
+| Path | Purpose |
+|---|---|
+| `assessing_and_probing_sentiment/` | Sentiment Challenge dataset from Barnes et al. for difficult sentiment examples. |
+| `cad_dataset/train_paired.tsv` | Counterfactually Augmented Data sentiment pairs used for CAD analyses. |
+| `nltk_data/corpora/opinion_lexicon/` | Local Hu & Liu positive/negative word lists. |
+| `user_defined/sentiment_prompts.json` | Project-specific prompt examples. |
+
+### `source/output/`
+
+Generated artifacts. These can be regenerated by rerunning the notebooks.
+
+| Path | Purpose |
+|---|---|
+| `png/` | Figures used in the notebooks and paper. |
+| `json/` | Structured intermediate results, e.g. Hu-Liu one-token word lists and top-token outputs. |
+| `txt/` | Human-readable reports. |
+
+### Other Top-Level Files
+
+| Path | Purpose |
+|---|---|
+| `Paper/` | LaTeX source and compiled PDF for the written report. Figures are stored in `Paper/figures/`; chapters are in `Paper/chapters/`. |
+| `app/dashboard.py` | Standalone Streamlit dashboard for interactive prompt exploration with predictions, attention, and patching-style views. |
+| `data/prompts.csv` and `data/annotations.csv` | Additional early exploration data for the dashboard/prototype work. |
+| `pyproject.toml` | Python project metadata and dependencies. |
+| `uv.lock` | Locked dependency versions for reproducible installs with `uv`. |
+| `.gitignore` | Ignore rules for generated/cache files. |
+
+### `Paper/`
+
+| File or Folder | Purpose |
+|---|---|
+| `main.tex` | Main LaTeX entry point that includes the cover, glossary, chapters, and bibliography. |
+| `cover.tex` | Title page and project metadata. |
+| `glossary.tex` | Glossary/acronym definitions used by the paper. |
+| `references.bib` | BibLaTeX bibliography database. |
+| `main.pdf` | Compiled version of the report. |
+| `figures/` | Figures copied or generated from `source/output/png/` for use in the paper. |
+| `chapters/01_einleitung.tex` | Introduction, motivation, and research framing. |
+| `chapters/02_grundlagen_modell.tex` | Model and method foundations. |
+| `chapters/03_verhalten.tex` | Behavioral sentiment analysis results. |
+| `chapters/04_embedding.tex` | Embedding-space analysis. |
+| `chapters/05_logit_lens.tex` | Logit Lens analysis. |
+| `chapters/06_attention.tex` | Attention analysis. |
+| `chapters/07_activation_patching.tex` | Activation patching analysis. |
+| `chapters/08_diskussion_fazit.tex` | Discussion and conclusion. |
+
+## Requirements
+
+- Python `>=3.11,<3.14`
+- [uv](https://docs.astral.sh/uv/) package manager
+- Optional: CUDA-capable GPU. The project pins PyTorch `2.6.0` and uses the
+  `pytorch-cu124` index in `pyproject.toml`.
+- For editing/building the paper: a LaTeX setup with `latexmk` and `biber`.
 
 ## Installation
 
+From the repository root:
+
 ```bash
-git clone git@github.com:ia13400/AI_Frameworks_Tools.git
-cd AI_Frameworks_Tools
 uv sync
 ```
 
-## Verwendung
+The first model run downloads `EleutherAI/pythia-410m` from Hugging Face if it is
+not already cached locally.
 
-### Analyse-Notebooks
+## How To Run The Code
 
-Die eigentliche Untersuchung liegt in `source/notebooks/` und folgt der Reihenfolge der fünf Werkzeuge (Korrelation → Kausalität):
+### 1. Start Jupyter
 
 ```bash
 uv run jupyter notebook source/notebooks
 ```
 
-| Notebook | Inhalt |
-|---|---|
-| `01_Model_Inspection.ipynb` | Architektur und Parameterverteilung von Pythia-410M |
-| `02_Logit_Lens.ipynb` | Schichtweise Entstehung von Sentiment im Residual Stream |
-| `03_Attention_Analysis.ipynb` | Aufmerksamkeit der Attention Heads auf sentimenttragende Wörter |
-| `04_Linear_Probing.ipynb` | Lineare Trennbarkeit von Sentiment im Embedding-Raum |
-| `05_Activation_Patching.ipynb` | Kausale Überprüfung einzelner Schichten/Köpfe |
+Then run the notebooks in order:
 
-### Dashboard
+```text
+01_Model_Inspection.ipynb
+02_Logit_Lens.ipynb
+03_Attention_Analysis.ipynb
+04_Linear_Probing.ipynb
+05_Activation_Patching.ipynb
+```
+
+The notebooks are designed to add `source/utils` to `sys.path` automatically.
+Run them from their normal location under `source/notebooks`.
+
+### 2. Run A Quick Smoke Test
+
+This checks that the utility modules import and compile:
+
+```bash
+uv run python -m py_compile source/utils/*.py
+uv run python -c "import sys; sys.path.insert(0, 'source/utils'); import config; print(config.SOURCE_DIR)"
+```
+
+On Windows PowerShell, if the wildcard compile command does not expand as
+expected, run:
+
+```powershell
+Get-ChildItem source\utils\*.py | ForEach-Object { uv run python -m py_compile $_.FullName }
+```
+
+### 3. Run The Dashboard
 
 ```bash
 uv run streamlit run app/dashboard.py
 ```
 
-Interaktive Exploration von Logit Lens, Attention und Patching für selbst gewählte Prompts.
+The dashboard loads Pythia-410M and lets you enter a prompt, inspect top-token
+predictions, view attention, and explore patching-style behavior interactively.
 
-## Datengrundlage
+### 4. Build The Paper
 
-| Datensatz | Quelle | Verwendung |
+The compiled report is already available at:
+
+```text
+Paper/main.pdf
+```
+
+To rebuild it, run from `Paper/` with a working LaTeX installation:
+
+```bash
+latexmk -pdf main.tex
+```
+
+If bibliography or glossary output is stale, run the usual LaTeX toolchain with
+`biber` and glossary generation as needed.
+
+## Data Sources
+
+| Dataset | Source | Used For |
 |---|---|---|
-| Hu-&-Liu Opinion Lexicon | Hu, M., & Liu, B. (2004). *Mining and Summarizing Customer Reviews*. KDD. [Paper](https://www.cs.uic.edu/~liub/publications/kdd04-revSummary.pdf) · [Datensatz](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html) | Identifikation sentimenttragender Token; Grundlage für Embedding-Analysen, lineares Probing und logitbasierte Sentiment-Scores |
-| Sentiment Challenge Dataset | Barnes, J., Øvrelid, L., & Velldal, E. (2019). *Sentiment Analysis Is Not Solved! Assessing and Probing Sentiment Classification*. Proceedings of the 2019 ACL Workshop BlackboxNLP, S. 12–23. | Verhaltensbasierte Bewertung anhand sprachlich schwieriger Fälle (Negation, Ironie, Idiome, ...) |
-| Counterfactually Augmented Data (CAD) | Kaushik, D., Hovy, E., & Lipton, Z. C. (2020). *Learning the Difference that Makes a Difference with Counterfactually-Augmented Data*. ICLR. [Paper](https://openreview.net/pdf?id=Sklgs0NFvr) · [GitHub](https://github.com/acmi-lab/counterfactually-augmented-data) | Aggregierte Logit-Lens- und Attention-Analyse über kontextgleiche positiv/negativ-Paare |
+| Hu & Liu Opinion Lexicon | Hu, M., & Liu, B. (2004), *Mining and Summarizing Customer Reviews* | Positive/negative sentiment token sets, embedding analysis, Logit Lens scoring, probing, and patching metrics. |
+| Sentiment Challenge Dataset | Barnes, J., Oevrelid, L., & Velldal, E. (2019), *Sentiment Analysis Is Not Solved!* | Behavior checks on hard sentiment cases such as negation, irony, and idioms. |
+| Counterfactually Augmented Data (CAD) | Kaushik, D., Hovy, E., & Lipton, Z. C. (2020), *Learning the Difference that Makes a Difference with Counterfactually-Augmented Data* | Positive/negative prompt pairs for aggregate Logit Lens, attention, linear probing, and activation patching. |
 
-> Der zusätzliche Tweet-Datensatz in `data/` (`prompts.csv`, `annotations.csv`) wurde nur in den frühen Explorations-Notebooks (`notebooks/`) verwendet und fließt nicht in die finale Arbeit ein.
+## Notes
 
-## Wissenschaftliche Arbeit
-
-Die aktuelle Fassung liegt in [`Paper2/`](Paper2/) (kompiliertes [`main.pdf`](Paper2/main.pdf)), eine frühere Fassung in [`Paper/`](Paper/). Build-Anleitung (WSL2, LaTeX, Glossar, Bibliographie) siehe [`Paper2/readme.md`](Paper2/readme.md).
-
-
+- The source folder is intentionally named `source`; current code derives paths
+  from `source/utils/config.py`.
+- Generated files in `source/output/` and MLflow artifacts in
+  `source/notebooks/` can be regenerated by rerunning the notebooks.
+- The heavier notebooks may run slowly on CPU, especially CAD aggregation and
+  activation patching.
