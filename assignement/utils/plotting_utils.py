@@ -8,9 +8,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import torch
+from matplotlib.patches import Rectangle
 from sklearn.decomposition import PCA
 
 from config import (
+    ATTENTION_HEAD_GRID_PATH,
+    ATTENTION_INDUCTION_HEATMAP_PATH,
+    ATTENTION_SUBJECT_HEATMAP_PATH,
     LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH,
     FILTERED_SENTIMENT_CHALLENGE_HEATMAP_PATH,
     LOGIT_LENS_NEGATIVE_HEATMAP_PATH,
@@ -44,6 +48,96 @@ def wrapped_prompt_text(positive_prompt, negative_prompt, width=125):
             textwrap.fill(f"Negative prompt: {negative_prompt}", width=width),
         ]
     )
+
+
+def plot_attention_head_grid(
+    attentions,
+    tokens,
+    head_specs,
+    prompt,
+    filename_or_path=ATTENTION_HEAD_GRID_PATH,
+):
+    """Save a grid of individual attention-head matrices."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    fig, axes = plt.subplots(2, 3, figsize=(16, 9), constrained_layout=False)
+    axes = axes.ravel()
+
+    for ax, (layer, head) in zip(axes, head_specs):
+        attention_matrix = attentions[layer][0, head].detach().float().cpu().numpy()
+        image = ax.imshow(attention_matrix, cmap="Blues", vmin=0, vmax=attention_matrix.max())
+        ax.set_title(f"Layer {layer}, Head {head}", fontsize=10)
+        ax.set_xlabel("Key token")
+        ax.set_ylabel("Query token")
+        ax.set_xticks(range(len(tokens)))
+        ax.set_xticklabels(tokens, rotation=90, fontsize=7)
+        ax.set_yticks(range(len(tokens)))
+        ax.set_yticklabels(tokens, fontsize=7)
+        fig.colorbar(image, ax=ax, fraction=0.046, pad=0.04)
+
+    for ax in axes[len(head_specs):]:
+        ax.axis("off")
+
+    fig.suptitle("Selected Attention Heads", fontsize=14, y=0.985)
+    fig.text(
+        0.06,
+        0.025,
+        textwrap.fill(f"Prompt: {prompt}", width=150),
+        fontsize=8.2,
+        ha="left",
+        va="bottom",
+        bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
+    )
+    plt.tight_layout(rect=(0, 0.07, 1, 0.96))
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_layer_head_heatmap(
+    values,
+    title,
+    colorbar_label,
+    filename_or_path,
+    top_heads=None,
+    cmap="Blues",
+):
+    """Save a layer-by-head heatmap and optionally outline selected heads."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    values = np.asarray(values, dtype=float)
+    fig, ax = plt.subplots(figsize=(12, 8))
+    image = ax.imshow(values, cmap=cmap, aspect="auto")
+    ax.set_xlabel("Attention head")
+    ax.set_ylabel("Layer")
+    ax.set_title(title)
+    ax.set_xticks(range(values.shape[1]))
+    ax.set_yticks(range(values.shape[0]))
+    fig.colorbar(image, ax=ax, label=colorbar_label)
+
+    if top_heads:
+        for item in top_heads:
+            ax.add_patch(
+                Rectangle(
+                    (item["head"] - 0.5, item["layer"] - 0.5),
+                    1,
+                    1,
+                    fill=False,
+                    edgecolor="#D62728",
+                    linewidth=1.8,
+                )
+            )
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
 
 
 def plot_sentiment_challenge_category_heatmap(

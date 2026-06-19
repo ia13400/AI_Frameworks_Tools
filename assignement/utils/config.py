@@ -59,6 +59,9 @@ LOGIT_LENS_CAD_LOGIT_DIFFERENCE_AGGREGATE_PATH = (
 )
 LOGIT_LENS_POSITIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_positive_topk_heatmap.png"
 LOGIT_LENS_NEGATIVE_HEATMAP_PATH = OUTPUT_PNG_DIR / "logit_lens_negative_topk_heatmap.png"
+ATTENTION_HEAD_GRID_PATH = OUTPUT_PNG_DIR / "attention_head_grid.png"
+ATTENTION_SUBJECT_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_subject_heatmap.png"
+ATTENTION_INDUCTION_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_induction_heatmap.png"
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",
