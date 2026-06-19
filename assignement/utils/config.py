@@ -70,6 +70,9 @@ ATTENTION_INDUCTION_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_induction_heatmap
 LINEAR_PROBE_CAD_ACCURACY_PATH = OUTPUT_PNG_DIR / "linear_probe_cad_layer_accuracy.png"
 ACTIVATION_PATCHING_HEATMAP_PATH = OUTPUT_PNG_DIR / "activation_patching_heatmap.png"
 ACTIVATION_PATCHING_HEAD_HEATMAP_PATH = OUTPUT_PNG_DIR / "activation_patching_head_heatmap.png"
+ACTIVATION_PATCHING_CAD_POSITIVE_MASS_PATH = (
+    OUTPUT_PNG_DIR / "activation_patching_cad_positive_mass_effect.png"
+)
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",

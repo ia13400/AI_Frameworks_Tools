@@ -13,6 +13,7 @@ from matplotlib.ticker import PercentFormatter
 from sklearn.decomposition import PCA
 
 from config import (
+    ACTIVATION_PATCHING_CAD_POSITIVE_MASS_PATH,
     ACTIVATION_PATCHING_HEAD_HEATMAP_PATH,
     ACTIVATION_PATCHING_HEATMAP_PATH,
     ATTENTION_HEAD_GRID_PATH,
@@ -231,6 +232,83 @@ def plot_activation_head_patching_heatmap(
 
     plt.tight_layout()
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_cad_activation_patching_positive_mass_effect(
+    mean_effect,
+    std_effect,
+    pair_count,
+    filename_or_path=ACTIVATION_PATCHING_CAD_POSITIVE_MASS_PATH,
+    verbose=True,
+):
+    """Save the CAD last-token activation-patching effect curve."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    mean_effect = np.asarray(mean_effect, dtype=float)
+    std_effect = np.asarray(std_effect, dtype=float)
+    layers = np.arange(len(mean_effect))
+    best_layer = int(np.argmax(mean_effect))
+
+    fig, ax = plt.subplots(figsize=(11, 5.8))
+    ax.plot(
+        layers,
+        mean_effect,
+        color="#3B5BA9",
+        marker="o",
+        linewidth=2.0,
+        label="Mean patching effect",
+    )
+    ax.fill_between(
+        layers,
+        mean_effect - std_effect,
+        mean_effect + std_effect,
+        color="#3B5BA9",
+        alpha=0.18,
+        label="+/- 1 standard deviation",
+    )
+    ax.scatter(
+        [best_layer],
+        [mean_effect[best_layer]],
+        color="#B22222",
+        s=60,
+        zorder=5,
+        label=f"Best layer: {best_layer}",
+    )
+    ax.annotate(
+        (
+            f"Best layer {best_layer}\n"
+            f"Mean effect: {mean_effect[best_layer]:.4f}\n"
+            f"Std: {std_effect[best_layer]:.4f}"
+        ),
+        xy=(best_layer, mean_effect[best_layer]),
+        xytext=(best_layer + 0.8, mean_effect[best_layer] + std_effect[best_layer] + 0.01),
+        arrowprops={"arrowstyle": "->", "color": "#404040", "linewidth": 0.9},
+        fontsize=9,
+        bbox={
+            "boxstyle": "round,pad=0.25",
+            "facecolor": "white",
+            "alpha": 0.88,
+            "edgecolor": "#D0D0D0",
+        },
+    )
+    ax.axhline(0, color="#707070", linewidth=0.8, alpha=0.7)
+    set_even_layer_xticks(ax, len(mean_effect))
+    ax.set_xlabel("Layer index (0 = first transformer layer)")
+    ax.set_ylabel("Patched P(positive Hu & Liu) - negative baseline")
+    ax.set_title(
+        "CAD Activation Patching: Last-Token Positive Hu & Liu Probability Mass "
+        f"(n={pair_count})"
+    )
+    ax.grid(True, alpha=0.28)
+    ax.legend(fontsize=8.5, loc="best")
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, verbose=verbose, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
 

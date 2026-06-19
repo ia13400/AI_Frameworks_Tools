@@ -1,13 +1,23 @@
+import contextlib
+import io
+
 import numpy as np
 import torch
 
 from config import (
+    ACTIVATION_PATCHING_CAD_POSITIVE_MASS_PATH,
     ACTIVATION_PATCHING_HEAD_HEATMAP_PATH,
     ACTIVATION_PATCHING_HEATMAP_PATH,
+    CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+)
+from logit_lens_utils import (
+    load_cad_sentiment_prompt_pairs,
+    prepare_hu_liu_sentiment_state,
 )
 from plotting_utils import (
     plot_activation_head_patching_heatmap,
     plot_activation_patching_heatmap,
+    plot_cad_activation_patching_positive_mass_effect,
 )
 
 
@@ -102,7 +112,7 @@ def prepare_activation_patching_prompts(
     }
 
 
-def cache_clean_layer_activations(model, clean_inputs):
+def cache_clean_layer_activations(model, clean_inputs, verbose=True):
     """Run the clean prompt and cache its hidden states from every transformer layer."""
     clean_cache = {}
     hooks = []
@@ -125,7 +135,8 @@ def cache_clean_layer_activations(model, clean_inputs):
         for hook in hooks:
             hook.remove()
 
-    print(f"Cached clean activations for {len(clean_cache)} transformer layers.")
+    if verbose:
+        print(f"Cached clean activations for {len(clean_cache)} transformer layers.")
     return clean_cache
 
 
@@ -157,6 +168,126 @@ def patch_layer_position_and_measure(
         hook.remove()
 
     return float(outputs.logits[0, -1, correct_tok_id])
+
+
+def hu_liu_positive_token_ids(sentiment_state, device):
+    """Return unique one-token Hu & Liu positive-token ids on the model device."""
+    token_ids = sorted(
+        {
+            int(item["token_id"])
+            for item in sentiment_state["positive_words"]
+        }
+    )
+    if not token_ids:
+        raise ValueError("No one-token positive Hu & Liu words are available.")
+
+    return torch.tensor(token_ids, dtype=torch.long, device=device)
+
+
+def positive_hu_liu_probability_from_logits(logits, positive_token_ids):
+    """Calculate full softmax probability mass assigned to positive Hu & Liu tokens."""
+    probabilities = torch.softmax(logits.float(), dim=-1)
+    return float(probabilities.index_select(0, positive_token_ids).sum().item())
+
+
+def next_token_positive_hu_liu_probability(model, inputs, positive_token_ids):
+    """Run one prompt and measure P(any positive Hu & Liu token) at the final position."""
+    with torch.no_grad():
+        outputs = model(**inputs)
+    return positive_hu_liu_probability_from_logits(
+        outputs.logits[0, -1, :],
+        positive_token_ids,
+    )
+
+
+def patch_layer_last_position_and_measure_positive_mass(
+    model,
+    negative_inputs,
+    positive_cache,
+    patch_layer,
+    positive_token_ids,
+):
+    """Patch one positive last-token activation into the negative prompt and score it."""
+    target_layer = int(patch_layer)
+
+    def hook_fn(module, inputs, output):
+        hidden_state = hidden_state_from_layer_output(output)
+        modified = hidden_state.clone()
+        # The CAD prompts can have different tokenized lengths. Patching only the
+        # final position lets each prompt keep its own context length.
+        modified[0, -1, :] = positive_cache[target_layer][0, -1, :]
+        return replace_hidden_state_in_output(output, modified)
+
+    hook = model.gpt_neox.layers[target_layer].register_forward_hook(hook_fn)
+    try:
+        with torch.no_grad():
+            outputs = model(**negative_inputs)
+    finally:
+        hook.remove()
+
+    return positive_hu_liu_probability_from_logits(
+        outputs.logits[0, -1, :],
+        positive_token_ids,
+    )
+
+
+def run_cad_pair_last_position_positive_mass_patching(
+    model,
+    tokenizer,
+    device,
+    prompt_pair,
+    positive_token_ids,
+):
+    """Patch the positive prompt's final-position layer activations into its negative pair."""
+    positive_inputs = tokenizer(prompt_pair["positive"], return_tensors="pt").to(device)
+    negative_inputs = tokenizer(prompt_pair["negative"], return_tensors="pt").to(device)
+
+    positive_probability = next_token_positive_hu_liu_probability(
+        model,
+        positive_inputs,
+        positive_token_ids,
+    )
+    negative_probability = next_token_positive_hu_liu_probability(
+        model,
+        negative_inputs,
+        positive_token_ids,
+    )
+    positive_cache = cache_clean_layer_activations(model, positive_inputs, verbose=False)
+
+    patched_probabilities = []
+    for layer_index in range(int(model.config.num_hidden_layers)):
+        patched_probability = patch_layer_last_position_and_measure_positive_mass(
+            model,
+            negative_inputs,
+            positive_cache,
+            layer_index,
+            positive_token_ids,
+        )
+        patched_probabilities.append(patched_probability)
+
+    effects = [
+        patched_probability - negative_probability
+        for patched_probability in patched_probabilities
+    ]
+    recovery_denominator = positive_probability - negative_probability
+    if abs(recovery_denominator) < 1e-12:
+        normalized_effects = [0.0 for _ in effects]
+    else:
+        normalized_effects = [
+            effect / recovery_denominator
+            for effect in effects
+        ]
+
+    return {
+        "id": prompt_pair["id"],
+        "positive_prompt": prompt_pair["positive"],
+        "negative_prompt": prompt_pair["negative"],
+        "positive_probability": positive_probability,
+        "negative_probability": negative_probability,
+        "patched_probabilities": patched_probabilities,
+        "effects": effects,
+        "normalized_effects": normalized_effects,
+    }
 
 
 def run_activation_patching_grid(model, patching_state, clean_cache):
@@ -192,6 +323,99 @@ def run_activation_patching_grid(model, patching_state, clean_cache):
         "patched_logits": results,
         "normalized_effects": normalized,
     }
+
+
+def aggregate_cad_last_position_positive_mass_patching(
+    model,
+    tokenizer,
+    device,
+    sentiment_state,
+    prompt_pairs,
+    print_progress=True,
+):
+    """Run last-position CAD patching and aggregate layer effects across pairs."""
+    positive_token_ids = hu_liu_positive_token_ids(sentiment_state, device)
+    pair_results = []
+    effect_curves = []
+    normalized_effect_curves = []
+    total_pairs = len(prompt_pairs)
+
+    for index, prompt_pair in enumerate(prompt_pairs, start=1):
+        if print_progress:
+            print(f"\rCAD activation patching pair {index}/{total_pairs}", end="", flush=True)
+
+        pair_result = run_cad_pair_last_position_positive_mass_patching(
+            model,
+            tokenizer,
+            device,
+            prompt_pair,
+            positive_token_ids,
+        )
+        pair_results.append(pair_result)
+        effect_curves.append(pair_result["effects"])
+        normalized_effect_curves.append(pair_result["normalized_effects"])
+
+    if print_progress:
+        print()
+
+    if not effect_curves:
+        raise ValueError("No CAD prompt pairs were available for activation patching.")
+
+    effects = torch.tensor(effect_curves, dtype=torch.float32)
+    normalized_effects = torch.tensor(normalized_effect_curves, dtype=torch.float32)
+    mean_effect = effects.mean(dim=0).tolist()
+    std_effect = effects.std(dim=0, unbiased=False).tolist()
+    mean_normalized_effect = normalized_effects.mean(dim=0).tolist()
+    std_normalized_effect = normalized_effects.std(dim=0, unbiased=False).tolist()
+    best_layer = int(torch.argmax(torch.tensor(mean_effect)).item())
+
+    return {
+        "pair_results": pair_results,
+        "mean_effect": mean_effect,
+        "std_effect": std_effect,
+        "mean_normalized_effect": mean_normalized_effect,
+        "std_normalized_effect": std_normalized_effect,
+        "best_layer": best_layer,
+        "best_layer_mean_effect": mean_effect[best_layer],
+        "pair_count": len(pair_results),
+        "positive_token_count": int(len(positive_token_ids)),
+    }
+
+
+def run_cad_activation_patching_positive_mass(
+    model,
+    tokenizer,
+    device,
+    sentiment_state=None,
+    dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    max=None,
+    filename_or_path=ACTIVATION_PATCHING_CAD_POSITIVE_MASS_PATH,
+):
+    """Run CAD last-position activation patching and save the aggregate effect plot."""
+    if sentiment_state is None:
+        with contextlib.redirect_stdout(io.StringIO()):
+            sentiment_state = prepare_hu_liu_sentiment_state(tokenizer)
+
+    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=False)
+    if max is not None:
+        prompt_pairs = prompt_pairs[:max]
+
+    aggregation = aggregate_cad_last_position_positive_mass_patching(
+        model,
+        tokenizer,
+        device,
+        sentiment_state,
+        prompt_pairs,
+        print_progress=True,
+    )
+    plot_cad_activation_patching_positive_mass_effect(
+        aggregation["mean_effect"],
+        aggregation["std_effect"],
+        aggregation["pair_count"],
+        filename_or_path=filename_or_path,
+        verbose=False,
+    )
+    return aggregation
 
 
 def plot_activation_patching_results(
