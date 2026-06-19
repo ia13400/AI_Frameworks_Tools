@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main"] 1781886758.31695 "main.bcf" "main.bbl" "main" 1781894211.7284 0
-  "main.bcf" 1781894211.65746 109156 dd591ade6609aec3fb99f814814ef699 "pdflatex"
+["biber main"] 1781896285.63331 "main.bcf" "main.bbl" "main" 1781896431.74354 0
+  "main.bcf" 1781896431.68271 109156 dd591ade6609aec3fb99f814814ef699 "pdflatex"
   "references.bib" 1781892679.16311 3256 505afb50bea583e8ca6e0a6c7f828d44 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1781894209.3655 "/home/danie/projects/AI_Frameworks_Tools/Paper/main.tex" "main.pdf" "main" 1781894211.72863 0
+["pdflatex"] 1781896429.85149 "/home/danie/projects/AI_Frameworks_Tools/Paper/main.tex" "main.pdf" "main" 1781896431.74381 0
   "/etc/texmf/web2c/texmf.cnf" 1781434158.11796 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/danie/projects/AI_Frameworks_Tools/Paper/main.tex" 1781892679.16287 2613 ed41e0535b2560ead75d38ab6677cd0c ""
+  "/home/danie/projects/AI_Frameworks_Tools/Paper/main.tex" 1781894514.34753 2632 04612360e7559a0072b0f27a8d072e1e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm" 1136768653 3584 13049b61b922a28b158a38aeff75ee9b ""
@@ -92,6 +92,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty" 1738874546 52272 63d293bc0d496619edb57585740861a2 ""
   "/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1759437024 46885 8953c67ffba03252c6090aa19568b8ba ""
+  "/usr/share/texlive/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
   "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/share/texlive/texmf-dist/tex/latex/glossaries-german/glossaries-german.ldf" 1416960498 3629 97ae3d40edaa2b921aeca43a630251ae ""
   "/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries.sty" 1762723365 263604 afa61de25e12f99bb1305606fa9e1ddf ""
@@ -154,7 +155,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1781434202 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1781434321 3638601 2dedfafeb672287e81e85338eb3cb7ce ""
   "chapters/01_einleitung.tex" 1781894209.03346 2243 732e106358a12629e5553014ae39e176 ""
-  "chapters/02_grundlagen_modell.tex" 1781892679.12327 4691 a64b095946e78c28a9c647bfc72b9024 ""
+  "chapters/02_grundlagen_modell.tex" 1781896429.71676 4911 9f96081f6d0920e9d0e8d5ce6b93e1b5 ""
   "chapters/03_verhalten.tex" 1781892679.12428 3478 9ea11b0c7342fc6991f15f1526659632 ""
   "chapters/04_embedding.tex" 1781892679.12484 6083 9f325d001c35840ddb5f9784870af25c ""
   "chapters/05_logit_lens.tex" 1781892679.12527 4446 b2ddebea383a9ce7913e4e556a957d1f ""
@@ -175,11 +176,11 @@
   "figures/sentiment_embedding_norms_all_fields.png" 1781892679.14459 171179 d62ea4463a3ad646891cfda99c0d332b ""
   "glossary.tex" 1781856897.19345 2911 dcd12035437c8751f2f4b20cd4ad9785 ""
   "logo.png" 1781856897.19345 7483 cae6ba544c2bdd8baf06fe5110b446f3 ""
-  "main.aux" 1781894211.65346 10252 014485d1dd28c6d5d3c7ebf864ba5d98 "pdflatex"
-  "main.bbl" 1781892679.14566 20046 ef34a3173e5b868a7185123f413e33e1 "biber main"
-  "main.out" 1781894211.65346 3152 f3080e9311a819b6caed5b7b794685df "pdflatex"
-  "main.run.xml" 1781894211.66171 2432 49ce9cc1c2e214794d05d7a5a4d87ddd "pdflatex"
-  "main.tex" 1781892679.16287 2613 ed41e0535b2560ead75d38ab6677cd0c ""
+  "main.aux" 1781896431.67688 10252 fd47f05a27846f30bf9abd1cc3b5d9e6 "pdflatex"
+  "main.bbl" 1781896286.19147 20046 ef34a3173e5b868a7185123f413e33e1 "biber main"
+  "main.out" 1781896431.68088 3152 f3080e9311a819b6caed5b7b794685df "pdflatex"
+  "main.run.xml" 1781896431.68532 2432 49ce9cc1c2e214794d05d7a5a4d87ddd "pdflatex"
+  "main.tex" 1781894514.34753 2632 04612360e7559a0072b0f27a8d072e1e ""
   (generated)
   "main.acn"
   "main.aux"
