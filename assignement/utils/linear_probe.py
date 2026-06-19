@@ -11,18 +11,298 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold, cross_val_score, train_test_split
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-from config import FLAT_PAIRS_PATH, PROBE_SPLIT_PATH
+from config import (
+    CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    FLAT_PAIRS_PATH,
+    LINEAR_PROBE_CAD_ACCURACY_PATH,
+    MODEL_NAME,
+    PROBE_SPLIT_PATH,
+)
+from lexicon_utils import prepare_hu_liu_lookup_state
+from logit_lens_utils import load_cad_sentiment_prompt_pairs
 from output_utils import write_json_if_changed
 from plotting_utils import (
+    plot_linear_probe_layer_accuracy,
     plot_logistic_regression_probabilities,
     plot_logistic_regression_sentiment_axis,
 )
 
 
 PROBE_SPLIT_STRATEGY = "stratified_all_hu_liu_one_token_words_v1"
+
+
+def cad_prompt_records_from_pairs(prompt_pairs):
+    """Flatten CAD positive/negative pairs into labeled prompt records."""
+    records = []
+    for pair in prompt_pairs:
+        records.append(
+            {
+                "id": f"{pair['id']}_positive",
+                "pair_id": pair["id"],
+                "prompt": pair["positive"],
+                "sentiment": "positive",
+                "label": 1,
+            }
+        )
+        records.append(
+            {
+                "id": f"{pair['id']}_negative",
+                "pair_id": pair["id"],
+                "prompt": pair["negative"],
+                "sentiment": "negative",
+                "label": 0,
+            }
+        )
+    return records
+
+
+def load_cad_linear_probe_records(
+    tokenizer,
+    dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    max_prompts=None,
+):
+    """Load CAD prompts and prepare the Hu & Liu state used by this notebook."""
+    sentiment_state = prepare_hu_liu_lookup_state(tokenizer)
+    prompt_pairs = load_cad_sentiment_prompt_pairs(dataset_path, verbose=False)
+    prompt_records = cad_prompt_records_from_pairs(prompt_pairs)
+    if max_prompts is not None:
+        prompt_records = prompt_records[:max_prompts]
+
+    labels = np.array([record["label"] for record in prompt_records], dtype=int)
+    if len(prompt_records) == 0:
+        raise ValueError("No CAD prompts were available for linear probing.")
+    if len(np.unique(labels)) < 2:
+        raise ValueError("CAD linear probing requires both positive and negative prompts.")
+
+    print(
+        "CAD linear probing records:",
+        f"{len(prompt_records)} prompts",
+        f"({int(labels.sum())} positive, {int((labels == 0).sum())} negative)",
+    )
+    print(
+        "Hu & Liu one-token lookup:",
+        f"{len(sentiment_state['positive_words'])} positive words,",
+        f"{len(sentiment_state['negative_words'])} negative words",
+    )
+    return prompt_records, labels, sentiment_state
+
+
+def extract_all_layer_activations(
+    model,
+    tokenizer,
+    device,
+    prompts,
+    batch_size=4,
+):
+    """Collect last-token activations from every transformer layer using hooks."""
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    layer_count = len(model.gpt_neox.layers)
+    activations_by_layer = [[] for _ in range(layer_count)]
+    current_attention_mask = None
+    hooks = []
+
+    def make_hook(layer_index):
+        def hook_fn(module, inputs, output):
+            hidden_states = output[0] if isinstance(output, tuple) else output
+            last_valid_positions = current_attention_mask.sum(dim=1) - 1
+            batch_indices = torch.arange(
+                hidden_states.shape[0],
+                device=hidden_states.device,
+            )
+            selected_activations = hidden_states[
+                batch_indices,
+                last_valid_positions,
+                :,
+            ]
+            activations_by_layer[layer_index].append(
+                selected_activations.detach().float().cpu().numpy()
+            )
+
+        return hook_fn
+
+    for layer_index, layer in enumerate(model.gpt_neox.layers):
+        hooks.append(layer.register_forward_hook(make_hook(layer_index)))
+
+    model.eval()
+    try:
+        with torch.no_grad():
+            for start in range(0, len(prompts), batch_size):
+                batch_prompts = prompts[start : start + batch_size]
+                end = start + len(batch_prompts)
+                print(f"\rCAD prompt {end}/{len(prompts)} handled", end="", flush=True)
+                inputs = tokenizer(
+                    batch_prompts,
+                    return_tensors="pt",
+                    padding=True,
+                    truncation=True,
+                ).to(device)
+                current_attention_mask = inputs["attention_mask"]
+                model(**inputs)
+    finally:
+        for hook in hooks:
+            hook.remove()
+        print()
+
+    return {
+        layer_index: np.concatenate(layer_activations, axis=0)
+        for layer_index, layer_activations in enumerate(activations_by_layer)
+    }
+
+
+def train_probe_per_layer(activations, labels, n_layers=None):
+    """Train one logistic-regression probe per layer with stratified CV."""
+    labels = np.asarray(labels, dtype=int)
+    if n_layers is None:
+        n_layers = len(activations)
+
+    min_class_count = int(min(np.bincount(labels)))
+    cv_folds = min(5, min_class_count)
+    if cv_folds < 2:
+        raise ValueError("At least two examples per class are required for cross-validation.")
+
+    cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+    accuracies = np.zeros(n_layers, dtype=float)
+    std_devs = np.zeros(n_layers, dtype=float)
+
+    for layer_index in range(n_layers):
+        X = np.asarray(activations[layer_index], dtype=float)
+        probe = make_pipeline(
+            StandardScaler(),
+            LogisticRegression(max_iter=1000, C=1.0, random_state=42),
+        )
+        cv_scores = cross_val_score(
+            probe,
+            X,
+            labels,
+            cv=cv,
+            scoring="accuracy",
+        )
+        accuracies[layer_index] = float(cv_scores.mean())
+        std_devs[layer_index] = float(cv_scores.std())
+
+    return accuracies, std_devs
+
+
+def print_linear_probe_results_table(accuracies, std_devs):
+    """Print layer-wise probe results as a compact table."""
+    best_layer = int(np.argmax(accuracies))
+    print(f"{'Layer':<8} {'CV accuracy':<14} {'Std':<10}")
+    print("-" * 34)
+    for layer_index, (accuracy, std_dev) in enumerate(zip(accuracies, std_devs)):
+        marker = " <-- best" if layer_index == best_layer else ""
+        print(f"{layer_index:<8} {accuracy:<14.4f} {std_dev:<10.4f}{marker}")
+    print(
+        f"\nBest layer: {best_layer} "
+        f"(accuracy={accuracies[best_layer]:.4f}, std={std_devs[best_layer]:.4f})"
+    )
+
+
+def run_cad_linear_probe_analysis(
+    model,
+    tokenizer,
+    device,
+    dataset_path=CAD_SENTIMENT_TRAIN_PAIRED_PATH,
+    max_prompts=None,
+    batch_size=4,
+    filename_or_path=LINEAR_PROBE_CAD_ACCURACY_PATH,
+):
+    """Run hook-based CAD sentiment probing and save the layer accuracy plot."""
+    prompt_records, labels, sentiment_state = load_cad_linear_probe_records(
+        tokenizer,
+        dataset_path=dataset_path,
+        max_prompts=max_prompts,
+    )
+    prompts = [record["prompt"] for record in prompt_records]
+    activations = extract_all_layer_activations(
+        model,
+        tokenizer,
+        device,
+        prompts,
+        batch_size=batch_size,
+    )
+    accuracies, std_devs = train_probe_per_layer(
+        activations,
+        labels,
+        n_layers=len(model.gpt_neox.layers),
+    )
+    print_linear_probe_results_table(accuracies, std_devs)
+    plot_path = plot_linear_probe_layer_accuracy(
+        accuracies,
+        std_devs,
+        sample_count=len(prompt_records),
+        filename_or_path=filename_or_path,
+    )
+    return {
+        "prompt_records": prompt_records,
+        "labels": labels,
+        "sentiment_state": sentiment_state,
+        "activations": activations,
+        "accuracies": accuracies,
+        "std_devs": std_devs,
+        "best_layer": int(np.argmax(accuracies)),
+        "best_accuracy": float(np.max(accuracies)),
+        "plot_path": plot_path,
+    }
+
+
+def log_linear_probe_with_mlflow(probe_result, mlflow_module=None):
+    """Log CAD linear-probe metrics to MLflow, or print a table if unavailable."""
+    if mlflow_module is None:
+        print("MLflow is not installed; keeping the printed layer table as tracking output.")
+        print_linear_probe_results_table(
+            probe_result["accuracies"],
+            probe_result["std_devs"],
+        )
+        return False
+
+    mlflow_module.set_experiment("linear_probing_pythia410m")
+    with mlflow_module.start_run(run_name="cad_sentiment_probe"):
+        mlflow_module.log_param("model", MODEL_NAME)
+        mlflow_module.log_param("n_examples", len(probe_result["prompt_records"]))
+        for layer_index, accuracy in enumerate(probe_result["accuracies"]):
+            mlflow_module.log_metric(
+                f"layer_{layer_index:02d}_accuracy",
+                float(accuracy),
+                step=layer_index,
+            )
+            mlflow_module.log_metric(
+                f"layer_{layer_index:02d}_std",
+                float(probe_result["std_devs"][layer_index]),
+                step=layer_index,
+            )
+        mlflow_module.log_metric("best_accuracy", probe_result["best_accuracy"])
+        mlflow_module.log_metric("best_layer", probe_result["best_layer"])
+    print("Logged CAD linear-probe run to MLflow.")
+    return True
+
+
+def print_linear_probe_reflection(probe_result):
+    """Answer the notebook reflection questions in German."""
+    best_layer = int(probe_result["best_layer"])
+    best_accuracy = float(probe_result["best_accuracy"])
+    print("1. Die Probe erreicht ihr Maximum in Schicht "
+          f"{best_layer} mit einer Genauigkeit von {best_accuracy:.3f}.")
+    print("2. Eine Genauigkeit von etwa 50% entspricht Zufallsniveau: "
+          "die Sentiment-Information ist linear kaum dekodierbar. Eine Genauigkeit "
+          "von etwa 90% bedeutet, dass positive und negative CAD-Prompts in dieser "
+          "Schicht fast linear trennbar sind.")
+    print("3. Probing zeigt eine Korrelation: Information ist in den Aktivierungen "
+          "dekodierbar. Activation Patching ist kausaler, weil Aktivierungen "
+          "gezielt ausgetauscht werden und danach gemessen wird, ob sich das "
+          "Modellverhalten ändert.")
+    print("4. StandardScaler ist wichtig, weil logistische Regression empfindlich "
+          "auf unterschiedliche Feature-Skalen reagiert. Standardisierung macht "
+          "die Dimensionen vergleichbarer und stabilisiert das Training.")
+    print("5. Ein nicht-linearer Probe wie ein MLP könnte höhere Genauigkeit erreichen, "
+          "ist aber schwerer interpretierbar. Er kann selbst komplexe Muster lernen, "
+          "sodass unklarer wird, ob die Information einfach im Modell vorhanden ist "
+          "oder erst vom Probe konstruiert wurde.")
 
 
 def split_word_record(item):

@@ -63,6 +63,9 @@ ATTENTION_HEAD_GRID_PATH = OUTPUT_PNG_DIR / "attention_head_grid.png"
 ATTENTION_SUBJECT_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_subject_heatmap.png"
 ATTENTION_CAD_SENTIMENT_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_cad_sentiment_heatmap.png"
 ATTENTION_INDUCTION_HEATMAP_PATH = OUTPUT_PNG_DIR / "attention_induction_heatmap.png"
+LINEAR_PROBE_CAD_ACCURACY_PATH = OUTPUT_PNG_DIR / "linear_probe_cad_layer_accuracy.png"
+ACTIVATION_PATCHING_HEATMAP_PATH = OUTPUT_PNG_DIR / "activation_patching_heatmap.png"
+ACTIVATION_PATCHING_HEAD_HEATMAP_PATH = OUTPUT_PNG_DIR / "activation_patching_head_heatmap.png"
 
 EXAMPLE_PROMPTS = [
     "The food was delicious and the service was",

@@ -12,6 +12,8 @@ from matplotlib.patches import Rectangle
 from sklearn.decomposition import PCA
 
 from config import (
+    ACTIVATION_PATCHING_HEAD_HEATMAP_PATH,
+    ACTIVATION_PATCHING_HEATMAP_PATH,
     ATTENTION_HEAD_GRID_PATH,
     ATTENTION_INDUCTION_HEATMAP_PATH,
     ATTENTION_SUBJECT_HEATMAP_PATH,
@@ -22,6 +24,7 @@ from config import (
     LOGIT_LENS_PROMPT_LOGIT_SCORES_PATH,
     LOGIT_LENS_POSITIVE_HEATMAP_PATH,
     LOGIT_LENS_TARGET_PROBABILITY_PATH,
+    LINEAR_PROBE_CAD_ACCURACY_PATH,
     OUTPUT_PNG_DIR,
     SENTIMENT_CHALLENGE_CATEGORY_ACCURACY_PATH,
     SENTIMENT_CHALLENGE_CATEGORY_CONFUSION_PATH,
@@ -92,6 +95,132 @@ def plot_attention_head_grid(
         bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
     )
     plt.tight_layout(rect=(0, 0.13, 1, 0.96))
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_activation_patching_heatmap(
+    normalized_effects,
+    tokens,
+    filename_or_path=ACTIVATION_PATCHING_HEATMAP_PATH,
+):
+    """Save activation-patching effects as a layer-by-position heatmap."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    normalized_effects = np.asarray(normalized_effects, dtype=float)
+    best_layer, best_pos = np.unravel_index(
+        int(np.argmax(normalized_effects)),
+        normalized_effects.shape,
+    )
+    max_per_layer = normalized_effects.max(axis=1)
+    layers = np.arange(normalized_effects.shape[0])
+
+    fig, (ax_heatmap, ax_bar) = plt.subplots(
+        1,
+        2,
+        figsize=(15.5, 7.0),
+        gridspec_kw={"width_ratios": [3.1, 1.15]},
+    )
+    image = ax_heatmap.imshow(
+        normalized_effects,
+        cmap="RdBu_r",
+        vmin=-0.2,
+        vmax=1.0,
+        aspect="auto",
+    )
+    ax_heatmap.scatter(
+        [best_pos],
+        [best_layer],
+        marker="o",
+        s=90,
+        facecolors="none",
+        edgecolors="#111111",
+        linewidths=2.0,
+    )
+    ax_heatmap.set_xlabel("Token position")
+    ax_heatmap.set_ylabel("Layer (0 = first transformer layer)")
+    ax_heatmap.set_title("Normalized Activation Patching Effect")
+    ax_heatmap.set_xticks(range(len(tokens)))
+    ax_heatmap.set_xticklabels(tokens, rotation=45, ha="right")
+    ax_heatmap.set_yticks(range(normalized_effects.shape[0]))
+    fig.colorbar(image, ax=ax_heatmap, label="Normalized effect")
+
+    ax_bar.barh(layers, max_per_layer, color="#4C72B0", alpha=0.84)
+    ax_bar.axvline(0, color="#707070", linewidth=0.8)
+    ax_bar.axvline(1, color="#B0B0B0", linewidth=0.8, linestyle="--")
+    ax_bar.scatter([max_per_layer[best_layer]], [best_layer], color="#B22222", zorder=5)
+    ax_bar.set_xlabel("Max effect")
+    ax_bar.set_ylabel("Layer")
+    ax_bar.set_title("Max per Layer")
+    ax_bar.set_yticks(range(normalized_effects.shape[0]))
+    ax_bar.grid(axis="x", alpha=0.24)
+    ax_bar.invert_yaxis()
+
+    fig.suptitle(
+        (
+            "Activation Patching: "
+            f"best layer={best_layer}, position={best_pos}, token={tokens[best_pos]!r}, "
+            f"effect={normalized_effects[best_layer, best_pos]:.3f}"
+        ),
+        fontsize=13,
+    )
+    plt.tight_layout(rect=(0, 0, 1, 0.955))
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_activation_head_patching_heatmap(
+    normalized_effects,
+    filename_or_path=ACTIVATION_PATCHING_HEAD_HEATMAP_PATH,
+):
+    """Save head-level patching effects as a layer-by-head heatmap."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    normalized_effects = np.asarray(normalized_effects, dtype=float)
+    best_layer, best_head = np.unravel_index(
+        int(np.argmax(normalized_effects)),
+        normalized_effects.shape,
+    )
+
+    fig, ax = plt.subplots(figsize=(12, 7.5))
+    image = ax.imshow(
+        normalized_effects,
+        cmap="RdBu_r",
+        vmin=-0.2,
+        vmax=1.0,
+        aspect="auto",
+    )
+    ax.scatter(
+        [best_head],
+        [best_layer],
+        marker="o",
+        s=90,
+        facecolors="none",
+        edgecolors="#111111",
+        linewidths=2.0,
+    )
+    ax.set_xlabel("Attention head")
+    ax.set_ylabel("Layer (0 = first transformer layer)")
+    ax.set_title(
+        (
+            "Head-Level Activation Patching "
+            f"(best layer={best_layer}, head={best_head}, "
+            f"effect={normalized_effects[best_layer, best_head]:.3f})"
+        )
+    )
+    ax.set_xticks(range(normalized_effects.shape[1]))
+    ax.set_yticks(range(normalized_effects.shape[0]))
+    fig.colorbar(image, ax=ax, label="Normalized effect")
+
+    plt.tight_layout()
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
@@ -699,6 +828,63 @@ def plot_cad_logit_difference_aggregate(
 
     plt.tight_layout()
     save_figure_if_changed(fig, output_path, verbose=verbose, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def plot_linear_probe_layer_accuracy(
+    accuracies,
+    std_devs,
+    sample_count,
+    filename_or_path=LINEAR_PROBE_CAD_ACCURACY_PATH,
+):
+    """Save the CAD linear-probe accuracy curve across transformer layers."""
+    output_path = (
+        OUTPUT_PNG_DIR / filename_or_path
+        if isinstance(filename_or_path, str)
+        else filename_or_path
+    )
+    accuracies = np.asarray(accuracies, dtype=float)
+    std_devs = np.asarray(std_devs, dtype=float)
+    layers = np.arange(len(accuracies))
+    best_layer = int(np.argmax(accuracies))
+
+    fig, ax = plt.subplots(figsize=(10.8, 5.8))
+    ax.plot(
+        layers,
+        accuracies,
+        marker="o",
+        color="#3B5BA9",
+        linewidth=2.0,
+        label="5-fold CV accuracy",
+    )
+    ax.fill_between(
+        layers,
+        accuracies - std_devs,
+        accuracies + std_devs,
+        color="#3B5BA9",
+        alpha=0.18,
+        label="+/- 1 standard deviation",
+    )
+    ax.axhline(0.5, color="#707070", linestyle="--", linewidth=1.0, label="Chance level")
+    ax.scatter([best_layer], [accuracies[best_layer]], color="#B22222", zorder=5)
+    ax.annotate(
+        f"Max: {accuracies[best_layer]:.3f}\nLayer {best_layer}",
+        xy=(best_layer, accuracies[best_layer]),
+        xytext=(best_layer + 0.8, min(1.0, accuracies[best_layer] + 0.06)),
+        arrowprops={"arrowstyle": "->", "color": "#404040", "linewidth": 0.9},
+        fontsize=9,
+        bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
+    )
+    ax.set_ylim(0.0, 1.04)
+    ax.set_xlabel("Layer (0 = first transformer layer)")
+    ax.set_ylabel("Cross-validated accuracy")
+    ax.set_title(f"CAD Sentiment Linear Probe by Layer (n={sample_count} prompts)")
+    ax.grid(True, alpha=0.28)
+    ax.legend(fontsize=8.5, loc="lower right")
+
+    plt.tight_layout()
+    save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
 
