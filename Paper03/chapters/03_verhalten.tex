@@ -20,8 +20,6 @@ Für eine systematische Prüfung wird der gefilterte Sentiment-Challenge-Datensa
   \end{tabular}
 \end{table}
 
-Tabelle~\ref{tab:catacc_short} und Abbildung~\ref{fig:catacc} zeigen die Trefferquote nach Annotationskategorie für den besseren Suffix.
-
 \begin{table}[htbp]
   \centering
   \caption{Trefferquote ausgewählter Kategorien (Suffix \texttt{ I feel very}).}
@@ -47,6 +45,6 @@ Tabelle~\ref{tab:catacc_short} und Abbildung~\ref{fig:catacc} zeigen die Treffer
   \label{fig:catacc}
 \end{figure}
 
-Eindeutige Fälle wie reine positive oder negative Sätze, Verneinungen (negated) oder Verstärkungen (amplified) werden mit über 80~Prozent gut erkannt. Am schwierigsten ist die Kategorie Sarkasmus/Ironie mit nur 46,7~Prozent. Auffällig ist außerdem eine starke Neigung zur positiven Klasse: Beim schwächeren Suffix \texttt{ Sentiment:} sagt das Modell in 395 von 636 Fällen „positiv“ voraus und liefert in 229 weiteren Fällen gar kein erkennbares Sentiment-Token.
+Tabelle~\ref{tab:catacc_short} und Abbildung~\ref{fig:catacc} zeigen die Trefferquote nach Annotationskategorie für den besseren Suffix. Eindeutige Fälle wie reine positive oder negative Sätze, Verneinungen (negated) oder Verstärkungen (amplified) werden mit über 80~Prozent gut erkannt. Am schwierigsten ist die Kategorie Sarkasmus/Ironie mit nur 46,7~Prozent. Auffällig ist außerdem eine starke Neigung zur positiven Klasse: Beim schwächeren Suffix \texttt{ Sentiment:} sagt das Modell in 395 von 636 Fällen „positiv“ voraus und liefert in 229 weiteren Fällen gar kein erkennbares Sentiment-Token.
 
 Diese niedrige Quote bei Sarkasmus passt zur Erwartung, dass das Modell Ironie nicht versteht. Allerdings ist die Kategorie im Datensatz zu 93~Prozent negativ gelabelt, während das Modell ohnehin zur positiven Klasse tendiert, sodass ein Teil der schlechten Quote schlicht diese Schieflage widerspiegeln könnte und nicht fehlendes Ironieverständnis. Insgesamt zeigt der Verhaltenstest: Das Modell nutzt Sentiment-Information, aber nur zuverlässig, wenn der Prompt eine sentimenttragende Fortsetzung wahrscheinlich macht. Reine Next-Token-Generierung ersetzt keine stabile Sentiment-Klassifikation. Das motiviert die folgenden Kapitel, die direkt in die internen Repräsentationen des Modells schauen.

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1781886758.31695 "main.bcf" "main.bbl" "main" 1781888435.18516 0
-  "main.bcf" 1781888435.05496 109156 dd591ade6609aec3fb99f814814ef699 "pdflatex"
+["biber main"] 1781886758.31695 "main.bcf" "main.bbl" "main" 1781889194.43419 0
+  "main.bcf" 1781889194.23475 109156 dd591ade6609aec3fb99f814814ef699 "pdflatex"
   "references.bib" 1781886662.43209 3256 505afb50bea583e8ca6e0a6c7f828d44 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1781888431.62902 "/home/danie/projects/AI_Frameworks_Tools/Paper03/main.tex" "main.pdf" "main" 1781888435.18586 0
+["pdflatex"] 1781889189.83927 "/home/danie/projects/AI_Frameworks_Tools/Paper03/main.tex" "main.pdf" "main" 1781889194.43476 0
   "/etc/texmf/web2c/texmf.cnf" 1781434158.11796 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/danie/projects/AI_Frameworks_Tools/Paper03/main.tex" 1781887214.91927 2613 ed41e0535b2560ead75d38ab6677cd0c ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -153,14 +153,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1781434202 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1781434321 3638601 2dedfafeb672287e81e85338eb3cb7ce ""
-  "chapters/01_einleitung.tex" 1781888219.283 2607 61e806c5ad4177aa19e702bf091d8956 ""
-  "chapters/02_grundlagen_modell.tex" 1781887450.8792 4755 274e08a8333d5715785c4d9c18c3fd28 ""
-  "chapters/03_verhalten.tex" 1781887840.07511 3476 826c79adae5178a2da0a64047873f51e ""
-  "chapters/04_embedding.tex" 1781888129.61903 6094 1267b19a39dceb481dc94b4284ae26a2 ""
-  "chapters/05_logit_lens.tex" 1781888296.89498 4453 14bf934978b64d9d31dfce63625152e1 ""
-  "chapters/06_attention.tex" 1781888336.89097 3499 40f6b85b634efd8cdeb8a2458f88d5a7 ""
-  "chapters/07_activation_patching.tex" 1781888398.56296 4632 0eb998f7a05f76def9c909aba3ab1264 ""
-  "chapters/08_diskussion_fazit.tex" 1781888246.259 4315 23450ef649b41ab9250e9b95b3e7c539 ""
+  "chapters/01_einleitung.tex" 1781889052.5828 2243 61f674e8b4eeb8baa35733d14c226d92 ""
+  "chapters/02_grundlagen_modell.tex" 1781889043.8948 4688 86f4e48b8becde8645a0c0f6f9f57309 ""
+  "chapters/03_verhalten.tex" 1781889098.86678 3473 02d360337e97577a8fa357078aefde95 ""
+  "chapters/04_embedding.tex" 1781888677.80689 6075 ee990a41468af37ea149938873bb7e12 ""
+  "chapters/05_logit_lens.tex" 1781888723.70288 4441 8e755f5e6cb5a9e5d42222f20c6bcc98 ""
+  "chapters/06_attention.tex" 1781888779.95086 3492 ea34a027019e17f95afb9f3bd261279b ""
+  "chapters/07_activation_patching.tex" 1781888821.67085 4625 d9389f482ebef0a12622e930d310ed06 ""
+  "chapters/08_diskussion_fazit.tex" 1781889063.8508 4109 e124d472ea0058b0f4b3acee1c221f19 ""
   "cover.tex" 1781886757.64813 1236 5fc3328c1b8af9c9a9a5a64de38f92a1 ""
   "figures/activation_patching_head_heatmap.png" 1781886662.38079 59706 6bf78185c59b71ba56155732eac73e01 ""
   "figures/activation_patching_heatmap.png" 1781886662.38273 98944 087470d490f674902b5fc941d1b0c8a6 ""
@@ -175,10 +175,10 @@
   "figures/sentiment_embedding_norms_all_fields.png" 1781886662.40539 171179 d62ea4463a3ad646891cfda99c0d332b ""
   "glossary.tex" 1781886662.40539 2911 dcd12035437c8751f2f4b20cd4ad9785 ""
   "logo.png" 1781886662.40539 7483 cae6ba544c2bdd8baf06fe5110b446f3 ""
-  "main.aux" 1781888435.04696 10249 d7da9312aefb322cb1556da162de8247 "pdflatex"
+  "main.aux" 1781889194.21075 10249 d736e41205cb45eab22aa086711b4fc6 "pdflatex"
   "main.bbl" 1781886760.46738 20046 ef34a3173e5b868a7185123f413e33e1 "biber main"
-  "main.out" 1781888435.05096 3134 c991305be9038643b321a59f16bf02f6 "pdflatex"
-  "main.run.xml" 1781888435.0619 2432 49ce9cc1c2e214794d05d7a5a4d87ddd "pdflatex"
+  "main.out" 1781889194.21875 3134 c991305be9038643b321a59f16bf02f6 "pdflatex"
+  "main.run.xml" 1781889194.23875 2432 49ce9cc1c2e214794d05d7a5a4d87ddd "pdflatex"
   "main.tex" 1781887214.91927 2613 ed41e0535b2560ead75d38ab6677cd0c ""
   (generated)
   "main.acn"
