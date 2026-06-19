@@ -16,8 +16,8 @@ Das übergeordnete Ziel besteht darin nachzuvollziehen, wo und ab welcher Verarb
   \item Welche \glspl{attentionhead} richten ihre Aufmerksamkeit auf sentimenttragende Wörter und kommen damit als beteiligte Komponenten in Frage.
 \end{enumerate}
 
-\subsection{Hypothesen}
 
+\subsection{Hypothesen}
 Für die Untersuchung werden drei Hypothesen aufgestellt. Jede Hypothese wird mit einem Kriterium versehen, das angibt, wann sie als bestätigt gilt. Die Hypothesen verbinden die beschreibenden mit den kausalen Verfahren und werden in den folgenden Kapiteln geprüft.
 
 \begin{description}[style=nextline, leftmargin=0pt, font=\bfseries]
@@ -25,9 +25,3 @@ Für die Untersuchung werden drei Hypothesen aufgestellt. Jede Hypothese wird mi
   \item[H2 (Lokalisierbarkeit)] Die kausal verantwortliche Verarbeitung lässt sich auf eine bestimmte Schicht und Token-Position eingrenzen, statt über das gesamte Netz verteilt zu sein. Die Hypothese gilt als bestätigt, wenn eine scharf begrenzte Stelle das korrekte Verhalten nahezu vollständig wiederherstellt.
   \item[H3 (Ironie und Sarkasmus)] Das Modell erkennt keine Ironie, sondern verarbeitet ausschließlich die wörtliche Oberflächen-Polarität. Die Hypothese gilt als bestätigt, wenn das Modell durchgehend der wörtlichen Lesart folgt und die gemeinte ironische Polarität an keiner Schicht linear ablesbar ist.
 \end{description}
-
-Die Hypothesen H1 und H2 besitzen einen kausalen Kern, der den Eingriff durch Activation Patching erfordert. Hypothese H3 lässt sich teils über das beobachtbare Verhalten und teils über eine schichtweise Betrachtung prüfen.
-
-\subsection{Aufbau der Arbeit}
-
-Die Untersuchung folgt einer Abfolge von beschreibenden hin zu kausalen Verfahren. Kapitel 2 erklärt die methodischen Grundlagen sowie die fünf eingesetzten Werkzeuge der mechanistischen Interpretierbarkeit. Kapitel 3 beschreibt das Modell Pythia-410M sowie die drei verwendeten Datensätze. Kapitel 4 betrachtet zunächst das beobachtbare Verhalten des Modells. Kapitel 5 untersucht die Sentiment-Repräsentation im Embedding-Raum und prüft ihre lineare Trennbarkeit. Kapitel 6 verfolgt mit dem Logit Lens die schichtweise Entstehung von Sentiment. Kapitel 7 analysiert den Informationsfluss über die \gls{attention}. Kapitel 8 beschreibt die geplante kausale Überprüfung durch Activation Patching. Kapitel 9 diskutiert die Befunde im Zusammenhang, und Kapitel 10 fasst die Arbeit zusammen.
