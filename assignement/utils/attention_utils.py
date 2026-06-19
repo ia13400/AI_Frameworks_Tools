@@ -124,6 +124,7 @@ def print_ranked_heads(ranked_heads, score_label="Score"):
 def analyze_subject_attention(
     attentions,
     tokens,
+    prompt=None,
     subject_token="France",
     top_k=10,
     filename_or_path=ATTENTION_SUBJECT_HEATMAP_PATH,
@@ -132,17 +133,19 @@ def analyze_subject_attention(
     subject_position = find_token_position(tokens, subject_token)
     attention_values = attention_to_source_token_matrix(attentions, subject_position)
     ranked_heads = rank_layer_heads(attention_values, top_k=top_k)
+    score_label = f"Attention weight to {subject_token!r}"
 
     print(f"Subject token {subject_token!r} found at position {subject_position}.")
-    print_ranked_heads(ranked_heads, score_label="Attention")
+    print_ranked_heads(ranked_heads, score_label=score_label)
 
     plot_layer_head_heatmap(
         attention_values,
         f"Final-token attention to {subject_token!r}",
         "Attention weight",
         filename_or_path,
-        top_heads=ranked_heads[:5],
+        top_heads=ranked_heads[:top_k],
         cmap="Blues",
+        prompt_text=prompt,
     )
     return {
         "subject_position": subject_position,
@@ -178,6 +181,7 @@ def compute_induction_scores(attentions, offsets=(1, 2)):
 
 def analyze_induction_heads(
     attentions,
+    prompt=None,
     top_k=10,
     filename_or_path=ATTENTION_INDUCTION_HEATMAP_PATH,
 ):
@@ -200,6 +204,7 @@ def analyze_induction_heads(
         filename_or_path,
         top_heads=ranked_heads[:5],
         cmap="Purples",
+        prompt_text=prompt,
     )
     return {
         "induction_scores": induction_scores,

@@ -84,14 +84,14 @@ def plot_attention_head_grid(
     fig.suptitle("Selected Attention Heads", fontsize=14, y=0.985)
     fig.text(
         0.06,
-        0.025,
+        0.075,
         textwrap.fill(f"Prompt: {prompt}", width=150),
         fontsize=8.2,
         ha="left",
         va="bottom",
         bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
     )
-    plt.tight_layout(rect=(0, 0.07, 1, 0.96))
+    plt.tight_layout(rect=(0, 0.13, 1, 0.96))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
@@ -104,6 +104,7 @@ def plot_layer_head_heatmap(
     filename_or_path,
     top_heads=None,
     cmap="Blues",
+    prompt_text=None,
 ):
     """Save a layer-by-head heatmap and optionally outline selected heads."""
     output_path = (
@@ -120,8 +121,19 @@ def plot_layer_head_heatmap(
     ax.set_xticks(range(values.shape[1]))
     ax.set_yticks(range(values.shape[0]))
     fig.colorbar(image, ax=ax, label=colorbar_label)
+    if prompt_text:
+        fig.text(
+            0.08,
+            0.075,
+            textwrap.fill(f"Prompt: {prompt_text}", width=150),
+            fontsize=8.2,
+            ha="left",
+            va="bottom",
+            bbox={"boxstyle": "round,pad=0.28", "facecolor": "white", "alpha": 0.88, "edgecolor": "#D0D0D0"},
+        )
 
     if top_heads:
+        max_value = float(values.max()) if values.size else 0.0
         for item in top_heads:
             ax.add_patch(
                 Rectangle(
@@ -133,8 +145,20 @@ def plot_layer_head_heatmap(
                     linewidth=1.8,
                 )
             )
+            cell_value = float(values[item["layer"], item["head"]])
+            text_color = "white" if max_value and cell_value > max_value * 0.55 else "#111111"
+            ax.text(
+                item["head"],
+                item["layer"],
+                f"{cell_value:.3f}",
+                ha="center",
+                va="center",
+                fontsize=8.2,
+                fontweight="bold",
+                color=text_color,
+            )
 
-    plt.tight_layout()
+    plt.tight_layout(rect=(0, 0.13 if prompt_text else 0, 1, 1))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
@@ -716,7 +740,7 @@ def plot_logit_lens_topk_heatmap(
     if prompt_text:
         fig.text(
             0.08,
-            0.035,
+            0.075,
             textwrap.fill(f"Prompt: {prompt_text}", width=125),
             fontsize=8.2,
             ha="left",
@@ -740,7 +764,7 @@ def plot_logit_lens_topk_heatmap(
             )
 
     fig.colorbar(image, ax=ax, label="Probability")
-    plt.tight_layout(rect=(0, 0.10 if prompt_text else 0, 1, 1))
+    plt.tight_layout(rect=(0, 0.13 if prompt_text else 0, 1, 1))
     save_figure_if_changed(fig, output_path, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return output_path
