@@ -1,0 +1,83 @@
+\section{Schichtweise Entstehung mit dem Logit Lens}
+
+Während das vorige Kapitel gezeigt hat, dass Sentiment im Embedding-Raum vorhanden ist, untersucht dieses Kapitel, ab welcher Schicht das Modell diese Information für seine Vorhersage nutzt. Dazu dient der Logit Lens.
+
+\subsection{Verfahren}
+
+Der Logit Lens beruht auf der Idee des Residual Streams \cite{nostalgebraist2020logit}. Da die finale Ausgabe des Modells eine Projektion des Residual Streams auf den Vokabularraum ist, lässt sich dieselbe Ausgabematrix auch auf frühere Hidden States anwenden. Für jede Schicht entstehen so Zwischen-Logits, die zeigen, welches nächste Token das Modell nach dieser Schicht bevorzugen würde. Ein wichtiger Vorbehalt besteht darin, dass die Ausgabematrix für die letzte Schicht trainiert wurde. Mittlere Schichten könnten Informationen anders kodieren, weshalb der Logit Lens einzelne Inhalte übersehen kann.
+
+\subsection{Schichtweise Vorhersagen}
+
+Für ein positives und ein negatives Prompt-Paar werden die wahrscheinlichsten Token je Schicht bestimmt. In den frühen Schichten von etwa 0 bis 8 dominieren unspezifische Token mit sehr geringen Wahrscheinlichkeiten. Ab den mittleren Schichten erscheinen erstmals Wörter aus dem Hu-\&-Liu-Lexikon. In den späten Schichten verstärken sich die sentimentbezogenen Vorhersagen deutlich. Tabelle~\ref{tab:logitlenstokens} fasst zentrale Beobachtungen zusammen.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Ausgewählte Beobachtungen des Logit Lens für das positive und das negative Prompt-Paar.}
+  \label{tab:logitlenstokens}
+  \begin{tabular}{lll}
+    \toprule
+    Beobachtung & Token & Wahrscheinlichkeit \\
+    \midrule
+    erstes positives Top-1-Token (Schicht 12) & lucky & sehr gering \\
+    positives Top-1-Token (letzte Schicht) & satisfied & 0,1319 \\
+    negatives Top-1-Token (letzte Schicht) & sick & 0,1604 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Abbildung~\ref{fig:topkheat} zeigt die wahrscheinlichsten Token je Schicht für den positiven und den negativen Prompt. In den frühen und mittleren Schichten sind die Vorhersagen wenig interpretierbar und wechseln häufig. Ab etwa Schicht 17 steigen die Wahrscheinlichkeiten deutlich an, und die Vorhersagen konzentrieren sich auf wenige dominante Token. Abbildung~\ref{fig:huliumass} stellt dar, wie viel Wahrscheinlichkeitsmasse der Top-Token je Schicht auf Lexikonwörter entfällt.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.49\textwidth]{logit_lens_positive_topk_heatmap.png}
+  \hfill
+  \includegraphics[width=0.49\textwidth]{logit_lens_negative_topk_heatmap.png}
+  \caption{Wahrscheinlichste Token je Schicht für den positiven (links) und den negativen Prompt (rechts).}
+  \label{fig:topkheat}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.49\textwidth]{logit_lens_positive_hu_liu_topk_mass.png}
+  \hfill
+  \includegraphics[width=0.49\textwidth]{logit_lens_negative_hu_liu_topk_mass.png}
+  \caption{Anteil der Wahrscheinlichkeitsmasse auf Hu-\&-Liu-Wörtern je Schicht für den positiven (links) und den negativen Prompt (rechts).}
+  \label{fig:huliumass}
+\end{figure}
+
+\subsection{Logit-Differenz als Sentiment-Score}
+
+Um die Entwicklung über die Schichten zu quantifizieren, wird je Schicht ein Sentiment-Score gebildet. Dieser ergibt sich aus dem durchschnittlichen Logit-Wert über alle positiven Lexikonwörter abzüglich des durchschnittlichen Logit-Werts über alle negativen Lexikonwörter. Ein höherer Wert bedeutet eine stärkere Ausrichtung der Schicht auf positives Sentiment. Der Abstand zwischen dem Score des positiven und des negativen Prompts beschreibt, wie deutlich das Modell beide Eingaben trennt.
+
+In den frühen Schichten liegen die Werte nahe null, positive und negative Eingaben besitzen also zunächst sehr ähnliche Repräsentationen. Ab den mittleren Schichten baut sich eine systematische Trennung auf. Der Abstand wächst kontinuierlich und erreicht zwischen etwa Schicht 17 und Schicht 23 seine höchsten Werte. In der letzten Schicht treten teilweise starke Änderungen auf, was darauf hindeutet, dass die finale Schicht zusätzlich die konkrete Next-Token-Vorhersage optimiert. Die Entwicklung ist weitgehend unabhängig von der konkreten Formulierung, da das kurze und das längere Prompt-Paar einen ähnlichen Verlauf zeigen. Die Abbildungen~\ref{fig:ldscores} und~\ref{fig:lddiff} zeigen die Verläufe der Sentiment-Scores und der Logit-Differenzen.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.49\textwidth]{logit_lens_prompt_hu_liu_logit_scores_Trial1.png}
+  \hfill
+  \includegraphics[width=0.49\textwidth]{logit_lens_prompt_hu_liu_logit_scores_Trial2.png}
+  \caption{Sentiment-Scores je Schicht für das kurze (links) und das längere (rechts) Prompt-Paar.}
+  \label{fig:ldscores}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.49\textwidth]{logit_lens_prompt_hu_liu_logit_difference_Trial1.png}
+  \hfill
+  \includegraphics[width=0.49\textwidth]{logit_lens_prompt_hu_liu_logit_difference_Trial2.png}
+  \caption{Logit-Differenz je Schicht für das kurze (links) und das längere (rechts) Prompt-Paar.}
+  \label{fig:lddiff}
+\end{figure}
+
+\subsection{Aggregation über den CAD-Datensatz}
+
+Damit das Ergebnis nicht von einzelnen Prompts abhängt, wird die Logit-Differenz über alle 1.707 gegenfaktischen Paare des CAD-Datensatzes aggregiert \cite{kaushik2020learning}. Abbildung~\ref{fig:cadaggregate} zeigt den gemittelten Verlauf. In den frühen Schichten ist die mittlere Logit-Differenz nahezu null. Ab den mittleren Schichten nimmt sie kontinuierlich zu und erreicht ihr Maximum in den späten Schichten. Obwohl die Streuung in den oberen Schichten zunimmt, bleibt der Mittelwert deutlich positiv. Das Muster tritt somit systematisch über den gesamten Datensatz hinweg auf und ist nicht auf einzelne Beispiele zurückzuführen.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{logit_lens_cad_logit_difference_aggregate.png}
+  \caption{Über 1.707 CAD-Paare gemittelte Logit-Differenz je Schicht.}
+  \label{fig:cadaggregate}
+\end{figure}
+
+Der Logit Lens beantwortet die zweite Forschungsfrage. Sentiment wird nicht in einer einzelnen Schicht gespeichert, sondern schrittweise über den Residual Stream aufgebaut. Die deutlichste Trennung zwischen positiven und negativen Eingaben entsteht in den oberen Schichten zwischen etwa Schicht 17 und Schicht 23. Dieser Befund stützt die Leithypothese und macht diesen Schichtbereich zum vorrangigen Kandidaten für die folgenden Analysen.

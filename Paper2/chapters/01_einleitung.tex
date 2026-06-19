@@ -1,0 +1,33 @@
+\section{Einleitung}
+
+\gls{ai} hat sich zu einem zentralen Forschungs- und Anwendungsgebiet der Informatik entwickelt. Besonders die jüngsten Fortschritte im Bereich der \gls{nlp} beruhen auf der \gls{transformer}-Architektur und auf großen Sprachmodellen \cite{vaswani2017attention, radford2018improving}. Ein \gls{llm} erreicht bei vielen sprachbezogenen Aufgaben hohe Leistung. Das interne Verhalten dieser Modelle bleibt für Anwender jedoch häufig undurchsichtig.
+
+Diese fehlende Transparenz motiviert das Forschungsgebiet der \gls{mechanisticinterpretability}. Im Gegensatz zur reinen Verhaltensbeobachtung, die nur untersucht, was ein Modell ausgibt, fragt die mechanistische Interpretierbarkeit danach, wie und warum eine Ausgabe im Inneren des Modells entsteht. Ziel ist es, die internen Berechnungen offenzulegen und so von einer Black-Box-Sicht zu einem nachvollziehbaren Verständnis der Mechanismen zu gelangen \cite{nanda2023comprehensive, elhage2021mathematical}.
+
+Als Fallstudie dient in dieser Arbeit die \gls{sentimentanalysis}. Sentiment beschreibt die emotionale Tonalität eines Textes, also ob eine Aussage eher positiv oder eher negativ ausgerichtet ist. Sentiment eignet sich gut für eine mechanistische Untersuchung, weil es sich an einzelnen sentimenttragenden Wörtern festmachen lässt und sich positive und negative Beispiele mit nahezu identischem Kontext gegenüberstellen lassen. Untersucht wird das offene Modell Pythia-410M von EleutherAI \cite{biderman2023pythia}. Die Analysen verwenden ausschließlich PyTorch und HuggingFace und verzichten bewusst auf Spezialbibliotheken, damit jeder Verarbeitungsschritt direkt sichtbar bleibt.
+
+\subsection{Zielsetzung und Forschungsfragen}
+
+Das übergeordnete Ziel besteht darin nachzuvollziehen, wo und ab welcher Verarbeitungstiefe ein \gls{llm} Sentiment intern repräsentiert und welche Bestandteile daran beteiligt sind. Zur Strukturierung werden drei Forschungsfragen formuliert.
+
+\begin{enumerate}
+  \item Sind sentimentbezogene Informationen bereits in den \glspl{token}-Repräsentationen vor der eigentlichen \gls{transformer}-Verarbeitung enthalten und lassen sie sich linear trennen.
+  \item Ab welcher Schicht und wie deutlich werden positive und negative Eingaben innerhalb des Modells voneinander unterschieden.
+  \item Welche \glspl{attentionhead} richten ihre Aufmerksamkeit auf sentimenttragende Wörter und kommen damit als beteiligte Komponenten in Frage.
+\end{enumerate}
+
+\subsection{Hypothesen}
+
+Für die Untersuchung werden drei Hypothesen aufgestellt. Jede Hypothese wird mit einem Kriterium versehen, das angibt, wann sie als bestätigt gilt. Die Hypothesen verbinden die beschreibenden mit den kausalen Verfahren und werden in den folgenden Kapiteln geprüft.
+
+\begin{enumerate}
+  \item[\textbf{H1 (klare Stimmungswörter)}] Eindeutig polare Wörter wie „wonderful“ oder „delicious“ werden früh und direkt am Token verarbeitet. Die Hypothese gilt als bestätigt, wenn die korrekte Polarität bereits in frühen bis mittleren Schichten ablesbar ist und ein Eingriff am Stimmungswort die Vorhersage wiederherstellt.
+  \item[\textbf{H2 (Lokalisierbarkeit)}] Die kausal verantwortliche Verarbeitung lässt sich auf eine bestimmte Schicht und Token-Position eingrenzen, statt über das gesamte Netz verteilt zu sein. Die Hypothese gilt als bestätigt, wenn eine scharf begrenzte Stelle das korrekte Verhalten nahezu vollständig wiederherstellt.
+  \item[\textbf{H5 (Ironie und Sarkasmus)}] Das Modell erkennt keine Ironie, sondern verarbeitet ausschließlich die wörtliche Oberflächen-Polarität. Die Hypothese gilt als bestätigt, wenn das Modell durchgehend der wörtlichen Lesart folgt und die gemeinte ironische Polarität an keiner Schicht linear ablesbar ist.
+\end{enumerate}
+
+Die Hypothesen H1 und H2 besitzen einen kausalen Kern, der den Eingriff durch Activation Patching erfordert. Hypothese H5 lässt sich teils über das beobachtbare Verhalten und teils über eine schichtweise Betrachtung prüfen.
+
+\subsection{Aufbau der Arbeit}
+
+Die Untersuchung folgt einer Abfolge von beschreibenden hin zu kausalen Verfahren. Kapitel 2 erklärt die methodischen Grundlagen sowie die fünf eingesetzten Werkzeuge der mechanistischen Interpretierbarkeit. Kapitel 3 beschreibt das Modell Pythia-410M sowie die drei verwendeten Datensätze. Kapitel 4 betrachtet zunächst das beobachtbare Verhalten des Modells. Kapitel 5 untersucht die Sentiment-Repräsentation im Embedding-Raum und prüft ihre lineare Trennbarkeit. Kapitel 6 verfolgt mit dem Logit Lens die schichtweise Entstehung von Sentiment. Kapitel 7 analysiert den Informationsfluss über die \gls{attention}. Kapitel 8 beschreibt die geplante kausale Überprüfung durch Activation Patching. Kapitel 9 diskutiert die Befunde im Zusammenhang, und Kapitel 10 fasst die Arbeit zusammen.

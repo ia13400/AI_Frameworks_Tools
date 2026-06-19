@@ -1,0 +1,108 @@
+\section{Verhalten des Modells bei Sentiment}
+
+Bevor die internen Mechanismen untersucht werden, wird das beobachtbare Verhalten von Pythia-410M betrachtet. Diese verhaltensbasierte Sicht beantwortet die Frage, was das Modell bei sentimentbezogenen Eingaben tut, und bildet den Ausgangspunkt für die anschließenden internen Analysen.
+
+\subsection{Top-K-Vorhersagen}
+
+In einem ersten Schritt werden für mehrere positiv und negativ formulierte Beispielprompts die wahrscheinlichsten nächsten Token ausgegeben. Die Ergebnisse zeigen, dass das Modell den emotionalen Kontext eines Satzes erkennt. Bei einer positiv formulierten Eingabe wie \texttt{The food was delicious and the service was} dominieren positive Fortsetzungen wie „excellent“, „great“ oder „good“. Bei einer negativ formulierten Eingabe wie \texttt{The food was disgusting and the service was} erzeugt das Modell überwiegend negative Fortsetzungen wie „terrible“, „awful“ oder „horrible“. Dieses Verhalten ist ein erster Hinweis darauf, dass sentimentbezogene Muster im Modell vorhanden sind.
+
+\subsection{Next-Token-Probe auf der Sentiment Challenge}
+
+Für eine systematische Bewertung wird der gefilterte Challenge-Datensatz mit 636 binär gelabelten Sätzen verwendet. Davon sind 353 Sätze negativ und 283 Sätze positiv. Für jeden Satz wird ein Prompt-Suffix angehängt und die zehn wahrscheinlichsten nächsten Token werden bestimmt. Anschließend wird die Wahrscheinlichkeitsmasse jener Token summiert, die im Hu-\&-Liu-Lexikon als positiv beziehungsweise als negativ gelten. Überwiegt die positive Masse, wird der Satz als positiv vorhergesagt, andernfalls als negativ. Findet sich unter den zehn Token kein Lexikonwort, wird kein Sentiment vergeben.
+
+Geprüft werden zwei Prompt-Varianten. Variante 1 verwendet den Suffix \texttt{ I feel very}, Variante 2 den Suffix \texttt{ Sentiment:}. Abbildung~\ref{fig:filteredheatmap} zeigt die Zusammensetzung des gefilterten Datensatzes nach Annotationskategorien und Sentiment.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{sentiment_challenge_filtered_category_heatmap.png}
+  \caption{Verteilung der Annotationskategorien im gefilterten Challenge-Datensatz nach Sentiment.}
+  \label{fig:filteredheatmap}
+\end{figure}
+
+\subsubsection{Konfusionsmatrizen}
+
+Die Tabellen~\ref{tab:cm1} und~\ref{tab:cm2} stellen die Konfusionsmatrizen beider Varianten dar. Eine Konfusionsmatrix vergleicht das wahre Sentiment mit dem vorhergesagten Sentiment und macht damit sichtbar, welche Fehler das Modell macht. Die Zeilen geben das wahre Sentiment an, die Spalten die Vorhersage des Modells.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Konfusionsmatrix für Variante 1 mit dem Suffix \texttt{ I feel very}.}
+  \label{tab:cm1}
+  \begin{tabular}{lrrr}
+    \toprule
+    & \multicolumn{3}{c}{vorhergesagt} \\
+    \cmidrule(lr){2-4}
+    wahr & positiv & negativ & kein Sentiment \\
+    \midrule
+    positiv & 259 & 24 & 0 \\
+    negativ & 134 & 219 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Konfusionsmatrix für Variante 2 mit dem Suffix \texttt{ Sentiment:}.}
+  \label{tab:cm2}
+  \begin{tabular}{lrrr}
+    \toprule
+    & \multicolumn{3}{c}{vorhergesagt} \\
+    \cmidrule(lr){2-4}
+    wahr & positiv & negativ & kein Sentiment \\
+    \midrule
+    positiv & 194 & 2 & 87 \\
+    negativ & 201 & 10 & 142 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Variante 1 erreicht eine Trefferquote von 75,2 Prozent, Variante 2 nur 32,1 Prozent. Auffällig ist die starke Neigung des Modells zur positiven Klasse. In Variante 1 werden 393 der 636 Sätze als positiv vorhergesagt, in Variante 2 sogar 395 Sätze als positiv und gleichzeitig 229 Sätze ohne Sentiment. Der Suffix \texttt{ Sentiment:} bringt das Modell somit häufig nicht dazu, unmittelbar ein sentimenttragendes Token zu erzeugen.
+
+\subsubsection{Genauigkeit nach Kategorie}
+
+Tabelle~\ref{tab:catacc} zeigt die Trefferquote getrennt nach Annotationskategorie für beide Varianten. Da ein Satz mehrere Kategorien tragen kann, summieren sich die Fallzahlen nicht auf die Gesamtzahl der Sätze.
+
+\begin{longtable}{lrrr}
+  \caption{Trefferquote je Annotationskategorie in Prozent für beide Prompt-Varianten.}
+  \label{tab:catacc} \\
+  \toprule
+  Kategorie & n & Variante 1 & Variante 2 \\
+  \midrule
+  \endfirsthead
+  \toprule
+  Kategorie & n & Variante 1 & Variante 2 \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  positiv & 272 & 86,4 & 51,1 \\
+  negativ & 275 & 69,5 & 13,1 \\
+  negated & 76 & 84,2 & 30,3 \\
+  amplified & 68 & 83,8 & 36,8 \\
+  strong & 93 & 81,7 & 38,7 \\
+  difficult-vocab & 62 & 82,3 & 38,7 \\
+  idioms & 113 & 80,5 & 43,4 \\
+  emoji & 27 & 81,5 & 7,4 \\
+  morphology & 25 & 80,0 & 24,0 \\
+  non-standard spelling & 124 & 77,4 & 29,0 \\
+  desirable-element & 128 & 78,9 & 27,3 \\
+  reducer & 10 & 70,0 & 50,0 \\
+  mixed & 83 & 68,7 & 42,2 \\
+  comparative & 56 & 64,3 & 19,6 \\
+  world-knowledge & 72 & 62,5 & 31,9 \\
+  shifter & 40 & 62,5 & 7,5 \\
+  modality & 30 & 60,0 & 23,3 \\
+  sarcasm/irony & 45 & 46,7 & 6,7 \\
+\end{longtable}
+
+Die Kategorie Sarkasmus und Ironie ist in beiden Varianten am schwierigsten. Selbst mit dem besseren Suffix liegt die Trefferquote nur bei 46,7 Prozent, mit dem schwächeren Suffix bei 6,7 Prozent. Auch shifter und modality fallen deutlich ab. Direkte sentimentbezogene Kategorien wie positiv, negated, amplified, strong, difficult-vocab und idioms erreichen dagegen in Variante 1 Werte über 80 Prozent. Abbildung~\ref{fig:catacc} zeigt die Trefferquoten beider Varianten grafisch.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.49\textwidth]{sentiment_challenge_category_accuracy_Trial1.png}
+  \hfill
+  \includegraphics[width=0.49\textwidth]{sentiment_challenge_category_accuracy_Trial2.png}
+  \caption{Trefferquote je Kategorie für Variante 1 (links) und Variante 2 (rechts).}
+  \label{fig:catacc}
+\end{figure}
+
+Die verhaltensbasierte Analyse zeigt zwei Dinge. Das Modell kann sentimentbezogene Informationen grundsätzlich nutzen, sobald der Prompt eine sentimenttragende Fortsetzung wahrscheinlich macht. Die reine Next-Token-Generierung ersetzt jedoch keine stabile Sentiment-Klassifikation, da die Ergebnisse stark vom Prompt-Design und von der sprachlichen Komplexität abhängen. Diese Beobachtung motiviert die folgende Frage, wo und wie das Sentiment im Inneren des Modells repräsentiert wird.

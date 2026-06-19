@@ -1,0 +1,53 @@
+\section{Informationsfluss über die Attention}
+
+Der Logit Lens zeigt, dass Sentiment im Residual Stream entsteht, sagt aber nichts darüber aus, welche Bestandteile diese Information dorthin transportieren. Dieses Kapitel untersucht daher die \glspl{attentionhead} und formuliert eine mechanistische Hypothese über den Informationsfluss.
+
+\subsection{Verfahren}
+
+In jedem \gls{transformer}-Layer berechnen die \glspl{attentionhead} gewichtete Summen über alle Token-Positionen. Für jeden Prompt liefert das Modell auf Wunsch die \gls{attention}-Gewichte aller Schichten zurück. Bei Pythia-410M entstehen so 24 Attention-Tensoren, einer je Schicht, mit jeweils 16 Köpfen. Eine einzelne \gls{attention}-Matrix hat die Form Sequenzlänge mal Sequenzlänge. Jede Zeile steht für eine Query-Position, also das Token, das Aufmerksamkeit verteilt. Jede Spalte steht für eine Key-Position, also ein Token, auf das geachtet wird. Da das Modell kausal arbeitet, richtet sich die Aufmerksamkeit nur auf das aktuelle und auf vorherige Token. Ein \gls{attention}-Gewicht nahe 1 bedeutet, dass eine Query-Position fast ihre gesamte Aufmerksamkeit auf ein einzelnes Token legt.
+
+Abbildung~\ref{fig:headgrid} zeigt beispielhaft die \gls{attention}-Muster mehrerer Köpfe. Einige Köpfe fokussieren stark auf einzelne inhaltstragende Token, andere verfolgen globale Muster wie Satzanfänge oder das jeweils vorherige Token.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{attention_head_grid.png}
+  \caption{Attention-Muster ausgewählter Köpfe in unterschiedlichen Schichten.}
+  \label{fig:headgrid}
+\end{figure}
+
+\subsection{Aufmerksamkeit auf ein sentimenttragendes Token}
+
+In einem ersten Schritt wird untersucht, welche Köpfe beim Verarbeiten eines Prompts besonders stark auf das sentimenttragende Wort „delicious“ fokussieren. Mehrere Köpfe in unterschiedlichen Schichten richten erhöhte Aufmerksamkeit auf dieses Token. Die stärkste gemessene Aufmerksamkeit tritt in Schicht 6 und Kopf 3 mit einem Gewicht von 0,835 auf. Weitere auffällige Köpfe finden sich in den Schichten 7, 8, 10 und 19. Abbildung~\ref{fig:subject} stellt diese Aufmerksamkeit dar.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{attention_subject_heatmap.png}
+  \caption{Aufmerksamkeit der Köpfe auf das sentimenttragende Token „delicious“.}
+  \label{fig:subject}
+\end{figure}
+
+Auffällig ist, dass sich die stärksten Muster überwiegend auf die frühen bis mittleren Schichten konzentrieren. Dies deutet darauf hin, dass sentimentrelevante Informationen bereits früh aus dem Eingabetext extrahiert werden. In den späteren Schichten nimmt die direkte Aufmerksamkeit auf das Wort deutlich ab, während der Logit Lens gerade dort die stärkste Sentiment-Trennung gezeigt hat. Frühe Köpfe sammeln demnach zunächst sentimentrelevante Informationen, die in den oberen Schichten zu einer stabilen Repräsentation verdichtet werden.
+
+\subsection{Aggregierte Analyse über den CAD-Datensatz}
+
+Um über ein einzelnes Beispiel hinauszugehen, wird die Aufmerksamkeit auf sentimenttragende Wörter über alle Paare des CAD-Datensatzes aggregiert. Für jeden Prompt werden die im Text enthaltenen positiven und negativen Lexikonwörter bestimmt. Anschließend wird für alle 24 Schichten und 16 Köpfe das durchschnittliche \gls{attention}-Gewicht auf diese Wörter berechnet. Abbildung~\ref{fig:cadattention} zeigt das Ergebnis als Heatmap mit 24 Schichten und 16 Köpfen. So lassen sich Köpfe identifizieren, die systematisch auf sentimenttragende Wörter fokussieren und damit als Kandidaten für die kausale Überprüfung in Frage kommen.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{attention_cad_sentiment_heatmap.png}
+  \caption{Durchschnittliche Aufmerksamkeit je Schicht und Kopf auf sentimenttragende Wörter über den CAD-Datensatz.}
+  \label{fig:cadattention}
+\end{figure}
+
+Ergänzend wird nach Induction Heads gesucht. Solche Köpfe vervollständigen Muster der Form „A B ... A“ zu „B“ und gelten als ein bekannter Mechanismus zur Mustererkennung. Abbildung~\ref{fig:induction} zeigt die entsprechende Analyse.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{attention_induction_heatmap.png}
+  \caption{Analyse möglicher Induction Heads.}
+  \label{fig:induction}
+\end{figure}
+
+\subsection{Einordnung}
+
+Die \gls{attention}-Analyse beantwortet die dritte Forschungsfrage und benennt Köpfe, die auf sentimenttragende Wörter fokussieren. Hohe \gls{attention}-Gewichte bedeuten jedoch nur, dass ein Kopf Informationen von einem Token bezieht. Daraus folgt nicht, dass diese Informationen für die finale Entscheidung auch genutzt werden. Die \gls{attention} beschreibt somit den Informationsfluss und liefert eine Hypothese über relevante Komponenten, beweist aber keine Kausalität. Für einen kausalen Nachweis ist das Activation Patching erforderlich, das im folgenden Kapitel beschrieben wird.

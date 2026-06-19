@@ -1,0 +1,31 @@
+\section{Grundlagen}
+
+\subsection{Mechanistische Interpretierbarkeit}
+
+Bei der Analyse von Sprachmodellen lassen sich zwei Sichtweisen unterscheiden. Die verhaltensbasierte Sicht beobachtet ausschließlich die Beziehung zwischen Eingabe und Ausgabe und beschreibt, was ein Modell tut. Die \gls{mechanisticinterpretability} geht darüber hinaus und untersucht die internen Berechnungen, um zu erklären, wie und warum eine Ausgabe zustande kommt \cite{nanda2023comprehensive}. Ein anschauliches Bild ist der Unterschied zwischen dem Fahren eines Autos und dem Verstehen des Motors. Erst das Verständnis der inneren Abläufe erlaubt es, Fehler vorherzusagen, Wissen gezielt zu verändern und die Sicherheit eines Modells zu verbessern.
+
+\subsection{Transformer und Residual Stream}
+
+Die \gls{transformer}-Architektur führte den Self-\gls{attention}-Mechanismus ein, der einem neuronalen Netz erlaubt, unterschiedliche Positionen einer Eingabesequenz unterschiedlich stark zu gewichten \cite{vaswani2017attention}. Moderne Sprachmodelle bestehen aus einem Stapel solcher Schichten. Eine zentrale Vorstellung der mechanistischen Interpretierbarkeit ist der Residual Stream. Darunter wird ein gemeinsamer Informationskanal verstanden, der durch alle Schichten verläuft. Jede Schicht liest aus diesem Kanal, berechnet einen Beitrag und addiert diesen wieder hinzu \cite{elhage2021mathematical}. Untere Schichten verarbeiten eher lexikalische und syntaktische Merkmale, während semantische Informationen und Faktenwissen erst in höheren Schichten entstehen. Die finale Vorhersage wird an der letzten Position des Residual Streams aufgebaut.
+
+Ein \gls{token} ist die kleinste Verarbeitungseinheit eines Modells, etwa ein Wort oder ein Wortbestandteil. Jedes Token wird zunächst in einen Vektor fester Länge überführt, der als Embedding bezeichnet wird. Am Ende des Modells werden die internen Vektoren auf den Vokabularraum projiziert. Die dabei entstehenden Rohwerte heißen Logits. Ein höherer Logit-Wert bedeutet, dass ein Token als nächste Ausgabe wahrscheinlicher ist. Durch die Softmax-Funktion werden die Logits in Wahrscheinlichkeiten umgerechnet, also in Werte zwischen 0 und 1, die sich über alle Token zu 1 summieren.
+
+\subsection{Fünf Werkzeuge von Korrelation zu Kausalität}
+
+Die Arbeit setzt fünf Werkzeuge ein, die sich von beschreibenden hin zu kausalen Aussagen anordnen lassen. Diese Reihenfolge bildet den roten Faden der Untersuchung.
+
+\begin{enumerate}
+  \item Die Residual-Stream-Analyse betrachtet die internen Repräsentationen und prüft, ob sich positive und negative Eingaben unterscheiden. Sie liefert einen Hinweis darauf, dass eine Information vorhanden ist.
+  \item Der Logit Lens projiziert die Zwischenrepräsentationen einzelner Schichten mit der Ausgabematrix des Modells in den Vokabularraum \cite{nostalgebraist2020logit}. So wird sichtbar, ab welcher Schicht das Modell die Information bereits nutzt.
+  \item Die \gls{attention}-Analyse untersucht, welche \glspl{attentionhead} ihre Aufmerksamkeit auf welche Token richten. Sie formuliert eine mechanistische Hypothese über den Informationsfluss.
+  \item Das lineare Probing trainiert einen einfachen linearen Klassifikator auf den Aktivierungen und prüft, ob eine Information linear dekodierbar ist. Ein einfaches Modell kann nur dann gut trennen, wenn die Information bereits klar im Vektorraum vorliegt.
+  \item Das Activation Patching ersetzt einzelne Aktivierungen gezielt und beobachtet die Wirkung auf die Vorhersage \cite{meng2022locating, goldowskydill2023localizing}. Erst dieser Eingriff erlaubt eine kausale Aussage darüber, welche Komponente tatsächlich benötigt wird.
+\end{enumerate}
+
+Die ersten vier Werkzeuge zeigen Korrelationen, also dass eine Information vorhanden ist und genutzt zu werden scheint. Nur das Activation Patching weist eine kausale Verantwortung nach. Alle Verfahren beruhen auf PyTorch-Mechanismen wie Forward Hooks und kommen ohne Spezialbibliotheken aus.
+
+\subsection{Sentimentanalyse und lexikonbasierte Bewertung}
+
+Für die Bewertung von Sentiment wird in dieser Arbeit ein lexikonbasiertes Verfahren genutzt. Ein Sentiment-Lexikon enthält Wortlisten, die manuell als positiv oder negativ eingestuft wurden. Verwendet wird das Opinion-Lexikon von Hu und Liu, eines der bekanntesten Lexika im Bereich Opinion Mining \cite{hu2004mining}. Es enthält Wörter wie „good“, „excellent“ oder „wonderful“ auf der positiven Seite und Wörter wie „bad“, „terrible“ oder „awful“ auf der negativen Seite. Über dieses Lexikon lassen sich sentimenttragende Token im Vokabular von Pythia-410M identifizieren und mit den internen Repräsentationen des Modells in Beziehung setzen.
+
+Ein wiederkehrendes Maß in dieser Arbeit ist die Cosine-Ähnlichkeit. Sie misst den Winkel zwischen zwei Vektoren und nimmt Werte zwischen minus 1 und plus 1 an. Ein Wert nahe 1 bedeutet, dass zwei Vektoren in nahezu dieselbe Richtung zeigen und damit als ähnlich gelten. Die Cosine-Ähnlichkeit eignet sich, um nahe Nachbarn eines Wortes im Embedding-Raum zu finden, weil sie unabhängig von der Länge der Vektoren ist.
