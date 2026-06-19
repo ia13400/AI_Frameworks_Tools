@@ -1,8 +1,9 @@
 \section{Schichtweise Entstehung mit dem Logit Lens}
 
-Dieses Kapitel untersucht, ab welcher Schicht und wie deutlich sich positive und negative Eingaben innerhalb des Modells unterscheiden, ein zentraler Baustein für den beschreibenden Teil von Hypothese H1. Am Ende des Modells wird der finale Zustand mit der Ausgabematrix auf den Vokabularraum projiziert, so entstehen die Logits, aus denen das nächste Token vorhergesagt wird. Der \textbf{Logit Lens} wendet genau dieselbe Ausgabematrix bereits auf frühere, eigentlich noch unfertige Zwischenzustände an \cite{nostalgebraist2020logit}. So lässt sich für jede Schicht ablesen, welches Token das Modell zu diesem Zeitpunkt schon bevorzugen würde, ein Blick in den laufenden Denkprozess, wenn auch mit dem Vorbehalt, dass die Ausgabematrix nur für die letzte Schicht trainiert wurde und mittlere Schichten Information anders kodieren könnten.
+Dieses Kapitel untersucht, ab welcher Schicht und wie deutlich sich positive und negative Eingaben innerhalb des Modells unterscheiden, ein zentraler Baustein für den beschreibenden Teil von Hypothese H3. Am Ende des Modells wird der finale Zustand mit der Ausgabematrix auf den Vokabularraum projiziert, so entstehen die Logits, aus denen das nächste Token vorhergesagt wird. Der \textbf{Logit Lens} wendet genau dieselbe Ausgabematrix bereits auf frühere, eigentlich noch unfertige Zwischenzustände an \cite{nostalgebraist2020logit}. So lässt sich für jede Schicht ablesen, welches Token das Modell zu diesem Zeitpunkt schon bevorzugen würde, ein Blick in den laufenden Denkprozess, wenn auch mit dem Vorbehalt, dass die Ausgabematrix nur für die letzte Schicht trainiert wurde und mittlere Schichten Information anders kodieren könnten.
 
-Als Sentiment-Score dient die durchschnittliche Logit-Differenz zwischen allen positiven und allen negativen Hu-\&-Liu-Wörtern je Schicht. An einem Beispielpaar (\texttt{The food was tasty/disgusting and I feel very}) liegt dieser Wert in den frühen Schichten nahe null. Positive und negative Eingaben sind für das Modell an dieser Stelle kaum zu unterscheiden. Ab den mittleren Schichten baut sich eine Trennung auf, die zwischen Schicht 17 und 23 ihre höchsten Werte erreicht (Abbildung~\ref{fig:lddiff}). Der mit Abstand größte Einzelsprung liegt jedoch im letzten Schritt von Schicht 23 auf 24, wo sich der Effekt mehr als verdoppelt; die allerletzte Schicht scheint zusätzlich die konkrete Wortwahl zu optimieren.
+Als Sentiment-Score dient die durchschnittliche Logit-Differenz zwischen allen positiven und allen negativen Hu-\&-Liu-Wörtern je Schicht. An einem Beispielpaar (\texttt{The food was tasty/disgusting and I feel very}) liegt dieser Wert in den frühen Schichten nahe null. Positive und negative Eingaben sind für das Modell an dieser Stelle kaum zu unterscheiden. Ab den mittleren Schichten baut sich eine Trennung auf, die zwischen Schicht 17 und 23 ihre höchsten Werte erreicht (Abbildung~\ref{fig:lddiff}). 
+Bereits ab Schicht 4 zeigt sich eine erste Trennung zwischen positiven und negativen Eingaben. Der Abstand bleibt zunächst gering, wächst jedoch ab Schicht 17 deutlich an und erreicht in der letzten Schicht seinen stärksten Zuwachs. Dies deutet darauf hin, dass sentimentbezogene Informationen früh entstehen, aber erst in den späten Schichten klar ausgeprägt werden.
 
 \begin{figure}[htbp]
   \centering
@@ -11,16 +12,9 @@ Als Sentiment-Score dient die durchschnittliche Logit-Differenz zwischen allen p
   \label{fig:lddiff}
 \end{figure}
 
-Betrachtet man statt der Differenz die absoluten Scores beider Klassen (Abbildung~\ref{fig:ldscores}), zeigt sich ein überraschendes Zwischenmuster. Sowohl positive als auch negative Lexikonwörter sinken ab etwa Schicht 13 zunächst gemeinsam auf deutlich negative Werte ab, bevor in der letzten Schicht der Sprung ins Positive erfolgt. Das Modell verteilt die Logit-Masse zwischenzeitlich offenbar auf andere Token, statt durchgehend auf Sentiment-Wörter zu setzen; die eigentliche Trennung zwischen den Klassen bleibt davon unberührt, die Kurve ist aber kein einfacher, gleichmäßiger Anstieg.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.85\textwidth]{logit_lens_prompt_hu_liu_logit_scores_Trial2.png}
-  \caption{Absolute Sentiment-Scores je Schicht für ein positives und ein negatives Beispiel-Prompt.}
-  \label{fig:ldscores}
-\end{figure}
 
-Damit dieses Muster nicht nur an einem einzelnen, handverlesenen Beispiel gilt, wird es über alle 1.707 Paare des CAD-Datensatzes aggregiert (Abbildung~\ref{fig:cad}). Das bestätigt den Befund systematisch. Der mittlere Abstand ist in den frühen Schichten nahe null, das Streuband reicht dort bis an die Null-Linie heran, sodass für viele Paare noch keine verlässliche Trennung besteht. Er wächst ab etwa Schicht 16 deutlich an und erreicht sein Maximum mit dem Sprung von Schicht 23 auf 24.
+Damit dieses Muster nicht nur an einem einzelnen, handverlesenen Beispiel gilt, wird es über alle 1.707 Paare des CAD-Datensatzes aggregiert (Abbildung 5). Das bestätigt den Befund systematisch. Der mittlere Abstand liegt in den frühen Schichten zunächst nahe null. Ab etwa Schicht 4 ist jedoch eine erste leichte Abweichung von der Null-Linie erkennbar. Eine verlässliche Trennung besteht zu diesem Zeitpunkt noch nicht, da das Streuband weiterhin bis an die Null-Linie heranreicht und viele Prompt-Paare noch kaum unterscheidbar sind. In den darauffolgenden Schichten nimmt der Abstand zunächst nur langsam zu. Ab etwa Schicht 16 verstärkt sich dieser Trend jedoch deutlich, sodass die Trennung zwischen positiven und negativen Eingaben zunehmend ausgeprägter wird. Der größte Zuwachs zeigt sich schließlich im letzten Schritt von Schicht 23 auf 24, wo der mittlere Abstand sein Maximum erreicht.
 
 \begin{figure}[htbp]
   \centering
