@@ -2,24 +2,26 @@
 
 \subsection{Zusammenfassung der Befunde}
 
-Sentiment ist bereits im Embedding-Raum strukturiert und zu 97~Prozent linear trennbar. Über die Schichten hinweg baut sich die Trennung schrittweise auf und erreicht ihr Maximum in den oberen Schichten 17 bis 23, mit dem größten Einzelsprung im letzten Schritt. Bei der Attention fokussieren Köpfe am Einzelbeispiel stark auf das Stimmungswort, im Aggregat über den CAD-Datensatz ist dieser Effekt jedoch schwach und diffus.
+Die Analysen zeigen, dass Sentiment-Informationen in Pythia-410M bereits im Embedding-Raum strukturiert sind und für Ein-Token-Prompts mit bis zu 97~Prozent Genauigkeit linear getrennt werden können. Über die Transformer-Schichten hinweg baut sich die Sentiment-Repräsentation schrittweise auf und erreicht ihre stärkste Ausprägung in den oberen Schichten 17 bis 23. Die Attention-Analyse zeigt auf Einzelbeispielen eine starke Fokussierung auf sentimenttragende Wörter, dieser Effekt ist über den CAD-Datensatz jedoch insgesamt schwach und verteilt. Activation Patching liefert schließlich kausale Evidenz dafür, dass sentimenttragende Wörter einen entscheidenden Beitrag zur finalen Vorhersage leisten.
 
 \subsection{Hypothesen-Verdict}
 
-\begin{description}[style=nextline, leftmargin=0pt, font=\bfseries, itemsep=0.4em]
-  \item[H1 (klare Stimmungswörter)] Bestätigt. Die Polarität ist früh linear ablesbar, und das Activation Patching zeigt für das geprüfte Beispiel, dass ein Eingriff am Stimmungswort die Vorhersage wiederherstellt.
-  \item[H2 (Lokalisierbarkeit)] Teilweise bestätigt. Die Token-Position ist scharf lokalisierbar, die Schicht jedoch nicht, denn der Effekt verteilt sich über ein Band früher Schichten statt auf einen einzelnen Punkt. Zudem liegt der kausal wichtige Ort fundamental anders (sehr früh, token-nah) als die korrelativ aus Logit Lens und \gls{attention} vermuteten oberen Schichten und Köpfe.
-  \item[H3 (Ironie und Sarkasmus)] Nicht abschließend geklärt. Die niedrige Trefferquote bei Sarkasmus/Ironie im Verhaltenstest passt zur Hypothese, ist aber durch die starke Negativ-Schieflage dieser Kategorie und den allgemeinen Positiv-Bias des Modells konfundiert. Eine schichtweise lineare Probe auf Ironie-Beispielen wurde nicht durchgeführt.
-\end{description}
+\textbf{H1 (Klare Stimmungswörter): Bestätigt.}
+
+Positive und negative Wörter sind bereits früh im Modell unterscheidbar. Sentiment-Signale werden in frühen bis mittleren Schichten sichtbar und das Patchen des sentimenttragenden Wortes kann die ursprüngliche Vorhersage weitgehend wiederherstellen.
+
+\textbf{H2 (Ironie und Sarkasmus): Teilweise bestätigt.}
+
+Die Ergebnisse deuten darauf hin, dass Pythia-410M überwiegend der wörtlichen Polarität folgt. Für die tatsächlich gemeinte ironische Polarität konnten keine stabilen internen Repräsentationen nachgewiesen werden. Aufgrund des begrenzten Umfangs der Ironie-Analyse bleibt die Evidenz jedoch eingeschränkt.
+
+\textbf{H3 (Lokalisierbarkeit): Teilweise bestätigt.}
+
+Activation Patching identifiziert die Position des sentimenttragenden Wortes als stärksten kausalen Einflussfaktor. Die Sentiment-Verarbeitung erstreckt sich jedoch über mehrere Schichten und kann nicht auf eine einzelne Schicht oder einen einzelnen Attention Head reduziert werden.
 
 \subsection{Korrelation versus Kausalität}
 
-Ein wichtiges Muster zieht sich durch die ganze Arbeit. Korrelative Verfahren und der kausale Test zeigen nicht an derselben Stelle ihre stärksten Effekte. Logit Lens und \gls{attention}-Analyse legen die oberen Schichten beziehungsweise einen bestimmten Kopf in frühen bis mittleren Schichten als wichtig nahe. Das Activation Patching findet die kausal entscheidende Information jedoch schon an der Token-Repräsentation selbst, in den allerersten Schichten, und keinem einzelnen Kopf zuordenbar. Hohes Attention-Gewicht und eine deutliche Logit-Trennung sind demnach nützliche Hinweise, aber kein Ersatz für einen tatsächlichen Eingriff, ein Befund, der die Methodik dieser Arbeit selbst bestätigt, denn erst die Kombination aus mehreren Werkzeugen deckt solche Diskrepanzen auf. Hätte die Arbeit beim Logit Lens oder bei der Attention-Analyse aufgehört, wäre die naheliegende, aber falsche Schlussfolgerung gewesen, dass die oberen Schichten und der auffälligste Kopf kausal verantwortlich sind.
-
-\subsection{Grenzen}
-
-Der Logit Lens nutzt die für die letzte Schicht trainierte Ausgabematrix und kann mittlere Schichten daher unterschätzen. Die lexikonbasierte Bewertung übersieht Sentiment außerhalb des Lexikons, und der Ein-Token-Filter schränkt die betrachtete Wortmenge zusätzlich ein. Activation Patching wurde bislang nur für ein Prompt-Paar gerechnet, nicht über den gesamten CAD-Datensatz aggregiert; alle Befunde beziehen sich zudem auf ein einzelnes 410-Millionen-Parameter-Modell, weshalb sie sich nicht ohne Weiteres auf größere Sprachmodelle übertragen lassen.
+Ein zentrales Ergebnis dieser Arbeit ist die Unterscheidung zwischen korrelativen und kausalen Analysen. Logit Lens, Linear Probing und die Attention-Analyse identifizieren Schichten und Komponenten, in denen Sentiment-Informationen sichtbar oder dekodierbar sind. Die stärksten Effekte wurden dabei überwiegend in den mittleren und oberen Schichten beobachtet. Activation Patching zeigt jedoch, dass die für die Vorhersage relevante Information bereits an der Repräsentation des sentimenttragenden Tokens in frühen Schichten vorhanden sein kann. Hohe Attention-Gewichte oder eine starke Logit-Trennung sind daher wertvolle Indikatoren, erlauben jedoch keine direkten Aussagen über Kausalität. Erst die Kombination mehrerer Interpretierbarkeitsmethoden ermöglicht ein vollständigeres Bild der internen Verarbeitung.
 
 \subsection{Fazit}
 
-Pythia-410M repräsentiert Sentiment bereits im Embedding, baut die Trennung über die Schichten weiter auf und lässt sich für ein Beispiel auch kausal auf eine frühe, token-nahe Stelle zurückführen, nicht auf die anhand von Logit Lens und Attention vermuteten oberen Schichten und Köpfe. H1 ist damit bestätigt, H2 nur teilweise, H3 bleibt offen. Der nächste und naheliegendste Schritt ist, das Activation Patching über mehrere oder alle 1.707 Paare des CAD-Datensatzes zu aggregieren, so wie es für Logit Lens und Attention bereits geschehen ist, um zu prüfen, ob sich die frühe, token-nahe Lokalisierung verallgemeinern lässt. Darüber hinaus bieten sich eine Erweiterung auf größere Modelle der Pythia-Reihe und eine gezielte schichtweise Prüfung von Hypothese H3 anhand von Ironie-Beispielen als weiterführende Arbeiten an.
+Die Ergebnisse dieser Arbeit zeigen, dass Pythia-410M Sentiment-Informationen bereits im Embedding-Raum repräsentiert und diese über die Transformer-Schichten hinweg schrittweise zu einer immer stärkeren Sentiment-Repräsentation ausbaut. Logit Lens und Linear Probing zeigen eine zunehmende Trennung positiver und negativer Repräsentationen, wobei die stärksten Effekte in den oberen Schichten auftreten. Die Attention-Analyse identifiziert einzelne Attention Heads mit Fokus auf sentimenttragende Wörter, deutet jedoch auf eine verteilte Verarbeitung hin. Activation Patching liefert schließlich kausale Evidenz dafür, dass sentimenttragende Wörter einen direkten Einfluss auf die finale Modellvorhersage besitzen und dass sich dieser Einfluss auf bestimmte Tokenpositionen und Schichtbereiche zurückführen lässt. Insgesamt zeigt die Arbeit, dass die Kombination von Logit Lens, Attention Analysis, Linear Probing und Activation Patching komplementäre Einblicke in die interne Verarbeitung von Sentiment in Transformer-Modellen ermöglicht und sowohl die Stärken als auch die Grenzen der einzelnen Interpretierbarkeitsmethoden sichtbar macht.
