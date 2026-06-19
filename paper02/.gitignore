@@ -1,0 +1,35 @@
+# LaTeX Build-Artefakte
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Bibliografie (biber/biblatex)
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
+# Glossar-Hilfsdateien
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.xdy
+
+# Erzeugtes PDF (auskommentieren, um es mitzuversionieren)
+main.pdf
+
+# Editor und System
+.vscode/
+.DS_Store
+Thumbs.db
