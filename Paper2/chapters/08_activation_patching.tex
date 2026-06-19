@@ -1,0 +1,23 @@
+\section{Kausale Überprüfung mit Activation Patching}
+
+Die bisherigen Analysen liefern Korrelationen. Sie zeigen, dass Sentiment im Embedding-Raum vorhanden ist, dass es über die Schichten aufgebaut wird und welche \glspl{attentionhead} auf sentimenttragende Wörter fokussieren. Keines dieser Verfahren weist jedoch nach, dass eine bestimmte Komponente für die Vorhersage tatsächlich benötigt wird. Diesen Nachweis liefert das Activation Patching, das in der mechanistischen Interpretierbarkeit als kausaler Goldstandard gilt \cite{meng2022locating, goldowskydill2023localizing}.
+
+\subsection{Verfahren}
+
+Das Activation Patching führt ein kontrolliertes Experiment durch. Verwendet werden ein sauberer und ein korrumpierter Durchlauf, die sich nur in der Sentiment-Richtung unterscheiden. Als sauberer Durchlauf dient ein positives Beispiel, als korrumpierter Durchlauf das zugehörige negative Gegenstück aus dem CAD-Datensatz, dessen Kontext nahezu identisch ist \cite{kaushik2020learning}. Im sauberen Durchlauf erzeugt das Modell eine deutlich positive Antwort, im korrumpierten Durchlauf eine deutlich negative.
+
+Anschließend wird der korrumpierte Durchlauf wiederholt, wobei die \gls{activation} einer bestimmten Schicht an einer bestimmten Position durch die zuvor gespeicherte saubere \gls{activation} ersetzt wird. Verändert sich die Vorhersage dadurch wieder in Richtung des sauberen Ergebnisses, enthält diese Schicht an dieser Position die entscheidende Information. Der Effekt eines Eingriffs wird als Differenz der Logit-Werte zwischen dem gepatchten und dem korrumpierten Durchlauf gemessen. In normalisierter Form wird der Effekt zusätzlich ins Verhältnis zur Differenz zwischen sauberem und korrumpiertem Durchlauf gesetzt, sodass ein Wert nahe 1 eine vollständige Wiederherstellung der sauberen Vorhersage bedeutet.
+
+Die Umsetzung erfolgt ausschließlich über Forward Hooks in PyTorch, also über Funktionen, die nach dem Durchlauf eines Moduls aufgerufen werden und die \gls{activation} speichern oder ersetzen. Eine Spezialbibliothek ist dafür nicht erforderlich. Das Vorgehen umfasst vier Schritte. Zuerst werden die sauberen \glspl{activation} zwischengespeichert. Danach wird die Patching-Funktion implementiert. Anschließend wird systematisch über alle Schichten und Positionen gepatcht. Zuletzt werden die Ergebnisse als Heatmap dargestellt und die einflussreichsten Punkte analysiert. Ergänzend ist ein Patching auf Ebene einzelner Köpfe vorgesehen.
+
+\subsection{Erwartung}
+
+Aus der Leithypothese und den bisherigen Befunden ergibt sich eine klare Erwartung. Der stärkste kausale Effekt sollte in den oberen Schichten zwischen etwa Schicht 17 und Schicht 23 sowie an der Position des sentimenttragenden Wortes auftreten. Die in der \gls{attention}-Analyse identifizierten Köpfe sind dabei vorrangige Kandidaten für das Patching auf Kopfebene.
+
+\subsection{Ergebnisse}
+
+\ergebnisfolgt[Das Activation Patching wurde im Rahmen dieser Arbeit noch nicht gerechnet. An dieser Stelle folgen die Heatmap der kausalen Effekte über alle Schichten und Positionen, die Liste der einflussreichsten Patching-Punkte sowie die Ergebnisse des Patchings auf Kopfebene. Diese Ergebnisse prüfen, ob die in Kapitel 6 und 7 vermuteten oberen Schichten und Köpfe tatsächlich kausal für die Sentiment-Vorhersage verantwortlich sind.]
+
+\subsection{Geplante Auswertung}
+
+Sobald die Ergebnisse vorliegen, wird geprüft, ob die kausal verantwortlichen Komponenten mit den korrelativ identifizierten übereinstimmen. Eine hohe Übereinstimmung würde die Leithypothese bestätigen und die Argumentationskette von der Korrelation bis zur Kausalität schließen. Weichen die Ergebnisse ab, liefert dies einen wichtigen Hinweis darauf, dass hohe \gls{attention}-Gewichte und eine deutliche Logit-Trennung nicht zwangsläufig mit kausaler Relevanz zusammenfallen.
